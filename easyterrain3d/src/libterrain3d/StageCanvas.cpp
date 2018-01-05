@@ -34,7 +34,7 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
-//	e3d::DrawCross(sm::vec3(0, 0, 0), sm::vec3(100, 100, 100), ee::LIGHT_RED);
+//	n3::PrimitiveDraw::Cross(sm::vec3(0, 0, 0), sm::vec3(1, 1, 1));
 
 	m_demo->Update();
 	m_demo->Draw();

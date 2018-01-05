@@ -11,6 +11,8 @@
 #include <unirender/RenderContext.h>
 #include <gum/RenderContext.h>
 
+#include <node3/PrimitiveDraw.h>
+
 namespace eterrain3d
 {
 
@@ -28,8 +30,8 @@ void DemoTriNetwork::Load()
 {
 	IDemo::Load();
 
-	m_cam.SetPosition(sm::vec3(0, -8, 8));
-	m_cam.Rotate(0, 40);
+	//m_cam.SetPosition(sm::vec3(0, -8, 8));
+	//m_cam.Rotate(0, 40);
 
 	GenTex();
 
@@ -67,6 +69,10 @@ void DemoTriNetwork::DrawTriByLevel(const sm::vec3& v0, const sm::vec3& v1, cons
 		DrawTriByLevel(new_node, v0, v2, level + 1);
 		return;
 	}
+
+	n3::PrimitiveDraw::Line(v0, v1);
+	n3::PrimitiveDraw::Line(v1, v2);
+	n3::PrimitiveDraw::Line(v2, v0);
 
 //	e3d::DrawTriLine(v0, v1, v2);
 

@@ -19,9 +19,6 @@
     <Filter Include="view">
       <UniqueIdentifier>{9d389dac-f7dc-488c-a181-35865112a49d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="view\stage">
-      <UniqueIdentifier>{e1c06c3f-e6b1-492b-aa6b-4d65d0fd2f80}</UniqueIdentifier>
-    </Filter>
     <Filter Include="tools">
       <UniqueIdentifier>{276aae9f-0f9f-4878-899f-6b468cf2a6f6}</UniqueIdentifier>
     </Filter>
@@ -45,9 +42,6 @@
     <ClCompile Include="..\..\..\src\libterrain3d\DemoOcean.cpp">
       <Filter>demo\ocean</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\libterrain3d\StageCanvas.cpp">
-      <Filter>view\stage</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\libterrain3d\image.cpp">
       <Filter>tools</Filter>
     </ClCompile>
@@ -62,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\libterrain3d\Terrain.cpp">
       <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libterrain3d\StageCanvas.cpp">
+      <Filter>view</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,9 +77,6 @@
     <ClInclude Include="..\..\..\src\libterrain3d\DemoOcean.h">
       <Filter>demo\ocean</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\libterrain3d\StageCanvas.h">
-      <Filter>view\stage</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\libterrain3d\image.h">
       <Filter>tools</Filter>
     </ClInclude>
@@ -100,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\libterrain3d\Terrain.h">
       <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libterrain3d\StageCanvas.h">
+      <Filter>view</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
