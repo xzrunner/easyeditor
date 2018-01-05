@@ -85,10 +85,8 @@
     <ClInclude Include="..\..\..\src\libcomplex3d\RotateCameraState.h" />
     <ClInclude Include="..\..\..\src\libcomplex3d\RotateSpriteState.h" />
     <ClInclude Include="..\..\..\src\libcomplex3d\SelectSpriteOP.h" />
-    <ClInclude Include="..\..\..\src\libcomplex3d\Sprite.h" />
     <ClInclude Include="..\..\..\src\libcomplex3d\StageCanvas.h" />
     <ClInclude Include="..\..\..\src\libcomplex3d\StagePanel.h" />
-    <ClInclude Include="..\..\..\src\libcomplex3d\Symbol.h" />
     <ClInclude Include="..\..\..\src\libcomplex3d\ToolBarPanel.h" />
     <ClInclude Include="..\..\..\src\libcomplex3d\TranslateCameraState.h" />
     <ClInclude Include="..\..\..\src\libcomplex3d\TranslateSpriteState.h" />
@@ -101,10 +99,8 @@
     <ClCompile Include="..\..\..\src\libcomplex3d\RotateCameraState.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex3d\RotateSpriteState.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex3d\SelectSpriteOP.cpp" />
-    <ClCompile Include="..\..\..\src\libcomplex3d\Sprite.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex3d\StageCanvas.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex3d\StagePanel.cpp" />
-    <ClCompile Include="..\..\..\src\libcomplex3d\Symbol.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex3d\ToolbarPanel.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex3d\TranslateCameraState.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex3d\TranslateSpriteState.cpp" />

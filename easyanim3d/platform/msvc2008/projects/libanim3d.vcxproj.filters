@@ -13,14 +13,8 @@
     <Filter Include="view\toolbar">
       <UniqueIdentifier>{b5610ceb-77a2-40e8-9478-e8e235d75bea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="dataset">
-      <UniqueIdentifier>{4ec97004-afb1-46ad-a31b-546215f0f59e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\libanim3d\LibraryPage.cpp">
-      <Filter>view\library</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\libanim3d\LibraryPanel.cpp">
       <Filter>view\library</Filter>
     </ClCompile>
@@ -33,17 +27,8 @@
     <ClCompile Include="..\..\..\src\libanim3d\ToolbarPanel.cpp">
       <Filter>view\toolbar</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\libanim3d\Sprite.cpp">
-      <Filter>dataset</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\libanim3d\Symbol.cpp">
-      <Filter>dataset</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\libanim3d\LibraryPage.h">
-      <Filter>view\library</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\libanim3d\LibraryPanel.h">
       <Filter>view\library</Filter>
     </ClInclude>
@@ -56,12 +41,5 @@
     <ClInclude Include="..\..\..\src\libanim3d\ToolbarPanel.h">
       <Filter>view\toolbar</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\libanim3d\Sprite.h">
-      <Filter>dataset</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libanim3d\Symbol.h">
-      <Filter>dataset</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libanim3d\config.h" />
   </ItemGroup>
 </Project>

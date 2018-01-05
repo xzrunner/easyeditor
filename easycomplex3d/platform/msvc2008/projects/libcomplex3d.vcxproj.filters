@@ -33,12 +33,6 @@
     <ClInclude Include="..\..\..\src\libcomplex3d\config.h">
       <Filter>dataset</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\libcomplex3d\Sprite.h">
-      <Filter>dataset</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libcomplex3d\Symbol.h">
-      <Filter>dataset</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\libcomplex3d\LibraryPage.h">
       <Filter>view\library</Filter>
     </ClInclude>
@@ -80,12 +74,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\libcomplex3d\Sprite.cpp">
-      <Filter>dataset</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\libcomplex3d\Symbol.cpp">
-      <Filter>dataset</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\libcomplex3d\LibraryPage.cpp">
       <Filter>view\library</Filter>
     </ClCompile>

@@ -10,16 +10,19 @@
     <Filter Include="tools">
       <UniqueIdentifier>{8fad499d-8e2e-49a6-856e-ddb541133011}</UniqueIdentifier>
     </Filter>
-    <Filter Include="dataset">
+    <Filter Include="render">
       <UniqueIdentifier>{4679bcbe-0589-4529-b75c-4134375cc185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{7658fda3-233d-4c61-9168-01cfc64aa21f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easy3d\Camera.h">
-      <Filter>dataset</Filter>
+      <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\easy3d\ViewFrustum.h">
-      <Filter>dataset</Filter>
+      <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\easy3d\StageCanvas.h">
       <Filter>view</Filter>
@@ -30,13 +33,25 @@
     <ClInclude Include="..\..\..\src\easy3d\LogViewer.h">
       <Filter>tools</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\LibraryPage.h">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ModelFile.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\Sprite.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\Symbol.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easy3d\Camera.cpp">
-      <Filter>dataset</Filter>
+      <Filter>render</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\easy3d\ViewFrustum.cpp">
-      <Filter>dataset</Filter>
+      <Filter>render</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\easy3d\StageCanvas.cpp">
       <Filter>view</Filter>
@@ -46,6 +61,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easy3d\LogViewer.cpp">
       <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\LibraryPage.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\ModelFile.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\Sprite.cpp">
+      <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\Symbol.cpp">
+      <Filter>dataset</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

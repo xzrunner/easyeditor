@@ -53,7 +53,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\assimp\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\assimp\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -67,7 +67,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\assimp\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\assimp\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -79,15 +79,23 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easy3d\Camera.h" />
     <ClInclude Include="..\..\..\src\easy3d\ControlCameraOP.h" />
+    <ClInclude Include="..\..\..\src\easy3d\LibraryPage.h" />
     <ClInclude Include="..\..\..\src\easy3d\LogViewer.h" />
+    <ClInclude Include="..\..\..\src\easy3d\Sprite.h" />
     <ClInclude Include="..\..\..\src\easy3d\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ModelFile.h" />
+    <ClInclude Include="..\..\..\src\easy3d\Symbol.h" />
     <ClInclude Include="..\..\..\src\easy3d\ViewFrustum.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easy3d\Camera.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\ControlCameraOP.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\LibraryPage.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\LogViewer.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\Sprite.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\ModelFile.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\Symbol.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\ViewFrustum.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

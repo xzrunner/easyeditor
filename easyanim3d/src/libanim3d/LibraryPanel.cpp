@@ -1,5 +1,6 @@
 #include "LibraryPanel.h"
-#include "LibraryPage.h"
+
+#include <easy3d/LibraryPage.h>
 
 #include <wx/notebook.h>
 
@@ -11,7 +12,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 {
 	wxWindow* nb = GetNotebook();
 //	AddPage(new ee::LibraryImagePage(nb));
-	AddPage(new LibraryPage(nb));
+	AddPage(new e3d::LibraryPage(nb));
 }
 
 }

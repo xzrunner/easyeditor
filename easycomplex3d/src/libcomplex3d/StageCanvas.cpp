@@ -1,8 +1,5 @@
 #include "StageCanvas.h"
 
-#include "Symbol.h"
-#include "config.h"
-
 #include <ee/EditPanelImpl.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/Sprite.h>

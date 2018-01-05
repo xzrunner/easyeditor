@@ -1,7 +1,6 @@
 #include "ArrangeSpriteOP.h"
 #include "StagePanel.h"
 #include "IEditState.h"
-#include "Sprite.h"
 
 #include "TranslateSpriteState.h"
 #include "RotateSpriteState.h"
@@ -11,6 +10,8 @@
 #include <ee/FetchAllVisitor.h>
 
 #include <easy3d/StageCanvas.h>
+
+#include <sprite2/ModelSprite.h>
 
 namespace ecomplex3d
 {

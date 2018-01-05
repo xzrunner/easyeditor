@@ -1,8 +1,6 @@
 #include "SelectSpriteOP.h"
 #include "StagePanel.h"
 #include "StageCanvas.h"
-#include "Symbol.h"
-#include "Sprite.h"
 
 #include <ee/SpriteSelection.h>
 #include <ee/panel_msg.h>
@@ -12,6 +10,8 @@
 #include <node3/PrimitiveDraw.h>
 #include <node3/Ray.h>
 #include <node3/Math.h>
+#include <sprite2/ModelSprite.h>
+#include <sprite2/ModelSymbol.h>
 
 namespace ecomplex3d
 {
@@ -96,7 +96,7 @@ ee::SprPtr SelectSpriteOP::SelectByPos(const sm::ivec2& pos) const
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
 		auto& spr = sprs[i];
-		auto sym = std::dynamic_pointer_cast<const Symbol>(spr->GetSymbol());
+		auto sym = std::dynamic_pointer_cast<const s2::ModelSymbol>(spr->GetSymbol());
 		
 		const n3::AABB& aabb = sym->GetAABB();
 		auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);

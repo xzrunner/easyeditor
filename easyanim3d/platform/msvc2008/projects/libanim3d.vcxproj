@@ -77,22 +77,15 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\libanim3d\LibraryPage.cpp" />
     <ClCompile Include="..\..\..\src\libanim3d\LibraryPanel.cpp" />
-    <ClCompile Include="..\..\..\src\libanim3d\Sprite.cpp" />
     <ClCompile Include="..\..\..\src\libanim3d\StageCanvas.cpp" />
     <ClCompile Include="..\..\..\src\libanim3d\StagePanel.cpp" />
-    <ClCompile Include="..\..\..\src\libanim3d\Symbol.cpp" />
     <ClCompile Include="..\..\..\src\libanim3d\ToolbarPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\libanim3d\config.h" />
-    <ClInclude Include="..\..\..\src\libanim3d\LibraryPage.h" />
     <ClInclude Include="..\..\..\src\libanim3d\LibraryPanel.h" />
-    <ClInclude Include="..\..\..\src\libanim3d\Sprite.h" />
     <ClInclude Include="..\..\..\src\libanim3d\StageCanvas.h" />
     <ClInclude Include="..\..\..\src\libanim3d\StagePanel.h" />
-    <ClInclude Include="..\..\..\src\libanim3d\Symbol.h" />
     <ClInclude Include="..\..\..\src\libanim3d\ToolbarPanel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

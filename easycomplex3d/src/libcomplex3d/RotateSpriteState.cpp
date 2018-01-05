@@ -1,7 +1,8 @@
 #include "RotateSpriteState.h"
-#include "Sprite.h"
 #include "StagePanel.h"
 #include "StageCanvas.h"
+
+#include <sprite2/ModelSprite.h>
 
 namespace ecomplex3d
 {

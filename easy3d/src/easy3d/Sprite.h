@@ -1,11 +1,10 @@
-#ifndef _EASYCOMPLEX3D_SPRITE_H_
-#define _EASYCOMPLEX3D_SPRITE_H_
+#pragma once
 
 #include <ee/Sprite.h>
 
 #include <sprite2/ModelSprite.h>
 
-namespace ecomplex3d
+namespace e3d
 {
 
 class Sprite : public s2::ModelSprite, public ee::Sprite
@@ -31,5 +30,3 @@ public:
 }; // Sprite
 
 }
-
-#endif // _EASYCOMPLEX3D_SPRITE_H_

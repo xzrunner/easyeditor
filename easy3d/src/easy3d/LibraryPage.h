@@ -1,15 +1,14 @@
-#ifndef _EASYANIM3D_LIBRARY_PAGE_H_
-#define _EASYANIM3D_LIBRARY_PAGE_H_
+#pragma once
 
 #include <ee/LibraryPage.h>
 
-namespace eanim3d
+namespace e3d
 {
-
+	
 class LibraryPage : public ee::LibraryPage
 {
 public:
-	LibraryPage(wxWindow* parent);
+	LibraryPage(wxWindow* parent, const std::string& title = "model3d");
 
 	virtual bool IsHandleSymbol(const ee::SymPtr& sym) const override;
 
@@ -19,5 +18,3 @@ protected:
 }; // LibraryPage
 
 }
-
-#endif // _EASYANIM3D_LIBRARY_PAGE_H_

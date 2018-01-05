@@ -1,9 +1,10 @@
 #include "TranslateSpriteState.h"
-#include "Sprite.h"
 #include "StagePanel.h"
 
 #include <ee/SpriteSelection.h>
 #include <ee/panel_msg.h>
+
+#include <sprite2/ModelSprite.h>
 
 namespace ecomplex3d
 {
