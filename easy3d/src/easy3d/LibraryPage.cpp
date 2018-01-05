@@ -37,8 +37,9 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
+			n3::AABB aabb;
 			auto model = std::unique_ptr<n3::Model>(
-				n3::AssimpHelper::Load(filenames[i].ToStdString()));
+				n3::AssimpHelper::Load(filenames[i].ToStdString(), aabb));
 			auto obj_model = std::make_shared<n3::ObjectModel>();
 			obj_model->SetModel(model);
 
@@ -47,8 +48,8 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 
 			std::string filepath = ModelFile::Instance()->Tag(n3::MODEL_OBJECT);
 			filepath += ".json";
-			//sym->SetFilepath(filepath);
-// 			sym->SetAABB(aabb);
+			sym->SetFilepath(filepath);
+ 			sym->SetAABB(aabb);
 
 			AddItem(sym);
 		}
