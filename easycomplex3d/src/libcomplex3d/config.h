@@ -4,7 +4,7 @@
 namespace ecomplex3d
 {
 
-static const char* FILE_TAG = "sketch";
+static const char* FILE_TAG = "complex3d";
 
 }
 
