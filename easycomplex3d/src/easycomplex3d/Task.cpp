@@ -16,6 +16,8 @@ Task::Task(wxFrame* parent)
 	, m_parent(parent)
 {
 	InitLayout();
+
+	m_library->LoadDefaultSymbol();
 }
 
 Task::~Task()
