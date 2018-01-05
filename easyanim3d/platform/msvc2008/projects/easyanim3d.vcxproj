@@ -139,9 +139,6 @@
     <ProjectReference Include="..\..\..\..\drect\platform\msvc2008\projects\drect.vcxproj">
       <Project>{01dd105b-a599-4bc3-9ef8-c54c8800979f}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\ds\platform\msvc2008\projects\ds.vcxproj">
-      <Project>{e6044d31-8304-4854-99ac-cbef18b9e7d3}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\dtex2\platform\msvc2008\projects\dtex2.vcxproj">
       <Project>{a502c49c-7014-4d77-8bd9-b3f917ad34b0}</Project>
     </ProjectReference>
