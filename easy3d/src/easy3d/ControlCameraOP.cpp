@@ -1,6 +1,8 @@
 #include "ControlCameraOP.h"
 #include "StageCanvas.h"
 
+#include "RotateCameraState.h"
+
 #include <ee/EditPanelImpl.h>
 
 namespace e3d
@@ -10,6 +12,7 @@ static const float MOUSE_SENSITIVITY = 0.3f;
 
 ControlCameraOP::ControlCameraOP(wxWindow* wnd, ee::EditPanelImpl* stage)
 	: ee::EditOP(wnd, stage)
+	, m_op_state(nullptr)
 {
 	m_canvas = static_cast<e3d::StageCanvas*>(stage->GetCanvas());
 }
@@ -51,8 +54,12 @@ bool ControlCameraOP::OnMouseLeftDown(int x, int y)
 	if (ee::EditOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
-	m_last_pos.x = x;
-	m_last_pos.y = y;
+
+	m_op_state = std::make_unique<RotateCameraState>(
+		m_canvas, m_canvas->GetCamera3(), sm::ivec2(x, y));
+
+	m_op_state->OnMousePress(sm::ivec2(x, y));
+
 	return false;
 }
 
@@ -61,7 +68,7 @@ bool ControlCameraOP::OnMouseDrag(int x, int y)
 	if (ee::EditOP::OnMouseDrag(x, y)) {
 		return true;
 	}
-
+	
 	Camera& cam = m_canvas->GetCamera3();
 	float dx = (x - m_last_pos.x) * MOUSE_SENSITIVITY,
 		  dy = (m_last_pos.y - y) * MOUSE_SENSITIVITY;

@@ -79,12 +79,15 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easy3d\Camera.h" />
     <ClInclude Include="..\..\..\src\easy3d\ControlCameraOP.h" />
+    <ClInclude Include="..\..\..\src\easy3d\EditOpState.h" />
     <ClInclude Include="..\..\..\src\easy3d\LibraryPage.h" />
     <ClInclude Include="..\..\..\src\easy3d\LogViewer.h" />
+    <ClInclude Include="..\..\..\src\easy3d\RotateCameraState.h" />
     <ClInclude Include="..\..\..\src\easy3d\Sprite.h" />
     <ClInclude Include="..\..\..\src\easy3d\StageCanvas.h" />
     <ClInclude Include="..\..\..\src\easy3d\ModelFile.h" />
     <ClInclude Include="..\..\..\src\easy3d\Symbol.h" />
+    <ClInclude Include="..\..\..\src\easy3d\TranslateCameraState.h" />
     <ClInclude Include="..\..\..\src\easy3d\ViewFrustum.h" />
   </ItemGroup>
   <ItemGroup>
@@ -92,10 +95,12 @@
     <ClCompile Include="..\..\..\src\easy3d\ControlCameraOP.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\LibraryPage.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\LogViewer.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\RotateCameraState.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\Sprite.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\StageCanvas.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\ModelFile.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\Symbol.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\TranslateCameraState.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\ViewFrustum.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

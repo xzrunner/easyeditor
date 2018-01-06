@@ -3,12 +3,11 @@
 
 #include <ee/EditOP.h>
 
-#include <SM_Vector.h>
-
 namespace e3d
 {
 
 class StageCanvas;
+class EditOpState;
 
 class ControlCameraOP : public ee::EditOP
 {
@@ -23,7 +22,7 @@ public:
 private:
 	StageCanvas* m_canvas;
 
-	sm::ivec2 m_last_pos;
+	std::unique_ptr<EditOpState> m_op_state;
 
 }; // ControlCameraOP
 

@@ -22,7 +22,7 @@ public:
 
 	virtual bool OnDirectionKeyDown(int type) { return false; }
 
-}; // IArrangeState
+}; // ArrangeSpriteState
 
 }
 

@@ -76,7 +76,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	m_stage = new StagePanel(parent, m_parent, m_library, m_property);
+	m_stage = new StagePanel(parent, m_parent, m_library);
 	m_property->SetEditPanel(m_stage->GetStageImpl());
 	return m_stage;
 }

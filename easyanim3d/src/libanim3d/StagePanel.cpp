@@ -1,24 +1,18 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 
-#include <ee/ArrangeSpriteOP.h>
-#include <ee/SelectSpritesOP.h>
+#include "easy3d/ControlCameraOP.h"
 
 namespace eanim3d
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   ee::LibraryPanel* library,
-					   ee::PropertySettingPanel* property)
+					   ee::LibraryPanel* library)
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 {
-	SetEditOP(new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, GetStageImpl(), this, property));
 	SetCanvas(new StageCanvas(this, GetStageImpl(), this));
-}
-
-StagePanel::~StagePanel()
-{	
+	SetEditOP(new e3d::ControlCameraOP(this, GetStageImpl()));
 }
 
 void StagePanel::OnSizeDebug(wxSizeEvent& event)

@@ -45,6 +45,15 @@
     <ClInclude Include="..\..\..\src\easy3d\Symbol.h">
       <Filter>dataset</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\EditOpState.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\RotateCameraState.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\TranslateCameraState.h">
+      <Filter>editop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easy3d\Camera.cpp">
@@ -73,6 +82,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easy3d\Symbol.cpp">
       <Filter>dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\RotateCameraState.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\TranslateCameraState.cpp">
+      <Filter>editop</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
