@@ -49,12 +49,18 @@ void StageCanvas::OnSize(int w, int h)
 
 	ctx->SetScreen(w, h);
 
-	float hh = 1.0f * h / w;
-	const float CAM_NEAR = 1;
-	const float CAM_FAR = 3;
-	//const float CAM_NEAR = 0.1f;
-	//const float CAM_FAR = 100;
-	auto mat_proj = sm::mat4::Perspective(-1, 1, -hh, hh, CAM_NEAR, CAM_FAR);
+	static const float ZNEAR = 0.1f;
+	static const float ZFAR = 100;
+	static const float ANGLE_OF_VIEW = 90;
+	const float ASPECT = w / (float)h;
+
+	//////////////////////////////////////////////////////////////////////////
+	float scale = tan(ANGLE_OF_VIEW * 0.5 * SM_DEG_TO_RAD) * ZNEAR;
+	auto mat_proj = sm::mat4::Perspective(- ASPECT * scale, ASPECT * scale, -scale, scale, ZNEAR, ZFAR);
+	//////////////////////////////////////////////////////////////////////////
+//	auto mat_proj = sm::mat4::Perspective(ANGLE_OF_VIEW, ASPECT, ZNEAR, ZFAR);
+	//////////////////////////////////////////////////////////////////////////
+
 	ctx->SetProjection(mat_proj);
 }
 
