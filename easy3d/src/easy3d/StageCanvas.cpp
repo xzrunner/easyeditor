@@ -13,6 +13,7 @@ namespace e3d
 
 StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
 	: ee::OnePassCanvas(stage_wnd, stage, nullptr, true, true)
+	, m_cam_uvn(sm::vec3(0, 0, -2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0))
 {
 }
 
@@ -20,15 +21,15 @@ void StageCanvas::Refresh()
 {
 	auto ctx = n3::RenderCtxStack::Instance()->Top();
 	if (ctx) {
-		const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera3().GetModelViewMat());
+		const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCameraUVN().GetModelViewMat());
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-sm::ivec2 StageCanvas::TransPos3ProjectToScreen(const sm::vec3& proj) const
+sm::vec2 StageCanvas::TransPos3ProjectToScreen(const sm::vec3& proj) const
 {
-	sm::mat4 mat_modelview = GetCamera3().GetModelViewMat();
+	sm::mat4 mat_modelview = GetCameraUVN().GetModelViewMat();
 	sm::vec3 v0 = mat_modelview * proj;
 
 	sm::vec3 v1 = m_mat_projection * v0;
@@ -44,13 +45,16 @@ void StageCanvas::OnSize(int w, int h)
 		return;
 	}
 
-	m_camera3.SetScreenSize(w, h);
+//	m_cam_uvn.SetScreenSize(w, h);
 
 	ctx->SetScreen(w, h);
 
 	float hh = 1.0f * h / w;
-	auto mat_proj = sm::mat4::Perspective(-1, 1, -hh, hh, 
-		e3d::Camera::CAM_NEAR, e3d::Camera::CAM_FAR);
+	const float CAM_NEAR = 1;
+	const float CAM_FAR = 3;
+	//const float CAM_NEAR = 0.1f;
+	//const float CAM_FAR = 100;
+	auto mat_proj = sm::mat4::Perspective(-1, 1, -hh, hh, CAM_NEAR, CAM_FAR);
 	ctx->SetProjection(mat_proj);
 }
 

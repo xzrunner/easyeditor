@@ -89,6 +89,7 @@
     <ClInclude Include="..\..\..\src\easy3d\Symbol.h" />
     <ClInclude Include="..\..\..\src\easy3d\TranslateCameraState.h" />
     <ClInclude Include="..\..\..\src\easy3d\ViewFrustum.h" />
+    <ClInclude Include="..\..\..\src\easy3d\ZoomCameraState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easy3d\Camera.cpp" />
@@ -102,6 +103,7 @@
     <ClCompile Include="..\..\..\src\easy3d\Symbol.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\TranslateCameraState.cpp" />
     <ClCompile Include="..\..\..\src\easy3d\ViewFrustum.cpp" />
+    <ClCompile Include="..\..\..\src\easy3d\ZoomCameraState.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

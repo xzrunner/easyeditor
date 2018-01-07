@@ -54,6 +54,9 @@
     <ClInclude Include="..\..\..\src\easy3d\TranslateCameraState.h">
       <Filter>editop</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\easy3d\ZoomCameraState.h">
+      <Filter>editop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easy3d\Camera.cpp">
@@ -87,6 +90,9 @@
       <Filter>editop</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\easy3d\TranslateCameraState.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easy3d\ZoomCameraState.cpp">
       <Filter>editop</Filter>
     </ClCompile>
   </ItemGroup>

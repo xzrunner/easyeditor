@@ -32,7 +32,7 @@ public:
 
 	void SetScreenSize(int width, int height);
 
-	sm::vec3 MapToSphere(sm::ivec2 touchpoint) const;
+	sm::vec3 MapToSphere(const sm::vec2& touchpoint) const;
 
 	void Reset();
 

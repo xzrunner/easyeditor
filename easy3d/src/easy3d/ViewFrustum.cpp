@@ -4,13 +4,13 @@
 namespace e3d
 {
 
-sm::ivec2 ViewFrustum::TransPos3ProjectToScreen(const sm::vec3& proj, float screen_width, float screen_height)
+sm::vec2 ViewFrustum::TransPos3ProjectToScreen(const sm::vec3& proj, float screen_width, float screen_height)
 {
 	float x = Camera::CAM_NEAR * proj.x / proj.z * screen_width * 0.5f ,
 		  y = Camera::CAM_NEAR * proj.y / proj.z * screen_height * 0.5f;
-	sm::ivec2 pos;
-	pos.x = static_cast<int>(floor(screen_width * 0.5f - x + 0.5f));
-	pos.y = static_cast<int>(floor(screen_height * 0.5f + y + 0.5f));
+	sm::vec2 pos;
+	pos.x = screen_width * 0.5f - x;
+	pos.y = screen_height * 0.5f + y;
 	return pos;
 }
 

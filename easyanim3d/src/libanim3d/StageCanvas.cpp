@@ -32,7 +32,7 @@ void StageCanvas::OnDrawSprites() const
 	if (!ctx) {
 		return;
 	}
-	const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera3().GetModelViewMat());
+	const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCameraUVN().GetModelViewMat());
 
 	DrawBackground();
 	DrawSprites();

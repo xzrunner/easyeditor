@@ -18,7 +18,6 @@ namespace e3d
 // const float Camera::CAM_NEAR = 1004;
 // const float Camera::CAM_FAR = 1010;
 // static const float DEFAULT_Z = -1008;
-
 static const float ZOOM_STEP = 0.05f;
 
 Camera::Camera()
@@ -109,7 +108,7 @@ void Camera::SetScreenSize(int width, int height)
 	m_height = height;
 }
 
-sm::vec3 Camera::MapToSphere(sm::ivec2 touchpoint) const
+sm::vec3 Camera::MapToSphere(const sm::vec2& touchpoint) const
 {
 // 	int viewport[4];
 // 	glGetIntegerv(GL_VIEWPORT, viewport);
@@ -119,7 +118,7 @@ sm::vec3 Camera::MapToSphere(sm::ivec2 touchpoint) const
 	const float trackball_radius = m_width / 3.0f;
 	const sm::vec2 center_point(m_width*0.5f, m_height*0.5f);
 
-	sm::vec2 p = sm::vec2(touchpoint.x, touchpoint.y) - center_point;
+	sm::vec2 p = touchpoint - center_point;
 
 	// Flip the Y axis because pixel coords increase towards the bottom.
 	p.y = -p.y;

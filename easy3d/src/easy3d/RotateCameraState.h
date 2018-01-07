@@ -2,28 +2,29 @@
 
 #include "EditOpState.h"
 
+namespace n3 { class Camera; }
+
 namespace e3d
 {
 
 class StageCanvas;
-class Camera;
 
 class RotateCameraState : public EditOpState
 {
 public:
-	RotateCameraState(StageCanvas& canvas, Camera& cam, 
-		const sm::ivec2& pos);
+	RotateCameraState(StageCanvas& canvas, n3::Camera& cam, 
+		const sm::vec2& pos);
 
-	virtual void OnMousePress(const sm::ivec2& pos);
-	virtual void OnMouseRelease(const sm::ivec2& pos);
-	virtual void OnMouseDrag(const sm::ivec2& pos);
+	virtual void OnMousePress(const sm::vec2& pos) override;
+	virtual void OnMouseRelease(const sm::vec2& pos) override;
+	virtual void OnMouseDrag(const sm::vec2& pos) override;
 
 private:
 	StageCanvas& m_canvas;
 
-	Camera& m_cam;
+	n3::Camera& m_cam;
 
-	sm::ivec2 m_last_pos;
+	sm::vec2 m_last_pos;
 
 }; // RotateCameraState
 
