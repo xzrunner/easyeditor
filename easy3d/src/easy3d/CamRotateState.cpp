@@ -1,4 +1,4 @@
-#include "RotateCameraState.h"
+#include "CamRotateState.h"
 #include "StageCanvas.h"
 
 #include <SM_Calc.h>
@@ -7,7 +7,7 @@
 namespace e3d
 {
 
-RotateCameraState::RotateCameraState(StageCanvas& canvas, 
+CamRotateState::CamRotateState(StageCanvas& canvas, 
 	                                 n3::Camera& cam,
 	                                 const sm::vec2& pos)
 	: m_canvas(canvas)
@@ -16,16 +16,16 @@ RotateCameraState::RotateCameraState(StageCanvas& canvas,
 {
 }
 
-void RotateCameraState::OnMousePress(const sm::vec2& pos)
+void CamRotateState::OnMousePress(const sm::vec2& pos)
 {
 	m_last_pos = pos;
 }
 
-void RotateCameraState::OnMouseRelease(const sm::vec2& pos)
+void CamRotateState::OnMouseRelease(const sm::vec2& pos)
 {
 }
 
-void RotateCameraState::RotateCameraState::OnMouseDrag(const sm::vec2& pos)
+void CamRotateState::CamRotateState::OnMouseDrag(const sm::vec2& pos)
 {
 	float dx = pos.x - m_last_pos.x;
 	float dy = pos.y - m_last_pos.y;

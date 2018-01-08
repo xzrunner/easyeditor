@@ -1,5 +1,4 @@
-#ifndef _EASY3D_LOG_VIEWER_H_
-#define _EASY3D_LOG_VIEWER_H_
+#pragma once
 
 #include <string>
 #include <vector>
@@ -30,5 +29,3 @@ private:
 }; // LogViewer
 
 }
-
-#endif // _EASY3D_LOG_VIEWER_H_

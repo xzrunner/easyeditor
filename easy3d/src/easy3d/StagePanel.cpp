@@ -1,6 +1,5 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
-#include "ArrangeSpriteOP.h"
 
 #include <ee/StageDropTarget.h>
 #include <ee/sprite_msg.h>
@@ -9,7 +8,7 @@
 #include <ee/subject_id.h>
 #include <ee/panel_msg.h>
 
-namespace ecomplex3d
+namespace e3d
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -17,10 +16,10 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: ee::EditPanel(parent, frame)
 	, ee::MultiSpritesImpl(GetStageImpl())
 {
-	StageCanvas* canvas = new StageCanvas(this, GetStageImpl(), this, library);
-	SetCanvas(canvas);
+	//StageCanvas* canvas = new StageCanvas(this, GetStageImpl(), this, library);
+	//SetCanvas(canvas);
 
-	SetEditOP(new ArrangeSpriteOP(this));
+	//SetEditOP(new ArrangeSpriteOP(this));
 
 	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 
@@ -39,18 +38,6 @@ void StagePanel::TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, ee::DataTr
 			break;
 		}
 	}
-}
-
-sm::ivec2 StagePanel::TransPos3ProjectToScreen(const sm::vec3& proj) const
-{
-	const StageCanvas* canvas = static_cast<const StageCanvas*>(GetCanvas());
-	return canvas->TransPos3ProjectToScreen(proj);
-}
-
-sm::vec3 StagePanel::TransPos3ScreenToProject(const sm::ivec2& scr, float proj_z) const
-{
-	const StageCanvas* canvas = static_cast<const StageCanvas*>(GetCanvas());
-	return canvas->TransPos3ScreenToProject(scr, proj_z);	
 }
 
 void StagePanel::OnNotify(int sj_id, void* ud)

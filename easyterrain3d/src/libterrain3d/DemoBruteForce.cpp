@@ -1,21 +1,20 @@
 #include "DemoBruteForce.h"
 
-#include <easy3d/Camera.h>
-
 #include <SM_Vector.h>
+#include <node3/Camera.h>
 
 namespace eterrain3d
 {
 
-DemoBruteForce::DemoBruteForce(e3d::Camera& cam)
+DemoBruteForce::DemoBruteForce(n3::Camera& cam)
 	: m_cam(cam)
 {
 }
 
 void DemoBruteForce::Load()
 {
-	m_cam.SetPosition(sm::vec3(6, -12, 12));
-	m_cam.Rotate(0, 60);
+	m_cam.Pitch(-60);
+	m_cam.MoveToward(8);
 
 	//load the height map in
 //	// 1. load from image

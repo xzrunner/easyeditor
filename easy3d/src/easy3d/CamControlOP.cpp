@@ -1,9 +1,9 @@
-#include "ControlCameraOP.h"
+#include "CamControlOP.h"
 #include "StageCanvas.h"
 
-#include "RotateCameraState.h"
-#include "TranslateCameraState.h"
-#include "ZoomCameraState.h"
+#include "CamRotateState.h"
+#include "CamTranslateState.h"
+#include "CamZoomState.h"
 
 #include <ee/EditPanelImpl.h>
 
@@ -12,19 +12,19 @@ namespace e3d
 
 static const float MOUSE_SENSITIVITY = 0.3f;
 
-ControlCameraOP::ControlCameraOP(wxWindow* wnd, ee::EditPanelImpl* stage)
+CamControlOP::CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage)
 	: ee::EditOP(wnd, stage)
 {
 	m_canvas = static_cast<e3d::StageCanvas*>(stage->GetCanvas());
 }
 
-bool ControlCameraOP::OnKeyDown(int keyCode)
+bool CamControlOP::OnKeyDown(int keyCode)
 {
 	if (ee::EditOP::OnKeyDown(keyCode)) { return true; }
 
 	static const float OFFSET = 0.1f;
 
-	auto& cam = m_canvas->GetCameraUVN();
+	auto& cam = m_canvas->GetCamera();
 	switch (keyCode)
 	{
 	case WXK_ESCAPE:
@@ -51,59 +51,59 @@ bool ControlCameraOP::OnKeyDown(int keyCode)
 	return false;
 }
 
-bool ControlCameraOP::OnMouseLeftDown(int x, int y)
+bool CamControlOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::EditOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
-	m_op_state = std::make_unique<RotateCameraState>(
-		*m_canvas, m_canvas->GetCameraUVN(), sm::vec2(x, y));
+	m_op_state = std::make_unique<CamRotateState>(
+		*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
 
 	m_op_state->OnMousePress(sm::vec2(x, y));
 
 	return false;
 }
 
-bool ControlCameraOP::OnMouseLeftUp(int x, int y)
+bool CamControlOP::OnMouseLeftUp(int x, int y)
 {
 	if (ee::EditOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
-	m_op_state = std::make_unique<ZoomCameraState>(
-		*m_canvas, m_canvas->GetCameraUVN());
+	m_op_state = std::make_unique<CamZoomState>(
+		*m_canvas, m_canvas->GetCamera());
 
 	return false;
 }
 
-bool ControlCameraOP::OnMouseRightDown(int x, int y)
+bool CamControlOP::OnMouseRightDown(int x, int y)
 {
 	if (ee::EditOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
-	m_op_state = std::make_unique<TranslateCameraState>(
-		*m_canvas, m_canvas->GetCameraUVN(), sm::vec2(x, y));
+	m_op_state = std::make_unique<CamTranslateState>(
+		*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
 
 	m_op_state->OnMousePress(sm::vec2(x, y));
 
 	return false;
 }
 
-bool ControlCameraOP::OnMouseRightUp(int x, int y)
+bool CamControlOP::OnMouseRightUp(int x, int y)
 {
 	if (ee::EditOP::OnMouseRightUp(x, y)) {
 		return true;
 	}
 
-	m_op_state = std::make_unique<ZoomCameraState>(
-		*m_canvas, m_canvas->GetCameraUVN());
+	m_op_state = std::make_unique<CamZoomState>(
+		*m_canvas, m_canvas->GetCamera());
 
 	return false;
 }
 
-bool ControlCameraOP::OnMouseDrag(int x, int y)
+bool CamControlOP::OnMouseDrag(int x, int y)
 {
 	if (ee::EditOP::OnMouseDrag(x, y)) {
 		return true;
@@ -116,7 +116,7 @@ bool ControlCameraOP::OnMouseDrag(int x, int y)
 	return false;
 }
 
-bool ControlCameraOP::OnMouseMove(int x, int y)
+bool CamControlOP::OnMouseMove(int x, int y)
 {
 	if (ee::EditOP::OnMouseMove(x, y)) {
 		return true;
@@ -131,7 +131,7 @@ bool ControlCameraOP::OnMouseMove(int x, int y)
 	return false;
 }
 
-bool ControlCameraOP::OnMouseWheelRotation(int x, int y, int direction)
+bool CamControlOP::OnMouseWheelRotation(int x, int y, int direction)
 {
 	if (ee::EditOP::OnMouseWheelRotation(x, y, direction)) {
 		return true;

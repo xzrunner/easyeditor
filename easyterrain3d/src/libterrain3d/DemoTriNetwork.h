@@ -7,7 +7,7 @@
 
 #include <vector>
 
-namespace e3d { class Camera; }
+namespace n3 { class Camera; }
 
 namespace eterrain3d
 {
@@ -17,7 +17,7 @@ typedef unsigned int GLuint;
 class DemoTriNetwork : public IDemo
 {
 public:
-	DemoTriNetwork(e3d::Camera& cam);
+	DemoTriNetwork(n3::Camera& cam);
 	
 	virtual void Load() override;
 	virtual void Draw() const override;
@@ -31,7 +31,7 @@ private:
 	float GetRandHeight(const sm::vec3& v1, const sm::vec3& v2, int level) const;
 
 private:
-	e3d::Camera& m_cam;
+	n3::Camera& m_cam;
 
 	GLuint m_tex;
 

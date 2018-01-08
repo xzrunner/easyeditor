@@ -9,10 +9,10 @@ namespace e3d
 
 class StageCanvas;
 
-class ZoomCameraState : public EditOpState
+class CamZoomState : public EditOpState
 {
 public:
-	ZoomCameraState(StageCanvas& canvas, n3::Camera& cam);
+	CamZoomState(StageCanvas& canvas, n3::Camera& cam);
 
 	virtual void OnMouseWheelRotation(int x, int y, int direction) override;
 
@@ -21,6 +21,6 @@ private:
 
 	n3::Camera& m_cam;
 
-}; // ZoomCameraState
+}; // CamZoomState
 
 }

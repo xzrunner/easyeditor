@@ -6,11 +6,10 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/color_config.h>
 
-#include <easy3d/ViewFrustum.h>
-
 #include <node3/RenderContext.h>
 #include <node3/RenderCtxStack.h>
 #include <node3/PrimitiveDraw.h>
+#include <node3/Viewport.h>
 
 namespace ecomplex3d
 {
@@ -21,23 +20,6 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
 	, m_sprites_impl(sprites_impl)
 	, m_library(library)
 {
-}
-
-sm::ivec2 StageCanvas::TransPos3ProjectToScreen(const sm::vec3& proj) const
-{
-	sm::vec3 pos = GetCamera3().GetModelViewMat() * proj;
-	return e3d::ViewFrustum::TransPos3ProjectToScreen(pos, m_screen_width, m_screen_height);
-}
-
-sm::vec3 StageCanvas::TransPos3ScreenToProject(const sm::ivec2& scr, float proj_z) const
-{
-	sm::vec3 pos = GetCamera3().GetModelViewMat() * sm::vec3(0, 0, proj_z);
-	return e3d::ViewFrustum::TransPos3ScreenToProject(scr, pos.z, m_screen_width, m_screen_height);
-}
-
-sm::vec3 StageCanvas::TransPos3ScreenToDir(const sm::ivec2& screen) const
-{
-	return e3d::ViewFrustum::TransPos3ScreenToDir(screen, m_screen_width, m_screen_height);
 }
 
 void StageCanvas::OnSize(int w, int h)
@@ -53,7 +35,8 @@ void StageCanvas::OnDrawSprites() const
 	if (!ctx) {
 		return;
 	}
-	const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera3().GetModelViewMat());
+	const_cast<n3::RenderContext*>(ctx)->SetModelView(
+		GetCamera().GetModelViewMat());
 
 	DrawBackground();
  	DrawSprites();

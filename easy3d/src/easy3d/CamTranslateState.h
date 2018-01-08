@@ -9,10 +9,10 @@ namespace e3d
 
 class StageCanvas;
 
-class RotateCameraState : public EditOpState
+class CamTranslateState : public EditOpState
 {
 public:
-	RotateCameraState(StageCanvas& canvas, n3::Camera& cam, 
+	CamTranslateState(StageCanvas& canvas, n3::Camera& cam,
 		const sm::vec2& pos);
 
 	virtual void OnMousePress(const sm::vec2& pos) override;
@@ -26,6 +26,6 @@ private:
 
 	sm::vec2 m_last_pos;
 
-}; // RotateCameraState
+}; // CamTranslateState
 
 }

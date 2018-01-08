@@ -1,20 +1,19 @@
-#ifndef _EASYCOMPLEX3D_SELECT_SPRITE_OP_H_
-#define _EASYCOMPLEX3D_SELECT_SPRITE_OP_H_
+#pragma once
 
 #include <ee/EditOP.h>
 #include <ee/Sprite.h>
 
 namespace ee { class SpriteSelection; }
 
-namespace ecomplex3d
+namespace e3d
 {
 
 class StagePanel;
 
-class SelectSpriteOP : public ee::EditOP
+class SprSelectOP : public ee::EditOP
 {
 public:	
-	SelectSpriteOP(StagePanel* stage);
+	SprSelectOP(StagePanel& stage);
 
 	virtual bool OnMouseLeftDown(int x, int y) override;
 
@@ -28,16 +27,14 @@ public:
 	}
 
 private:
-	ee::SprPtr SelectByPos(const sm::ivec2& pos) const;
+	ee::SprPtr SelectByPos(const sm::vec2& pos) const;
 
 protected:
-	StagePanel* m_stage;
+	StagePanel& m_stage;
 
 private:
 	ee::SpriteSelection* m_selection;
 
-}; // SelectSpriteOP
+}; // SprSelectOP
 
 }
-
-#endif // _EASYCOMPLEX3D_SELECT_SPRITE_OP_H_

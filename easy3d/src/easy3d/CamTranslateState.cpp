@@ -1,10 +1,10 @@
-#include "TranslateCameraState.h"
+#include "CamTranslateState.h"
 #include "StageCanvas.h"
 
 namespace e3d
 {
 
-TranslateCameraState::TranslateCameraState(StageCanvas& canvas, 
+CamTranslateState::CamTranslateState(StageCanvas& canvas, 
 	                                       n3::Camera& cam,
 	                                       const sm::vec2& pos)
 	: m_canvas(canvas)
@@ -13,16 +13,16 @@ TranslateCameraState::TranslateCameraState(StageCanvas& canvas,
 {
 }
 
-void TranslateCameraState::OnMousePress(const sm::vec2& pos)
+void CamTranslateState::OnMousePress(const sm::vec2& pos)
 {
 	m_last_pos = pos;
 }
 
-void TranslateCameraState::OnMouseRelease(const sm::vec2& pos)
+void CamTranslateState::OnMouseRelease(const sm::vec2& pos)
 {
 }
 
-void TranslateCameraState::TranslateCameraState::OnMouseDrag(const sm::vec2& pos)
+void CamTranslateState::CamTranslateState::OnMouseDrag(const sm::vec2& pos)
 {
 	float dx = pos.x - m_last_pos.x;
 	float dy = pos.y - m_last_pos.y;

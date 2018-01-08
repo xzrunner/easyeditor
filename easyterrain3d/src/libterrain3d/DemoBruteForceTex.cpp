@@ -1,19 +1,19 @@
 #include "DemoBruteForceTex.h"
 
-#include <easy3d/Camera.h>
+#include <node3/Camera.h>
 
 namespace eterrain3d
 {
 
-DemoBruteForceTex::DemoBruteForceTex(e3d::Camera& cam)
+DemoBruteForceTex::DemoBruteForceTex(n3::Camera& cam)
 	: m_cam(cam)
 {
 }
 
 void DemoBruteForceTex::Load()
 {
-	m_cam.SetPosition(sm::vec3(6, -12, 12));
-	m_cam.Rotate(0, 60);
+	m_cam.Pitch(-60);
+	m_cam.MoveToward(8);
 
 	//load the height map in
 //	// 1. load from image

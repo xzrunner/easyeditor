@@ -21,9 +21,6 @@
     <ClCompile Include="..\..\..\src\libanim3d\StageCanvas.cpp">
       <Filter>view\stage</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\libanim3d\StagePanel.cpp">
-      <Filter>view\stage</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\libanim3d\ToolbarPanel.cpp">
       <Filter>view\toolbar</Filter>
     </ClCompile>
@@ -33,9 +30,6 @@
       <Filter>view\library</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libanim3d\StageCanvas.h">
-      <Filter>view\stage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libanim3d\StagePanel.h">
       <Filter>view\stage</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libanim3d\ToolbarPanel.h">

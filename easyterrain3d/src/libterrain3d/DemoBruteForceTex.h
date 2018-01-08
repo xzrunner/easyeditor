@@ -4,7 +4,7 @@
 #include "IDemo.h"
 #include "BruteForceTex.h"
 
-namespace e3d { class Camera; }
+namespace n3 { class Camera; }
 
 namespace eterrain3d
 {
@@ -12,13 +12,13 @@ namespace eterrain3d
 class DemoBruteForceTex : public IDemo
 {
 public:
-	DemoBruteForceTex(e3d::Camera& cam);
+	DemoBruteForceTex(n3::Camera& cam);
 
 	virtual void Load() override;
 	virtual void Draw() const override;
 
 private:
-	e3d::Camera& m_cam;
+	n3::Camera& m_cam;
 
 	BruteForceTex m_bf;
 

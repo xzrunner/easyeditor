@@ -10,7 +10,7 @@
 #include <memory>
 
 namespace ee { class Image; }
-namespace e3d { class Camera; }
+namespace n3 { class Camera; }
 
 namespace eterrain3d
 {
@@ -18,7 +18,7 @@ namespace eterrain3d
 class DemoOcean : public IDemo
 {
 public:
-	DemoOcean(e3d::Camera& cam);
+	DemoOcean(n3::Camera& cam);
 
 	virtual void Load() override;
 	virtual void Draw() const override;
@@ -36,7 +36,7 @@ private:
 	};
 
 private:
-	e3d::Camera& m_cam;
+	n3::Camera& m_cam;
 
 	std::shared_ptr<ee::Image> m_image;
 

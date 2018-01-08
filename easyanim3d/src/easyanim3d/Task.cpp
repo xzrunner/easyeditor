@@ -3,6 +3,9 @@
 #include <ee/SymbolMgr.h>
 #include <ee/PropertySettingPanel.h>
 
+#include <easy3d/StagePanel.h>
+#include <easy3d/CamControlOP.h>
+
 #include <easyanim3d.h>
 
 namespace eanim3d
@@ -76,14 +79,19 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	m_stage = new StagePanel(parent, m_parent, m_library);
+	auto stage = new e3d::StagePanel(parent, m_parent, m_library);
+	stage->SetCanvas(new StageCanvas(stage, stage->GetStageImpl(), stage));
+	stage->SetEditOP(new e3d::CamControlOP(stage, stage->GetStageImpl()));
+
+	m_stage = stage;
 	m_property->SetEditPanel(m_stage->GetStageImpl());
+
 	return m_stage;
 }
 
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
-	ToolbarPanel* toolbar = new ToolbarPanel(parent, static_cast<StagePanel*>(m_stage));
+	ToolbarPanel* toolbar = new ToolbarPanel(parent, static_cast<e3d::StagePanel*>(m_stage));
 	return toolbar;
 }
 

@@ -4,6 +4,9 @@
 #include <ee/LibraryPanel.h>
 #include <ee/PropertySettingPanel.h>
 
+#include <easy3d/StagePanel.h>
+#include <easy3d/SprArrangeOP.h>
+
 #include <easycomplex3d.h>
 
 #include <wx/splitter.h>
@@ -46,29 +49,53 @@ const ee::EditPanel* Task::GetEditPanel() const
 
 void Task::InitLayout()
 {
-	wxSplitterWindow* rightVerSplitter = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* leftVerSplitter = new wxSplitterWindow(rightVerSplitter);
-	wxSplitterWindow* leftHorSplitter = new wxSplitterWindow(leftVerSplitter);
+	wxSplitterWindow* right_split = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
 
-	m_library = new ee::LibraryPanel(leftHorSplitter);
+	wxWindow* left = InitLayoutLeft(left_split);
+	wxWindow* center = InitLayoutCenter(left_split);
+	wxWindow* right = InitLayoutRight(right_split);
+
+	left_split->SetSashGravity(0.2f);
+	left_split->SplitVertically(left, center);
+
+	right_split->SetSashGravity(0.85f);
+	right_split->SplitVertically(left_split, right);
+
+	m_root = right_split;
+}
+
+wxWindow* Task::InitLayoutLeft(wxWindow* parent)
+{
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
+
+	m_library = new ee::LibraryPanel(split);
 	m_library->AddPage(new ecomplex3d::LibraryPage(m_library->GetNotebook()));
 
-	m_property = new ee::PropertySettingPanel(leftHorSplitter);
+	m_property = new ee::PropertySettingPanel(split);
 
-	ecomplex3d::StagePanel* stage = new ecomplex3d::StagePanel(leftVerSplitter, m_parent, m_library);
+	split->SetSashGravity(0.55f);
+	split->SplitHorizontally(m_library, m_property);
+
+	return split;
+}
+
+wxWindow* Task::InitLayoutCenter(wxWindow* parent)
+{
+	auto stage = new e3d::StagePanel(parent, m_parent, m_library);
+	stage->SetCanvas(new StageCanvas(stage, stage->GetStageImpl(), stage, m_library));
+	stage->SetEditOP(new e3d::SprArrangeOP(*stage));
+
 	m_stage = stage;
+	m_property->SetEditPanel(m_stage->GetStageImpl());
 
-	m_toolbar = new ecomplex3d::ToolbarPanel(rightVerSplitter, stage);
+	return m_stage;
+}
 
-	leftHorSplitter->SetSashGravity(0.8f);
-	leftHorSplitter->SplitHorizontally(m_library, m_property);
-	leftVerSplitter->SetSashGravity(0.15f);
-	leftVerSplitter->SplitVertically(leftHorSplitter, m_stage);
-	
-	rightVerSplitter->SetSashGravity(0.85f);
-	rightVerSplitter->SplitVertically(leftVerSplitter, m_toolbar);
-
-	m_root = rightVerSplitter;
+wxWindow* Task::InitLayoutRight(wxWindow* parent)
+{
+	m_toolbar = new ecomplex3d::ToolbarPanel(parent, static_cast<e3d::StagePanel*>(m_stage));
+	return m_toolbar;
 }
 	
 }

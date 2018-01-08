@@ -5,7 +5,7 @@
 
 #include "BruteForce.h"
 
-namespace e3d { class Camera; }
+namespace n3 { class Camera; }
 
 namespace eterrain3d
 {
@@ -13,13 +13,13 @@ namespace eterrain3d
 class DemoBruteForce : public IDemo
 {
 public:
-	DemoBruteForce(e3d::Camera& cam);
+	DemoBruteForce(n3::Camera& cam);
 
 	virtual void Load() override;
 	virtual void Draw() const override;
 
 private:
-	e3d::Camera& m_cam;
+	n3::Camera& m_cam;
 
 	BruteForce m_bf;
 

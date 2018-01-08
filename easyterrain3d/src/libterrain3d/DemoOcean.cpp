@@ -2,7 +2,7 @@
 
 #include <ee/Image.h>
 
-#include <easy3d/Camera.h>
+#include <node3/Camera.h>
 
 #include <glp_loop.h>
 #include <SM_Calc.h>
@@ -19,7 +19,7 @@ static const float EDGE = 10;
 static const int ROW = 20;
 static const int COL = 20;
 
-DemoOcean::DemoOcean(e3d::Camera& cam)
+DemoOcean::DemoOcean(n3::Camera& cam)
 	: m_cam(cam)
 	, m_image(NULL)
 {
@@ -29,8 +29,8 @@ DemoOcean::DemoOcean(e3d::Camera& cam)
 
 void DemoOcean::Load()
 {
-	m_cam.SetPosition(sm::vec3(0, -8, 8));
-	m_cam.Rotate(0, 40);
+	m_cam.Pitch(-60);
+	m_cam.MoveToward(8);
 
 	m_image = ee::ImageMgr::Instance()->GetItem("ocean/water2_256.png");
 
@@ -100,8 +100,8 @@ void DemoOcean::Draw() const
 				};
 				sm::vec2 center = (texcoords[0] + texcoords[1] + texcoords[2]) / 3;
 				sm::vec2 base;
-				int ix = center.x - uv_left_low.x,
-					iy = center.y - uv_left_low.y;
+				int ix = static_cast<int>(center.x - uv_left_low.x),
+					iy = static_cast<int>(center.y - uv_left_low.y);
 				base.x = uv_left_low.x + ix;
 				base.y = uv_left_low.y + iy;
 				for (int i = 0; i < 3; ++i) {
@@ -124,8 +124,8 @@ void DemoOcean::Draw() const
 
 				sm::vec2 center = (texcoords[0] + texcoords[1] + texcoords[2]) / 3;
 				sm::vec2 base;
-				int ix = center.x - uv_left_low.x,
-					iy = center.y - uv_left_low.y;
+				int ix = static_cast<int>(center.x - uv_left_low.x),
+					iy = static_cast<int>(center.y - uv_left_low.y);
 				base.x = uv_left_low.x + ix;
 				base.y = uv_left_low.y + iy;
 				for (int i = 0; i < 3; ++i) {

@@ -2,8 +2,6 @@
 
 #include "randtab.h"
 
-#include <easy3d/Camera.h>
-
 #include <SM_Vector.h>
 #include <SM_Calc.h>
 #include <shaderlab/ShaderMgr.h>
@@ -12,6 +10,7 @@
 #include <gum/RenderContext.h>
 
 #include <node3/PrimitiveDraw.h>
+#include <node3/Camera.h>
 
 namespace eterrain3d
 {
@@ -20,7 +19,7 @@ static const float EDGE = 10;
 
 static const int MAX_LEVEL = 10;
 
-DemoTriNetwork::DemoTriNetwork(e3d::Camera& cam)
+DemoTriNetwork::DemoTriNetwork(n3::Camera& cam)
 	: m_cam(cam)
 	, m_tex(0)
 {
@@ -30,8 +29,8 @@ void DemoTriNetwork::Load()
 {
 	IDemo::Load();
 
-	//m_cam.SetPosition(sm::vec3(0, -8, 8));
-	//m_cam.Rotate(0, 40);
+	m_cam.Pitch(-45);
+	m_cam.MoveToward(5);
 
 	GenTex();
 
@@ -57,7 +56,7 @@ void DemoTriNetwork::Draw() const
 void DemoTriNetwork::DrawTriByLevel(const sm::vec3& v0, const sm::vec3& v1, const sm::vec3& v2, int level) const
 {
 	sm::vec3 c = (v0 + v1 + v2) / 3;
-	float dis = sm::dis_pos3_to_pos3(c, m_cam.GetPosition());
+	float dis = sm::dis_pos3_to_pos3(c, m_cam.GetPos());
 	float len = sm::dis_square_pos3_to_pos3(v1, v2);
 //	e3d::LogViewer::Instance()->Add(("dis:"+wxString::FromDouble(dis)).ToStdString());
 

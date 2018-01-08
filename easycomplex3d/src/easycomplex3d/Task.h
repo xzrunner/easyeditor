@@ -28,6 +28,9 @@ public:
 
 private:
 	void InitLayout();
+	wxWindow* InitLayoutLeft(wxWindow* parent);
+	wxWindow* InitLayoutCenter(wxWindow* parent);
+	wxWindow* InitLayoutRight(wxWindow* parent);
 
 private:
 	wxWindow* m_root;

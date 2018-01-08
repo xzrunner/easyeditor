@@ -1,4 +1,4 @@
-#include "SelectSpriteOP.h"
+#include "SprSelectOP.h"
 #include "StagePanel.h"
 #include "StageCanvas.h"
 
@@ -13,25 +13,25 @@
 #include <sprite2/ModelSprite.h>
 #include <sprite2/ModelSymbol.h>
 
-namespace ecomplex3d
+namespace e3d
 {
 
-SelectSpriteOP::SelectSpriteOP(StagePanel* stage)
-	: ee::EditOP(stage, stage->GetStageImpl())
+SprSelectOP::SprSelectOP(StagePanel& stage)
+	: ee::EditOP(&stage, stage.GetStageImpl())
 	, m_stage(stage)
 {
-	m_selection = stage->GetSpriteSelection();
+	m_selection = stage.GetSpriteSelection();
 	m_selection->AddReference();
 }
 
-bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
+bool SprSelectOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::EditOP::OnMouseLeftDown(x, y)) return true;
 
-	ee::SprPtr selected = SelectByPos(sm::ivec2(x, y));
+	ee::SprPtr selected = SelectByPos(sm::vec2(x, y));
 	if (selected && selected->IsEditable())
 	{
-		if (m_stage->GetKeyState(WXK_CONTROL)) 
+		if (m_stage.GetKeyState(WXK_CONTROL)) 
 		{
 			if (m_selection->IsExist(selected)) {
 				m_selection->Remove(selected);
@@ -58,7 +58,7 @@ bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool SelectSpriteOP::OnDraw() const
+bool SprSelectOP::OnDraw() const
 {
 	if (ee::EditOP::OnDraw()) return true;
 
@@ -81,18 +81,18 @@ bool SelectSpriteOP::OnDraw() const
 
 // 以sprite的中心和方向，旋转ray的坐标系
 // 即AABB不变
-ee::SprPtr SelectSpriteOP::SelectByPos(const sm::ivec2& pos) const
+ee::SprPtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
 {
 	ee::SprPtr selected = NULL;
 
 	std::vector<ee::SprPtr> sprs;
-	m_stage->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
+	m_stage.TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
 
-	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->GetCanvas());
+	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage.GetCanvas());
 	sm::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
 	n3::Ray ray(sm::vec3(0, 0, 0), ray_dir);
 
-	sm::mat4 cam_mat = canvas->GetCamera3().GetModelViewMat();
+	sm::mat4 cam_mat = canvas->GetCamera().GetModelViewMat();
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
 		auto& spr = sprs[i];

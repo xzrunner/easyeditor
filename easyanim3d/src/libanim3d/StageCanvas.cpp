@@ -1,10 +1,10 @@
 #include "StageCanvas.h"
-#include "StagePanel.h"
 
 #include <ee/EditPanelImpl.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>
+#include <ee/MultiSpritesImpl.h>
 
 #include <node3/RenderCtxStack.h>
 #include <node3/PrimitiveDraw.h>
@@ -32,7 +32,7 @@ void StageCanvas::OnDrawSprites() const
 	if (!ctx) {
 		return;
 	}
-	const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCameraUVN().GetModelViewMat());
+	const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera().GetModelViewMat());
 
 	DrawBackground();
 	DrawSprites();
