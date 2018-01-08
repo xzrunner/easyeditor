@@ -145,10 +145,6 @@ void StageCanvas::Init()
 {
 	SetCurrentCanvas();
 
-	if (glewInit() != GLEW_OK) {
-		exit(1);
-	}
-
 	s2::SprTimer::Instance()->Init();
 	// prepare 2d
 	// todo: move to child, for defferent init (such as 3d ?)

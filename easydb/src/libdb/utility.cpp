@@ -30,10 +30,6 @@ int init_gl()
 		return -2;
 	}
 
-	if (glewInit() != GLEW_OK) {
-		return -2;
-	}
-
 //	gum::ShaderLab::Instance()->Init();
 	{
 		sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
