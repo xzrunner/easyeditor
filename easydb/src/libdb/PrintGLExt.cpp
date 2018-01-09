@@ -28,8 +28,11 @@ int PrintGLExt::Run(int argc, char *argv[])
 		return ret;
 	}
 
-	const char* extensions = (char*)glGetString(GL_EXTENSIONS);
-	printf("%s\n", extensions);
+	GLint n;
+	glGetIntegerv(GL_NUM_EXTENSIONS, &n);
+	for (GLint i = 0; i < n; ++i) {
+		printf("%s\n", (const char*)(glGetStringi(GL_EXTENSIONS, i)));
+	}
 
 	return 0;
 }
