@@ -56,10 +56,10 @@ bool SprArrangeOP::OnMouseLeftDown(int x, int y)
 	}
 
 	if (GetSelection().IsEmpty()) {
-		m_op_state = std::make_unique<CamTranslateState>(
+		m_op_state = std::make_unique<CamRotateState>(
 			*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
 	} else {
-		m_op_state = std::make_unique<SprTranslateState>(
+		m_op_state = std::make_unique<SprRotateState>(
 			*m_canvas, GetSelection());
 	}
 
@@ -94,10 +94,10 @@ bool SprArrangeOP::OnMouseRightDown(int x, int y)
 
 	const ee::SpriteSelection& selection = GetSelection();
 	if (selection.IsEmpty()) {
-		m_op_state = std::make_unique<CamRotateState>(
+		m_op_state = std::make_unique<CamTranslateState>(
 			*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
 	} else if (selection.Size() == 1) {
-		m_op_state = std::make_unique<SprRotateState>(
+		m_op_state = std::make_unique<SprTranslateState>(
 			*m_canvas, GetSelection());
 	}
 
