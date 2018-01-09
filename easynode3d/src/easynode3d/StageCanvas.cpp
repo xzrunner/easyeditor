@@ -36,18 +36,12 @@ sm::vec2 StageCanvas::TransPos3ProjectToScreen(const sm::vec3& proj) const
 	sm::vec3 v1 = m_mat_projection * v0;
 	v1.z = v0.z;
 
-	return m_viewport.TransPos3ProjectToScreen(v1, m_camera.GetNear(), m_camera.GetFar());
-}
-
-sm::vec3 StageCanvas::TransPos3ScreenToProject(const sm::vec2& scr, float proj_z) const
-{
-	sm::vec3 pos = m_camera.GetModelViewMat() * sm::vec3(0, 0, proj_z);
-	return m_viewport.TransPos3ScreenToProject(scr, pos.z, m_camera.GetNear(), m_camera.GetFar());
+	return m_viewport.TransPos3ProjectToScreen(v1, m_camera);
 }
 
 sm::vec3 StageCanvas::TransPos3ScreenToDir(const sm::vec2& screen) const
 {
-	return m_viewport.TransPos3ScreenToDir(screen, m_camera.GetNear());
+	return m_viewport.TransPos3ScreenToDir(screen, m_camera);
 }
 
 void StageCanvas::OnSize(int w, int h)

@@ -48,8 +48,6 @@ void StageCanvas::DrawBackground() const
 {
 	n3::PrimitiveDraw::SetColor(ee::LIGHT_RED.ToABGR());
 	n3::PrimitiveDraw::Cross(sm::vec3(0, 0, 0), sm::vec3(10, 10, 10));
-//  	enode3d::DrawGrids(sm::vec3(-10, -10, 0), sm::vec3(10, 10, 0), sm::vec3(0.5f, 0.5f, FLT_MAX), 
-//  		ee::LIGHT_RED);
 }
 
 void StageCanvas::DrawSprites() const

@@ -20,8 +20,6 @@ public:
 	const n3::Viewport& GetViewport() const { return m_viewport; }
 
 	sm::vec2 TransPos3ProjectToScreen(const sm::vec3& proj) const;
-	sm::vec3 TransPos3ScreenToProject(const sm::vec2& scr, float proj_z) const;
-
 	sm::vec3 TransPos3ScreenToDir(const sm::vec2& screen) const;
 
 protected:

@@ -52,8 +52,8 @@ Visit(const ee::SprPtr& spr, bool& next)
 	auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
 
 	const sm::vec3& old = model_spr->GetPos3();
-	sm::vec3 last = m_canvas.TransPos3ScreenToProject(m_last, old.z);
-	sm::vec3 curr = m_canvas.TransPos3ScreenToProject(m_curr, old.z);
+	sm::vec3 last = m_canvas.TransPos3ScreenToDir(m_last) * old.z;
+	sm::vec3 curr = m_canvas.TransPos3ScreenToDir(m_curr) * old.z;
 	model_spr->Translate3(curr - last);
 
 	next = true;
