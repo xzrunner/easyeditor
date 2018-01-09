@@ -16,18 +16,51 @@
 #include <shaderlab/Model3Shader.h>
 
 #include <gl/glew.h>
-#include <glfw.h>
+#include <glfw3.h>
+
+#include <iostream>
 
 namespace edb
 {
 
-int init_gl()
+static void error_callback(int error, const char* description)
 {
-	glfwInit();
-	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
+    fputs(description, stderr);
+}
+
+static int prepare_gl_context()
+{
+	glfwSetErrorCallback(error_callback);
+	if (!glfwInit()) {
+		exit(EXIT_FAILURE);
+	}
+
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	GLFWwindow* window = glfwCreateWindow(100, 100, "easydb", nullptr, nullptr);
+	if (!window)
 	{
 		glfwTerminate();
-		return -2;
+		return -1;
+	}
+	glfwMakeContextCurrent(window);
+
+	// Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
+	glewExperimental = GL_TRUE;
+	//// Initialize GLEW to setup the OpenGL Function pointers
+	//if (glewInit() != GLEW_OK) {
+	//	return -1;
+	//}
+}
+	
+int init_gl()
+{
+	int ret = prepare_gl_context();
+	if (ret < 0) {
+		return ret;
 	}
 
 //	gum::ShaderLab::Instance()->Init();
