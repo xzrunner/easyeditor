@@ -6,6 +6,7 @@
 #include "SprRotateState.h"
 #include "CamTranslateState.h"
 #include "CamRotateState.h"
+#include "CamZoomState.h"
 
 #include <ee/FetchAllVisitor.h>
 
@@ -18,15 +19,6 @@ SprArrangeOP::SprArrangeOP(StagePanel& stage)
 	: SprSelectOP(stage)
 {
 	m_canvas = static_cast<e3d::StageCanvas*>(stage.GetCanvas());
-
-	//const ee::SpriteSelection& selection = GetSelection();
-	//m_translate_sprite = new SprTranslateState(m_stage, selection);
-	//m_rotate_sprite = new SprRotateState(m_stage, selection);
-
-	//e3d::StageCanvas* canvas 
-	//	= static_cast<e3d::StageCanvas*>(m_stage->GetCanvas());
-	//m_translate_camera = new TranslateCameraState(canvas);
-	//m_rotate_camera = new RotateCameraState(canvas);
 }
 
 bool SprArrangeOP::OnKeyDown(int keyCode)
@@ -88,6 +80,9 @@ bool SprArrangeOP::OnMouseLeftUp(int x, int y)
 		m_op_state->OnMouseRelease(sm::vec2(x, y));
 	}
 
+	m_op_state = std::make_unique<CamZoomState>(
+		*m_canvas, m_canvas->GetCamera());
+
 	return false;
 }
 
@@ -123,6 +118,9 @@ bool SprArrangeOP::OnMouseRightUp(int x, int y)
 		m_op_state->OnMouseRelease(sm::vec2(x, y));
 	}
 
+	m_op_state = std::make_unique<CamZoomState>(
+		*m_canvas, m_canvas->GetCamera());
+
 	return false;
 }
 
@@ -150,6 +148,19 @@ bool SprArrangeOP::OnMouseDrag(int x, int y)
 	if (m_op_state) {
 //		m_op_state->OnMouseMove(sm::vec2(x, y));
 		m_op_state->OnMouseDrag(sm::vec2(x, y));
+	}
+
+	return false;
+}
+
+bool SprArrangeOP::OnMouseWheelRotation(int x, int y, int direction)
+{
+	if (SprSelectOP::OnMouseWheelRotation(x, y, direction)) {
+		return true;
+	}
+
+	if (m_op_state) {
+		m_op_state->OnMouseWheelRotation(x, y, direction);
 	}
 
 	return false;
