@@ -14,7 +14,7 @@ namespace enode3d
 
 StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
 	: ee::OnePassCanvas(stage_wnd, stage, nullptr, true, true)
-	, m_camera(sm::vec3(0, 0, -2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0))
+	, m_camera(sm::vec3(0, 0, 2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0))
 {
 }
 
