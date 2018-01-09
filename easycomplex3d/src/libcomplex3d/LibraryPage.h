@@ -1,14 +1,14 @@
 #ifndef _EASYCOMPLEX3D_LIBRARY_PAGE_H_
 #define _EASYCOMPLEX3D_LIBRARY_PAGE_H_
 
-#include <easy3d/LibraryPage.h>
+#include <easynode3d/LibraryPage.h>
 
 namespace n3 { class Surface; }
 
 namespace ecomplex3d
 {
 
-class LibraryPage : public e3d::LibraryPage
+class LibraryPage : public enode3d::LibraryPage
 {
 public:
 	LibraryPage(wxWindow* parent);

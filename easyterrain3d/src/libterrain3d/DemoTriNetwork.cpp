@@ -58,7 +58,7 @@ void DemoTriNetwork::DrawTriByLevel(const sm::vec3& v0, const sm::vec3& v1, cons
 	sm::vec3 c = (v0 + v1 + v2) / 3;
 	float dis = sm::dis_pos3_to_pos3(c, m_cam.GetPos());
 	float len = sm::dis_square_pos3_to_pos3(v1, v2);
-//	e3d::LogViewer::Instance()->Add(("dis:"+wxString::FromDouble(dis)).ToStdString());
+//	enode3d::LogViewer::Instance()->Add(("dis:"+wxString::FromDouble(dis)).ToStdString());
 
 	if (level < MAX_LEVEL && len > dis * 0.005f)
 	{
@@ -73,7 +73,7 @@ void DemoTriNetwork::DrawTriByLevel(const sm::vec3& v0, const sm::vec3& v1, cons
 	n3::PrimitiveDraw::Line(v1, v2);
 	n3::PrimitiveDraw::Line(v2, v0);
 
-//	e3d::DrawTriLine(v0, v1, v2);
+//	enode3d::DrawTriLine(v0, v1, v2);
 
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	mgr->SetShader(sl::MODEL3);

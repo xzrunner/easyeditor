@@ -3,7 +3,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/EditPanel.h>
 
-#include <easy3d/CamControlOP.h>
+#include <easynode3d/CamControlOP.h>
 
 #include <easyterrain3d.h>
 
@@ -45,7 +45,7 @@ void Task::InitLayout()
 {
 	ee::EditPanel* stage = new ee::EditPanel(m_parent, m_parent);
 	stage->SetCanvas(new eterrain3d::StageCanvas(stage, stage->GetStageImpl()));
-	stage->SetEditOP(new e3d::CamControlOP(stage, stage->GetStageImpl()));
+	stage->SetEditOP(new enode3d::CamControlOP(stage, stage->GetStageImpl()));
 }
 
 }

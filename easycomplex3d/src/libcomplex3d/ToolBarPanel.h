@@ -3,7 +3,7 @@
 
 #include <ee/ToolbarPanel.h>
 
-namespace e3d { class StagePanel; }
+namespace enode3d { class StagePanel; }
 
 namespace ecomplex3d
 {
@@ -11,7 +11,7 @@ namespace ecomplex3d
 class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, e3d::StagePanel* stage);
+	ToolbarPanel(wxWindow* parent, enode3d::StagePanel* stage);
 
 protected:
 	virtual wxSizer* InitLayout() override;

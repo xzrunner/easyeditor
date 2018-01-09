@@ -16,7 +16,7 @@ BEGIN_EVENT_TABLE(StageCanvas, ee::CameraCanvas)
 END_EVENT_TABLE()
 
 StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
-	: e3d::StageCanvas(stage_wnd, stage)
+	: enode3d::StageCanvas(stage_wnd, stage)
 	, m_timer(this, TIMER_ID)
 {
 	m_timer.Start(100);
@@ -39,7 +39,7 @@ void StageCanvas::OnDrawSprites() const
 	m_demo->Update();
 	m_demo->Draw();
 
-//	e3d::LogViewer::Instance()->Draw();
+//	enode3d::LogViewer::Instance()->Draw();
 }
 
 void StageCanvas::OnTimer(wxTimerEvent& event)

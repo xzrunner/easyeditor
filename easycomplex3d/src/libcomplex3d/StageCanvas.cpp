@@ -16,7 +16,7 @@ namespace ecomplex3d
 
 StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 						 ee::MultiSpritesImpl* sprites_impl, ee::LibraryPanel* library)
-	: e3d::StageCanvas(stage_wnd, stage)
+	: enode3d::StageCanvas(stage_wnd, stage)
 	, m_sprites_impl(sprites_impl)
 	, m_library(library)
 {
@@ -24,7 +24,7 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
 
 void StageCanvas::OnSize(int w, int h)
 {
-	e3d::StageCanvas::OnSize(w, h);
+	enode3d::StageCanvas::OnSize(w, h);
 	m_screen_width = w;
 	m_screen_height = h;
 }
@@ -48,7 +48,7 @@ void StageCanvas::DrawBackground() const
 {
 	n3::PrimitiveDraw::SetColor(ee::LIGHT_RED.ToABGR());
 	n3::PrimitiveDraw::Cross(sm::vec3(0, 0, 0), sm::vec3(10, 10, 10));
-//  	e3d::DrawGrids(sm::vec3(-10, -10, 0), sm::vec3(10, 10, 0), sm::vec3(0.5f, 0.5f, FLT_MAX), 
+//  	enode3d::DrawGrids(sm::vec3(-10, -10, 0), sm::vec3(10, 10, 0), sm::vec3(0.5f, 0.5f, FLT_MAX), 
 //  		ee::LIGHT_RED);
 }
 

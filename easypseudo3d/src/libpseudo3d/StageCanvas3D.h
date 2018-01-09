@@ -2,8 +2,6 @@
 #define _EASYPSEUDO3D_STAGE_CANVAS_3D_H_
 
 
-#include <easy3d.h>
-
 namespace epseudo3d
 {
 

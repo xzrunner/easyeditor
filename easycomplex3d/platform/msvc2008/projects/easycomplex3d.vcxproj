@@ -57,7 +57,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;..\..\..\..\easy3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;..\..\..\..\easynode3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -83,7 +83,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;..\..\..\..\easy3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;..\..\..\..\easynode3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -137,10 +137,6 @@
     <ProjectReference Include="..\..\..\..\dtex2\platform\msvc2008\projects\dtex2.vcxproj">
       <Project>{a502c49c-7014-4d77-8bd9-b3f917ad34b0}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\easy3d\platform\msvc2008\projects\easy3d.vcxproj">
-      <Project>{c4799e05-825c-4633-a3e7-8ba05b45a666}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libdata.vcxproj">
       <Project>{77e15c91-f70b-4141-a0fc-4e82d1c43bd2}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -176,6 +172,9 @@
     <ProjectReference Include="..\..\..\..\easyimage\platform\msvc2008\projects\libimage.vcxproj">
       <Project>{d41c0b3e-f0a0-4a1f-a568-0100c839406c}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easynode3d\platform\msvc2008\projects\easynode3d.vcxproj">
+      <Project>{c4799e05-825c-4633-a3e7-8ba05b45a666}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\flatten\platform\msvc2008\projects\flatten.vcxproj">
       <Project>{26016761-3f64-45e4-aa37-ddd8714fb159}</Project>

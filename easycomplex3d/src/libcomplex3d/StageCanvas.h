@@ -3,14 +3,14 @@
 
 #include <ee/MultiSpritesImpl.h>
 
-#include <easy3d/StageCanvas.h>
+#include <easynode3d/StageCanvas.h>
 
 namespace ee { class LibraryPanel; }
 
 namespace ecomplex3d
 {
 
-class StageCanvas : public e3d::StageCanvas
+class StageCanvas : public enode3d::StageCanvas
 {
 public:
 	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 

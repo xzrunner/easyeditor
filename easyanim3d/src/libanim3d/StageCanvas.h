@@ -1,7 +1,7 @@
 #ifndef _EASYANIM3D_STAGE_CANVAS_H_
 #define _EASYANIM3D_STAGE_CANVAS_H_
 
-#include <easy3d/StageCanvas.h>
+#include <easynode3d/StageCanvas.h>
 
 namespace ee { class MultiSpritesImpl; }
 
@@ -10,7 +10,7 @@ namespace eanim3d
 
 class StagePanel;
 
-class StageCanvas : public e3d::StageCanvas
+class StageCanvas : public enode3d::StageCanvas
 {
 public:
 	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 

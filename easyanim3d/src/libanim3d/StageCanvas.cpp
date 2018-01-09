@@ -14,14 +14,14 @@ namespace eanim3d
 
 StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 						 ee::MultiSpritesImpl* sprites_impl)
-	: e3d::StageCanvas(stage_wnd, stage)
+	: enode3d::StageCanvas(stage_wnd, stage)
 	, m_sprites_impl(sprites_impl)
 {
 }
 
 void StageCanvas::OnSize(int w, int h)
 {
-	e3d::StageCanvas::OnSize(w, h);
+	enode3d::StageCanvas::OnSize(w, h);
 	m_width = w;
 	m_height = h;
 }

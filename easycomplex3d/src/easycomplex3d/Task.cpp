@@ -4,8 +4,8 @@
 #include <ee/LibraryPanel.h>
 #include <ee/PropertySettingPanel.h>
 
-#include <easy3d/StagePanel.h>
-#include <easy3d/SprArrangeOP.h>
+#include <easynode3d/StagePanel.h>
+#include <easynode3d/SprArrangeOP.h>
 
 #include <easycomplex3d.h>
 
@@ -82,9 +82,9 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	auto stage = new e3d::StagePanel(parent, m_parent, m_library);
+	auto stage = new enode3d::StagePanel(parent, m_parent, m_library);
 	stage->SetCanvas(new StageCanvas(stage, stage->GetStageImpl(), stage, m_library));
-	stage->SetEditOP(new e3d::SprArrangeOP(*stage));
+	stage->SetEditOP(new enode3d::SprArrangeOP(*stage));
 
 	m_stage = stage;
 	m_property->SetEditPanel(m_stage->GetStageImpl());
@@ -94,7 +94,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
-	m_toolbar = new ecomplex3d::ToolbarPanel(parent, static_cast<e3d::StagePanel*>(m_stage));
+	m_toolbar = new ecomplex3d::ToolbarPanel(parent, static_cast<enode3d::StagePanel*>(m_stage));
 	return m_toolbar;
 }
 	

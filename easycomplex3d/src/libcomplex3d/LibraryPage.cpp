@@ -2,8 +2,8 @@
 
 #include <ee/LibraryList.h>
 
-#include <easy3d/ModelFile.h>
-#include <easy3d/Symbol.h>
+#include <easynode3d/ModelFile.h>
+#include <easynode3d/Symbol.h>
 
 #include <node3/ParametricEquations.h>
 #include <node3/ModelParametric.h>
@@ -16,7 +16,7 @@ namespace ecomplex3d
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: e3d::LibraryPage(parent, e3d::ModelFile::Instance()->Tag(n3::MODEL_COMPLEX))
+	: enode3d::LibraryPage(parent, enode3d::ModelFile::Instance()->Tag(n3::MODEL_COMPLEX))
 {
 }
 
@@ -50,12 +50,12 @@ void LibraryPage::LoadSurface(n3::Surface* surface, const char* name)
 	auto obj_model = std::make_shared<n3::ObjectModel>();
 	obj_model->SetModel(model);
 
-	auto sym = std::make_shared<e3d::Symbol>();
+	auto sym = std::make_shared<enode3d::Symbol>();
 	sym->SetAABB(aabb);
 	sym->SetName(name);
 	sym->SetModel(obj_model);
 
-	std::string filepath = e3d::ModelFile::Instance()->Tag(n3::MODEL_COMPLEX);
+	std::string filepath = enode3d::ModelFile::Instance()->Tag(n3::MODEL_COMPLEX);
 	filepath += ".json";
 	sym->SetFilepath(filepath);
 
