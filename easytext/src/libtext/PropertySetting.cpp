@@ -110,7 +110,10 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	for (int i = 0, n = user_fonts.size(); i < n; ++i) {
 		choices.push_back(user_fonts[i].first.c_str());
 	}
-	pg->GetProperty("Font")->SetValue(choices[tb.font_type]);
+
+	if (!fonts.empty()) {
+		pg->GetProperty("Font")->SetValue(choices[tb.font_type]);
+	}
 	pg->GetProperty("FontSize")->SetValue(tb.font_size);
 	const s2::Color& font_col = tb.font_color;
 	pg->SetPropertyValueString("FontColor", wxColour(font_col.r, font_col.g, font_col.b, font_col.a).GetAsString());
