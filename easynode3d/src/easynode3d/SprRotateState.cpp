@@ -21,7 +21,7 @@ void SprRotateState::OnMouseRelease(const sm::vec2& pos)
 {
 }
 
-void SprRotateState::OnMouseMove(const sm::vec2& pos)
+void SprRotateState::OnMouseDrag(const sm::vec2& pos)
 {
 	Rotate(m_last_pos, pos);
 	m_last_pos = pos;

@@ -59,7 +59,7 @@ bool SprArrangeOP::OnMouseLeftDown(int x, int y)
 		m_op_state = std::make_unique<CamRotateState>(
 			*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
 	} else {
-		m_op_state = std::make_unique<SprRotateState>(
+		m_op_state = std::make_unique<SprTranslateState>(
 			*m_canvas, GetSelection());
 	}
 
@@ -97,7 +97,7 @@ bool SprArrangeOP::OnMouseRightDown(int x, int y)
 		m_op_state = std::make_unique<CamTranslateState>(
 			*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
 	} else if (selection.Size() == 1) {
-		m_op_state = std::make_unique<SprTranslateState>(
+		m_op_state = std::make_unique<SprRotateState>(
 			*m_canvas, GetSelection());
 	}
 
@@ -146,7 +146,6 @@ bool SprArrangeOP::OnMouseDrag(int x, int y)
 	}
 
 	if (m_op_state) {
-//		m_op_state->OnMouseMove(sm::vec2(x, y));
 		m_op_state->OnMouseDrag(sm::vec2(x, y));
 	}
 

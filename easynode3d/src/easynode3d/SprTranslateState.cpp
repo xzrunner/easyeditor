@@ -25,7 +25,7 @@ void SprTranslateState::OnMouseRelease(const sm::vec2& pos)
 	// todo history
 }
 
-void SprTranslateState::OnMouseMove(const sm::vec2& pos)
+void SprTranslateState::OnMouseDrag(const sm::vec2& pos)
 {
 	if (m_selection.IsEmpty()) {
 		return;
@@ -51,9 +51,12 @@ Visit(const ee::SprPtr& spr, bool& next)
 {
 	auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
 
+	float dist = sm::dis_pos3_to_pos3(
+		m_canvas.GetCamera().GetPos(), model_spr->GetPos3());
+
 	const sm::vec3& old = model_spr->GetPos3();
-	sm::vec3 last = m_canvas.TransPos3ScreenToDir(m_last) * old.z;
-	sm::vec3 curr = m_canvas.TransPos3ScreenToDir(m_curr) * old.z;
+	sm::vec3 last = m_canvas.TransPos3ScreenToDir(m_last) * dist;
+	sm::vec3 curr = m_canvas.TransPos3ScreenToDir(m_curr) * dist;
 	model_spr->Translate3(curr - last);
 
 	next = true;

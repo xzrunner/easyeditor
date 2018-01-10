@@ -71,9 +71,8 @@ bool SprSelectOP::OnDraw() const
 		sm::mat4 mat = sm::mat4(model_spr->GetOri3()) *
 			sm::mat4::Translated(pos.x, pos.y, pos.z);
 		n3::PrimitiveDraw::SetColor(ee::MID_RED.ToABGR());
-		// todo mat
-		n3::PrimitiveDraw::Cube(std::dynamic_pointer_cast<s2::ModelSymbol>(
-			model_spr->GetSymbol())->GetAABB());
+		n3::PrimitiveDraw::Cube(mat,
+			std::dynamic_pointer_cast<s2::ModelSymbol>(model_spr->GetSymbol())->GetAABB());
 	}
 
 	return false;
