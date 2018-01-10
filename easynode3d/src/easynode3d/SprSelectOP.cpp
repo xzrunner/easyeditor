@@ -79,8 +79,7 @@ bool SprSelectOP::OnDraw() const
 	return false;
 }
 
-// 以sprite的中心和方向，旋转ray的坐标系
-// 即AABB不变
+// AABB not changed, transform ray from Camera and spr's mat
 ee::SprPtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
 {
 	ee::SprPtr selected = NULL;
@@ -90,9 +89,12 @@ ee::SprPtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
 
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage.GetCanvas());
 	sm::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
-	n3::Ray ray(sm::vec3(0, 0, 0), ray_dir);
 
-	sm::mat4 cam_mat = canvas->GetCamera().GetModelViewMat();
+	auto& cam = canvas->GetCamera();
+	auto cam_rot_mat = cam.GetRotateMat();
+	ray_dir = cam_rot_mat.Inverted() * ray_dir;
+
+	n3::Ray ray(cam.GetPos(), ray_dir);
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
 		auto& spr = sprs[i];
@@ -101,7 +103,7 @@ ee::SprPtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
 		const n3::AABB& aabb = sym->GetAABB();
 		auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
 		
-		sm::vec3 offset = cam_mat * model_spr->GetPos3();
+		sm::vec3 offset = cam_rot_mat * model_spr->GetPos3();
 
 		sm::vec3 cross;
 		bool intersect = n3::Math::RayOBBIntersection(aabb, offset, model_spr->GetOri3(), ray, &cross);
