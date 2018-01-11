@@ -18,6 +18,9 @@ protected:
 
 	virtual bool LoadResources() override;
 
+private:
+	bool LoadModelFromFile(const std::string& filepath);
+
 }; // Symbol
 
 }

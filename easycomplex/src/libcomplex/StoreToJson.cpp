@@ -15,6 +15,7 @@ namespace ecomplex
 void StoreToJson::StoreToFile(const std::string& filepath, const Symbol& sym, const std::string& _dir, bool store_history)
 {
 	rapidjson::Document doc;
+	doc.SetObject();
 
 	std::string dir;
 	if (filepath != ee::SYM_GROUP_TAG) {
@@ -40,22 +41,25 @@ void StoreToJson::StoreToMem(rapidjson::Document& doc, const Symbol& sym, const 
 
 	auto& alloc = doc.GetAllocator();
 
-	doc["name"].SetString(sym.name.c_str(), alloc);
-	doc["tag"].SetString(sym.tag.c_str(), alloc);
+	doc.AddMember("name", rapidjson::Value(sym.name.c_str(), alloc), alloc);
+	doc.AddMember("tag", rapidjson::Value(sym.tag.c_str(), alloc), alloc);
 
 	const sm::rect& scissor = sym.GetScissor();
-	doc["xmin"] = scissor.xmin;
-	doc["xmax"] = scissor.xmax;
-	doc["ymin"] = scissor.ymin;
-	doc["ymax"] = scissor.ymax;
+	doc.AddMember("xmin", scissor.xmin, alloc);
+	doc.AddMember("xmax", scissor.xmax, alloc);
+	doc.AddMember("ymin", scissor.ymin, alloc);
+	doc.AddMember("ymax", scissor.ymax, alloc);
 
-	doc["use_render_cache"] = sym.m_use_render_cache;
+	doc.AddMember("use_render_cache", sym.m_use_render_cache, alloc);
 
+	rapidjson::Value spr_val;
+	spr_val.SetArray();
 	auto& children = sym.GetAllChildren();
 	for (int i = 0, n = children.size(); i < n; ++i) {
 		auto child = std::dynamic_pointer_cast<ee::Sprite>(children[i]);
-		doc["sprite"].PushBack(StoreSpr(child, dir, alloc).Move(), alloc);
+		spr_val.PushBack(StoreSpr(child, dir, alloc).Move(), alloc);
 	}
+	doc.AddMember("sprite", spr_val, alloc);
 
 //	StoreAction(sym, val);
 }
@@ -75,15 +79,23 @@ rapidjson::Value StoreToJson::StoreSpr(const ee::SprPtr& spr, const std::string&
 	                                   rapidjson::MemoryPoolAllocator<>& alloc)
 {
 	rapidjson::Value value;
+	value.SetObject();
+
 	auto sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 
 	// filepath
-	value["filepath"].SetString(ee::SymbolPath::GetRelativePath(*sym, dir).c_str(), alloc);
+	value.AddMember("filepath", rapidjson::Value(ee::SymbolPath::GetRelativePath(*sym, dir).c_str(), alloc), alloc);
 
 	// filepaths
 	auto& filepaths = sym->GetFilepaths();
-	for (auto& filepath : filepaths) {
-		value["filepaths"].PushBack(rapidjson::Value(filepath.c_str(), alloc).Move(), alloc);
+	if (!filepaths.empty()) 
+	{
+		rapidjson::Value filepaths_val;
+		filepaths_val.SetArray();
+		for (auto& filepath : filepaths) {
+			filepaths_val.PushBack(rapidjson::Value(filepath.c_str(), alloc).Move(), alloc);
+		}
+		value.AddMember("filepaths", filepaths_val, alloc);
 	}
 
 	// other
@@ -117,7 +129,7 @@ void StoreToJson::CheckDuplicateName(const Symbol& sym)
 			names_set.insert(name.c_str());
 		} else {
 			std::string msg = sym.GetFilepath() + ": " + name.c_str();
-			wxMessageBox(msg.c_str(), "重名");
+			wxMessageBox(msg, "重名");
 		}
 	}
 }
@@ -152,7 +164,7 @@ void StoreToJson::CheckNameDiff(const Symbol& sym)
 	}
 
 	std::string msg = sym.GetFilepath() + ": " + str;
-	wxMessageBox(msg.c_str(), "删除的名字");
+	wxMessageBox(msg, "删除的名字");
 }
 
 void StoreToJson::CheckAnchorName(const Symbol& sym)
@@ -167,7 +179,7 @@ void StoreToJson::CheckAnchorName(const Symbol& sym)
 		{
 			auto ee_sym = std::dynamic_pointer_cast<ee::Symbol>(spr->GetSymbol());
 			std::string msg = sym.GetFilepath() + ": " + ee_sym->GetName();
-			wxMessageBox(msg.c_str(), "anchor没有名字");
+			wxMessageBox(msg, "anchor没有名字");
 		}
 	}
 }
