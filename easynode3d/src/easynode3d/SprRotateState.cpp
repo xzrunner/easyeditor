@@ -49,8 +49,12 @@ Visit(const ee::SprPtr& spr, bool& next)
 	auto& vp = m_canvas.GetViewport();
    	sm::vec3 start = vp.MapToSphere(base + m_start -  center);
    	sm::vec3 end   = vp.MapToSphere(base + m_end - center);
-   	sm::Quaternion delta = sm::Quaternion::CreateFromVectors(start, end);
 
+	auto cam_mat = m_canvas.GetCamera().GetRotateMat().Inverted();
+	start = cam_mat * start;
+	end   = cam_mat * end;
+		
+   	sm::Quaternion delta = sm::Quaternion::CreateFromVectors(start, end);
 	model_spr->Rotate3(delta);
 
 	next = true;
