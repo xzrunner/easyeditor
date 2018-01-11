@@ -70,6 +70,9 @@
     <Filter Include="pack">
       <UniqueIdentifier>{38439dbe-d5f1-4e94-9a26-a0893c23c9d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="parser">
+      <UniqueIdentifier>{3bf9ef36-099a-4d00-be78-12bdeb2c53be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\libsprpacker\PackArray.h">
@@ -238,6 +241,9 @@
       <Filter>pack</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\ParserLuaData.h">
+      <Filter>parser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\src\libsprpacker\PackArray.inl">
@@ -388,6 +394,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\libsprpacker\PackToLua.cpp">
       <Filter>pack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libsprpacker\ParserLuaData.cpp">
+      <Filter>parser</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

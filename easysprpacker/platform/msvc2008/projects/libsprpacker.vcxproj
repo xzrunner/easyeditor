@@ -127,6 +127,7 @@
     <ClInclude Include="..\..\..\src\libsprpacker\PackTrail.h" />
     <ClInclude Include="..\..\..\src\libsprpacker\PackTrailSpr.h" />
     <ClInclude Include="..\..\..\src\libsprpacker\PackTrans.h" />
+    <ClInclude Include="..\..\..\src\libsprpacker\ParserLuaData.h" />
     <ClInclude Include="..\..\..\src\libsprpacker\PointsMesh.h" />
     <ClInclude Include="..\..\..\src\libsprpacker\Skin2Mesh.h" />
     <ClInclude Include="..\..\..\src\libsprpacker\SprBuilder.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="..\..\..\src\libsprpacker\PackTrail.cpp" />
     <ClCompile Include="..\..\..\src\libsprpacker\PackTrailSpr.cpp" />
     <ClCompile Include="..\..\..\src\libsprpacker\PackTrans.cpp" />
+    <ClCompile Include="..\..\..\src\libsprpacker\ParserLuaData.cpp" />
     <ClCompile Include="..\..\..\src\libsprpacker\PointsMesh.cpp" />
     <ClCompile Include="..\..\..\src\libsprpacker\Skin2Mesh.cpp" />
     <ClCompile Include="..\..\..\src\libsprpacker\TrianglesMesh.cpp" />

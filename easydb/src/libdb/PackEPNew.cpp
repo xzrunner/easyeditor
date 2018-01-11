@@ -65,11 +65,18 @@ int PackEPNew::Run(int argc, char *argv[])
 	if (argc >= 12) 
 	{
 		ee::PackIDMgr::Instance()->Init(argv[11], argv[10]);
-		esprpacker::PackIDMgr::Instance()->AddCurrPath(argv[12]);
 
 		auto audio_cfg = gum::FilepathHelper::Dir(argv[11]);
 		audio_cfg += "\\audio_cfg.json";
 		esprpacker::PackAudioIDMgr::Instance()->Init(audio_cfg.c_str());
+	}
+
+	if (argc >= 13) {
+		esprpacker::PackIDMgr::Instance()->AddCurrPath(argv[12]);
+	}
+
+	if (argc >= 14) {
+		esprpacker::PackIDMgr::Instance()->LoadPrevPackedInfo(argv[13]);
 	}
 
 	s2::SprTimer::Instance()->Init();
