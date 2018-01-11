@@ -51,8 +51,7 @@ Visit(const ee::SprPtr& spr, bool& next)
 {
 	auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
 
-	float dist = sm::dis_pos3_to_pos3(
-		m_canvas.GetCamera().GetPos(), model_spr->GetPos3());
+	float dist = fabs(m_canvas.GetCamera().GetPos().z - model_spr->GetPos3().z);
 
 	const sm::vec3& old = model_spr->GetPos3();
 	sm::vec3 last = m_canvas.TransPos3ScreenToDir(m_last) * dist;
