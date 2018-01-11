@@ -30,7 +30,7 @@ bool SprArrangeOP::OnKeyDown(int keyCode)
 	switch (keyCode)
 	{
 	case WXK_ESCAPE:
-		m_canvas->GetCamera().Reset(sm::vec3(0, 0, -2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0));
+		m_canvas->GetCamera().Reset();
 		break;
 	case WXK_SPACE:
 		{

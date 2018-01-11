@@ -28,7 +28,8 @@ bool CamControlOP::OnKeyDown(int keyCode)
 	switch (keyCode)
 	{
 	case WXK_ESCAPE:
-		cam.Reset(sm::vec3(0, 0, -2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0));
+		cam.Reset();
+		m_canvas->Refresh();
 		break;
 	case 'w': case 'W':
 		cam.Translate(0, OFFSET);
