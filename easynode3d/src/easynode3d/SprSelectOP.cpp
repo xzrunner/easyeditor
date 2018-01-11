@@ -90,8 +90,7 @@ ee::SprPtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
 	sm::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
 
 	auto& cam = canvas->GetCamera();
-	auto cam_rot_mat = cam.GetRotateMat();
-	ray_dir = cam_rot_mat.Inverted() * ray_dir;
+	ray_dir = cam.GetRotateMat().Inverted() * ray_dir;
 
 	n3::Ray ray(cam.GetPos(), ray_dir);
 	for (int i = 0, n = sprs.size(); i < n; ++i)
@@ -102,10 +101,9 @@ ee::SprPtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
 		const n3::AABB& aabb = sym->GetAABB();
 		auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
 		
-		sm::vec3 offset = cam_rot_mat * model_spr->GetPos3();
-
 		sm::vec3 cross;
-		bool intersect = n3::Math::RayOBBIntersection(aabb, offset, model_spr->GetOri3(), ray, &cross);
+		bool intersect = n3::Math::RayOBBIntersection(
+			aabb, model_spr->GetPos3(), model_spr->GetOri3(), ray, &cross);
 		if (intersect) {
 			return spr;
 		}
