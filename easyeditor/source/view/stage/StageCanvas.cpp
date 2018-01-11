@@ -53,16 +53,16 @@ static const int GL_ATTRIB[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN,
 static const float FPS = 30;
 
 StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, 
-						 wxGLContext* glctx, bool use_context_stack, bool is_3d)
+						 wxGLContext* glctx, uint32_t flag)
 	: wxGLCanvas(stage_wnd, wxID_ANY, GL_ATTRIB)
+	, m_flag(flag)
 	, m_share_context(false)
-	, m_use_context_stack(use_context_stack)
-	, m_is_3d(is_3d)
 	, m_stage(stage)
  	, m_width(0), m_height(0)
 	, m_dirty(false)
 	, m_cam_dirty(false)
-	, m_render_ctx_idx(-1)
+	, m_ctx_idx_2d(-1)
+	, m_ctx_idx_3d(-1)
 	, m_timer(this, TIMER_ID)
 	, m_draw(true)
 {
@@ -80,12 +80,13 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 
 	RegistSubject(SetCanvasDirtySJ::Instance());
 
-	if (m_use_context_stack) 
+	if (m_flag & USE_CONTEXT_STACK)
 	{
-		if (m_is_3d) {
-			m_render_ctx_idx = n3::RenderCtxStack::Instance()->Push(n3::RenderContext());
-		} else {
-			m_render_ctx_idx = s2::RenderCtxStack::Instance()->Push(s2::RenderContext());
+		if (m_flag & HAS_2D) {
+			m_ctx_idx_2d = s2::RenderCtxStack::Instance()->Push(s2::RenderContext());
+		}
+		if (m_flag & HAS_3D) {
+			m_ctx_idx_3d = n3::RenderCtxStack::Instance()->Push(n3::RenderContext());
 		}
 	}
 }
@@ -98,14 +99,9 @@ StageCanvas::~StageCanvas()
 		delete m_gl_ctx;
 	}
 
-	if (m_use_context_stack) 
+	if (m_flag & USE_CONTEXT_STACK)
 	{
-		if (m_is_3d)
-		{
-			n3::RenderCtxStack::Instance()->Pop();
-		}
-		else
-		{
+		if (m_flag & HAS_2D) {
 			s2::RenderCtxStack::Instance()->Pop();
 
 			const s2::RenderContext* ctx = s2::RenderCtxStack::Instance()->Top();
@@ -113,16 +109,21 @@ StageCanvas::~StageCanvas()
 				gum::RenderContext::Instance()->OnSize(ctx->GetScreenWidth(), ctx->GetScreenHeight());
 			}
 		}
+		if (m_flag & HAS_3D) {
+			n3::RenderCtxStack::Instance()->Pop();
+		}
 	}
 }
 
 void StageCanvas::SetCurrentCanvas()
 {
 	SetCurrent(*m_gl_ctx);
-	if (m_is_3d) {
-		n3::RenderCtxStack::Instance()->Bind(m_render_ctx_idx);
-	} else {
-		s2::RenderCtxStack::Instance()->Bind(m_render_ctx_idx);
+	
+	if (m_flag & HAS_2D) {
+		s2::RenderCtxStack::Instance()->Bind(m_ctx_idx_2d);
+	}
+	if (m_flag & HAS_3D) {
+		n3::RenderCtxStack::Instance()->Bind(m_ctx_idx_3d);
 	}
 }
 

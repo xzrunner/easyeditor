@@ -4,37 +4,52 @@
 #include <sprite2/OrthoCamera.h>
 #include <sprite2/Pseudo3DCamera.h>
 #include <sprite2/Blackboard.h>
+#include <node3/RenderCtxStack.h>
+#include <node3/Camera.h>
 
 namespace ee
 {
 
 CameraCanvas::CameraCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, s2::CameraType cam_type,
-						   wxGLContext* glctx, bool use_context_stack)
-	: TwoPassCanvas(stage_wnd, stage, glctx, use_context_stack)
-	, m_camera(NULL)
+						   wxGLContext* glctx, bool use_context_stack, bool has_3d)
+	: TwoPassCanvas(stage_wnd, stage, glctx, USE_CONTEXT_STACK * use_context_stack | HAS_2D | HAS_3D * has_3d)
+	, m_cam2d(nullptr)
+	, m_cam3d(nullptr)
 {
 	if (cam_type == s2::CAM_ORTHO2D) {
-		m_camera = new s2::OrthoCamera();
+		m_cam2d = new s2::OrthoCamera();
 	} else if (cam_type == s2::CAM_PSEUDO3D) {
-		m_camera = new s2::Pseudo3DCamera();
+		m_cam2d = new s2::Pseudo3DCamera();
+	}
+
+	if (has_3d) {
+		m_cam3d = new n3::Camera(sm::vec3(0, 0, 2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0));
 	}
 }
 
 CameraCanvas::~CameraCanvas()
 {
 	s2::Blackboard::Instance()->SetCamera(NULL);
-	delete m_camera;
+	delete m_cam2d;
+	delete m_cam3d;
 }
 
 void CameraCanvas::SetCurrentCanvas()
 {
 	TwoPassCanvas::SetCurrentCanvas();
-	s2::Blackboard::Instance()->SetCamera(m_camera);
+	s2::Blackboard::Instance()->SetCamera(m_cam2d);
+}
+
+void CameraCanvas::OnSize(int w, int h)
+{
+	TwoPassCanvas::OnSize(w, h);
+
+	UpdateCam3D(w, h);
 }
 
 sm::rect CameraCanvas::GetVisibleRegion() const
 {
-	if (Is3D() || !m_camera || m_camera->Type() == s2::CAM_PSEUDO3D) {
+	if (!m_cam2d || m_cam2d->Type() == s2::CAM_PSEUDO3D) {
 		return sm::rect();
 	}
 	const s2::RenderContext* ctx = s2::RenderCtxStack::Instance()->Top();
@@ -42,7 +57,7 @@ sm::rect CameraCanvas::GetVisibleRegion() const
 		return sm::rect();
 	}
 
-	s2::OrthoCamera* ortho_cam = static_cast<s2::OrthoCamera*>(m_camera);
+	s2::OrthoCamera* ortho_cam = static_cast<s2::OrthoCamera*>(m_cam2d);
 	float s = ortho_cam->GetScale();
 	sm::rect r(sm::vec2(0, 0), ctx->GetScreenWidth() * s, ctx->GetScreenHeight() * s);
 	r.Translate(ortho_cam->GetPosition());
@@ -51,10 +66,27 @@ sm::rect CameraCanvas::GetVisibleRegion() const
 
 float CameraCanvas::GetCameraScale() const
 {
-	if (m_camera->Type() == s2::CAM_PSEUDO3D) {
+	if (m_cam2d->Type() == s2::CAM_PSEUDO3D) {
 		return 1;
 	}
-	return static_cast<s2::OrthoCamera*>(m_camera)->GetScale();
+	return static_cast<s2::OrthoCamera*>(m_cam2d)->GetScale();
+}
+
+void CameraCanvas::UpdateCam3D(int w, int h)
+{
+	if (!m_cam3d) {
+		return;
+	}
+
+	auto ctx = const_cast<n3::RenderContext*>(n3::RenderCtxStack::Instance()->Top());
+	if (!ctx) {
+		return;
+	}
+
+	ctx->SetModelView(m_cam3d->GetModelViewMat());
+
+	m_cam3d->SetAspect((float)w / h);
+	ctx->SetProjection(m_cam3d->GetProjectionMat());
 }
 
 }

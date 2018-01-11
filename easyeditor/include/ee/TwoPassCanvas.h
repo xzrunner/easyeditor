@@ -11,8 +11,8 @@ namespace ee
 class TwoPassCanvas : public StageCanvas
 {
 public:
-	TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
-		wxGLContext* glctx = NULL, bool use_context_stack = true);
+	TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, 
+		wxGLContext* glctx = NULL, uint32_t flag = USE_CONTEXT_STACK | HAS_2D);
 	virtual ~TwoPassCanvas();
 
 public:

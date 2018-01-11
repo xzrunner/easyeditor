@@ -25,8 +25,8 @@ namespace ee
 {
 
 TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
-							 wxGLContext* glctx, bool use_context_stack)
-	: StageCanvas(stage_wnd, stage, glctx, use_context_stack)
+							 wxGLContext* glctx, uint32_t flag)
+	: StageCanvas(stage_wnd, stage, glctx, flag)
 	, m_rt(NULL)
 {
 }
@@ -125,11 +125,7 @@ void TwoPassCanvas::DrawTwoPass() const
 	// Draw to Screen
 	//////////////////////////////////////////////////////////////////////////
 
-	if (Is3D()) {
-//		n3::RenderCtxStack::Instance()->Push(n3::RenderContext(2, 2, 0, 0));
-	} else {
-		s2::RenderCtxStack::Instance()->Push(s2::RenderContext(2, 2, 0, 0));
-	}
+	s2::RenderCtxStack::Instance()->Push(s2::RenderContext(2, 2, 0, 0));
 
 	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();
 	rc->SetClearFlag(ur::MASKC);
@@ -148,11 +144,7 @@ void TwoPassCanvas::DrawTwoPass() const
 	DrawPass2(&vertices[0].x, &texcoords[0].x, m_rt->GetTexID());
  	sl::ShaderMgr::Instance()->FlushShader();
 
-	if (Is3D()) {
-//		n3::RenderCtxStack::Instance()->Pop();
-	} else {
-		s2::RenderCtxStack::Instance()->Pop();
-	}
+	s2::RenderCtxStack::Instance()->Pop();
 }
 
 void TwoPassCanvas::DrawPass1() const

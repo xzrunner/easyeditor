@@ -77,6 +77,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\easynode3d.h" />
     <ClInclude Include="..\..\..\src\easynode3d\Camera.h" />
     <ClInclude Include="..\..\..\src\easynode3d\CamControlOP.h" />
     <ClInclude Include="..\..\..\src\easynode3d\EditOpState.h" />

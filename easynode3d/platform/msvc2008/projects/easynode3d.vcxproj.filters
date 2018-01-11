@@ -87,6 +87,7 @@
     <ClInclude Include="..\..\..\src\easynode3d\StagePanel.h">
       <Filter>view\stage</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\easynode3d.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easynode3d\Camera.cpp">

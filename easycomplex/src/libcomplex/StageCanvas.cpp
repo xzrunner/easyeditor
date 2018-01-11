@@ -21,6 +21,7 @@
 #include <gum/DTex.h>
 #include <gum/GTxt.h>
 #include <gum/StringHelper.h>
+#include <node3/PrimitiveDraw.h>
 
 namespace ecomplex
 {
@@ -28,7 +29,7 @@ namespace ecomplex
 StageCanvas::StageCanvas(StagePanel* editPanel,
 						 ee::LibraryPanel* library,
 						 wxGLContext* glctx)
-						 : ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), s2::CAM_ORTHO2D, glctx)
+	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), s2::CAM_ORTHO2D, glctx, true, true)
 	, m_stage(editPanel)
 	, m_library(library)
 	, m_background(NULL)
@@ -134,7 +135,7 @@ void StageCanvas::DrawBackground() const
 
 void StageCanvas::DrawStat() const
 {
-	s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(m_camera);
+	s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(m_cam2d);
 	S2_MAT mt;
 	float s = std::max(1.0f, cam->GetScale());
 	mt.Scale(s, s);

@@ -20,6 +20,7 @@
 #include <easytrail.h>
 #include <easyskeleton.h>
 #include <easyaudio.h>
+#include <easynode3d.h>
 
 #include <ee/LibraryImagePage.h>
 #include <ee/LibraryFontBlankPage.h>
@@ -53,7 +54,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new eparticle2d::LibraryPage(nb));
 //	AddPage(new eterrain2d::LibraryPage(nb));
 //	AddPage(new eshadow::LibraryPage(nb));
-//	AddPage(new esketch::LibraryPage(nb));
+	AddPage(new enode3d::LibraryPage(nb));
 }
 
 } // ecomplex

@@ -24,6 +24,7 @@
 #include <easytrail.h>
 #include <easyskeleton.h>
 #include <easyaudio.h>
+#include <easynode3d.h>
 
 #include <sprite2/SymType.h>
 
@@ -81,6 +82,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(s2::SYM_AUDIO, &eaudio::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_AUDIO, &eaudio::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(s2::SYM_MODEL, &enode3d::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_MODEL, &enode3d::Sprite::Create);
 }
 
 bool MyApp::OnInit()
