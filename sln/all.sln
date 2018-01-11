@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanim", "..\easyanim\platform\msvc2008\projects\libanim.vcxproj", "{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}"
 EndProject
@@ -89,7 +89,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libp3dinv", "..\easyp3din
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanis", "..\easyanim\platform\msvc2008\projects\libanis.vcxproj", "{4CD9986A-A4F8-4DD2-B9AD-FE18B70423B8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyanim3d", "..\easyanim3d\platform\msvc2008\projects\easyanim3d.vcxproj", "{0963327C-D73A-45EF-914A-563F4EF4F94B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyanimation3d", "..\easyanim3d\platform\msvc2008\projects\easyanim3d.vcxproj", "{0963327C-D73A-45EF-914A-563F4EF4F94B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanim3d", "..\easyanim3d\platform\msvc2008\projects\libanim3d.vcxproj", "{ED9E2268-BF41-46D7-8FE4-7C5EBCC525D5}"
 EndProject
@@ -104,8 +104,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyterrain3d", "..\easyterrain3d\platform\msvc2008\projects\easyterrain3d.vcxproj", "{619CD067-29C4-4A20-AA84-346E69BED088}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libterrain3d", "..\easyterrain3d\platform\msvc2008\projects\libterrain3d.vcxproj", "{69347FE7-98F6-4E63-A22F-EFEA9FE82C9E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libeasy3d", "..\easy3d\platform\msvc2008\projects\easy3d.vcxproj", "{C4799E05-825C-4633-A3E7-8BA05B45A666}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.ps", "..\particle\platform\msvc2008\projects\particle.vcxproj", "{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 EndProject
@@ -263,13 +261,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{3E445281
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "editor", "editor", "{DCD53373-2D4D-4A9D-AC8F-F1E917DBEE6C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{3F0B9C7C-49F9-4B55-8550-D4D95C236AEC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.base", "0.base", "{3F0B9C7C-49F9-4B55-8550-D4D95C236AEC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{67E9A611-D121-4925-BC49-4F79052AB416}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.lib", "1.lib", "{67E9A611-D121-4925-BC49-4F79052AB416}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "exe", "exe", "{AC252D13-3E77-4464-8C2F-841FC48B6D25}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.exe", "2.exe", "{AC252D13-3E77-4464-8C2F-841FC48B6D25}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "level", "level", "{94BEFC1A-9624-4C39-9B36-473F17199226}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.level", "3.level", "{94BEFC1A-9624-4C39-9B36-473F17199226}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.js", "..\js\platform\msvc2017\projects\js.vcxproj", "{68C18DA9-79BB-43A5-9E0C-79740AEA954B}"
 EndProject
@@ -280,6 +278,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easycomplex3d", "..\easycomplex3d\platform\msvc2008\projects\easycomplex3d.vcxproj", "{FF2D4A3A-86BA-47C0-AF4E-3264619B2F46}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.node3", "..\node3\platform\msvc2017\projects\node3.vcxproj", "{6030CF6B-1A8B-421B-92CE-4EB965751636}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libnode3d", "..\easynode3d\platform\msvc2008\projects\easynode3d.vcxproj", "{C4799E05-825C-4633-A3E7-8BA05B45A666}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -491,10 +491,6 @@ Global
 		{69347FE7-98F6-4E63-A22F-EFEA9FE82C9E}.Debug|Win32.Build.0 = Debug|Win32
 		{69347FE7-98F6-4E63-A22F-EFEA9FE82C9E}.Release|Win32.ActiveCfg = Release|Win32
 		{69347FE7-98F6-4E63-A22F-EFEA9FE82C9E}.Release|Win32.Build.0 = Release|Win32
-		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Debug|Win32.Build.0 = Debug|Win32
-		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Release|Win32.ActiveCfg = Release|Win32
-		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Release|Win32.Build.0 = Release|Win32
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Debug|Win32.ActiveCfg = Debug|Win32
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Debug|Win32.Build.0 = Debug|Win32
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Release|Win32.ActiveCfg = Release|Win32
@@ -747,6 +743,10 @@ Global
 		{6030CF6B-1A8B-421B-92CE-4EB965751636}.Debug|Win32.Build.0 = Debug|Win32
 		{6030CF6B-1A8B-421B-92CE-4EB965751636}.Release|Win32.ActiveCfg = Release|Win32
 		{6030CF6B-1A8B-421B-92CE-4EB965751636}.Release|Win32.Build.0 = Release|Win32
+		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Debug|Win32.Build.0 = Debug|Win32
+		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Release|Win32.ActiveCfg = Release|Win32
+		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -803,7 +803,6 @@ Global
 		{3156C188-65B6-4785-943C-03CDDE86B53A} = {67E9A611-D121-4925-BC49-4F79052AB416}
 		{619CD067-29C4-4A20-AA84-346E69BED088} = {AC252D13-3E77-4464-8C2F-841FC48B6D25}
 		{69347FE7-98F6-4E63-A22F-EFEA9FE82C9E} = {67E9A611-D121-4925-BC49-4F79052AB416}
-		{C4799E05-825C-4633-A3E7-8BA05B45A666} = {3F0B9C7C-49F9-4B55-8550-D4D95C236AEC}
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036} = {D4324EB3-FDFB-4488-BAEE-41AAEBD9F1B7}
 		{E5C07F5D-F889-4FC2-8DA8-194023914BBE} = {3E445281-8F17-4763-9112-39A38C12FE16}
 		{EB4F1EE0-CB3B-4B2E-9655-A8E22F948575} = {56A0A350-CB5B-411F-B7A3-E41CCD484216}
@@ -880,6 +879,7 @@ Global
 		{BE6E26CD-31F6-483F-91D4-79EAF3A6B3F8} = {67E9A611-D121-4925-BC49-4F79052AB416}
 		{FF2D4A3A-86BA-47C0-AF4E-3264619B2F46} = {AC252D13-3E77-4464-8C2F-841FC48B6D25}
 		{6030CF6B-1A8B-421B-92CE-4EB965751636} = {E3CAB0FE-5803-4275-BE6F-CB4395CD1DB7}
+		{C4799E05-825C-4633-A3E7-8BA05B45A666} = {67E9A611-D121-4925-BC49-4F79052AB416}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D54C01A-3C82-4351-A325-2853C3E81322}
