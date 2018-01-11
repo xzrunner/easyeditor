@@ -51,12 +51,15 @@ Visit(const ee::SprPtr& spr, bool& next)
 {
 	auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
 
-	float dist = fabs(m_canvas.GetCamera().GetPos().z - model_spr->GetPos3().z);
+	auto& cam = m_canvas.GetCamera();
+	float dist = cam.GetToward().Dot(cam.GetPos() - model_spr->GetPos3());
 
 	const sm::vec3& old = model_spr->GetPos3();
 	sm::vec3 last = m_canvas.TransPos3ScreenToDir(m_last) * dist;
 	sm::vec3 curr = m_canvas.TransPos3ScreenToDir(m_curr) * dist;
-	model_spr->Translate3(curr - last);
+
+	sm::vec3 offset = cam.GetRotateMat().Inverted() * (curr - last);
+	model_spr->Translate3(offset);
 
 	next = true;
 }
