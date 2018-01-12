@@ -14,9 +14,9 @@ void CamZoomState::OnMouseWheelRotation(int x, int y, int direction)
 {
 	static const float OFFSET = 0.1f;
 	if (direction > 0) {
-		m_cam.MoveToward(-OFFSET);
+		m_cam.MoveToward(- m_cam.GetDistance() * OFFSET);
 	} else {
-		m_cam.MoveToward(OFFSET);
+		m_cam.MoveToward(m_cam.GetDistance() * OFFSET);
 	}
 	m_canvas.Refresh();
 }
