@@ -13,6 +13,7 @@
 #include <easytext.h>
 #include <easyterrain2d.h>
 #include <easyskeleton.h>
+#include <easynode3d.h>
 #include <easyaudio.h>
 
 #include <ee/EditPanelImpl.h>
@@ -52,11 +53,13 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr, ee::CrossGuides* guides)
 
 	ee::CurrSprTreePath::Instance()->Push(spr);
 
+	auto canvas = m_stage->GetCanvas();
+
 	m_sprites_impl->EnableObserve(false);
 	m_stage->EnableObserve(false);
 	m_stage->SetActive(false);
-	m_stage->GetCanvas()->EnableObserve(false);
-	m_stage->GetCanvas()->SetDrawable(false);
+	canvas->EnableObserve(false);
+	canvas->SetDrawable(false);
 	if (m_viewlist) {
 		m_viewlist->EnableObserve(false);
 	}
@@ -66,7 +69,7 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr, ee::CrossGuides* guides)
 	{
 		auto sym = std::dynamic_pointer_cast<ecomplex::Symbol>(complex->GetSymbol());
 		edited_sym = sym;
- 		EditDialog dlg(m_wnd, std::dynamic_pointer_cast<ecomplex::Symbol>(edited_sym), m_stage->GetCanvas()->GetGLContext(), guides);
+ 		EditDialog dlg(m_wnd, std::dynamic_pointer_cast<ecomplex::Symbol>(edited_sym), canvas->GetGLContext(), guides);
  		dlg.ShowModal();
 
 		//////////////////////////////////////////////////////////////////////////
@@ -78,19 +81,19 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr, ee::CrossGuides* guides)
 	{
 		auto sym = std::dynamic_pointer_cast<libanim::Symbol>(anim->GetSymbol());
 		edited_sym = sym;
-		libanim::PreviewDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
+		libanim::PreviewDialog dlg(m_wnd, sym, canvas->GetGLContext());
  		dlg.ShowModal();
 	}
 	else if (auto patch9 = std::dynamic_pointer_cast<escale9::Sprite>(spr))
  	{
 		auto sym = std::dynamic_pointer_cast<escale9::Symbol>(patch9->GetSymbol());
 		edited_sym = sym;
-  		escale9::EditDialog dlg(m_wnd, sym, m_stage->GetCanvas()->GetGLContext());
+  		escale9::EditDialog dlg(m_wnd, sym, canvas->GetGLContext());
   		dlg.ShowModal();
  	}
 	else if (auto mesh = std::dynamic_pointer_cast<emesh::Sprite>(spr))
 	{
-		emesh::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), mesh, m_sprites_impl);
+		emesh::EditDialog dlg(m_wnd, canvas->GetGLContext(), mesh, m_sprites_impl);
 		dlg.ShowModal();
 	}
 	else if (auto font = std::dynamic_pointer_cast<ee::FontBlankSprite>(spr))
@@ -100,32 +103,37 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr, ee::CrossGuides* guides)
 	}
 	else if (auto tex = std::dynamic_pointer_cast<etexture::Sprite>(spr))
 	{
-		etexture::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), tex, m_sprites_impl);
+		etexture::EditDialog dlg(m_wnd, canvas->GetGLContext(), tex, m_sprites_impl);
 		dlg.ShowModal();
 	}
 	else if (auto icon = std::dynamic_pointer_cast<eicon::Sprite>(spr))
 	{
-		eicon::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), spr, m_sprites_impl);
+		eicon::EditDialog dlg(m_wnd, canvas->GetGLContext(), spr, m_sprites_impl);
 		dlg.ShowModal();
 	}
 	else if (auto text = std::dynamic_pointer_cast<etext::Sprite>(spr))
 	{
-		etext::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), text, m_sprites_impl);
+		etext::EditDialog dlg(m_wnd, canvas->GetGLContext(), text, m_sprites_impl);
 		dlg.ShowModal();
 	}
 	//else if (auto terr = std::dynamic_pointer_cast<eterrain2d::Sprite>(spr))
 	//{
-	//	eterrain2d::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), terr, m_sprites_impl);
+	//	eterrain2d::EditDialog dlg(m_wnd, canvas->GetGLContext(), terr, m_sprites_impl);
 	//	dlg.ShowModal();
 	//} 
 	//else if (auto skeleton = std::dynamic_pointer_cast<libskeleton::Sprite>(spr)) 
 	//{
-	//	libskeleton::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), skeleton);
+	//	libskeleton::EditDialog dlg(m_wnd, canvas->GetGLContext(), skeleton);
 	//	dlg.ShowModal();
 	//}
 	else if (auto shape = std::dynamic_pointer_cast<eshape::Sprite>(spr))
 	{
-		eshape::EditDialogSimple dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shape, m_sprites_impl);
+		eshape::EditDialogSimple dlg(m_wnd, canvas->GetGLContext(), shape, m_sprites_impl);
+		dlg.ShowModal();
+	}
+	else if (auto node3 = std::dynamic_pointer_cast<enode3d::Sprite>(spr))
+	{
+		enode3d::EditDialog dlg(m_wnd, canvas->GetGLContext(), node3);
 		dlg.ShowModal();
 	}
 	else if (auto audio = std::dynamic_pointer_cast<eaudio::Sprite>(spr))
@@ -137,8 +145,8 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr, ee::CrossGuides* guides)
 	m_sprites_impl->EnableObserve(true);
 	m_stage->EnableObserve(true);
 	m_stage->SetActive(true);
-	m_stage->GetCanvas()->EnableObserve(true);
-	m_stage->GetCanvas()->SetDrawable(true);
+	canvas->EnableObserve(true);
+	canvas->SetDrawable(true);
 	if (m_viewlist) {
 		m_viewlist->EnableObserve(true);
 	}

@@ -5,12 +5,15 @@
 #include <node3/Camera.h>
 #include <node3/Viewport.h>
 
+namespace ee { class MultiSpritesImpl; }
+
 namespace enode3d
 {
 class StageCanvas : public ee::OnePassCanvas
 {
 public:
-	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage);
+	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
+		ee::MultiSpritesImpl* sprites_impl, wxGLContext* glctx = nullptr);
 
 	virtual void Refresh();
 
@@ -24,8 +27,16 @@ public:
 
 protected:
 	virtual void OnSize(int w, int h) override;
+	virtual void OnDrawSprites() const override;
+
+	virtual void DrawBackground() const;
 
 private:
+	void DrawSprites() const;
+
+private:
+	ee::MultiSpritesImpl* m_sprites_impl;
+
 	n3::Camera   m_camera;
 	n3::Viewport m_viewport;
 

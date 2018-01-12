@@ -34,6 +34,9 @@
     <Filter Include="view\stage">
       <UniqueIdentifier>{38156d39-3809-4770-b6b6-e7495c391218}</UniqueIdentifier>
     </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{8b65fcb7-46e0-4c8b-a9d1-5c75978920c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easynode3d\Camera.h">
@@ -88,6 +91,9 @@
       <Filter>view\stage</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\easynode3d.h" />
+    <ClInclude Include="..\..\..\src\easynode3d\EditDialog.h">
+      <Filter>frame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easynode3d\Camera.cpp">
@@ -137,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easynode3d\StagePanel.cpp">
       <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynode3d\EditDialog.cpp">
+      <Filter>frame</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

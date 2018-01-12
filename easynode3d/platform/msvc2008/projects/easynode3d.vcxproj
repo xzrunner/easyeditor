@@ -80,6 +80,7 @@
     <ClInclude Include="..\..\..\src\easynode3d.h" />
     <ClInclude Include="..\..\..\src\easynode3d\Camera.h" />
     <ClInclude Include="..\..\..\src\easynode3d\CamControlOP.h" />
+    <ClInclude Include="..\..\..\src\easynode3d\EditDialog.h" />
     <ClInclude Include="..\..\..\src\easynode3d\EditOpState.h" />
     <ClInclude Include="..\..\..\src\easynode3d\LibraryPage.h" />
     <ClInclude Include="..\..\..\src\easynode3d\LogViewer.h" />
@@ -99,6 +100,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easynode3d\Camera.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\CamControlOP.cpp" />
+    <ClCompile Include="..\..\..\src\easynode3d\EditDialog.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\LibraryPage.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\LogViewer.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\CamRotateState.cpp" />

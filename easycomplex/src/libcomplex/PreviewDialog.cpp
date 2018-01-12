@@ -75,8 +75,8 @@ void PreviewDialog::InitLayout(wxGLContext* glctx)
 void PreviewDialog::BuildEditPanel(wxSizer* sizer, wxGLContext* glctx)
 {
 	PreviewStage* stage = new PreviewStage(this, this, m_control);
-	stage->SetEditOP(new PreviewEditOP(stage, stage->GetStageImpl(), m_sprs));
 	stage->SetCanvas(new PreviewCanvas(stage, stage->GetStageImpl(), m_sprs, glctx));
+	stage->SetEditOP(new PreviewEditOP(stage, stage->GetStageImpl(), m_sprs));
 	sizer->Add(stage, 1, wxEXPAND);
 }
 

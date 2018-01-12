@@ -8,24 +8,14 @@ namespace ee { class MultiSpritesImpl; }
 namespace eanim3d
 {
 
-class StagePanel;
-
 class StageCanvas : public enode3d::StageCanvas
 {
 public:
 	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 		ee::MultiSpritesImpl* sprites_impl);
 
-protected:
-	virtual void OnSize(int w, int h) override;
-	virtual void OnDrawSprites() const override;
-
-private:
-	void DrawBackground() const;
-	void DrawSprites() const;
-
-private:
-	ee::MultiSpritesImpl* m_sprites_impl;
+public:
+	virtual void DrawBackground() const override;
 
 }; // StageCanvas
 

@@ -14,12 +14,11 @@
 namespace enode3d
 {
 
-LibraryPage::LibraryPage(wxWindow* parent, const std::string& title)
-	: ee::LibraryPage(parent, title)
+LibraryPage::LibraryPage(wxWindow* parent)
+	: ee::LibraryPage(parent, "Model3d")
 {
 	InitLayout();
 //	m_list->SetFileter(ModelFile::Instance()->Tag(n3::MODEL_OBJECT));
-	m_list->SetFileter(title);
 }
 
 bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const

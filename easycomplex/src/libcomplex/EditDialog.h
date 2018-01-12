@@ -39,7 +39,7 @@ private:
 	StagePanel* m_stage;
 	ee::ViewlistPanel* m_viewlist;
 
-	std::shared_ptr<Symbol> m_sym;
+	std::shared_ptr<Symbol> m_sym = nullptr;
 
 	DECLARE_EVENT_TABLE()
 

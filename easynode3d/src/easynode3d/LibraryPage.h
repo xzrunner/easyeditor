@@ -8,7 +8,7 @@ namespace enode3d
 class LibraryPage : public ee::LibraryPage
 {
 public:
-	LibraryPage(wxWindow* parent, const std::string& title = "model3d");
+	LibraryPage(wxWindow* parent);
 
 	virtual bool IsHandleSymbol(const ee::SymPtr& sym) const override;
 

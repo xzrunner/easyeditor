@@ -3,18 +3,27 @@
 #include <ee/panel_msg.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Sprite.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/MultiSpritesImpl.h>
+#include <ee/color_config.h>
 
 #include <node3/RenderCtxStack.h>
 #include <node3/Camera.h>
 #include <node3/Viewport.h>
+#include <node3/PrimitiveDraw.h>
 #include <gum/RenderContext.h>
 
 namespace enode3d
 {
 
-StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
-	: ee::OnePassCanvas(stage_wnd, stage, nullptr, USE_CONTEXT_STACK | HAS_2D | HAS_3D)
+StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+	                     ee::MultiSpritesImpl* sprites_impl, wxGLContext* glctx)
+	: ee::OnePassCanvas(stage_wnd, stage, glctx, USE_CONTEXT_STACK | HAS_2D | HAS_3D)
 	, m_camera(sm::vec3(0, 0, 2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0))
+	, m_sprites_impl(sprites_impl)
 {
 }
 
@@ -56,6 +65,40 @@ void StageCanvas::OnSize(int w, int h)
 
 	m_camera.SetAspect((float)w / h);
 	ctx->SetProjection(m_camera.GetProjectionMat());
+}
+
+void StageCanvas::OnDrawSprites() const
+{
+	auto ctx = const_cast<n3::RenderContext*>(n3::RenderCtxStack::Instance()->Top());
+	if (!ctx) {
+		return;
+	}
+	const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera().GetModelViewMat());
+
+	DrawBackground();
+	DrawSprites();
+
+	m_stage->DrawEditOP();
+}
+
+void StageCanvas::DrawSprites() const
+{
+	std::vector<ee::SprPtr> sprs;
+	m_sprites_impl->TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
+
+	for (size_t i = 0, n = sprs.size(); i < n; ++i)
+	{
+		auto& spr = sprs[i];
+		if (!spr->IsVisible())
+			continue;
+		ee::SpriteRenderer::Instance()->Draw(spr.get());
+	}
+}
+
+void StageCanvas::DrawBackground() const
+{
+	n3::PrimitiveDraw::SetColor(ee::LIGHT_RED.ToABGR());
+	n3::PrimitiveDraw::Cross(sm::vec3(0, 0, 0), sm::vec3(10, 10, 10));
 }
 
 }

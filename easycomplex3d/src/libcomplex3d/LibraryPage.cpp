@@ -16,7 +16,7 @@ namespace ecomplex3d
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: enode3d::LibraryPage(parent, enode3d::ModelFile::Instance()->Tag(n3::MODEL_COMPLEX))
+	: enode3d::LibraryPage(parent)
 {
 }
 
