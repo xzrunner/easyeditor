@@ -89,11 +89,7 @@ ee::SprPtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
 
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage.GetCanvas());
 	sm::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
-
-	auto& cam = canvas->GetCamera();
-	ray_dir = cam.GetRotateMat().Inverted() * ray_dir;
-
-	n3::Ray ray(cam.GetPos(), ray_dir);
+	n3::Ray ray(canvas->GetCamera().GetPos(), ray_dir);
 	for (auto& spr : sprs)
 	{
 		if (spr->GetSymbol()->Type() != s2::SYM_MODEL) {
