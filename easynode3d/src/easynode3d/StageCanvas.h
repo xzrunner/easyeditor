@@ -12,8 +12,8 @@ namespace enode3d
 class StageCanvas : public ee::OnePassCanvas
 {
 public:
-	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
-		ee::MultiSpritesImpl* sprites_impl, wxGLContext* glctx = nullptr);
+	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* sprites_impl, 
+		wxGLContext* glctx = nullptr, bool has2d = false);
 
 	virtual void Refresh();
 
@@ -35,6 +35,8 @@ private:
 	void DrawSprites() const;
 
 private:
+	bool m_has2d;
+
 	ee::MultiSpritesImpl* m_sprites_impl;
 
 	n3::Camera   m_camera;

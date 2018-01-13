@@ -24,6 +24,9 @@
     <ClInclude Include="..\..\..\src\libcomplex3d\ToolBarPanel.h">
       <Filter>view\toolbar</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex3d\LibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\libcomplex3d\LibraryPage.cpp">
@@ -34,6 +37,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\libcomplex3d\ToolbarPanel.cpp">
       <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex3d\LibraryPanel.cpp">
+      <Filter>view\library</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

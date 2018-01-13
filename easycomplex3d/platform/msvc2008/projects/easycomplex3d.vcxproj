@@ -137,6 +137,18 @@
     <ProjectReference Include="..\..\..\..\dtex2\platform\msvc2008\projects\dtex2.vcxproj">
       <Project>{a502c49c-7014-4d77-8bd9-b3f917ad34b0}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyanim2\platform\msvc2008\projects\libanim2.vcxproj">
+      <Project>{dd070d7b-9149-4dbc-9660-5223f6d34b61}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyanim\platform\msvc2008\projects\libanim.vcxproj">
+      <Project>{e1cfc0b9-f8a8-4f14-930a-e88a436fc038}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyaudio\platform\msvc2008\projects\libaudio.vcxproj">
+      <Project>{63e1ca82-f674-4e86-a0dc-eeef3edd6324}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easycomplex\platform\msvc2008\projects\libcomplex.vcxproj">
+      <Project>{5f4cba3e-b2b5-46d5-a1d2-77ab16dfd909}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc2008\projects\libdata.vcxproj">
       <Project>{77e15c91-f70b-4141-a0fc-4e82d1c43bd2}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -173,8 +185,32 @@
       <Project>{d41c0b3e-f0a0-4a1f-a568-0100c839406c}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easymask\platform\msvc2008\projects\libmask.vcxproj">
+      <Project>{edef7503-bbad-494a-a9e9-2a0cb5747e85}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easymesh\platform\msvc2008\projects\libmesh.vcxproj">
+      <Project>{9dc03bcc-3c8c-4bb8-8811-336f295df7e2}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\easynode3d\platform\msvc2008\projects\easynode3d.vcxproj">
       <Project>{c4799e05-825c-4633-a3e7-8ba05b45a666}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyparticle2d\platform\msvc2008\projects\libparticle2d.vcxproj">
+      <Project>{54c54be5-7708-41f3-9375-8ba4b9aa983c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyparticle3d\platform\msvc2008\projects\libparticle3d.vcxproj">
+      <Project>{b2e0de06-ace8-4c69-8966-c81ed5686fca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyscale9\platform\msvc2008\projects\libscale9.vcxproj">
+      <Project>{e5b2631f-c25d-4253-a9cb-a57ef357b004}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyshape\platform\msvc2008\projects\libshape.vcxproj">
+      <Project>{c1a2e85c-cf62-46a9-b46c-dfa12ec725e7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easytext\platform\msvc2008\projects\libtext.vcxproj">
+      <Project>{fc9b43d6-8d2b-4d57-a976-9379f87a366c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easytrail\platform\msvc2008\projects\libtrail.vcxproj">
+      <Project>{29109610-3d3c-4040-a8e6-d9eec78470e0}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\flatten\platform\msvc2008\projects\flatten.vcxproj">
       <Project>{26016761-3f64-45e4-aa37-ddd8714fb159}</Project>

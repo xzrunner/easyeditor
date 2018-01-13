@@ -14,16 +14,18 @@
 #include <node3/Camera.h>
 #include <node3/Viewport.h>
 #include <node3/PrimitiveDraw.h>
-#include <gum/RenderContext.h>
+#include <sprite2/RenderCtxStack.h>
+#include <unirender/RenderContext.h>
 
 namespace enode3d
 {
 
 StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
-	                     ee::MultiSpritesImpl* sprites_impl, wxGLContext* glctx)
-	: ee::OnePassCanvas(stage_wnd, stage, glctx, USE_CONTEXT_STACK | HAS_2D | HAS_3D)
-	, m_camera(sm::vec3(0, 0, 2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0))
+	                     ee::MultiSpritesImpl* sprites_impl, wxGLContext* glctx, bool has2d)
+	: ee::OnePassCanvas(stage_wnd, stage, glctx, USE_CONTEXT_STACK | HAS_2D * has2d | HAS_3D)
+	, m_has2d(has2d)
 	, m_sprites_impl(sprites_impl)
+	, m_camera(sm::vec3(0, 0, 2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0))
 {
 }
 
@@ -32,6 +34,13 @@ void StageCanvas::Refresh()
 	auto ctx = n3::RenderCtxStack::Instance()->Top();
 	if (ctx) {
 		const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera().GetModelViewMat());
+	}
+
+	if (m_has2d) {
+		auto ctx = s2::RenderCtxStack::Instance()->Top();
+		if (ctx) {
+			const_cast<s2::RenderContext*>(ctx)->SetModelView(sm::vec2(0, 0), 1);
+		}
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -56,15 +65,24 @@ sm::vec3 StageCanvas::TransPos3ScreenToDir(const sm::vec2& screen) const
 void StageCanvas::OnSize(int w, int h)
 {
 	auto ctx = const_cast<n3::RenderContext*>(n3::RenderCtxStack::Instance()->Top());
-	if (!ctx) {
-		return;
+	if (ctx)
+	{
+		ctx->SetScreen(w, h);
+		m_viewport.SetSize(w, h);
+
+		m_camera.SetAspect((float)w / h);
+		ctx->SetProjection(m_camera.GetProjectionMat());
 	}
 
-	ctx->SetScreen(w, h);
-	m_viewport.SetSize(w, h);
-
-	m_camera.SetAspect((float)w / h);
-	ctx->SetProjection(m_camera.GetProjectionMat());
+	if (m_has2d)
+	{
+		auto ctx = const_cast<s2::RenderContext*>(s2::RenderCtxStack::Instance()->Top());
+		if (ctx)
+		{
+			ctx->SetScreen(w, h);
+			ctx->SetProjection(w, h);
+		}
+	}
 }
 
 void StageCanvas::OnDrawSprites() const

@@ -12,6 +12,7 @@
 #include <node3/Math.h>
 #include <sprite2/ModelSprite.h>
 #include <sprite2/ModelSymbol.h>
+#include <sprite2/SymType.h>
 
 namespace enode3d
 {
@@ -93,9 +94,12 @@ ee::SprPtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
 	ray_dir = cam.GetRotateMat().Inverted() * ray_dir;
 
 	n3::Ray ray(cam.GetPos(), ray_dir);
-	for (int i = 0, n = sprs.size(); i < n; ++i)
+	for (auto& spr : sprs)
 	{
-		auto& spr = sprs[i];
+		if (spr->GetSymbol()->Type() != s2::SYM_MODEL) {
+			continue;
+		}
+
 		auto sym = std::dynamic_pointer_cast<const s2::ModelSymbol>(spr->GetSymbol());
 		
 		const n3::AABB& aabb = sym->GetAABB();
@@ -109,7 +113,7 @@ ee::SprPtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 }

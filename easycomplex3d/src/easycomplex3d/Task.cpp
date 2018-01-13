@@ -69,9 +69,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_library = new ee::LibraryPanel(split);
-	m_library->AddPage(new ecomplex3d::LibraryPage(m_library->GetNotebook()));
-
+	m_library  = new LibraryPanel(split);
 	m_property = new ee::PropertySettingPanel(split);
 
 	split->SetSashGravity(0.55f);

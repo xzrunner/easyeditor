@@ -9,7 +9,7 @@ namespace ecomplex3d
 
 StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 						 ee::MultiSpritesImpl* sprites_impl, ee::LibraryPanel* library)
-	: enode3d::StageCanvas(stage_wnd, stage, sprites_impl)
+	: enode3d::StageCanvas(stage_wnd, stage, sprites_impl, nullptr, true)
 {
 }
 
