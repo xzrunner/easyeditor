@@ -10,9 +10,6 @@
     <Filter Include="tools">
       <UniqueIdentifier>{8fad499d-8e2e-49a6-856e-ddb541133011}</UniqueIdentifier>
     </Filter>
-    <Filter Include="render">
-      <UniqueIdentifier>{4679bcbe-0589-4529-b75c-4134375cc185}</UniqueIdentifier>
-    </Filter>
     <Filter Include="dataset">
       <UniqueIdentifier>{7658fda3-233d-4c61-9168-01cfc64aa21f}</UniqueIdentifier>
     </Filter>
@@ -39,9 +36,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\easynode3d\Camera.h">
-      <Filter>render</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\easynode3d\LogViewer.h">
       <Filter>tools</Filter>
     </ClInclude>
@@ -96,9 +90,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\easynode3d\Camera.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\easynode3d\LogViewer.cpp">
       <Filter>tools</Filter>
     </ClCompile>
