@@ -98,8 +98,9 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawSprites() const
 {
 	auto& nodes = m_stage->GetAllNodes();
+	n3::RenderParams rp(m_camera.GetModelViewMat());
 	for (auto& node : nodes) {
-		n3::DrawNode::Draw(node, n3::RenderParams());
+		n3::DrawNode::Draw(node, rp);
 	}
 }
 
