@@ -35,6 +35,8 @@ bool SprSelectOP::OnKeyDown(int keyCode)
 			m_stage.DeleteNode(node);
 		}
 	}
+
+	return false;
 }
 
 bool SprSelectOP::OnMouseLeftDown(int x, int y)

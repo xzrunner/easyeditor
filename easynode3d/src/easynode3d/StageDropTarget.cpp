@@ -5,8 +5,6 @@
 #include <ee/StringHelper.h>
 #include <ee/LibraryPanel.h>
 
-#include <sprite2/ModelSymbol.h>
-
 namespace enode3d
 {
 
@@ -39,10 +37,11 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
-		auto model_sym = std::dynamic_pointer_cast<s2::ModelSymbol>(sym);
-		auto node = NodeFactory::Instance()->Create(model_sym->GetModel());
-		node->SetPos(pos);
-		m_stage->InsertNode(node);
+		auto node = NodeFactory::Instance()->Create(sym);
+		if (node) {
+			node->SetPos(pos);
+			m_stage->InsertNode(node);
+		}
 	}
 }
 

@@ -89,6 +89,14 @@ void StageCanvas::OnDrawSprites() const
 	}
 	const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera().GetModelViewMat());
 
+	if (m_has2d)
+	{
+		auto ctx = const_cast<s2::RenderContext*>(s2::RenderCtxStack::Instance()->Top());
+		if (ctx) {
+			ctx->SetModelView(sm::vec2(0, 0), 1);
+		}
+	}
+	
 	DrawBackground();
 	DrawSprites();
 
