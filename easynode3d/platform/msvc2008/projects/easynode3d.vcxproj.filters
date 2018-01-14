@@ -88,6 +88,15 @@
     <ClInclude Include="..\..\..\src\easynode3d\EditDialog.h">
       <Filter>frame</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\easynode3d\StageDropTarget.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easynode3d\NodeFactory.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easynode3d\NodeSelection.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easynode3d\LogViewer.cpp">
@@ -137,6 +146,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easynode3d\EditDialog.cpp">
       <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynode3d\StageDropTarget.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynode3d\NodeFactory.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynode3d\NodeSelection.cpp">
+      <Filter>dataset</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,19 +2,21 @@
 
 #include "EditOpState.h"
 
-#include <ee/SpriteSelection.h>
 #include <ee/Visitor.h>
+
+#include <node3/INode.h>
 
 namespace enode3d
 {
 
 class StageCanvas;
 class Sprite;
+class NodeSelection;
 
 class SprRotateState : public EditOpState
 {
 public:
-	SprRotateState(StageCanvas& canvas, const ee::SpriteSelection& selection);
+	SprRotateState(StageCanvas& canvas, const NodeSelection& selection);
 
 	virtual void OnMousePress(const sm::vec2& pos) override;
 	virtual void OnMouseRelease(const sm::vec2& pos) override;
@@ -24,12 +26,12 @@ private:
 	void Rotate(const sm::vec2& start, const sm::vec2& end);
 
 private:
-	class Visitor : public ee::RefVisitor<ee::Sprite>
+	class Visitor : public ee::RefVisitor<n3::INode>
 	{
 	public:
 		Visitor(StageCanvas& canvas, const sm::vec2& start, const sm::vec2& end)
 			: m_canvas(canvas), m_start(start), m_end(end) {}
-		virtual void Visit(const ee::SprPtr& spr, bool& next) override;
+		virtual void Visit(const n3::NodePtr& node, bool& next) override;
 
 	private:
 		StageCanvas& m_canvas;
@@ -40,7 +42,7 @@ private:
 
 private:
 	StageCanvas& m_canvas;
-	const ee::SpriteSelection& m_selection;
+	const NodeSelection& m_selection;
 
 	sm::vec2 m_last_pos;
 

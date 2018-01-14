@@ -3,6 +3,8 @@
 
 #include <easynode3d/StageCanvas.h>
 
+namespace enode3d { class StagePanel; }
+
 namespace eterrain3d
 {
 
@@ -11,7 +13,7 @@ class IDemo;
 class StageCanvas : public enode3d::StageCanvas
 {
 public:
-	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage);
+	StageCanvas(enode3d::StagePanel* stage);
 
 protected:
 	virtual void OnDrawSprites() const override;

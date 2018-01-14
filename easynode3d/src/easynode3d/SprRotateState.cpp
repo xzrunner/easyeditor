@@ -1,12 +1,13 @@
 #include "SprRotateState.h"
 #include "StageCanvas.h"
+#include "NodeSelection.h"
 
 #include <sprite2/ModelSprite.h>
 
 namespace enode3d
 {
 
-SprRotateState::SprRotateState(StageCanvas& canvas, const ee::SpriteSelection& selection)
+SprRotateState::SprRotateState(StageCanvas& canvas, const NodeSelection& selection)
 	: m_canvas(canvas)
 	, m_selection(selection)
 {
@@ -39,11 +40,9 @@ void SprRotateState::Rotate(const sm::vec2& start, const sm::vec2& end)
 //////////////////////////////////////////////////////////////////////////
 
 void SprRotateState::Visitor::
-Visit(const ee::SprPtr& spr, bool& next)
+Visit(const n3::NodePtr& node, bool& next)
 {
-	auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
-
-	sm::vec2 center = m_canvas.TransPos3ProjectToScreen(model_spr->GetPos3());
+	sm::vec2 center = m_canvas.TransPos3ProjectToScreen(node->GetPos());
 	sm::vec2 base = m_canvas.TransPos3ProjectToScreen(sm::vec3(0, 0, 0));
 
 	auto& vp = m_canvas.GetViewport();
@@ -55,7 +54,7 @@ Visit(const ee::SprPtr& spr, bool& next)
 	end   = cam_mat * end;
 		
    	sm::Quaternion delta = sm::Quaternion::CreateFromVectors(start, end);
-	model_spr->Rotate3(delta);
+	node->Rotate(delta);
 
 	next = true;
 }

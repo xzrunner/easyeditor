@@ -38,7 +38,7 @@ void EditDialog::InitLayout(wxGLContext* glctx, const std::shared_ptr<Sprite>& s
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
 	m_stage = new StagePanel(this, this, nullptr);
-	m_stage->SetCanvas(new StageCanvas(m_stage, m_stage->GetStageImpl(), m_stage, glctx));
+	m_stage->SetCanvas(new StageCanvas(m_stage, glctx));
 	m_stage->SetEditOP(new SprArrangeOP(*m_stage));
 
 	ee::InsertSpriteSJ::Instance()->Insert(spr);

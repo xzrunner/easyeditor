@@ -15,8 +15,8 @@ BEGIN_EVENT_TABLE(StageCanvas, ee::CameraCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas::OnTimer)
 END_EVENT_TABLE()
 
-StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
-	: enode3d::StageCanvas(stage_wnd, stage)
+StageCanvas::StageCanvas(enode3d::StagePanel* stage)
+	: enode3d::StageCanvas(stage)
 	, m_timer(this, TIMER_ID)
 {
 	m_timer.Start(100);

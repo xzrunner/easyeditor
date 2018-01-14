@@ -1,7 +1,7 @@
 #include "SprTranslateState.h"
 #include "StageCanvas.h"
+#include "NodeSelection.h"
 
-#include <ee/SpriteSelection.h>
 #include <ee/panel_msg.h>
 
 #include <sprite2/ModelSprite.h>
@@ -9,7 +9,7 @@
 namespace enode3d
 {
 
-SprTranslateState::SprTranslateState(StageCanvas& canvas, const ee::SpriteSelection& selection)
+SprTranslateState::SprTranslateState(StageCanvas& canvas, const NodeSelection& selection)
 	: m_canvas(canvas)
 	, m_selection(selection)
 {
@@ -47,17 +47,15 @@ void SprTranslateState::Translate(const sm::vec2& first, const sm::vec2& curr)
 //////////////////////////////////////////////////////////////////////////
 
 void SprTranslateState::Visitor::
-Visit(const ee::SprPtr& spr, bool& next)
+Visit(const n3::NodePtr& node, bool& next)
 {
-	auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
-
 	auto& cam = m_canvas.GetCamera();
-	float dist = cam.GetToward().Dot(cam.GetPos() - model_spr->GetPos3());
+	float dist = cam.GetToward().Dot(cam.GetPos() - node->GetPos());
 
-	const sm::vec3& old = model_spr->GetPos3();
+	const sm::vec3& old = node->GetPos();
 	sm::vec3 last = m_canvas.TransPos3ScreenToDir(m_last) * dist;
 	sm::vec3 curr = m_canvas.TransPos3ScreenToDir(m_curr) * dist;
-	model_spr->Translate3(curr - last);
+	node->Translate(curr - last);
 
 	next = true;
 }

@@ -2,7 +2,6 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 
-#include <ee/SpriteSelection.h>
 #include <ee/panel_msg.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/color_config.h>
@@ -21,37 +20,51 @@ SprSelectOP::SprSelectOP(StagePanel& stage)
 	: ee::EditOP(&stage, stage.GetStageImpl())
 	, m_stage(stage)
 {
-	m_selection = stage.GetSpriteSelection();
-	m_selection->AddReference();
+}
+
+bool SprSelectOP::OnKeyDown(int keyCode)
+{
+	if (ee::EditOP::OnKeyDown(keyCode)) return true;
+
+	if (keyCode == WXK_DELETE)
+	{
+		std::vector<n3::NodePtr> nodes;
+		auto& selection = m_stage.GetNodeSelection();
+		selection.Traverse(ee::FetchAllRefVisitor<n3::INode>(nodes));
+		for (auto& node : nodes) {
+			m_stage.DeleteNode(node);
+		}
+	}
 }
 
 bool SprSelectOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::EditOP::OnMouseLeftDown(x, y)) return true;
 
-	ee::SprPtr selected = SelectByPos(sm::vec2(x, y));
-	if (selected && selected->IsEditable())
+	auto& selection = m_stage.GetNodeSelection();
+	auto selected = SelectByPos(sm::vec2(x, y));
+	if (selected)
 	{
 		if (m_stage.GetKeyState(WXK_CONTROL)) 
 		{
-			if (m_selection->IsExist(selected)) {
-				m_selection->Remove(selected);
+			if (selection.IsExist(selected)) {
+				selection.Remove(selected);
 			} else {
-				m_selection->Add(selected);
+				selection.Add(selected);
 			}
 		}
 		else
 		{
-			if (!m_selection->IsExist(selected))
+			if (!selection.IsExist(selected))
 			{
-				m_selection->Clear();
-				m_selection->Add(selected);
+				selection.Clear();
+				selection.Add(selected);
 			}
 		}
 	}
 	else
 	{
-		m_selection->Clear();
+		selection.Clear();
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -63,49 +76,40 @@ bool SprSelectOP::OnDraw() const
 {
 	if (ee::EditOP::OnDraw()) return true;
 
-	std::vector<ee::SprPtr> sprs;
-	m_selection->Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
-	for (auto& spr : sprs) 
+	std::vector<n3::NodePtr> nodes;
+	auto& selection = m_stage.GetNodeSelection();
+	selection.Traverse(ee::FetchAllRefVisitor<n3::INode>(nodes));
+	for (auto& node : nodes) 
 	{
-		auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
-		auto pos = model_spr->GetPos3();
-		sm::mat4 mat = sm::mat4(model_spr->GetOri3()) *
+		auto& pos = node->GetPos();
+		sm::mat4 mat = sm::mat4(node->GetAngle()) *
 			sm::mat4::Translated(pos.x, pos.y, pos.z);
 		n3::PrimitiveDraw::SetColor(ee::MID_RED.ToABGR());
-		n3::PrimitiveDraw::Cube(mat,
-			std::dynamic_pointer_cast<s2::ModelSymbol>(model_spr->GetSymbol())->GetAABB());
+		n3::PrimitiveDraw::Cube(mat, node->GetModel()->GetAABB());
 	}
 
 	return false;
 }
 
 // AABB not changed, transform ray from Camera and spr's mat
-ee::SprPtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
+n3::NodePtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
 {
-	ee::SprPtr selected = NULL;
-
-	std::vector<ee::SprPtr> sprs;
-	m_stage.TraverseSprites(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
+	auto& nodes = m_stage.GetAllNodes();
 
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage.GetCanvas());
 	sm::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
 	n3::Ray ray(canvas->GetCamera().GetPos(), ray_dir);
-	for (auto& spr : sprs)
-	{
-		if (spr->GetSymbol()->Type() != s2::SYM_MODEL) {
-			continue;
-		}
-
-		auto sym = std::dynamic_pointer_cast<const s2::ModelSymbol>(spr->GetSymbol());
-		
-		const n3::AABB& aabb = sym->GetAABB();
-		auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
-		
+	for (auto& node : nodes)
+	{				
 		sm::vec3 cross;
 		bool intersect = n3::Math::RayOBBIntersection(
-			aabb, model_spr->GetPos3(), model_spr->GetOri3(), ray, &cross);
+			node->GetModel()->GetAABB(), 
+			node->GetPos(), 
+			node->GetAngle(), 
+			ray, 
+			&cross);
 		if (intersect) {
-			return spr;
+			return node;
 		}
 	}
 

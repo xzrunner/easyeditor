@@ -9,11 +9,14 @@ namespace ee { class MultiSpritesImpl; }
 
 namespace enode3d
 {
+
+class StagePanel;
+
 class StageCanvas : public ee::OnePassCanvas
 {
 public:
-	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* sprites_impl, 
-		wxGLContext* glctx = nullptr, bool has2d = false);
+	StageCanvas(StagePanel* stage, wxGLContext* glctx = nullptr, 
+		bool has2d = false);
 
 	virtual void Refresh();
 
@@ -35,9 +38,9 @@ private:
 	void DrawSprites() const;
 
 private:
-	bool m_has2d;
+	StagePanel* m_stage;
 
-	ee::MultiSpritesImpl* m_sprites_impl;
+	bool m_has2d;
 
 	n3::Camera   m_camera;
 	n3::Viewport m_viewport;

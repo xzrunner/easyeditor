@@ -4,6 +4,7 @@
 #include <easynode3d/StageCanvas.h>
 
 namespace ee { class LibraryPanel; }
+namespace enode3d { class StagePanel; }
 
 namespace ecomplex3d
 {
@@ -11,8 +12,7 @@ namespace ecomplex3d
 class StageCanvas : public enode3d::StageCanvas
 {
 public:
-	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
-		ee::MultiSpritesImpl* sprites_impl, ee::LibraryPanel* library);
+	StageCanvas(enode3d::StagePanel* stage, ee::LibraryPanel* library);
 
 protected:
 	virtual void DrawBackground() const override;

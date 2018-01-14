@@ -34,13 +34,14 @@ bool SprArrangeOP::OnKeyDown(int keyCode)
 		break;
 	case WXK_SPACE:
 		{
-			std::vector<ee::SprPtr> sprs;
-			GetSelection().Traverse(ee::FetchAllRefVisitor<ee::Sprite>(sprs));
-			for (auto& spr : sprs) 
+			std::vector<n3::NodePtr> nodes;
+			m_stage.GetNodeSelection().Traverse(
+				ee::FetchAllRefVisitor<n3::INode>(nodes));
+			for (auto& node : nodes) 
 			{
-				auto model_spr = std::dynamic_pointer_cast<s2::ModelSprite>(spr);
-				model_spr->SetPos3(sm::vec3(0, 0, 0));
-				model_spr->SetOri3(sm::Quaternion());
+				node->SetPos(sm::vec3(0, 0, 0));
+				node->SetAngle(sm::Quaternion());
+				node->SetScale(sm::vec3(1, 1, 1));
 			}
 		}
 		break;
@@ -55,12 +56,13 @@ bool SprArrangeOP::OnMouseLeftDown(int x, int y)
 		return true;
 	}
 
-	if (GetSelection().IsEmpty()) {
+	auto& selection = m_stage.GetNodeSelection();
+	if (selection.IsEmpty()) {
 		m_op_state = std::make_unique<CamRotateState>(
 			*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
 	} else {
 		m_op_state = std::make_unique<SprTranslateState>(
-			*m_canvas, GetSelection());
+			*m_canvas, selection);
 	}
 
 	if (m_op_state) {
@@ -92,13 +94,13 @@ bool SprArrangeOP::OnMouseRightDown(int x, int y)
 		return true;
 	}
 
-	const ee::SpriteSelection& selection = GetSelection();
+	auto& selection = m_stage.GetNodeSelection();
 	if (selection.IsEmpty()) {
 		m_op_state = std::make_unique<CamTranslateState>(
 			*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
 	} else if (selection.Size() == 1) {
 		m_op_state = std::make_unique<SprRotateState>(
-			*m_canvas, GetSelection());
+			*m_canvas, selection);
 	}
 
 	if (m_op_state) {

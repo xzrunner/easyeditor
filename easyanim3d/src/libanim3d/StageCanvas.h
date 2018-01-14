@@ -3,7 +3,7 @@
 
 #include <easynode3d/StageCanvas.h>
 
-namespace ee { class MultiSpritesImpl; }
+namespace enode3d { class StagePanel; }
 
 namespace eanim3d
 {
@@ -11,8 +11,7 @@ namespace eanim3d
 class StageCanvas : public enode3d::StageCanvas
 {
 public:
-	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
-		ee::MultiSpritesImpl* sprites_impl);
+	StageCanvas(enode3d::StagePanel* stage);
 
 public:
 	virtual void DrawBackground() const override;

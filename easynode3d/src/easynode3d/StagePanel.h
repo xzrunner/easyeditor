@@ -1,38 +1,36 @@
 #pragma once
 
+#include "NodeSelection.h"
+
 #include <ee/EditPanel.h>
 #include <ee/MultiSpritesImpl.h>
+
+#include <node3/INode.h>
 
 namespace ee { class LibraryPanel; }
 
 namespace enode3d
 {
 
-class StagePanel : public ee::EditPanel, public ee::MultiSpritesImpl
+class StagePanel : public ee::EditPanel
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		ee::LibraryPanel* library);
 
-	//
-	// ee::MultiSpritesImpl interface
-	//
-	virtual void TraverseSprites(ee::RefVisitor<ee::Sprite>& visitor, 
-		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const override;
+	sm::vec3 TransPosScrToProj(int x, int y) const;
 
-protected:
-	//
-	//	interface Observer
-	//
-	virtual void OnNotify(int sj_id, void* ud) override;
+	void InsertNode(const n3::NodePtr& node);
+	void DeleteNode(const n3::NodePtr& node);
 
+	const std::vector<n3::NodePtr>& GetAllNodes() const { return m_nodes; }
+
+	auto& GetNodeSelection() { return m_selection; }
+	
 private:
-	void Insert(const ee::SprPtr& spr);
-	void Remove(const ee::SprPtr& spr);
-	void Clear();
+	std::vector<n3::NodePtr> m_nodes;
 
-private:
-	std::vector<ee::SprPtr> m_sprs;
+	NodeSelection m_selection;
 
 }; // StagePanel
 

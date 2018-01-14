@@ -49,6 +49,7 @@ void LibraryPage::LoadSurface(n3::Surface* surface, const char* name)
 	auto model = std::unique_ptr<n3::Model>(new n3::ModelParametric(surface, aabb));
 	auto obj_model = std::make_shared<n3::ObjectModel>();
 	obj_model->SetModel(model);
+	obj_model->SetAABB(aabb);
 
 	auto sym = std::make_shared<enode3d::Symbol>();
 	sym->SetAABB(aabb);

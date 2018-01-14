@@ -5,9 +5,8 @@
 namespace eanim3d
 {
 
-StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
-						 ee::MultiSpritesImpl* sprites_impl)
-	: enode3d::StageCanvas(stage_wnd, stage, sprites_impl)
+StageCanvas::StageCanvas(enode3d::StagePanel* stage)
+	: enode3d::StageCanvas(stage)
 {
 }
 

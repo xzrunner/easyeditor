@@ -45,6 +45,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 
 			auto obj_model = std::make_shared<n3::ObjectModel>();
 			obj_model->SetModel(model);
+			obj_model->SetAABB(aabb);
 
 			auto sym = std::make_shared<Symbol>();
 			sym->SetModel(obj_model);

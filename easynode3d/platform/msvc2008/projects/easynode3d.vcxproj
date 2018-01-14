@@ -84,6 +84,8 @@
     <ClInclude Include="..\..\..\src\easynode3d\LibraryPage.h" />
     <ClInclude Include="..\..\..\src\easynode3d\LogViewer.h" />
     <ClInclude Include="..\..\..\src\easynode3d\CamRotateState.h" />
+    <ClInclude Include="..\..\..\src\easynode3d\NodeFactory.h" />
+    <ClInclude Include="..\..\..\src\easynode3d\NodeSelection.h" />
     <ClInclude Include="..\..\..\src\easynode3d\SprArrangeOP.h" />
     <ClInclude Include="..\..\..\src\easynode3d\Sprite.h" />
     <ClInclude Include="..\..\..\src\easynode3d\SprRotateState.h" />
@@ -91,6 +93,7 @@
     <ClInclude Include="..\..\..\src\easynode3d\SprTranslateState.h" />
     <ClInclude Include="..\..\..\src\easynode3d\StageCanvas.h" />
     <ClInclude Include="..\..\..\src\easynode3d\ModelFile.h" />
+    <ClInclude Include="..\..\..\src\easynode3d\StageDropTarget.h" />
     <ClInclude Include="..\..\..\src\easynode3d\StagePanel.h" />
     <ClInclude Include="..\..\..\src\easynode3d\Symbol.h" />
     <ClInclude Include="..\..\..\src\easynode3d\CamTranslateState.h" />
@@ -102,6 +105,8 @@
     <ClCompile Include="..\..\..\src\easynode3d\LibraryPage.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\LogViewer.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\CamRotateState.cpp" />
+    <ClCompile Include="..\..\..\src\easynode3d\NodeFactory.cpp" />
+    <ClCompile Include="..\..\..\src\easynode3d\NodeSelection.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\SprArrangeOP.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\Sprite.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\SprRotateState.cpp" />
@@ -109,6 +114,7 @@
     <ClCompile Include="..\..\..\src\easynode3d\SprTranslateState.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\StageCanvas.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\ModelFile.cpp" />
+    <ClCompile Include="..\..\..\src\easynode3d\StageDropTarget.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\StagePanel.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\Symbol.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\CamTranslateState.cpp" />
