@@ -1,5 +1,6 @@
 #include "Sprite.h"
 #include "Symbol.h"
+#include "PropertySetting.h"
 
 namespace enode3d
 {
@@ -38,7 +39,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
-	return nullptr;
+	return new PropertySetting(stage, std::dynamic_pointer_cast<Sprite>(shared_from_this()));
 }
 
 ee::SprPtr Sprite::Create(const std::shared_ptr<ee::Symbol>& sym) 

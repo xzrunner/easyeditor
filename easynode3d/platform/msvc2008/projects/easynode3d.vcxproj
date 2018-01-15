@@ -86,6 +86,7 @@
     <ClInclude Include="..\..\..\src\easynode3d\CamRotateState.h" />
     <ClInclude Include="..\..\..\src\easynode3d\NodeFactory.h" />
     <ClInclude Include="..\..\..\src\easynode3d\NodeSelection.h" />
+    <ClInclude Include="..\..\..\src\easynode3d\PropertySetting.h" />
     <ClInclude Include="..\..\..\src\easynode3d\SprArrangeOP.h" />
     <ClInclude Include="..\..\..\src\easynode3d\Sprite.h" />
     <ClInclude Include="..\..\..\src\easynode3d\SprRotateState.h" />
@@ -107,6 +108,7 @@
     <ClCompile Include="..\..\..\src\easynode3d\CamRotateState.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\NodeFactory.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\NodeSelection.cpp" />
+    <ClCompile Include="..\..\..\src\easynode3d\PropertySetting.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\SprArrangeOP.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\Sprite.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\SprRotateState.cpp" />
