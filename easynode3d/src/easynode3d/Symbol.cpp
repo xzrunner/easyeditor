@@ -58,10 +58,9 @@ bool Symbol::LoadModelFromFile(const std::string& filepath)
 
 	auto obj_model = std::make_shared<n3::ObjectModel>();
 	obj_model->SetModel(model);
+	obj_model->SetAABB(aabb);
 
 	SetModel(obj_model);
-
-	SetAABB(aabb);
 
 	return true;
 }

@@ -51,7 +51,6 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			sym->SetModel(obj_model);
 
 			sym->SetFilepath(filenames[i].ToStdString());
- 			sym->SetAABB(aabb);
 
 			AddItem(sym);
 		}
