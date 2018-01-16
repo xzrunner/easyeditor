@@ -52,7 +52,6 @@ void LibraryPage::LoadSurface(n3::Surface* surface, const char* name)
 	obj_model->SetAABB(aabb);
 
 	auto sym = std::make_shared<enode3d::Symbol>();
-	sym->SetAABB(aabb);
 	sym->SetName(name);
 	sym->SetModel(obj_model);
 
