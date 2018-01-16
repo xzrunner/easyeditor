@@ -23,6 +23,7 @@ public:
 	void InsertNode(const n3::NodePtr& node);
 	void DeleteNode(const n3::NodePtr& node);
 
+	// todo
 	const std::vector<n3::NodePtr>& GetAllNodes() const { return m_nodes; }
 
 	auto& GetNodeSelection() { return m_selection; }

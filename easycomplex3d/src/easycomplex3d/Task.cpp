@@ -31,10 +31,12 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
+	Serializer::LoadFroimJson(filename, dynamic_cast<enode3d::StagePanel*>(m_stage));
 }
 
 void Task::Store(const char* filename) const
 {
+	Serializer::StoreToJson(filename, dynamic_cast<enode3d::StagePanel*>(m_stage));
 }
 
 bool Task::IsDirty() const

@@ -13,7 +13,8 @@ class Symbol;
 class FileStorer
 {
 public:
-	static void Store(const std::string& filepath, const Symbol& sym, const std::string& dir, bool store_history);
+	static void Store(const std::string& filepath, const Symbol& sym, 
+		const std::string& dir, bool store_history);
 
 }; // FileStorer
 

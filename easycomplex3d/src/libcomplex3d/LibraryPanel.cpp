@@ -3,7 +3,8 @@
 
 #include <ee/LibraryImagePage.h>
 
-#include <easynode3d.h>
+#include <easynode3d/LibraryPage.h>
+
 #include <easycomplex.h>
 
 namespace ecomplex3d

@@ -13,6 +13,9 @@
     <Filter Include="view\toolbar">
       <UniqueIdentifier>{77fa2905-adea-497f-81ea-ea2540248a54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{29055d08-7464-49cd-901a-124be7ad81e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\libcomplex3d\LibraryPage.h">
@@ -27,6 +30,9 @@
     <ClInclude Include="..\..\..\src\libcomplex3d\LibraryPanel.h">
       <Filter>view\library</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex3d\Serializer.h">
+      <Filter>tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\libcomplex3d\LibraryPage.cpp">
@@ -40,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\libcomplex3d\LibraryPanel.cpp">
       <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex3d\Serializer.cpp">
+      <Filter>tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
