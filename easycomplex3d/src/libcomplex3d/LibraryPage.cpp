@@ -31,25 +31,25 @@ void LibraryPage::LoadDefaultSymbol()
 	n3::Surface* surface;
 
 	surface = new n3::Cone(2, 1);
-	LoadSurface(surface, "Cone");
+	LoadGeometric(surface, "Cone");
 
 	surface = new n3::Sphere(1);
-	LoadSurface(surface, "Sphere");
+	LoadGeometric(surface, "Sphere");
 
 	surface = new n3::Torus(0.5f, 0.2f);
-	LoadSurface(surface, "Torus");
+	LoadGeometric(surface, "Torus");
 
 	surface = new n3::TrefoilKnot(1);
-	LoadSurface(surface, "TrefoilKnot");
+	LoadGeometric(surface, "TrefoilKnot");
 
 	surface = new n3::MobiusStrip(0.2f);
-	LoadSurface(surface, "MobiusStrip");
+	LoadGeometric(surface, "MobiusStrip");
 
 	surface = new n3::KleinBottle(0.1f);
-	LoadSurface(surface, "KleinBottle");
+	LoadGeometric(surface, "KleinBottle");
 }
 
-void LibraryPage::LoadSurface(n3::Surface* surface, const char* name)
+void LibraryPage::LoadGeometric(n3::Surface* surface, const std::string& name)
 {
 	n3::AABB aabb;
 	auto model = std::unique_ptr<n3::Model>(new n3::ModelParametric(surface, aabb));
@@ -61,8 +61,8 @@ void LibraryPage::LoadSurface(n3::Surface* surface, const char* name)
 	sym->SetName(name);
 	sym->SetModel(obj_model);
 
-	std::string filepath = enode3d::ModelFile::Instance()->Tag(n3::MODEL_COMPLEX);
-	filepath += ".json";
+	std::string filepath = name + ".geo";
+	obj_model->SetFilepath(filepath);
 	sym->SetFilepath(filepath);
 
 //	sym->RefreshThumbnail(sym->GetFilepath());

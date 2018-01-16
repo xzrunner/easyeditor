@@ -18,7 +18,7 @@ public:
 	virtual void LoadDefaultSymbol() override;
 
 private:
-	void LoadSurface(n3::Surface* surface, const char* name);
+	void LoadGeometric(n3::Surface* surface, const std::string& name);
 
 }; // LibraryPage
 
