@@ -3,8 +3,6 @@
 
 #include <ee/LibraryPage.h>
 
-namespace n3 { class Surface; }
-
 namespace ecomplex3d
 {
 
@@ -18,7 +16,7 @@ public:
 	virtual void LoadDefaultSymbol() override;
 
 private:
-	void LoadGeometric(n3::Surface* surface, const std::string& name);
+	void LoadGeometric(const std::string& name);
 
 }; // LibraryPage
 

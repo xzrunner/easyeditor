@@ -13,7 +13,7 @@
 #include <gum/FilepathHelper.h>
 #include <node3/ModelParametric.h>
 #include <node3/ObjectModel.h>
-#include <node3/ParametricEquations.h>
+#include <node3/SurfaceFactory.h>
 
 namespace ecomplex3d
 {
@@ -99,21 +99,8 @@ n3::NodePtr Serializer::LoadNode(const rapidjson::Value& val)
 	auto ext = gum::FilepathHelper::Extension(filepath);
 	if (ext == ".geo")
 	{
-		n3::Surface* surface = nullptr;
 		auto name = ee::FileHelper::GetFilename(filepath.c_str());
-		if (name == "Cone") {
-			surface = new n3::Cone(2, 1);
-		}  else if (name == "Sphere") {
-			surface = new n3::Sphere(1);
-		} else if (name == "Torus") {
-			surface = new n3::Torus(0.5f, 0.2f);
-		} else if (name == "TrefoilKnot") {
-			surface = new n3::TrefoilKnot(1);
-		} else if (name == "MobiusStrip") {
-			surface = new n3::MobiusStrip(0.2f);
-		} else if (name == "KleinBottle") {
-			surface = new n3::KleinBottle(0.1f);
-		}
+		n3::Surface* surface = n3::SurfaceFactory::Create(name);
 		if (!surface) {
 			return nullptr;
 		}

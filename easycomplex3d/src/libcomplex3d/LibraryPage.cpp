@@ -5,7 +5,7 @@
 #include <easynode3d/ModelFile.h>
 #include <easynode3d/Symbol.h>
 
-#include <node3/ParametricEquations.h>
+#include <node3/SurfaceFactory.h>
 #include <node3/ModelParametric.h>
 #include <node3/ObjectModel.h>
 #include <node3/ModelType.h>
@@ -28,29 +28,18 @@ bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
 
 void LibraryPage::LoadDefaultSymbol()
 {
-	n3::Surface* surface;
-
-	surface = new n3::Cone(2, 1);
-	LoadGeometric(surface, "Cone");
-
-	surface = new n3::Sphere(1);
-	LoadGeometric(surface, "Sphere");
-
-	surface = new n3::Torus(0.5f, 0.2f);
-	LoadGeometric(surface, "Torus");
-
-	surface = new n3::TrefoilKnot(1);
-	LoadGeometric(surface, "TrefoilKnot");
-
-	surface = new n3::MobiusStrip(0.2f);
-	LoadGeometric(surface, "MobiusStrip");
-
-	surface = new n3::KleinBottle(0.1f);
-	LoadGeometric(surface, "KleinBottle");
+	LoadGeometric("Cone");
+	LoadGeometric("Sphere");
+	LoadGeometric("Torus");
+	LoadGeometric("TrefoilKnot");
+	LoadGeometric("MobiusStrip");
+	LoadGeometric("KleinBottle");
 }
 
-void LibraryPage::LoadGeometric(n3::Surface* surface, const std::string& name)
+void LibraryPage::LoadGeometric(const std::string& name)
 {
+	n3::Surface* surface = n3::SurfaceFactory::Create(name);
+
 	n3::AABB aabb;
 	auto model = std::unique_ptr<n3::Model>(new n3::ModelParametric(surface, aabb));
 	auto obj_model = std::make_shared<n3::ObjectModel>();
