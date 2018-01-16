@@ -3,6 +3,8 @@
 
 #include <ee/StringHelper.h>
 
+#include <sm_const.h>
+
 namespace enode3d
 {
 
@@ -28,6 +30,18 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 		ee::StringHelper::FromString(keys[2], pos.z);
 		spr->SetPos3(pos);
 	}
+	else if (name == "Angle3")
+	{
+		std::vector<std::string> keys;
+		ee::StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), ";", keys);
+		assert(keys.size() == 3);
+		float roll, pitch, yaw;
+		ee::StringHelper::FromString(keys[0], roll);
+		ee::StringHelper::FromString(keys[1], pitch);
+		ee::StringHelper::FromString(keys[2], yaw);
+		spr->SetOri3(sm::Quaternion::CreateFromEulerAngle(
+			roll * SM_DEG_TO_RAD, pitch * SM_DEG_TO_RAD, yaw * SM_DEG_TO_RAD));
+	}
 }
 
 void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
@@ -41,6 +55,13 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Pos3.Y"))->SetValue(pos.y);
 	pg->GetProperty(wxT("Pos3.Z"))->SetValue(pos.z);
 	pg->GetProperty(wxT("Pos3"))->SetValue(pg->GetProperty(wxT("Pos3"))->GenerateComposedValue());
+
+	float roll, pitch, yaw;
+	sm::Quaternion::TransToEulerAngle(spr->GetOri3(), roll, pitch, yaw);
+	pg->GetProperty(wxT("Angle3.Roll"))->SetValue(roll * SM_RAD_TO_DEG);
+	pg->GetProperty(wxT("Angle3.Pitch"))->SetValue(pitch * SM_RAD_TO_DEG);
+	pg->GetProperty(wxT("Angle3.Yaw"))->SetValue(yaw * SM_RAD_TO_DEG);
+	pg->GetProperty(wxT("Angle3"))->SetValue(pg->GetProperty(wxT("Angle3"))->GenerateComposedValue());
 }
 
 void PropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -63,6 +84,20 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->AppendIn(pos_prop, new wxFloatProperty(wxT("Z"), wxPG_LABEL, pos.z));
 	pg->SetPropertyAttribute(wxT("Pos3.Z"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Pos3.Z"), "Precision", 1);
+
+	float roll, pitch, yaw;
+	sm::Quaternion::TransToEulerAngle(spr->GetOri3(), roll, pitch, yaw);
+	wxPGProperty* angle_prop = pg->Append(new wxStringProperty(wxT("Angle3"), wxPG_LABEL, wxT("<composed>")));
+	angle_prop->SetExpanded(false);
+	pg->AppendIn(angle_prop, new wxFloatProperty(wxT("Roll"), wxPG_LABEL, roll * SM_RAD_TO_DEG));
+	pg->SetPropertyAttribute(wxT("Angle3.Roll"), wxPG_ATTR_UNITS, wxT("deg"));
+	pg->SetPropertyAttribute(wxT("Angle3.Roll"), "Precision", 1);
+	pg->AppendIn(angle_prop, new wxFloatProperty(wxT("Pitch"), wxPG_LABEL, pitch * SM_RAD_TO_DEG));
+	pg->SetPropertyAttribute(wxT("Angle3.Pitch"), wxPG_ATTR_UNITS, wxT("deg"));
+	pg->SetPropertyAttribute(wxT("Angle3.Pitch"), "Precision", 1);
+	pg->AppendIn(angle_prop, new wxFloatProperty(wxT("Yaw"), wxPG_LABEL, yaw * SM_RAD_TO_DEG));
+	pg->SetPropertyAttribute(wxT("Angle3.Yaw"), wxPG_ATTR_UNITS, wxT("deg"));
+	pg->SetPropertyAttribute(wxT("Angle3.Yaw"), "Precision", 1);
 }
 
 }
