@@ -1,17 +1,19 @@
 #ifndef _EASYCOMPLEX3D_LIBRARY_PAGE_H_
 #define _EASYCOMPLEX3D_LIBRARY_PAGE_H_
 
-#include <easynode3d/LibraryPage.h>
+#include <ee/LibraryPage.h>
 
 namespace n3 { class Surface; }
 
 namespace ecomplex3d
 {
 
-class LibraryPage : public enode3d::LibraryPage
+class LibraryPage : public ee::LibraryPage
 {
 public:
 	LibraryPage(wxWindow* parent);
+
+	virtual bool IsHandleSymbol(const ee::SymPtr& sym) const override;
 
 	virtual void LoadDefaultSymbol() override;
 

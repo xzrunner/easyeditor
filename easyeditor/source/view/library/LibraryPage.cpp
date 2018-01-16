@@ -11,10 +11,10 @@ namespace ee
 {
 
 LibraryPage::LibraryPage(wxWindow* parent, const std::string& name,
-						 bool isStatic)
+						 bool is_static)
 	: wxWindow(parent, wxID_ANY)
 	, m_name(name)
-	, m_is_static(isStatic)
+	, m_is_static(is_static)
 	, m_list(NULL)
 {
 	m_btn_add = m_btn_del = NULL;

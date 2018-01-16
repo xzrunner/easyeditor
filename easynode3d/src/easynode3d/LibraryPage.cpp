@@ -15,7 +15,7 @@ namespace enode3d
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, "Model3d")
+	: ee::LibraryPage(parent, "Model")
 {
 	InitLayout();
 //	m_list->SetFileter(ModelFile::Instance()->Tag(n3::MODEL_OBJECT));

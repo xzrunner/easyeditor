@@ -16,8 +16,14 @@ namespace ecomplex3d
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: enode3d::LibraryPage(parent)
+	: ee::LibraryPage(parent, "Geometric", true)
 {
+	InitLayout();
+}
+
+bool LibraryPage::IsHandleSymbol(const ee::SymPtr& sym) const
+{
+	return false;
 }
 
 void LibraryPage::LoadDefaultSymbol()
