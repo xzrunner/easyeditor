@@ -26,7 +26,7 @@ sm::vec3 StagePanel::TransPosScrToProj(int x, int y) const
 	auto dir = canvas->TransPos3ScreenToDir(sm::vec2(x, y));
 	auto& cam = canvas->GetCamera();
 	sm::vec3 ret = dir.Normalized() * cam.GetDistance();
-	ret.z = 0;
+	ret.y = 0;
 	return ret;
 }
 
