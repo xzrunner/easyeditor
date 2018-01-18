@@ -50,11 +50,11 @@ void SprTranslateState::Visitor::
 Visit(const n3::NodePtr& node, bool& next)
 {
 	auto& cam = m_canvas.GetCamera();
-	float dist = cam.GetToward().Dot(cam.GetPos() - node->GetPos());
+	float dist = cam.GetToward().Dot(node->GetPos() - cam.GetPos());
 
 	const sm::vec3& old = node->GetPos();
-	sm::vec3 last = m_canvas.TransPos3ScreenToDir(m_last) * dist;
-	sm::vec3 curr = m_canvas.TransPos3ScreenToDir(m_curr) * dist;
+	sm::vec3 last = m_canvas.TransPos3ScreenToDir(m_last).Normalized() * dist;
+	sm::vec3 curr = m_canvas.TransPos3ScreenToDir(m_curr).Normalized() * dist;
 	node->Translate(curr - last);
 
 	next = true;

@@ -30,9 +30,10 @@ void CamRotateState::CamRotateState::OnMouseDrag(const sm::vec2& pos)
 	float dx = pos.x - m_last_pos.x;
 	float dy = pos.y - m_last_pos.y;
 
-	m_cam.Yaw(dx * 0.2f);
-	m_cam.Pitch(dy * 0.2f);
+	m_cam.Yaw(- dx * 0.2f);
+	m_cam.Pitch(- dy * 0.2f);
 	m_cam.AimAtTarget();
+	m_cam.SetUpDir(sm::vec3(0, 1, 0));
 
 	m_last_pos = pos;
 

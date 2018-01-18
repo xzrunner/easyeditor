@@ -21,7 +21,7 @@ StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx, bool has2d)
 	: ee::OnePassCanvas(stage, stage->GetStageImpl(), glctx, USE_CONTEXT_STACK | HAS_2D * has2d | HAS_3D)
 	, m_stage(stage)
 	, m_has2d(has2d)
-	, m_camera(sm::vec3(0, 0, 2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0))
+	, m_camera(sm::vec3(0, 2, -2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0))
 {
 }
 
