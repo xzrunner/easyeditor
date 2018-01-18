@@ -19,16 +19,16 @@ void StageCanvas::DrawBackground() const
 
 	static const int TOT_LEN = 100;
 	static const int GRID_EDGE = 5;
-	for (int y = -TOT_LEN; y < TOT_LEN; y += GRID_EDGE) {
+	for (int z = -TOT_LEN; z < TOT_LEN; z += GRID_EDGE) {
 		for (int x = -TOT_LEN; x < TOT_LEN; x += GRID_EDGE) {
-			if ((x + y) % (GRID_EDGE * 2) == 0) {
+			if ((x + z) % (GRID_EDGE * 2) == 0) {
 				n3::PrimitiveDraw::SetColor(0xff444444);
 			} else {
 				n3::PrimitiveDraw::SetColor(0xff888888);
 			}
 			n3::PrimitiveDraw::Rect(
-				sm::vec3(x, y, 0),
-				sm::vec3(x + GRID_EDGE, y + GRID_EDGE, 0));
+				sm::vec3(x, 0, z),
+				sm::vec3(x + GRID_EDGE, 0, z + GRID_EDGE));
 		}
 	}
 }
