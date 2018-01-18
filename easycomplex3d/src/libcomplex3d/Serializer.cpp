@@ -162,7 +162,7 @@ rapidjson::Value Serializer::StoreCamera(const n3::Camera& cam, rapidjson::Memor
 	val.AddMember("target", target_val, alloc);
 
 	rapidjson::Value up_val;
-	auto& up = cam.GetUp();
+	auto& up = cam.GetUpDir();
 	up_val.SetObject();
 	up_val.AddMember("x", up.x, alloc);
 	up_val.AddMember("y", up.y, alloc);
