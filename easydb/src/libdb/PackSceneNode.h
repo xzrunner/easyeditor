@@ -21,7 +21,8 @@ public:
 	static ICommand* Create() { return new PackSceneNode(); }
 
 private:
-	void Pack(const std::string& src_file, const std::string& dst_file);
+	void Pack(const std::string& src_dir, const std::string& dst_dir,
+		const std::string& tp_src_dir, const std::string& tp_filepath);
 
 }; // PackSceneNode
 
