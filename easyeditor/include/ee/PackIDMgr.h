@@ -30,6 +30,10 @@ public:
 
 		bool img_cut;
 		std::string cut_img, cut_json, cut_ori;
+
+		bool IsIdUsed(uint32_t id) const {
+			return sprs_id_set.find(id) != sprs_id_set.end();
+		}
 	};
 
 public:

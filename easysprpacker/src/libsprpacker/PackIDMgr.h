@@ -1,7 +1,7 @@
 #ifndef _EASYSPRPACKER_PACK_ID_MGR_H_
 #define _EASYSPRPACKER_PACK_ID_MGR_H_
 
-#include "ParserLuaData.h"
+#include "ParserBinData.h"
 
 #include <ee/PackIDMgr.h>
 
@@ -29,14 +29,17 @@ public:
 	bool IsCurrImgCut() const { return m_curr_pkg ? m_curr_pkg->img_cut : false; }
 	void GetCurrImgCutPath(std::string& img, std::string& json, std::string& ori) const;
 
-	void SetCurrPkgID(int id) { m_curr_pkg_id = id; }
+	void SetCurrPkgID(int id) { 
+		m_curr_pkg_id = id; 
+		m_prev_info.InitSprIDSet(id);
+	}
 
 	void LoadPrevPackedInfo(const std::string& filepath) {
 		m_prev_info.LoadFromFile(filepath);
 	}
 
 private:
-	static void GetNextFreeID(const ee::PackIDMgr::Package* pkg, int& node_id);
+	void GetNextFreeID(const ee::PackIDMgr::Package* pkg, int& node_id) const;
 
 private:
 	const ee::PackIDMgr::Package* m_curr_pkg;
@@ -44,7 +47,7 @@ private:
 
 	std::vector<std::string> m_curr_paths;
 
-	ParserLuaData m_prev_info;
+	ParserBinData m_prev_info;
 
 	CU_SINGLETON_DECLARATION(PackIDMgr)
 	

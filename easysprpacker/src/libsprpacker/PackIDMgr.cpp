@@ -143,6 +143,11 @@ void PackIDMgr::QueryID(const std::string& filepath, int& pkg_id, int& node_id,
 				find = true;
 			}
 		}
+		else
+		{
+			// is spr
+			int zz = 0;
+		}
 		if (!find) {
 			GetNextFreeID(m_curr_pkg, NEXT_NODE_ID);
 			node_id = NEXT_NODE_ID++;
@@ -204,11 +209,11 @@ void PackIDMgr::GetCurrImgCutPath(std::string& img, std::string& json, std::stri
 	ori = m_curr_pkg->cut_ori;
 }
 
-void PackIDMgr::GetNextFreeID(const ee::PackIDMgr::Package* pkg, int& node_id)
+void PackIDMgr::GetNextFreeID(const ee::PackIDMgr::Package* pkg, int& node_id) const
 {
 	while (true) {
 		uint32_t id = simp::NodeID::ComposeID(pkg->id, node_id);
-		if (pkg->sprs_id_set.find(id) != pkg->sprs_id_set.end()) {
+		if (pkg->IsIdUsed(id) || m_prev_info.IsIdUsed(id)) {
 			++node_id;
 		} else {
 			break;

@@ -241,7 +241,7 @@
       <Filter>pack</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="..\..\..\src\libsprpacker\ParserLuaData.h">
+    <ClInclude Include="..\..\..\src\libsprpacker\ParserBinData.h">
       <Filter>parser</Filter>
     </ClInclude>
   </ItemGroup>
@@ -395,7 +395,7 @@
     <ClCompile Include="..\..\..\src\libsprpacker\PackToLua.cpp">
       <Filter>pack</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\libsprpacker\ParserLuaData.cpp">
+    <ClCompile Include="..\..\..\src\libsprpacker\ParserBinData.cpp">
       <Filter>parser</Filter>
     </ClCompile>
   </ItemGroup>
