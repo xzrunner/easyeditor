@@ -13,10 +13,10 @@ namespace enode3d
 class StageCanvas;
 class NodeSelection;
 
-class SprTranslateState : public EditOpState
+class NodeTranslateState : public EditOpState
 {
 public:
-	SprTranslateState(StageCanvas& canvas, const NodeSelection& selection);
+	NodeTranslateState(StageCanvas& canvas, const NodeSelection& selection);
 
 	virtual void OnMousePress(const sm::vec2& pos) override;
 	virtual void OnMouseRelease(const sm::vec2& pos) override;
@@ -46,6 +46,6 @@ private:
 
 	sm::vec2 m_first_pos, m_last_pos;
 
-}; // SprTranslateState
+}; // NodeTranslateState
 
 }

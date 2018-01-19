@@ -1,4 +1,4 @@
-#include "PropertySetting.h"
+#include "PropertySetting2.h"
 #include "Sprite.h"
 
 #include <ee/StringHelper.h>
@@ -8,13 +8,13 @@
 namespace enode3d
 {
 
-PropertySetting::PropertySetting(ee::EditPanelImpl* edit_impl, const std::shared_ptr<Sprite>& spr)
+PropertySetting2::PropertySetting2(ee::EditPanelImpl* edit_impl, const std::shared_ptr<Sprite>& spr)
 	: ee::SpritePropertySetting(edit_impl, spr)
 {
 	m_type = "Node3d";
 }
 
-void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
+void PropertySetting2::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 
@@ -44,7 +44,7 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 	}
 }
 
-void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
+void PropertySetting2::UpdateProperties(wxPropertyGrid* pg)
 {
 	ee::SpritePropertySetting::UpdateProperties(pg);
 
@@ -64,7 +64,7 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Angle3"))->SetValue(pg->GetProperty(wxT("Angle3"))->GenerateComposedValue());
 }
 
-void PropertySetting::InitProperties(wxPropertyGrid* pg)
+void PropertySetting2::InitProperties(wxPropertyGrid* pg)
 {
 	ee::SpritePropertySetting::InitProperties(pg);
 

@@ -1,9 +1,9 @@
-#include "SprArrangeOP.h"
+#include "NodeArrangeOP.h"
 #include "StagePanel.h"
 #include "StageCanvas.h"
 
-#include "SprTranslateState.h"
-#include "SprRotateState.h"
+#include "NodeTranslateState.h"
+#include "NodeRotateState.h"
 #include "CamTranslateState.h"
 #include "CamRotateState.h"
 #include "CamZoomState.h"
@@ -15,15 +15,15 @@
 namespace enode3d
 {
 
-SprArrangeOP::SprArrangeOP(StagePanel& stage)
-	: SprSelectOP(stage)
+NodeArrangeOP::NodeArrangeOP(StagePanel& stage)
+	: NodeSelectOP(stage)
 {
 	m_canvas = static_cast<enode3d::StageCanvas*>(stage.GetCanvas());
 }
 
-bool SprArrangeOP::OnKeyDown(int keyCode)
+bool NodeArrangeOP::OnKeyDown(int keyCode)
 {
-	if (SprSelectOP::OnKeyDown(keyCode)) {
+	if (NodeSelectOP::OnKeyDown(keyCode)) {
 		return true;
 	}
 
@@ -50,9 +50,9 @@ bool SprArrangeOP::OnKeyDown(int keyCode)
 	return false;
 }
 
-bool SprArrangeOP::OnMouseLeftDown(int x, int y)
+bool NodeArrangeOP::OnMouseLeftDown(int x, int y)
 {
-	if (SprSelectOP::OnMouseLeftDown(x, y)) {
+	if (NodeSelectOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
@@ -61,7 +61,7 @@ bool SprArrangeOP::OnMouseLeftDown(int x, int y)
 		m_op_state = std::make_unique<CamRotateState>(
 			*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
 	} else {
-		m_op_state = std::make_unique<SprTranslateState>(
+		m_op_state = std::make_unique<NodeTranslateState>(
 			*m_canvas, selection);
 	}
 
@@ -72,9 +72,9 @@ bool SprArrangeOP::OnMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool SprArrangeOP::OnMouseLeftUp(int x, int y)
+bool NodeArrangeOP::OnMouseLeftUp(int x, int y)
 {
-	if (SprSelectOP::OnMouseLeftUp(x, y)) {
+	if (NodeSelectOP::OnMouseLeftUp(x, y)) {
 		return true;
 	}
 
@@ -88,9 +88,9 @@ bool SprArrangeOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool SprArrangeOP::OnMouseRightDown(int x, int y)
+bool NodeArrangeOP::OnMouseRightDown(int x, int y)
 {
-	if (SprSelectOP::OnMouseRightDown(x, y)) {
+	if (NodeSelectOP::OnMouseRightDown(x, y)) {
 		return true;
 	}
 
@@ -99,7 +99,7 @@ bool SprArrangeOP::OnMouseRightDown(int x, int y)
 		m_op_state = std::make_unique<CamTranslateState>(
 			*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
 	} else if (selection.Size() == 1) {
-		m_op_state = std::make_unique<SprRotateState>(
+		m_op_state = std::make_unique<NodeRotateState>(
 			*m_canvas, selection);
 	}
 
@@ -110,9 +110,9 @@ bool SprArrangeOP::OnMouseRightDown(int x, int y)
 	return false;
 }
 
-bool SprArrangeOP::OnMouseRightUp(int x, int y)
+bool NodeArrangeOP::OnMouseRightUp(int x, int y)
 {
-	if (SprSelectOP::OnMouseRightUp(x, y)) {
+	if (NodeSelectOP::OnMouseRightUp(x, y)) {
 		return true;
 	}
 
@@ -126,9 +126,9 @@ bool SprArrangeOP::OnMouseRightUp(int x, int y)
 	return false;
 }
 
-bool SprArrangeOP::OnMouseMove(int x, int y)
+bool NodeArrangeOP::OnMouseMove(int x, int y)
 {
-	if (SprSelectOP::OnMouseMove(x, y)) {
+	if (NodeSelectOP::OnMouseMove(x, y)) {
 		return true;
 	}
 
@@ -141,9 +141,9 @@ bool SprArrangeOP::OnMouseMove(int x, int y)
 	return false;
 }
 
-bool SprArrangeOP::OnMouseDrag(int x, int y)
+bool NodeArrangeOP::OnMouseDrag(int x, int y)
 {
-	if (SprSelectOP::OnMouseDrag(x, y)) {
+	if (NodeSelectOP::OnMouseDrag(x, y)) {
 		return true;
 	}
 
@@ -154,9 +154,9 @@ bool SprArrangeOP::OnMouseDrag(int x, int y)
 	return false;
 }
 
-bool SprArrangeOP::OnMouseWheelRotation(int x, int y, int direction)
+bool NodeArrangeOP::OnMouseWheelRotation(int x, int y, int direction)
 {
-	if (SprSelectOP::OnMouseWheelRotation(x, y, direction)) {
+	if (NodeSelectOP::OnMouseWheelRotation(x, y, direction)) {
 		return true;
 	}
 

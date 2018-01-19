@@ -9,10 +9,10 @@ namespace enode3d
 
 class StagePanel;
 
-class SprSelectOP : public ee::EditOP
+class NodeSelectOP : public ee::EditOP
 {
 public:	
-	SprSelectOP(StagePanel& stage);
+	NodeSelectOP(StagePanel& stage);
 
 	virtual bool OnKeyDown(int keyCode) override;
 	virtual bool OnMouseLeftDown(int x, int y) override;
@@ -25,6 +25,6 @@ private:
 protected:
 	StagePanel& m_stage;
 
-}; // SprSelectOP
+}; // NodeSelectOP
 
 }

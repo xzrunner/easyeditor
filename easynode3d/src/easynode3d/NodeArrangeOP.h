@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SprSelectOP.h"
+#include "NodeSelectOP.h"
 
 #include <memory>
 
@@ -10,10 +10,10 @@ namespace enode3d
 class StageCanvas;
 class EditOpState;
 
-class SprArrangeOP : public SprSelectOP
+class NodeArrangeOP : public NodeSelectOP
 {
 public:
-	SprArrangeOP(StagePanel& stage);
+	NodeArrangeOP(StagePanel& stage);
 
 	virtual bool OnKeyDown(int keyCode) override;
 	virtual bool OnMouseLeftDown(int x, int y) override;
@@ -29,6 +29,6 @@ private:
 
 	std::unique_ptr<EditOpState> m_op_state = nullptr;
 
-}; // SprArrangeOP
+}; // NodeArrangeOP
 
 }

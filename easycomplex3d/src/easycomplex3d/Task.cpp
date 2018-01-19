@@ -5,7 +5,7 @@
 #include <ee/PropertySettingPanel.h>
 
 #include <easynode3d/StagePanel.h>
-#include <easynode3d/SprArrangeOP.h>
+#include <easynode3d/NodeArrangeOP.h>
 
 #include <easycomplex3d.h>
 
@@ -84,7 +84,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	auto stage = new enode3d::StagePanel(parent, m_parent, m_library);
 	stage->SetCanvas(new StageCanvas(stage, m_library));
-	stage->SetEditOP(new enode3d::SprArrangeOP(*stage));
+	stage->SetEditOP(new enode3d::NodeArrangeOP(*stage));
 
 	m_stage = stage;
 	m_property->SetEditPanel(m_stage->GetStageImpl());

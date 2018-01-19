@@ -13,10 +13,10 @@ class StageCanvas;
 class Sprite;
 class NodeSelection;
 
-class SprRotateState : public EditOpState
+class NodeRotateState : public EditOpState
 {
 public:
-	SprRotateState(StageCanvas& canvas, const NodeSelection& selection);
+	NodeRotateState(StageCanvas& canvas, const NodeSelection& selection);
 
 	virtual void OnMousePress(const sm::vec2& pos) override;
 	virtual void OnMouseRelease(const sm::vec2& pos) override;
@@ -46,6 +46,6 @@ private:
 
 	sm::vec2 m_last_pos;
 
-}; // SprRotateState
+}; // NodeRotateState
 
 }

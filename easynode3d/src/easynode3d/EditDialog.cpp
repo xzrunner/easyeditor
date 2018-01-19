@@ -3,7 +3,7 @@
 #include "Sprite.h"
 #include "StagePanel.h"
 #include "StageCanvas.h"
-#include "SprArrangeOP.h"
+#include "NodeArrangeOP.h"
 #include "NodeFactory.h"
 
 #include <ee/EditedFileStack.h>
@@ -52,7 +52,7 @@ void EditDialog::InitLayout(wxGLContext* glctx)
 	m_stage = new StagePanel(this, this, nullptr);
 	m_canvas = new StageCanvas(m_stage, glctx);
 	m_stage->SetCanvas(m_canvas);
-	m_stage->SetEditOP(new SprArrangeOP(*m_stage));
+	m_stage->SetEditOP(new NodeArrangeOP(*m_stage));
 
 	m_node = NodeFactory::Instance()->Create(m_spr->GetSymbol());
 	assert(m_spr->GetSymbol()->Type() == s2::SYM_MODEL);

@@ -1,4 +1,4 @@
-#include "SprSelectOP.h"
+#include "NodeSelectOP.h"
 #include "StagePanel.h"
 #include "StageCanvas.h"
 
@@ -16,13 +16,13 @@
 namespace enode3d
 {
 
-SprSelectOP::SprSelectOP(StagePanel& stage)
+NodeSelectOP::NodeSelectOP(StagePanel& stage)
 	: ee::EditOP(&stage, stage.GetStageImpl())
 	, m_stage(stage)
 {
 }
 
-bool SprSelectOP::OnKeyDown(int keyCode)
+bool NodeSelectOP::OnKeyDown(int keyCode)
 {
 	if (ee::EditOP::OnKeyDown(keyCode)) return true;
 
@@ -39,7 +39,7 @@ bool SprSelectOP::OnKeyDown(int keyCode)
 	return false;
 }
 
-bool SprSelectOP::OnMouseLeftDown(int x, int y)
+bool NodeSelectOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::EditOP::OnMouseLeftDown(x, y)) return true;
 
@@ -74,7 +74,7 @@ bool SprSelectOP::OnMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool SprSelectOP::OnDraw() const
+bool NodeSelectOP::OnDraw() const
 {
 	if (ee::EditOP::OnDraw()) return true;
 
@@ -94,7 +94,7 @@ bool SprSelectOP::OnDraw() const
 }
 
 // AABB not changed, transform ray from Camera and spr's mat
-n3::NodePtr SprSelectOP::SelectByPos(const sm::vec2& pos) const
+n3::NodePtr NodeSelectOP::SelectByPos(const sm::vec2& pos) const
 {
 	auto& nodes = m_stage.GetAllNodes();
 

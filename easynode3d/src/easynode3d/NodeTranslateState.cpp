@@ -1,4 +1,4 @@
-#include "SprTranslateState.h"
+#include "NodeTranslateState.h"
 #include "StageCanvas.h"
 #include "NodeSelection.h"
 
@@ -9,23 +9,23 @@
 namespace enode3d
 {
 
-SprTranslateState::SprTranslateState(StageCanvas& canvas, const NodeSelection& selection)
+NodeTranslateState::NodeTranslateState(StageCanvas& canvas, const NodeSelection& selection)
 	: m_canvas(canvas)
 	, m_selection(selection)
 {
 }
 
-void SprTranslateState::OnMousePress(const sm::vec2& pos)
+void NodeTranslateState::OnMousePress(const sm::vec2& pos)
 {
 	m_first_pos = m_last_pos = pos;
 }
 
-void SprTranslateState::OnMouseRelease(const sm::vec2& pos)
+void NodeTranslateState::OnMouseRelease(const sm::vec2& pos)
 {
 	// todo history
 }
 
-void SprTranslateState::OnMouseDrag(const sm::vec2& pos)
+void NodeTranslateState::OnMouseDrag(const sm::vec2& pos)
 {
 	if (m_selection.IsEmpty()) {
 		return;
@@ -37,16 +37,16 @@ void SprTranslateState::OnMouseDrag(const sm::vec2& pos)
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void SprTranslateState::Translate(const sm::vec2& first, const sm::vec2& curr)
+void NodeTranslateState::Translate(const sm::vec2& first, const sm::vec2& curr)
 {
 	m_selection.Traverse(Visitor(m_canvas, first, curr));
 }
 
 //////////////////////////////////////////////////////////////////////////
-// class SprTranslateState::Visitor
+// class NodeTranslateState::Visitor
 //////////////////////////////////////////////////////////////////////////
 
-void SprTranslateState::Visitor::
+void NodeTranslateState::Visitor::
 Visit(const n3::NodePtr& node, bool& next)
 {
 	auto& cam = m_canvas.GetCamera();
