@@ -13,7 +13,6 @@
 #include <easytext.h>
 #include <easyterrain2d.h>
 #include <easyskeleton.h>
-#include <easynode3d.h>
 #include <easyaudio.h>
 
 #include <ee/EditPanelImpl.h>
@@ -22,6 +21,9 @@
 #include <ee/ViewlistPanel.h>
 #include <ee/panel_msg.h>
 #include <ee/CurrSprTreePath.h>
+
+#include <easynode3d/EditDialog.h>
+#include <easynode3d/Sprite.h>
 
 #include <gum/Audio.h>
 

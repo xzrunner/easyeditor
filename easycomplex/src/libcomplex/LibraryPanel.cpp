@@ -20,11 +20,12 @@
 #include <easytrail.h>
 #include <easyskeleton.h>
 #include <easyaudio.h>
-#include <easynode3d.h>
 
 #include <ee/LibraryImagePage.h>
 #include <ee/LibraryFontBlankPage.h>
 #include <ee/LibraryScriptsPage.h>
+
+#include <easynode3d/LibraryPage.h>
 
 namespace ecomplex
 {

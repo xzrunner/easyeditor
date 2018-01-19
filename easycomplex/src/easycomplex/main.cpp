@@ -7,6 +7,9 @@
 #include <ee/SymbolFile.h>
 #include <ee/SymbolType.h>
 
+#include <easynode3d/Symbol.h>
+#include <easynode3d/Sprite.h>
+
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyanim2.h>
@@ -24,7 +27,6 @@
 #include <easytrail.h>
 #include <easyskeleton.h>
 #include <easyaudio.h>
-#include <easynode3d.h>
 
 #include <sprite2/SymType.h>
 
