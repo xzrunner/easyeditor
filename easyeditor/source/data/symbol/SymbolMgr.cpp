@@ -47,7 +47,11 @@ SymPtr SymbolMgr::FetchSymbol(const std::string& filepath, int type)
 //			return NULL;
 	}
 
-	bool succ = sym->LoadFromFile(fixed_path);
+	std::string real_path = fixed_path;
+	if (!FileHelper::IsFileExist(real_path)) {
+		real_path = fixed_path.substr(0, fixed_path.find_last_of(".")) + ".bin";
+	}
+	bool succ = sym->LoadFromFile(real_path);
 	if (succ)
 	{
 		m_syms.insert(std::make_pair(fixed_path, sym));

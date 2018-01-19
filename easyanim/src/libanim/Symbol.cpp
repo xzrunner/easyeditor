@@ -80,9 +80,14 @@ bool Symbol::LoadResources()
 	auto sym_loader(std::make_shared<ee::SymbolLoader>());
 	auto spr_loader(std::make_shared<ee::SpriteLoader>());
 	gum::AnimSymLoader loader(*this, sym_loader, spr_loader);
-	loader.LoadJson(m_filepath.c_str());
-
-	LoadEE();
+	
+	auto ext = ee::FileHelper::GetExtension(m_filepath);
+	if (ext == "json") {
+		loader.LoadJson(m_filepath.c_str());
+		LoadEE();
+	} else if (ext == "bin") {
+		loader.LoadSns(m_filepath.c_str());
+	}
 
 	return true;
 }

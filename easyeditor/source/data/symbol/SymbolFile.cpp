@@ -55,7 +55,7 @@ int SymbolFile::Type(const std::string& filepath) const
 	
 	int pos = filepath.rfind('.');
 	std::string ext = filepath.substr(pos + 1);
-	if (ext == "json")
+	if (ext == "json" || ext == "bin")
 	{
 		const std::string filename = filepath.substr(0, filepath.find_last_of('.'));
 		int pos = filename.find_last_of('_');
