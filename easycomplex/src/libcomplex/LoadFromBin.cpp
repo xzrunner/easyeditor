@@ -22,15 +22,7 @@ void LoadFromBin::Load(const std::string& filepath, Symbol& complex)
 {
 	mm::LinearAllocator alloc;
 
-	std::ifstream fin(filepath, std::ios::binary);
-	fin.seekg(0, std::ios::end);
-	size_t len = static_cast<size_t>(fin.tellg());
-	fin.seekg(0, std::ios::beg);
-	char* data = new char[len];
-	fin.read(data, len);
-	fin.close();
-
-	auto sym = sns::NodeFactory::CreateNodeSym(alloc, bs::ImportStream(data, len));
+	auto sym = sns::NodeFactory::CreateSymFromBin(alloc, filepath);
 	auto sym_src = dynamic_cast<sns::ComplexSym*>(sym);
 
 	sm::rect scissor;
@@ -43,7 +35,7 @@ void LoadFromBin::Load(const std::string& filepath, Symbol& complex)
 	{
 		auto child = sym_src->GetChildByIndex(i);
 		auto child_path = ee::FileHelper::GetAbsolutePath(
-			dir, child->GetBaseInfo().GetFilepath());
+			dir, child->GetCommon().GetFilepath());
 		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(child_path);
 		auto spr = ee::SpriteFactory::Instance()->Create(sym);
 		spr->Load(child);

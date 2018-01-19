@@ -108,7 +108,7 @@ SprPtr SpriteFactory::Create(const Json::Value& val, const std::string& dir, con
 SprPtr SpriteFactory::Create(const sns::NodeSpr* node_spr, const std::string& dir)
 {
 	std::string filepath = ee::FileHelper::GetAbsolutePath(
-		dir, node_spr->GetBaseInfo().GetFilepath());
+		dir, node_spr->GetCommon().GetFilepath());
 	SymPtr sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	if (!sym) {
 		return nullptr;
