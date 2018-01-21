@@ -29,6 +29,8 @@ public:
 
 	virtual void SetCurrentCanvas();
 
+	virtual void RefreshCanvas() {}
+
 	void SetBgColor(const s2::Color& color);
 
 	bool IsDirty() const { return m_dirty; }

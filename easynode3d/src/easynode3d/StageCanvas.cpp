@@ -25,7 +25,7 @@ StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx, bool has2d)
 {
 }
 
-void StageCanvas::Refresh()
+void StageCanvas::RefreshCanvas()
 {
 	auto ctx = n3::RenderCtxStack::Instance()->Top();
 	if (ctx) {
@@ -44,13 +44,13 @@ void StageCanvas::Refresh()
 
 sm::vec2 StageCanvas::TransPos3ProjectToScreen(const sm::vec3& proj) const
 {
-	sm::mat4 mat_modelview = GetCamera().GetModelViewMat();
-	sm::vec3 v0 = mat_modelview * proj;
+	//sm::mat4 mat_modelview = GetCamera().GetModelViewMat();
+	//sm::vec3 v0 = mat_modelview * proj;
 
-	sm::vec3 v1 = m_mat_projection * v0;
-	v1.z = v0.z;
+	//sm::vec3 v1 = m_mat_projection * v0;
+	//v1.z = v0.z;
 
-	return m_viewport.TransPos3ProjectToScreen(v1, m_camera);
+	return m_viewport.TransPos3ProjectToScreen(m_mat_projection * GetCamera().GetModelViewMat() * proj, m_camera);
 }
 
 sm::vec3 StageCanvas::TransPos3ScreenToDir(const sm::vec2& screen) const
