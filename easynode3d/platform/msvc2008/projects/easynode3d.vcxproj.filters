@@ -43,6 +43,9 @@
     <Filter Include="view\property3">
       <UniqueIdentifier>{97e2ee0e-a69e-4cf6-9709-e804979fafe5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="dataset\node3">
+      <UniqueIdentifier>{ff02cd70-2724-4fe3-890c-5b67fd4e05c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easynode3d\LogViewer.h">
@@ -112,6 +115,18 @@
     <ClInclude Include="..\..\..\src\easynode3d\PropertySetting2.h">
       <Filter>view\property2</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\easynode3d\PropertySetting.h">
+      <Filter>view\property3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easynode3d\NodePropertySetting.h">
+      <Filter>view\property3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easynode3d\Node.h">
+      <Filter>dataset\node3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easynode3d\Model.h">
+      <Filter>dataset\node3</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easynode3d\LogViewer.cpp">
@@ -176,6 +191,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easynode3d\PropertySetting2.cpp">
       <Filter>view\property2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynode3d\PropertySetting.cpp">
+      <Filter>view\property3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynode3d\NodePropertySetting.cpp">
+      <Filter>view\property3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynode3d\Node.cpp">
+      <Filter>dataset\node3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easynode3d\Model.cpp">
+      <Filter>dataset\node3</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

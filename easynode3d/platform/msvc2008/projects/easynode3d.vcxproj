@@ -84,8 +84,12 @@
     <ClInclude Include="..\..\..\src\easynode3d\LibraryPage.h" />
     <ClInclude Include="..\..\..\src\easynode3d\LogViewer.h" />
     <ClInclude Include="..\..\..\src\easynode3d\CamRotateState.h" />
+    <ClInclude Include="..\..\..\src\easynode3d\Model.h" />
+    <ClInclude Include="..\..\..\src\easynode3d\Node.h" />
     <ClInclude Include="..\..\..\src\easynode3d\NodeFactory.h" />
+    <ClInclude Include="..\..\..\src\easynode3d\NodePropertySetting.h" />
     <ClInclude Include="..\..\..\src\easynode3d\NodeSelection.h" />
+    <ClInclude Include="..\..\..\src\easynode3d\PropertySetting.h" />
     <ClInclude Include="..\..\..\src\easynode3d\PropertySetting2.h" />
     <ClInclude Include="..\..\..\src\easynode3d\NodeArrangeOP.h" />
     <ClInclude Include="..\..\..\src\easynode3d\PropertySettingPanel.h" />
@@ -107,8 +111,12 @@
     <ClCompile Include="..\..\..\src\easynode3d\LibraryPage.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\LogViewer.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\CamRotateState.cpp" />
+    <ClCompile Include="..\..\..\src\easynode3d\Model.cpp" />
+    <ClCompile Include="..\..\..\src\easynode3d\Node.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\NodeFactory.cpp" />
+    <ClCompile Include="..\..\..\src\easynode3d\NodePropertySetting.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\NodeSelection.cpp" />
+    <ClCompile Include="..\..\..\src\easynode3d\PropertySetting.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\PropertySetting2.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\NodeArrangeOP.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\PropertySettingPanel.cpp" />
