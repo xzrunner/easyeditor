@@ -6,6 +6,7 @@
 
 #include <easynode3d/StagePanel.h>
 #include <easynode3d/NodeArrangeOP.h>
+#include <easynode3d/PropertySettingPanel.h>
 
 #include <easycomplex3d.h>
 
@@ -72,7 +73,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
 	m_library  = new LibraryPanel(split);
-	m_property = new ee::PropertySettingPanel(split);
+	m_property = new enode3d::PropertySettingPanel(split);
 
 	split->SetSashGravity(0.55f);
 	split->SplitHorizontally(m_library, m_property);
@@ -87,7 +88,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	stage->SetEditOP(new enode3d::NodeArrangeOP(*stage));
 
 	m_stage = stage;
-	m_property->SetEditPanel(m_stage->GetStageImpl());
+//	m_property->SetEditPanel(m_stage->GetStageImpl());
 
 	return m_stage;
 }
