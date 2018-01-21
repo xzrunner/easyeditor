@@ -27,7 +27,7 @@ void NodeRotateState::OnMouseDrag(const sm::vec2& pos)
 	Rotate(m_last_pos, pos);
 	m_last_pos = pos;
 
-	m_canvas.Refresh();
+	m_canvas.RefreshCanvas();
 }
 
 void NodeRotateState::Rotate(const sm::vec2& start, const sm::vec2& end)

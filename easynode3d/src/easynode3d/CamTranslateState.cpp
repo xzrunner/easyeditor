@@ -4,9 +4,9 @@
 namespace enode3d
 {
 
-CamTranslateState::CamTranslateState(StageCanvas& canvas, 
-	                                       n3::Camera& cam,
-	                                       const sm::vec2& pos)
+CamTranslateState::CamTranslateState(ee::StageCanvas& canvas, 
+	                                 n3::Camera& cam, 
+	                                 const sm::vec2& pos)
 	: m_canvas(canvas)
 	, m_cam(cam)
 	, m_last_pos(pos)
@@ -33,7 +33,7 @@ void CamTranslateState::CamTranslateState::OnMouseDrag(const sm::vec2& pos)
 
 	m_last_pos = pos;
 
-	m_canvas.Refresh();
+	m_canvas.RefreshCanvas();
 }
 
 }

@@ -1,21 +1,26 @@
 #include "CamControlOP.h"
-#include "StageCanvas.h"
 
 #include "CamRotateState.h"
 #include "CamTranslateState.h"
 #include "CamZoomState.h"
 
 #include <ee/EditPanelImpl.h>
+#include <ee/StageCanvas.h>
+
+#include <node3/Camera.h>
 
 namespace enode3d
 {
 
 static const float MOUSE_SENSITIVITY = 0.3f;
 
-CamControlOP::CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage)
+CamControlOP::CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+	                       n3::Camera& cam, const n3::Viewport& vp)
 	: ee::EditOP(wnd, stage)
+	, m_canvas(stage->GetCanvas())
+	, m_cam(cam)
+	, m_vp(vp)
 {
-	m_canvas = static_cast<enode3d::StageCanvas*>(stage->GetCanvas());
 }
 
 bool CamControlOP::OnKeyDown(int keyCode)
@@ -24,28 +29,27 @@ bool CamControlOP::OnKeyDown(int keyCode)
 
 	static const float OFFSET = 0.1f;
 
-	auto& cam = m_canvas->GetCamera();
 	switch (keyCode)
 	{
 	case WXK_ESCAPE:
-		cam.Reset();
-		m_canvas->Refresh();
+		m_cam.Reset();
+		m_canvas->RefreshCanvas();
 		break;
 	case 'w': case 'W':
-		cam.Translate(0, OFFSET);
-		m_canvas->Refresh();
+		m_cam.Translate(0, OFFSET);
+		m_canvas->RefreshCanvas();
 		break;
 	case 's': case 'S':
-		cam.Translate(0, -OFFSET);
-		m_canvas->Refresh();
+		m_cam.Translate(0, -OFFSET);
+		m_canvas->RefreshCanvas();
 		break;
  	case 'a': case 'A':
-		cam.Translate(OFFSET, 0);
-		m_canvas->Refresh();
+		m_cam.Translate(OFFSET, 0);
+		m_canvas->RefreshCanvas();
  		break;
  	case 'd': case 'D':
-		cam.Translate(-OFFSET, 0);
-		m_canvas->Refresh();
+		m_cam.Translate(-OFFSET, 0);
+		m_canvas->RefreshCanvas();
  		break;
 	}
 
@@ -59,7 +63,7 @@ bool CamControlOP::OnMouseLeftDown(int x, int y)
 	}
 
 	m_op_state = std::make_unique<CamRotateState>(
-		*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
+		*m_canvas, m_cam, sm::vec2(x, y));
 
 	m_op_state->OnMousePress(sm::vec2(x, y));
 
@@ -73,7 +77,7 @@ bool CamControlOP::OnMouseLeftUp(int x, int y)
 	}
 
 	m_op_state = std::make_unique<CamZoomState>(
-		*m_canvas, m_canvas->GetCamera());
+		*m_canvas, m_cam, m_vp);
 
 	return false;
 }
@@ -85,7 +89,7 @@ bool CamControlOP::OnMouseRightDown(int x, int y)
 	}
 
 	m_op_state = std::make_unique<CamTranslateState>(
-		*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
+		*m_canvas, m_cam, sm::vec2(x, y));
 
 	m_op_state->OnMousePress(sm::vec2(x, y));
 
@@ -99,7 +103,7 @@ bool CamControlOP::OnMouseRightUp(int x, int y)
 	}
 
 	m_op_state = std::make_unique<CamZoomState>(
-		*m_canvas, m_canvas->GetCamera());
+		*m_canvas, m_cam, m_vp);
 
 	return false;
 }

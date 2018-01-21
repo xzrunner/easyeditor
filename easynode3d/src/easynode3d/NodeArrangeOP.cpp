@@ -83,7 +83,7 @@ bool NodeArrangeOP::OnMouseLeftUp(int x, int y)
 	}
 
 	m_op_state = std::make_unique<CamZoomState>(
-		*m_canvas, m_canvas->GetCamera());
+		*m_canvas, m_canvas->GetCamera(), m_canvas->GetViewport());
 
 	return false;
 }
@@ -121,7 +121,7 @@ bool NodeArrangeOP::OnMouseRightUp(int x, int y)
 	}
 
 	m_op_state = std::make_unique<CamZoomState>(
-		*m_canvas, m_canvas->GetCamera());
+		*m_canvas, m_canvas->GetCamera(), m_canvas->GetViewport());
 
 	return false;
 }
