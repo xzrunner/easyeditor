@@ -1,5 +1,7 @@
 #pragma once
 
+#include "EditOpState.h"
+
 #include <ee/EditOP.h>
 
 #include <memory>
@@ -11,7 +13,6 @@ namespace enode3d
 {
 
 class Camera;
-class EditOpState;
 
 class CamControlOP : public ee::EditOP
 {

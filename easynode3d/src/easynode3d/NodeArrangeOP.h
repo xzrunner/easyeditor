@@ -1,6 +1,7 @@
 #pragma once
 
 #include "NodeSelectOP.h"
+#include "EditOpState.h"
 
 #include <memory>
 
@@ -8,7 +9,6 @@ namespace enode3d
 {
 
 class StageCanvas;
-class EditOpState;
 
 class NodeArrangeOP : public NodeSelectOP
 {
