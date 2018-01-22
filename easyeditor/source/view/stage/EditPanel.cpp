@@ -46,9 +46,9 @@ EditOP* EditPanel::GetEditOP()
 	return m_impl->GetEditOP();
 }
 
-void EditPanel::SetEditOP(EditOP* editOP)
+void EditPanel::SetEditOP(const std::shared_ptr<EditOP>& op)
 {
-	m_impl->SetEditOP(editOP);
+	m_impl->SetEditOP(op);
 }
 
 const StageCanvas* EditPanel::GetCanvas() const 
@@ -61,7 +61,7 @@ StageCanvas* EditPanel::GetCanvas()
 	return m_impl->GetCanvas(); 
 }
 
-void EditPanel::SetCanvas(StageCanvas* canvas) 
+void EditPanel::SetCanvas(const std::shared_ptr<StageCanvas>& canvas)
 { 
 	m_impl->SetCanvas(canvas);
 }

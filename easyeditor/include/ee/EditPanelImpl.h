@@ -16,8 +16,8 @@ namespace ee
 
 class EditPanel;
 class AtomicOP;
-class EditOP;
 class StageCanvas;
+class EditOP;
 
 class EditPanelImpl : public Observer, public cu::RefCountObj
 {
@@ -35,13 +35,13 @@ public:
 
 	void DrawEditOP() const;
 
-	const EditOP* GetEditOP() const { return m_edit_op; }
-	EditOP* GetEditOP() { return m_edit_op; }
-	void SetEditOP(EditOP* editOP);
+	const EditOP* GetEditOP() const { return m_edit_op.get(); }
+	EditOP* GetEditOP() { return m_edit_op.get(); }
+	void SetEditOP(const std::shared_ptr<EditOP>& op);
 
-	const StageCanvas* GetCanvas() const { return m_canvas; }
-	StageCanvas* GetCanvas() { return m_canvas; }
-	void SetCanvas(StageCanvas* canvas);
+	const StageCanvas* GetCanvas() const { return m_canvas.get(); }
+	StageCanvas* GetCanvas() { return m_canvas.get(); }
+	void SetCanvas(const std::shared_ptr<StageCanvas>& canvas) { m_canvas = canvas; }
 
 	void OnMouse(wxMouseEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
@@ -96,9 +96,9 @@ private:
 	void UpdateWndState(HistoryList::Type type);
 
 protected:
-	EditOP* m_edit_op;
+	std::shared_ptr<EditOP> m_edit_op = nullptr;
 
-	StageCanvas* m_canvas;
+	std::shared_ptr<StageCanvas> m_canvas = nullptr;
 
 	wxTopLevelWindow* m_frame;
 

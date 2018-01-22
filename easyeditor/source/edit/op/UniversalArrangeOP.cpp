@@ -9,20 +9,8 @@ UniversalArrangeOP::UniversalArrangeOP(wxWindow* wnd, EditPanelImpl* stage, Mult
 									   PropertySettingPanel* property, EditCMPT* callback/* = NULL*/)
 	: ZoomViewOP(wnd, stage, true)
 {
-	m_noPhysics = new ArrangeSpriteOP<SelectSpritesOP>(wnd, stage, sprites_impl, property, callback);
-	m_editop = m_noPhysics;
-}
-
-UniversalArrangeOP::~UniversalArrangeOP()
-{
-	m_noPhysics->RemoveReference();
-	m_noPhysics = NULL;
-
-	for (size_t i = 0, n = m_physics.size(); i < n; ++i)
-		m_physics[i].editOP->RemoveReference();
-	m_physics.clear();
-
-	m_editop = NULL;
+	m_no_physics = std::make_shared<ArrangeSpriteOP<SelectSpritesOP>>(wnd, stage, sprites_impl, property, callback);
+	m_editop = m_no_physics;
 }
 
 bool UniversalArrangeOP::OnKeyDown(int keyCode)
@@ -32,14 +20,14 @@ bool UniversalArrangeOP::OnKeyDown(int keyCode)
 
 bool UniversalArrangeOP::OnMouseLeftDown(int x, int y)
 {
-	m_editop = m_noPhysics;
+	m_editop = m_no_physics;
 
 	sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 	for (size_t i = 0, n = m_physics.size(); i < n; ++i)
 	{
 		if (PhysicsQuery::QueryOn(m_physics[i].world, pos))
 		{
-			m_editop = m_physics[i].editOP;
+			m_editop = m_physics[i].editop;
 			break;
 		}
 	}
@@ -81,7 +69,7 @@ void UniversalArrangeOP::addPhysicsEditOP(b2World* world, b2Body* ground)
 {
 	PhysicsOP physics;
 	physics.world = world;
-	physics.editOP = new DragPhysicsOP(m_wnd, m_stage, world, ground);
+	physics.editop = std::make_shared<DragPhysicsOP>(m_wnd, m_stage, world, ground);
 	m_physics.push_back(physics);
 }
 

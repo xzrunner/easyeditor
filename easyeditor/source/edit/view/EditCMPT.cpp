@@ -21,14 +21,11 @@ EditCMPT::EditCMPT(wxWindow* parent, const std::string& name, EditPanelImpl* sta
 }
 
 EditCMPT::~EditCMPT()
-{
-	if (m_editop)
-		m_editop->RemoveReference();
- 
+{ 
  	for_each(m_children.begin(), m_children.end(), DeletePointerFunctor<EditCMPT>());
 }
 
-void EditCMPT::SetEditOP(EditOP* op)
+void EditCMPT::SetEditOP(const std::shared_ptr<EditOP>& op)
 {
 	LoadEditOP(op);
 }
@@ -37,7 +34,7 @@ EditOP* EditCMPT::GetChildEditOP()
 {
 	int index = m_edit_choice->GetSelection();
 	if (index < static_cast<int>(m_children.size())) {
-		return m_children[index]->m_editop;
+		return m_children[index]->m_editop.get();
 	} else {
 		return NULL;
 	}
@@ -99,18 +96,14 @@ void EditCMPT::LoadEditOP()
 	m_stage->SetEditOP(m_editop);
 }
 
-void EditCMPT::LoadEditOP(EditOP* op)
+void EditCMPT::LoadEditOP(const std::shared_ptr<EditOP>& op)
 {
 	if (m_editop == op) {
 		return;
 	}
 
-	if (op) {
-		op->AddReference();
-	}
 	if (m_editop) {
 		m_editop->Clear();
-		m_editop->RemoveReference();
 	}
 	m_editop = op;
 
@@ -123,13 +116,9 @@ void EditCMPT::LoadEditOP(EditCMPT* cmpt)
 		return;
 	}
 
-	if (m_editop) {
-		m_editop->AddReference();
-	}
 	if (cmpt->m_editop)
 	{
 		cmpt->m_editop->Clear();
-		cmpt->m_editop->RemoveReference();
 	}
 	cmpt->m_editop = m_editop;
 

@@ -1,16 +1,16 @@
 #ifndef _EASYEDITOR_EDIT_OP_H_
 #define _EASYEDITOR_EDIT_OP_H_
 
-#include <cu/CU_RefCountObj.h>
-
 #include <wx/cursor.h>
+
+#include <memory>
 
 namespace ee
 {
 
 class EditPanelImpl;
 
-class EditOP : public cu::RefCountObj
+class EditOP
 {
 public:
 	EditOP(wxWindow* wnd, EditPanelImpl* stage);

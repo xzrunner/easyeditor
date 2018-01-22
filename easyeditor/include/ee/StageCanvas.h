@@ -15,7 +15,7 @@ namespace ee
 class EditPanelImpl;
 class RenderContext;
 
-class StageCanvas : public wxGLCanvas, public Observer, public cu::RefCountObj
+class StageCanvas : public wxGLCanvas, public Observer
 {
 public:
 	static const uint32_t USE_CONTEXT_STACK = 0x00000001;

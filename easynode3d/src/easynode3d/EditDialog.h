@@ -29,8 +29,8 @@ private:
 	void OnCloseEvent(wxCloseEvent& event);
 
 private:
-	StagePanel*  m_stage;
-	StageCanvas* m_canvas;
+	StagePanel* m_stage;
+	std::shared_ptr<StageCanvas> m_canvas = nullptr;
 
 	s2::SprPtr  m_spr = nullptr;
 	n3::NodePtr m_node = nullptr;

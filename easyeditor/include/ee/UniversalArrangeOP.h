@@ -22,7 +22,6 @@ class UniversalArrangeOP : public ZoomViewOP
 public:
 	UniversalArrangeOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* sprites_impl,
 		PropertySettingPanel* property, EditCMPT* callback = NULL);
-	virtual ~UniversalArrangeOP();
 
 	virtual bool OnKeyDown(int keyCode) override;
 	virtual bool OnMouseLeftDown(int x, int y) override;
@@ -39,15 +38,15 @@ public:
 private:
 	struct PhysicsOP
 	{
-		DragPhysicsOP* editOP;
+		std::shared_ptr<DragPhysicsOP> editop = nullptr;
 		b2World* world;
 	};
 
 private:
 	std::vector<PhysicsOP> m_physics;
-	ArrangeSpriteOP<SelectSpritesOP>* m_noPhysics;
+	std::shared_ptr<ArrangeSpriteOP<SelectSpritesOP>> m_no_physics;
 
-	EditOP* m_editop;
+	std::shared_ptr<EditOP> m_editop = nullptr;
 
 }; // UniversalArrangeOP
 

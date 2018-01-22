@@ -12,7 +12,7 @@ LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const std::string& name,
 	: EditCMPT(parent, name, stage)
 	, m_layersMgr(NULL)
 {
-	m_editop = new SelectShapesOP(stage_wnd, stage, shapes_impl);
+	m_editop = std::make_shared<SelectShapesOP>(stage_wnd, stage, shapes_impl);
 
 	m_layersMgr = new LayersMgrWidget(this);
 	m_sizer = new wxBoxSizer(wxVERTICAL);
@@ -25,7 +25,7 @@ LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const std::string& name,
 	 : EditCMPT(parent, name, stage)
 	 , m_layersMgr(NULL)
 {
-	m_editop = new SelectSpritesOP(stage_wnd, stage, sprites_impl);
+	m_editop = std::make_shared<SelectSpritesOP>(stage_wnd, stage, sprites_impl);
 
 	m_layersMgr = new LayersMgrWidget(this);
 	m_sizer = new wxBoxSizer(wxVERTICAL);

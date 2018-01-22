@@ -3,14 +3,18 @@
 
 #include "EditCMPT.h"
 
+#include <memory>
+
 namespace ee
 {
+
+class EditOP;
 
 class UniversalCMPT : public EditCMPT
 {
 public:
 	UniversalCMPT(wxWindow* parent, const std::string& name,
-		EditPanelImpl* stage, EditOP* editOP);
+		EditPanelImpl* stage, const std::shared_ptr<EditOP>& editop);
 
 protected:
 	virtual wxSizer* InitLayout() override;

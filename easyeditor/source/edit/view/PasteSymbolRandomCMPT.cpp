@@ -12,7 +12,7 @@ PasteSymbolRandomCMPT::PasteSymbolRandomCMPT(wxWindow* parent, const std::string
 	: EditCMPT(parent, name, stage)
 {
 	m_random_widget = new PasteSymbolRandomWidget(this, library);
-	m_editop = new PasteSymbolRandomOP(stage_wnd, stage, library, m_random_widget);
+	m_editop = std::make_shared<PasteSymbolRandomOP>(stage_wnd, stage, library, m_random_widget);
 }
 
 wxSizer* PasteSymbolRandomCMPT::InitLayout()

@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 
 #include <vector>
+#include <memory>
 
 namespace ee
 {
@@ -20,7 +21,7 @@ public:
 
 	virtual void UpdateControlValue() {}
 
-	void SetEditOP(EditOP* op);
+	void SetEditOP(const std::shared_ptr<EditOP>& op);
 	EditOP* GetChildEditOP();		// todo
 
 protected:
@@ -32,7 +33,7 @@ protected:
 
 	void SetChoice(size_t index);
 
-	void LoadEditOP(EditOP* op);
+	void LoadEditOP(const std::shared_ptr<EditOP>& op);
 
 private:
 	void LoadEditOP();
@@ -47,7 +48,7 @@ private:
 protected:
 	EditPanelImpl* m_stage;
 
-	EditOP* m_editop;
+	std::shared_ptr<EditOP> m_editop = nullptr;
 
 private:
 	std::string m_name;

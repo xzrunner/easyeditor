@@ -14,7 +14,7 @@ PasteSymbolScaleCMPT::PasteSymbolScaleCMPT(wxWindow* parent, const std::string& 
 	: EditCMPT(parent, name, stage)
 	, m_scaleVal(1.0f)
 {
-	m_editop = new PasteSymbolOP(stage_wnd, stage, library, &m_scaleVal);
+	m_editop = std::make_shared<PasteSymbolOP>(stage_wnd, stage, library, &m_scaleVal);
 }
 
 wxSizer* PasteSymbolScaleCMPT::InitLayout()

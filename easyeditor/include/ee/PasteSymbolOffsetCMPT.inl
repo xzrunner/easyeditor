@@ -14,7 +14,7 @@ PasteSymbolOffsetCMPT(wxWindow* parent, const std::string& name,
 					  LibraryPanel* library)
 	: EditCMPT(parent, name, editPanel)
 {
-	m_editop = new TOperation(stage_wnd, stage, sprites_impl, library, this);
+	m_editop = std::make_shared<TOperation>(stage_wnd, stage, sprites_impl, library, this);
 }
 
 template <typename TOperation>

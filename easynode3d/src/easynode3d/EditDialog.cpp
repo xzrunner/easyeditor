@@ -50,9 +50,9 @@ void EditDialog::InitLayout(wxGLContext* glctx)
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
 	m_stage = new StagePanel(this, this, nullptr);
-	m_canvas = new StageCanvas(m_stage, glctx);
+	m_canvas = std::make_shared<StageCanvas>(m_stage, glctx);
 	m_stage->SetCanvas(m_canvas);
-	m_stage->SetEditOP(new NodeArrangeOP(*m_stage));
+	m_stage->SetEditOP(std::make_shared<NodeArrangeOP>(*m_stage));
 
 	m_node = NodeFactory::Instance()->Create(m_spr->GetSymbol());
 	assert(m_spr->GetSymbol()->Type() == s2::SYM_MODEL);

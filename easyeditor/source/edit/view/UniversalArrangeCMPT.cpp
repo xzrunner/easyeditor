@@ -14,7 +14,7 @@ UniversalArrangeCMPT::UniversalArrangeCMPT(wxWindow* parent, const std::string& 
 	: EditCMPT(parent, name, stage)
 	, m_spritesImpl(sprites_impl)
 {
-	m_editop = new UniversalArrangeOP(stage_wnd, stage, sprites_impl, property, this);
+	m_editop = std::make_shared<UniversalArrangeOP>(stage_wnd, stage, sprites_impl, property, this);
 }
 
 void UniversalArrangeCMPT::UpdateControlValue()
@@ -45,7 +45,7 @@ void UniversalArrangeCMPT::UpdateControlValue()
 
 void UniversalArrangeCMPT::AddPhysicsEditOP(b2World* world, b2Body* ground)
 {
-	UniversalArrangeOP* op = static_cast<UniversalArrangeOP*>(m_editop);
+	auto op = std::dynamic_pointer_cast<UniversalArrangeOP>(m_editop);
 	op->addPhysicsEditOP(world, ground);
 }
 

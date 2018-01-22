@@ -15,9 +15,9 @@ PasteSymbolPhysicsCMPT::PasteSymbolPhysicsCMPT(wxWindow* parent, const std::stri
 	, m_worldReverse(worldReverse)
 {
 	if (!randomWidget)
-		m_editop = new PasteSymbolPhysicsOP(stage_wnd, stage, library, physicsImpl, pScale);
+		m_editop = std::make_shared<PasteSymbolPhysicsOP>(stage_wnd, stage, library, physicsImpl, pScale);
 	else
-		m_editop = new PasteSymbolPhysicsRandomOP(stage_wnd, stage, library, physicsImpl, randomWidget);
+		m_editop = std::make_shared<PasteSymbolPhysicsRandomOP>(stage_wnd, stage, library, physicsImpl, randomWidget);
 }
 
 wxSizer* PasteSymbolPhysicsCMPT::InitLayout()
@@ -51,8 +51,8 @@ void PasteSymbolPhysicsCMPT::onChangeGravity(wxCommandEvent& event)
 
 void PasteSymbolPhysicsCMPT::onChangeStaticType(wxCommandEvent& event)
 {
-	PasteSymbolPhysicsOP* editOP = static_cast<PasteSymbolPhysicsOP*>(m_editop);
-	editOP->setStatic(event.IsChecked());
+	auto op = std::dynamic_pointer_cast<PasteSymbolPhysicsOP>(m_editop);
+	op->setStatic(event.IsChecked());
 }
 
 }

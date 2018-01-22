@@ -33,14 +33,6 @@ EditPanelImpl::EditPanelImpl(wxTopLevelWindow* frame,
 EditPanelImpl::~EditPanelImpl()
 {
 	Clear();
-
-	if (m_edit_op) {
-		m_edit_op->RemoveReference();
-	}
-	if (m_canvas) {
-		m_canvas->RemoveReference();
-		m_canvas = NULL;
-	}
 }
 
 void EditPanelImpl::SetEditPanelNull()
@@ -62,12 +54,12 @@ sm::vec2 EditPanelImpl::TransPosScrToProj(int x, int y) const
 		return sm::vec2(0, 0);
 	}
 
-	ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_canvas);
-	if (!canvas || canvas->GetCamera()->Type() != s2::CAM_ORTHO2D) {
+	auto cam_canvas = std::dynamic_pointer_cast<ee::CameraCanvas>(m_canvas);
+	if (!cam_canvas || cam_canvas->GetCamera()->Type() != s2::CAM_ORTHO2D) {
 		return sm::vec2(0, 0);
 	}
 
-	s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
+	s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(cam_canvas->GetCamera());
 	int w = m_stage->GetSize().GetWidth(),
 		h = m_stage->GetSize().GetHeight();
 	return cam->TransPosScreenToProject(x, y, w, h);
@@ -79,12 +71,12 @@ sm::vec2 EditPanelImpl::TransPosProjToScr(const sm::vec2& proj) const
 		return sm::vec2(0, 0);
 	}
 
-	ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_canvas);
-	if (!canvas || canvas->GetCamera()->Type() != s2::CAM_ORTHO2D) {
+	auto cam_canvas = std::dynamic_pointer_cast<ee::CameraCanvas>(m_canvas);
+	if (!cam_canvas || cam_canvas->GetCamera()->Type() != s2::CAM_ORTHO2D) {
 		return sm::vec2(0, 0);
 	}
 
-	s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
+	s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(cam_canvas->GetCamera());
 	int w = m_stage->GetSize().GetWidth(),
 		h = m_stage->GetSize().GetHeight();
 	return cam->TransPosProjectToScreen(proj, w, h);
@@ -97,30 +89,20 @@ void EditPanelImpl::DrawEditOP() const
 	}
 }
 
-void EditPanelImpl::SetEditOP(EditOP* editOP)
+void EditPanelImpl::SetEditOP(const std::shared_ptr<EditOP>& op)
 {
-	if (m_edit_op == editOP) {
+	if (m_edit_op == op) {
 		return;
 	}
 
-	if (editOP) {
-		editOP->AddReference();
-	}
-	if (m_edit_op)
-	{
+	if (m_edit_op) {
 		m_edit_op->Clear();
-		m_edit_op->RemoveReference();
 	}
-	m_edit_op = editOP;
+	m_edit_op = op;
 	if (m_edit_op) {
 		m_edit_op->OnActive();
 	}
 	SetCanvasDirtySJ::Instance()->SetDirty();
-}
-
-void EditPanelImpl::SetCanvas(StageCanvas* canvas) 
-{ 
-	cu::RefCountObjAssign(m_canvas, canvas);
 }
 
 void EditPanelImpl::OnMouse(wxMouseEvent& event)
@@ -213,7 +195,7 @@ void EditPanelImpl::OnChar(wxKeyEvent& event)
 
 void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 {
-	ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_canvas);
+	auto canvas = std::dynamic_pointer_cast<ee::CameraCanvas>(m_canvas);
 	if (!canvas) {
 		return;
 	}

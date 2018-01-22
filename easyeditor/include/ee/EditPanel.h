@@ -13,11 +13,11 @@ namespace ee
 {
 
 class AtomicOP;
-class EditOP;
 class StageCanvas;
 class Camera;
 class KeysState;
 class EditPanelImpl;
+class EditOP;
 
 class EditPanel : public wxPanel
 {
@@ -40,11 +40,11 @@ public:
 
 	const EditOP* GetEditOP() const;
 	EditOP* GetEditOP();
-	void SetEditOP(EditOP* editOP);
+	void SetEditOP(const std::shared_ptr<EditOP>& op);
 
 	const StageCanvas* GetCanvas() const;
 	StageCanvas* GetCanvas();
-	void SetCanvas(StageCanvas* canvas);
+	void SetCanvas(const std::shared_ptr<StageCanvas>& canvas);
 
 	// In Stage, class StagePanel can't get focus, only its class StageCanvas has the focus, so 
 	// these two func should be called by StageCanvas.
