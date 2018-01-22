@@ -59,7 +59,7 @@ bool NodeArrangeOP::OnMouseLeftDown(int x, int y)
 	auto& selection = m_stage.GetNodeSelection();
 	if (selection.IsEmpty()) {
 		m_op_state = std::make_unique<CamRotateState>(
-			*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
+			m_canvas->GetCamera(), sm::vec2(x, y));
 	} else {
 		m_op_state = std::make_unique<NodeTranslateState>(
 			*m_canvas, selection);
@@ -83,7 +83,7 @@ bool NodeArrangeOP::OnMouseLeftUp(int x, int y)
 	}
 
 	m_op_state = std::make_unique<CamZoomState>(
-		*m_canvas, m_canvas->GetCamera(), m_canvas->GetViewport());
+		m_canvas->GetCamera(), m_canvas->GetViewport());
 
 	return false;
 }
@@ -97,7 +97,7 @@ bool NodeArrangeOP::OnMouseRightDown(int x, int y)
 	auto& selection = m_stage.GetNodeSelection();
 	if (selection.IsEmpty()) {
 		m_op_state = std::make_unique<CamTranslateState>(
-			*m_canvas, m_canvas->GetCamera(), sm::vec2(x, y));
+			m_canvas->GetCamera(), sm::vec2(x, y));
 	} else if (selection.Size() == 1) {
 		m_op_state = std::make_unique<NodeRotateState>(
 			*m_canvas, selection);
@@ -121,7 +121,7 @@ bool NodeArrangeOP::OnMouseRightUp(int x, int y)
 	}
 
 	m_op_state = std::make_unique<CamZoomState>(
-		*m_canvas, m_canvas->GetCamera(), m_canvas->GetViewport());
+		m_canvas->GetCamera(), m_canvas->GetViewport());
 
 	return false;
 }

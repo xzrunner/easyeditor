@@ -6,7 +6,6 @@
 
 #include <memory>
 
-namespace ee { class StageCanvas; }
 namespace n3 { class Camera; class Viewport; }
 
 namespace enode3d
@@ -17,7 +16,7 @@ class Camera;
 class CamControlOP : public ee::EditOP
 {
 public:
-	CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+	CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 		n3::Camera& cam, const n3::Viewport& vp);
 
 	virtual bool OnKeyDown(int keyCode) override;
@@ -30,8 +29,6 @@ public:
 	virtual bool OnMouseWheelRotation(int x, int y, int direction) override;
 
 private:
-	ee::StageCanvas* m_canvas;
-
 	n3::Camera& m_cam;
 	const n3::Viewport& m_vp;
 

@@ -18,8 +18,6 @@ public:
 	StageCanvas(StagePanel* stage, wxGLContext* glctx = nullptr, 
 		bool has2d = false);
 
-	virtual void RefreshCanvas() override;
-
 	n3::Camera& GetCamera() { return m_camera; }
 	const n3::Camera& GetCamera() const { return m_camera; }
 

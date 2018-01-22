@@ -2,12 +2,15 @@
 #include "StageCanvas.h"
 #include "NodeSelection.h"
 
+#include <ee/panel_msg.h>
+
 #include <sprite2/ModelSprite.h>
 
 namespace enode3d
 {
 
-NodeRotateState::NodeRotateState(StageCanvas& canvas, const NodeSelection& selection)
+NodeRotateState::NodeRotateState(const StageCanvas& canvas,
+	                             const NodeSelection& selection)
 	: m_canvas(canvas)
 	, m_selection(selection)
 {
@@ -27,7 +30,7 @@ void NodeRotateState::OnMouseDrag(const sm::vec2& pos)
 	Rotate(m_last_pos, pos);
 	m_last_pos = pos;
 
-	m_canvas.RefreshCanvas();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void NodeRotateState::Rotate(const sm::vec2& start, const sm::vec2& end)

@@ -1,14 +1,13 @@
 #include "CamTranslateState.h"
 #include "StageCanvas.h"
 
+#include <ee/panel_msg.h>
+
 namespace enode3d
 {
 
-CamTranslateState::CamTranslateState(ee::StageCanvas& canvas, 
-	                                 n3::Camera& cam, 
-	                                 const sm::vec2& pos)
-	: m_canvas(canvas)
-	, m_cam(cam)
+CamTranslateState::CamTranslateState(n3::Camera& cam, const sm::vec2& pos)
+	: m_cam(cam)
 	, m_last_pos(pos)
 {
 }
@@ -33,7 +32,7 @@ void CamTranslateState::CamTranslateState::OnMouseDrag(const sm::vec2& pos)
 
 	m_last_pos = pos;
 
-	m_canvas.RefreshCanvas();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

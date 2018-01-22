@@ -1,14 +1,13 @@
 #include "CamZoomState.h"
 #include "StageCanvas.h"
 
+#include <ee/panel_msg.h>
+
 namespace enode3d
 {
 
-CamZoomState::CamZoomState(ee::StageCanvas& canvas, 
-	                       n3::Camera& cam,
-	                       const n3::Viewport& vp)
-	: m_canvas(canvas)
-	, m_cam(cam)
+CamZoomState::CamZoomState(n3::Camera& cam, const n3::Viewport& vp)
+	: m_cam(cam)
 	, m_vp(vp)
 {
 }
@@ -23,7 +22,7 @@ void CamZoomState::OnMouseWheelRotation(int x, int y, int direction)
 		m_cam.Move(dir, - m_cam.GetDistance() * OFFSET);
 	}
 
-	m_canvas.RefreshCanvas();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

@@ -6,6 +6,7 @@
 
 #include <ee/EditPanelImpl.h>
 #include <ee/StageCanvas.h>
+#include <ee/panel_msg.h>
 
 #include <node3/Camera.h>
 
@@ -17,7 +18,6 @@ static const float MOUSE_SENSITIVITY = 0.3f;
 CamControlOP::CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
 	                       n3::Camera& cam, const n3::Viewport& vp)
 	: ee::EditOP(wnd, stage)
-	, m_canvas(stage->GetCanvas())
 	, m_cam(cam)
 	, m_vp(vp)
 {
@@ -33,23 +33,23 @@ bool CamControlOP::OnKeyDown(int keyCode)
 	{
 	case WXK_ESCAPE:
 		m_cam.Reset();
-		m_canvas->RefreshCanvas();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		break;
 	case 'w': case 'W':
 		m_cam.Translate(0, OFFSET);
-		m_canvas->RefreshCanvas();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		break;
 	case 's': case 'S':
 		m_cam.Translate(0, -OFFSET);
-		m_canvas->RefreshCanvas();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		break;
  	case 'a': case 'A':
 		m_cam.Translate(OFFSET, 0);
-		m_canvas->RefreshCanvas();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
  		break;
  	case 'd': case 'D':
 		m_cam.Translate(-OFFSET, 0);
-		m_canvas->RefreshCanvas();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
  		break;
 	}
 
@@ -62,8 +62,7 @@ bool CamControlOP::OnMouseLeftDown(int x, int y)
 		return true;
 	}
 
-	m_op_state = std::make_unique<CamRotateState>(
-		*m_canvas, m_cam, sm::vec2(x, y));
+	m_op_state = std::make_unique<CamRotateState>(m_cam, sm::vec2(x, y));
 
 	m_op_state->OnMousePress(sm::vec2(x, y));
 
@@ -76,8 +75,7 @@ bool CamControlOP::OnMouseLeftUp(int x, int y)
 		return true;
 	}
 
-	m_op_state = std::make_unique<CamZoomState>(
-		*m_canvas, m_cam, m_vp);
+	m_op_state = std::make_unique<CamZoomState>(m_cam, m_vp);
 
 	return false;
 }
@@ -88,8 +86,7 @@ bool CamControlOP::OnMouseRightDown(int x, int y)
 		return true;
 	}
 
-	m_op_state = std::make_unique<CamTranslateState>(
-		*m_canvas, m_cam, sm::vec2(x, y));
+	m_op_state = std::make_unique<CamTranslateState>(m_cam, sm::vec2(x, y));
 
 	m_op_state->OnMousePress(sm::vec2(x, y));
 
@@ -102,8 +99,7 @@ bool CamControlOP::OnMouseRightUp(int x, int y)
 		return true;
 	}
 
-	m_op_state = std::make_unique<CamZoomState>(
-		*m_canvas, m_cam, m_vp);
+	m_op_state = std::make_unique<CamZoomState>(m_cam, m_vp);
 
 	return false;
 }

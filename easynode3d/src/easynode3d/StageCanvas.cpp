@@ -25,23 +25,6 @@ StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx, bool has2d)
 {
 }
 
-void StageCanvas::RefreshCanvas()
-{
-	auto ctx = n3::RenderCtxStack::Instance()->Top();
-	if (ctx) {
-		const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera().GetModelViewMat());
-	}
-
-	if (m_has2d) {
-		auto ctx = s2::RenderCtxStack::Instance()->Top();
-		if (ctx) {
-			const_cast<s2::RenderContext*>(ctx)->SetModelView(sm::vec2(0, 0), 1);
-		}
-	}
-
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
-}
-
 sm::vec2 StageCanvas::TransPos3ProjectToScreen(const sm::vec3& proj) const
 {
 	//sm::mat4 mat_modelview = GetCamera().GetModelViewMat();
