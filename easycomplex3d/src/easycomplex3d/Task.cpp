@@ -84,8 +84,8 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	auto stage = new enode3d::StagePanel(parent, m_parent, m_library);
-	stage->SetCanvas(new StageCanvas(stage, m_library));
-	stage->SetEditOP(new enode3d::NodeArrangeOP(*stage));
+	stage->SetCanvas(std::make_shared<StageCanvas>(stage, m_library));
+	stage->SetEditOP(std::make_shared<enode3d::NodeArrangeOP>(*stage));
 
 	m_stage = stage;
 //	m_property->SetEditPanel(m_stage->GetStageImpl());

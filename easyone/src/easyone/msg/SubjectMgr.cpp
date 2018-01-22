@@ -6,29 +6,16 @@
 namespace eone
 {
 
-Subject& SubjectMgr::AddSubject(MessageID id)
-{
-	GD_ASSERT(QuerySubject(id) == nullptr, "subject exists.");
-	auto sub_ptr = std::make_unique<Subject>(id);
-	m_subjects.insert(std::make_pair(id, std::move(sub_ptr)));
-	return *sub_ptr;
-}
-
-Subject* SubjectMgr::QuerySubject(MessageID id) const
-{
-	auto& itr = m_subjects.find(id);
-	return itr == m_subjects.end() ? nullptr : itr->second.get();
-}
-
-bool SubjectMgr::RegisterObserver(MessageID msg, Observer* o)
+void SubjectMgr::RegisterObserver(MessageID msg, Observer* o)
 {
 	auto sub = QuerySubject(msg);
 	if (!sub) {
-		return false;
-	} else {
-		sub->RegisterObserver(o);
-		return true;
-	}
+		auto sub_ptr = std::make_unique<Subject>(msg);
+		sub = sub_ptr.get();
+		m_subjects.insert(std::make_pair(msg, std::move(sub_ptr)));
+	} 
+
+	sub->RegisterObserver(o);
 }
 
 bool SubjectMgr::UnregisterObserver(MessageID msg, Observer* o)
@@ -40,6 +27,23 @@ bool SubjectMgr::UnregisterObserver(MessageID msg, Observer* o)
 		sub->UnregisterObserver(o);
 		return true;
 	}
+}
+
+bool SubjectMgr::NotifyObservers(MessageID msg, const VariantSet& variants)
+{
+	auto sub = QuerySubject(msg);
+	if (!sub) {
+		return false;
+	} else {
+		sub->NotifyObservers(variants);
+		return true;
+	}
+}
+
+Subject* SubjectMgr::QuerySubject(MessageID id) const
+{
+	auto& itr = m_subjects.find(id);
+	return itr == m_subjects.end() ? nullptr : itr->second.get();
 }
 
 }

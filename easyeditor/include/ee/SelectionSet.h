@@ -7,6 +7,7 @@
 #include <cu/CU_RefCountObj.h>
 
 #include <vector>
+#include <functional>
 
 namespace ee
 {
@@ -28,6 +29,7 @@ public:
 	bool IsExist(const std::shared_ptr<T>& item) const;
 
 	void Traverse(RefVisitor<T>& visitor) const;
+	void Traverse(std::function<bool(const std::shared_ptr<T>&)> func) const;
 
 protected:
 	std::vector<std::shared_ptr<T>> m_items;

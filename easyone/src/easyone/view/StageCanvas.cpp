@@ -19,14 +19,14 @@ StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx)
 {
 }
 
-void StageCanvas::RefreshCanvas()
+void StageCanvas::OnNotify(MessageID msg, const VariantSet& variants)
 {
-	auto ctx = n3::RenderCtxStack::Instance()->Top();
-	if (ctx) {
-		const_cast<n3::RenderContext*>(ctx)->SetModelView(GetCamera().GetModelViewMat());
+	switch (msg)
+	{
+	case MSG_SET_CANVAS_DIRTY:
+		SetDirty();
+		break;
 	}
-
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 sm::vec2 StageCanvas::TransPos3ProjectToScreen(const sm::vec3& proj) const
@@ -91,6 +91,8 @@ void StageCanvas::DrawNodes() const
 {
 	auto& nodes = m_stage->GetAllNodes();
 
+	auto cam_mt = m_camera.GetModelViewMat();
+	
 	// draw model
 	for (auto& node : nodes)
 	{
@@ -102,7 +104,7 @@ void StageCanvas::DrawNodes() const
 		assert(node->HasComponent<n3::CompTransform>());
 		auto& ctrans = node->GetComponent<n3::CompTransform>();
 		
-		n3::RenderSystem::DrawModel(cmodel.GetModel(), ctrans.GetTransformMat());
+		n3::RenderSystem::DrawModel(cmodel.GetModel(), ctrans.GetTransformMat() * cam_mt);
 	}
 }
 

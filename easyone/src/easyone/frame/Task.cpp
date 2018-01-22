@@ -85,6 +85,7 @@ wxWindow* Task::CreateStagePanel()
 
 	auto& msg_mgr = m_stage->GetSubjectMgr();
 	msg_mgr.RegisterObserver(MSG_INSERT_SCENE_NODE, m_stage);
+	msg_mgr.RegisterObserver(MSG_SET_CANVAS_DIRTY, canvas.get());
 
 	ctrl->AddPage(m_stage, ("New 3d"));
 

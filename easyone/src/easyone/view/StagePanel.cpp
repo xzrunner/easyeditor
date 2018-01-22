@@ -3,8 +3,6 @@
 #include "view/StageDropTarget.h"
 #include "msg/VariantSet.h"
 
-#include <ee/panel_msg.h>
-
 #include <guard/check.h>
 
 namespace eone
@@ -14,8 +12,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	                   ee::LibraryPanel* library)
 	: ee::EditPanel(parent, frame)
 {
-	m_msg_mgr.AddSubject(MSG_INSERT_SCENE_NODE);
-
 	SetDropTarget(new StageDropTarget(this, library, this));
 }
 
@@ -27,6 +23,7 @@ void StagePanel::OnNotify(MessageID msg, const VariantSet& variants)
 		InsertSceneNode(variants);
 		break;
 	case MSG_DELETE_SCENE_NODE:
+		DeleteSceneNode(variants);
 		break;
 	}
 }
@@ -53,8 +50,7 @@ void StagePanel::InsertSceneNode(const VariantSet& variants)
 	GD_ASSERT(node, "err scene node");
 	m_nodes.push_back(*node);
 
-	// todo
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	m_sub_mgr.NotifyObservers(MSG_SET_CANVAS_DIRTY);
 }
 
 void StagePanel::DeleteSceneNode(const VariantSet& variants)
@@ -73,9 +69,8 @@ void StagePanel::DeleteSceneNode(const VariantSet& variants)
 		}
 	}
 	
-	// todo
 	if (dirty) {
-		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+		m_sub_mgr.NotifyObservers(MSG_SET_CANVAS_DIRTY);
 	}
 }
 

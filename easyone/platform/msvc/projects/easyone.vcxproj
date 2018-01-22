@@ -296,6 +296,11 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easyone\data\NodeFactory.h" />
     <ClInclude Include="..\..\..\src\easyone\data\SceneNode.h" />
+    <ClInclude Include="..\..\..\src\easyone\editop\EditOpState.h" />
+    <ClInclude Include="..\..\..\src\easyone\editop\NodeArrangeOP.h" />
+    <ClInclude Include="..\..\..\src\easyone\editop\NodeRotateState.h" />
+    <ClInclude Include="..\..\..\src\easyone\editop\NodeSelectOP.h" />
+    <ClInclude Include="..\..\..\src\easyone\editop\NodeTranslateState.h" />
     <ClInclude Include="..\..\..\src\easyone\frame\main.h" />
     <ClInclude Include="..\..\..\src\easyone\frame\Task.h" />
     <ClInclude Include="..\..\..\src\easyone\msg\MessageID.h" />
@@ -318,6 +323,10 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easyone\data\NodeFactory.cpp" />
     <ClCompile Include="..\..\..\src\easyone\data\SceneNode.cpp" />
+    <ClCompile Include="..\..\..\src\easyone\editop\NodeArrangeOP.cpp" />
+    <ClCompile Include="..\..\..\src\easyone\editop\NodeRotateState.cpp" />
+    <ClCompile Include="..\..\..\src\easyone\editop\NodeSelectOP.cpp" />
+    <ClCompile Include="..\..\..\src\easyone\editop\NodeTranslateState.cpp" />
     <ClCompile Include="..\..\..\src\easyone\frame\main.cpp" />
     <ClCompile Include="..\..\..\src\easyone\frame\Task.cpp" />
     <ClCompile Include="..\..\..\src\easyone\msg\Subject.cpp" />

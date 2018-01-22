@@ -1,5 +1,7 @@
 #pragma once
 
+#include "msg/Observer.h"
+
 #include <ee/OnePassCanvas.h>
 
 #include <node3/Camera.h>
@@ -12,12 +14,12 @@ namespace eone
 
 class StagePanel;
 
-class StageCanvas : public ee::OnePassCanvas
+class StageCanvas : public ee::OnePassCanvas, public Observer
 {
 public:
 	StageCanvas(StagePanel* stage, wxGLContext* glctx = nullptr);
 
-	virtual void RefreshCanvas() override;
+	virtual void OnNotify(MessageID msg, const VariantSet& variants) override;
 
 	n3::Camera& GetCamera() { return m_camera; }
 	const n3::Camera& GetCamera() const { return m_camera; }

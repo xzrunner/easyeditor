@@ -5,6 +5,7 @@
 #include "msg/Observer.h"
 
 #include <ee/EditPanel.h>
+#include <ee/SelectionSet.h>
 
 namespace ee { class LibraryPanel; }
 
@@ -21,12 +22,13 @@ public:
 
 	sm::vec3 TransPosScrToProj3d(int x, int y) const;
 
-	//void InsertNode(const SceneNodePtr& node);
-	//void DeleteNode(const SceneNodePtr& node);
-
 	const std::vector<SceneNodePtr>& GetAllNodes() const { return m_nodes; }
 
-	SubjectMgr& GetSubjectMgr() { return m_msg_mgr; }
+	const ee::SelectionSet<SceneNode>& GetNodeSelection() const { 
+		return m_node_selection; 
+	}
+
+	SubjectMgr& GetSubjectMgr() { return m_sub_mgr; }
 
 private:
 	void InsertSceneNode(const VariantSet& variants);
@@ -35,7 +37,9 @@ private:
 private:
 	std::vector<SceneNodePtr> m_nodes;
 
-	SubjectMgr m_msg_mgr;
+	ee::SelectionSet<SceneNode> m_node_selection;
+	
+	SubjectMgr m_sub_mgr;
 
 }; // StagePanel
 

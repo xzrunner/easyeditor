@@ -64,6 +64,16 @@ inline void SelectionSet<T>::Traverse(RefVisitor<T>& visitor) const
 	}
 }
 
+template<class T>
+inline void SelectionSet<T>::Traverse(std::function<bool(const std::shared_ptr<T>&)> func) const
+{
+	for (auto& item : m_items) {
+		if (!func(item)) {
+			break;
+		}
+	}
+}
+
 }
 
 #endif // _EASYEDITOR_SELECTION_SET_INL_

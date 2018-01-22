@@ -45,12 +45,17 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 		}
 
 		auto node = NodeFactory::Instance()->Create(sym);
-		if (node) {
-			auto& ctrans = node->AddComponent<n3::CompTransform>();
-			ctrans.SetPosition(pos);
-			InsertNode(node);
+		if (!node) {
+			continue;
 		}
+
+		// transform
+		auto& ctrans = node->AddComponent<n3::CompTransform>();
+		ctrans.SetPosition(pos);
+		InsertNode(node);
 	}
+
+	m_stage->GetSubjectMgr().NotifyObservers(MSG_SET_CANVAS_DIRTY);
 }
 
 void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
@@ -59,15 +64,14 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 
 void StageDropTarget::InsertNode(const SceneNodePtr& node)
 {
-	auto subject = m_stage->GetSubjectMgr().QuerySubject(MSG_INSERT_SCENE_NODE);
-	GD_ASSERT(subject, "no subject MSG_INSERT_SCENE_NODE");
-
 	VariantSet vars;
 	Variant var;
 	var.m_type = VT_PVOID;
 	var.m_val.pv = const_cast<SceneNodePtr*>(&node);
 	vars.SetVariant("node", var);
-	subject->NotifyObservers(vars);
+	
+	bool succ = m_stage->GetSubjectMgr().NotifyObservers(MSG_INSERT_SCENE_NODE, vars);
+	GD_ASSERT(succ, "no MSG_INSERT_SCENE_NODE");
 }
 
 }

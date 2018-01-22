@@ -31,6 +31,15 @@
     <Filter Include="msg\variant">
       <UniqueIdentifier>{e3122886-7d57-43bd-9e02-6ece0774f5c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="editop">
+      <UniqueIdentifier>{162e7aca-51bc-427d-b109-3731074839ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\node">
+      <UniqueIdentifier>{ec1a1f95-a2e2-4482-a7d4-a8e05c317142}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\node\state">
+      <UniqueIdentifier>{364a0dde-6c68-4876-b492-96c476565ea4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easyone\frame\main.h">
@@ -93,6 +102,21 @@
     <ClInclude Include="..\..\..\src\easyone\msg\SubjectMgr.h">
       <Filter>msg</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\easyone\editop\NodeTranslateState.h">
+      <Filter>editop\node\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyone\editop\NodeRotateState.h">
+      <Filter>editop\node\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyone\editop\NodeArrangeOP.h">
+      <Filter>editop\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyone\editop\NodeSelectOP.h">
+      <Filter>editop\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyone\editop\EditOpState.h">
+      <Filter>editop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easyone\frame\main.cpp">
@@ -139,6 +163,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easyone\msg\Subject.cpp">
       <Filter>msg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyone\editop\NodeTranslateState.cpp">
+      <Filter>editop\node\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyone\editop\NodeRotateState.cpp">
+      <Filter>editop\node\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyone\editop\NodeArrangeOP.cpp">
+      <Filter>editop\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyone\editop\NodeSelectOP.cpp">
+      <Filter>editop\node</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
