@@ -12,7 +12,7 @@ class VariantSet
 public:
 	VariantSet() {}
 
-	Variant GetVariant(std::string name) {
+	Variant GetVariant(std::string name) const {
 		auto& itr = m_variants.find(name);
 		return itr != m_variants.end() ? itr->second : Variant();
 	}

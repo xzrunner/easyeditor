@@ -1,9 +1,10 @@
 #pragma once
 
+#include "msg/MessageID.h"
+
 namespace eone
 {
 
-class Subject;
 class VariantSet;
 
 class Observer
@@ -11,7 +12,7 @@ class Observer
 public:
 	virtual ~Observer() {}
 
-	virtual void OnNotify(int sub_id, const VariantSet& variants) = 0;
+	virtual void OnNotify(MessageID msg, const VariantSet& variants) = 0;
 
 }; // Observer
 

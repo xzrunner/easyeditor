@@ -12,6 +12,8 @@ namespace ee { class LibraryPanel; }
 namespace eone
 {
 
+class StagePanel;
+
 class Task : public ee::Task
 {
 public:
@@ -41,6 +43,8 @@ private:
 	wxAuiManager m_mgr;
 
 	ee::LibraryPanel* m_library;
+
+	StagePanel* m_stage;
 
 }; // Task
 

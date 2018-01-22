@@ -90,6 +90,9 @@
     <ClInclude Include="..\..\..\src\easyone\msg\MessageID.h">
       <Filter>msg</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\easyone\msg\SubjectMgr.h">
+      <Filter>msg</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easyone\frame\main.cpp">
@@ -131,10 +134,10 @@
     <ClCompile Include="..\..\..\src\easyone\view\SceneTreeItem.cpp">
       <Filter>view\tree</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\msg\Subject.cpp">
+    <ClCompile Include="..\..\..\src\easyone\msg\SubjectMgr.cpp">
       <Filter>msg</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\msg\Observer.cpp">
+    <ClCompile Include="..\..\..\src\easyone\msg\Subject.cpp">
       <Filter>msg</Filter>
     </ClCompile>
   </ItemGroup>

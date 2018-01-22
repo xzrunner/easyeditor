@@ -10,22 +10,23 @@ SceneTreeCtrl::SceneTreeCtrl(wxWindow* parent)
 {
 }
 
-void SceneTreeCtrl::OnNotify(int sub_id, const VariantSet& variants)
+void SceneTreeCtrl::OnNotify(MessageID msg, const VariantSet& variants)
 {
-	switch (sub_id)
+	switch (msg)
 	{
-	case MSG_INSERT_NODE:
+	case MSG_INSERT_SCENE_NODE:
+		InsertSceneNode(variants);
 		break;
 	}
 }
 
-void SceneTreeCtrl::InsertNode(const SceneNodePtr& ndoe)
+void SceneTreeCtrl::InsertSceneNode(const VariantSet& variants)
 {
 	auto selection = GetSelection();
 	if (selection.IsOk()) {
-		
+			
 	} else {
-		
+			
 	}
 }
 

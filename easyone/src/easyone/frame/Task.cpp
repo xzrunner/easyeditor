@@ -77,13 +77,16 @@ wxWindow* Task::CreateStagePanel()
 		wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_EXTERNAL_MOVE | wxNO_BORDER);
 	ctrl->Freeze();
 
-	auto stage = new StagePanel(m_frame, m_frame, m_library);
-	auto canvas = new StageCanvas(stage);
-	stage->SetCanvas(canvas);
-	stage->SetEditOP(new enode3d::CamControlOP(stage, stage->GetStageImpl(), 
-		canvas->GetCamera(), canvas->GetViewport()));
+	m_stage = new StagePanel(m_frame, m_frame, m_library);
+	auto canvas = std::make_shared<StageCanvas>(m_stage);
+	m_stage->SetCanvas(canvas);
+	m_stage->SetEditOP(std::make_shared<enode3d::CamControlOP>(
+		m_stage, m_stage->GetStageImpl(), canvas->GetCamera(), canvas->GetViewport()));
 
-	ctrl->AddPage(stage, ("New 3d"));
+	auto& msg_mgr = m_stage->GetSubjectMgr();
+	msg_mgr.RegisterObserver(MSG_INSERT_SCENE_NODE, m_stage);
+
+	ctrl->AddPage(m_stage, ("New 3d"));
 
 	ctrl->Thaw();
 
@@ -93,6 +96,10 @@ wxWindow* Task::CreateStagePanel()
 wxWindow* Task::CreateTreePanel()
 {
 	auto tree = new SceneTreeCtrl(m_frame);
+
+	auto& msg_mgr = m_stage->GetSubjectMgr();
+	msg_mgr.RegisterObserver(MSG_INSERT_SCENE_NODE, tree);
+
 	return tree;
 }
 

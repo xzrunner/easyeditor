@@ -10,26 +10,27 @@ namespace eone
 class Variant
 {
 public:
-	Variant();
+	Variant() : m_type(VT_EMPTY) {}
 
-	VariantType m_varType;
+	VariantType m_type;
 
 	union
 	{
-		int8_t  bVal;              // VT_BYTE
-		int16_t iVal;              // VT_SHORT
-		int32_t lVal;              // VT_LONG
-		int64_t llVal;             // VT_LONGLONG
-		float fltVal;              // VT_FLOAT
-		double dblVal;             // VT_DOUBLE
-		char cVal;                 // VT_CHAR
-		uint16_t uiVal;            // VT_USHORT
-		uint32_t ulVal;            // VT_ULONG
-		uint64_t ullVal;           // VT_ULONGLONG
-		bool blVal;                // VT_BOOL
-		char* pcVal;               // VT_PCHAR
-		void* pvVal;               // VT_PVOID
+		int8_t   b;              // VT_BYTE
+		int16_t  i;              // VT_SHORT
+		int32_t  l;              // VT_LONG
+		int64_t  ll;             // VT_LONGLONG
+		float    flt;            // VT_FLOAT
+		double   dbl;            // VT_DOUBLE
+		char     c;              // VT_CHAR
+		uint16_t ui;             // VT_USHORT
+		uint32_t ul;             // VT_ULONG
+		uint64_t ull;            // VT_ULONGLONG
+		bool     bl;             // VT_BOOL
+		char*    pc;             // VT_PCHAR
+		void*    pv;             // VT_PVOID
 	} m_val;
+
 }; // Variant
 
 }

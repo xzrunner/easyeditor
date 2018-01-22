@@ -15,9 +15,10 @@ class SceneTreeCtrl : public wxTreeCtrl, public Observer
 public:
 	SceneTreeCtrl(wxWindow* parent);
 
-	virtual void OnNotify(int sub_id, const VariantSet& variants) override;
+	virtual void OnNotify(MessageID msg, const VariantSet& variants) override;
 
-	void InsertNode(const SceneNodePtr& ndoe);
+private:
+	void InsertSceneNode(const VariantSet& variants);
 
 private:
 	enum

@@ -2,19 +2,22 @@
 #include "view/StagePanel.h"
 #include "view/SceneTreeCtrl.h"
 #include "data/NodeFactory.h"
+#include "msg/MessageID.h"
+#include "msg/VariantSet.h"
 
 #include <ee/StringHelper.h>
 #include <ee/LibraryPanel.h>
+
+#include <guard/check.h>
 
 namespace eone
 {
 
 StageDropTarget::StageDropTarget(wxWindow* stage_wnd, ee::LibraryPanel* library,
-		                         StagePanel* stage, SceneTreeCtrl* tree)
+		                         StagePanel* stage)
 	: CombinedDropTarget(stage_wnd)
 	, m_library(library)
 	, m_stage(stage)
-	, m_tree(tree)
 {
 }
 
@@ -56,8 +59,15 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 
 void StageDropTarget::InsertNode(const SceneNodePtr& node)
 {
-	m_stage->InsertNode(node);
-	m_tree->InsertNode(node);
+	auto subject = m_stage->GetSubjectMgr().QuerySubject(MSG_INSERT_SCENE_NODE);
+	GD_ASSERT(subject, "no subject MSG_INSERT_SCENE_NODE");
+
+	VariantSet vars;
+	Variant var;
+	var.m_type = VT_PVOID;
+	var.m_val.pv = const_cast<SceneNodePtr*>(&node);
+	vars.SetVariant("node", var);
+	subject->NotifyObservers(vars);
 }
 
 }
