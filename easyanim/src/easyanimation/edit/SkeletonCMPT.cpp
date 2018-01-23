@@ -10,7 +10,7 @@ namespace eanim
 SkeletonCMPT::SkeletonCMPT(wxWindow* parent, const std::string& name, bool vertical)
 	: ee::EditCMPT(parent, name, ViewMgr::Instance()->stage->GetStageImpl())
 {
-	m_editop = new SkeletonOP(ViewMgr::Instance()->stage, ViewMgr::Instance()->property);
+	m_editop = std::make_shared<SkeletonOP>(ViewMgr::Instance()->stage, ViewMgr::Instance()->property);
 }
 
 wxSizer* SkeletonCMPT::InitLayout()

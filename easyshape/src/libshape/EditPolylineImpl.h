@@ -19,8 +19,8 @@ class EditPolylineImpl
 {
 public:
 	EditPolylineImpl(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl, 
-		ee::PropertySettingPanel* property, ee::OneFloatValue* node_capture, DrawPolylineOP* draw_op, 
-		ee::EditOP* select_op, IOperaterBase* base_op);
+		ee::PropertySettingPanel* property, ee::OneFloatValue* node_capture, DrawPolylineOP& draw_op, 
+		ee::EditOP& select_op, IOperaterBase* base_op);
 
 	bool OnKeyDown(int keyCode);
 	bool OnMouseLeftDown(int x, int y);
@@ -87,7 +87,7 @@ private:
 
 	//		NodeAddr m_captured;
 
-	DrawPolylineOP* m_draw_op;
+	DrawPolylineOP& m_draw_op;
 
 	IOperaterBase* m_base_op;
 
@@ -97,7 +97,7 @@ protected:
 	NodeAddr m_captured_editable, m_captureSelectable;
 
 protected:
-	ee::EditOP* m_selectOP;
+	ee::EditOP& m_select_op;
 
 private:
 	sm::vec2 m_last_left_down_pos;

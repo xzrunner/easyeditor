@@ -7,7 +7,7 @@
 namespace ee
 {
 
-SelectDrawTypeWidget::SelectDrawTypeWidget(wxWindow* parent, CameraCanvas* canvas)
+SelectDrawTypeWidget::SelectDrawTypeWidget(wxWindow* parent, const std::shared_ptr<CameraCanvas>& canvas)
 	: Widget(parent)
 	, m_canvas(canvas)
 {

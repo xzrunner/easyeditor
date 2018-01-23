@@ -11,8 +11,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 	, m_ps(NULL)
 {
-	SetEditOP(new EditOP(this));
-	SetCanvas(new StageCanvas(this));
+	SetEditOP(std::make_shared<EditOP>(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 }
 
 StagePanel::~StagePanel()

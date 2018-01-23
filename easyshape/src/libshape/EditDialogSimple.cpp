@@ -26,7 +26,7 @@ EditDialogSimple::EditDialogSimple(wxWindow* parent, wxGLContext* glctx,
 								   ee::SprPtr edited, const ee::MultiSpritesImpl* sprite_impl)
  	: wxDialog(parent, wxID_ANY, "Edit Shape", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
-	, m_stage(NULL)
+	, m_stage(nullptr)
 	, m_capture(5)
 {
 	InitLayout(glctx, edited, sprite_impl);
@@ -52,23 +52,23 @@ void EditDialogSimple::InitLayout(wxGLContext* glctx, const ee::SprPtr& edited,
 
 void EditDialogSimple::InitEditOP(const ee::SprPtr& edited)
 {
-	ee::EditOP* op = NULL;
+	std::shared_ptr<ee::EditOP> op = nullptr;
 
 	ShapeType type = std::dynamic_pointer_cast<Symbol>(edited->GetSymbol())->GetShapeType();
 	switch (type)
 	{
 	case ST_RECT:
-		op = new EditRectOP(m_stage, m_stage->GetStageImpl(), m_stage, NULL, &m_capture);
+		op = std::make_shared<EditRectOP>(m_stage, m_stage->GetStageImpl(), m_stage, nullptr, &m_capture);
 		break;
 	case ST_CIRCLE:
-		op = new EditCircleOP(m_stage, m_stage->GetStageImpl(), m_stage, NULL, &m_capture);
+		op = std::make_shared<EditCircleOP>(m_stage, m_stage->GetStageImpl(), m_stage, nullptr, &m_capture);
 		break;
 	case ST_CHAIN: case ST_POLYGON:
-		op = new EditPolylineOP<DrawPolygonOP, 
-			ee::SelectShapesOP>(m_stage, m_stage->GetStageImpl(), m_stage, NULL, new ee::OneFloatValueStatic(5), NULL); 
+		op = std::make_shared<EditPolylineOP<DrawPolygonOP, ee::SelectShapesOP>>(
+			m_stage, m_stage->GetStageImpl(), m_stage, nullptr, new ee::OneFloatValueStatic(5), nullptr); 
 		break;
 	case ST_BEZIER:
-		op = new EditBezierOP(m_stage, m_stage->GetStageImpl(), m_stage, NULL, &m_capture);
+		op = std::make_shared<EditBezierOP>(m_stage, m_stage->GetStageImpl(), m_stage, nullptr, &m_capture);
 		break;
 	}
 

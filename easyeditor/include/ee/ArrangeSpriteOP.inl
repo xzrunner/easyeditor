@@ -122,11 +122,11 @@ bool ArrangeSpriteOP<TBase>::OnDraw() const
 	if (TBase::OnDraw()) return true;
 
 	float cam_scale = 1;
-	auto cam_canvas = dynamic_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
+	auto cam_canvas = std::dynamic_pointer_cast<ee::CameraCanvas>(m_stage->GetCanvas());
 	if (cam_canvas) {
-		s2::Camera* cam = cam_canvas->GetCamera();
+		auto cam = cam_canvas->GetCamera();
 		if (cam->Type() == s2::CAM_ORTHO2D) {
-			cam_scale = static_cast<s2::OrthoCamera*>(cam)->GetScale();
+			cam_scale = std::dynamic_pointer_cast<s2::OrthoCamera>(cam)->GetScale();
 		}
 	}
 

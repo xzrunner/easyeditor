@@ -419,7 +419,7 @@ void ViewlistList::RemoveSelected()
 	// add to history
 	std::vector<SprPtr> sprs;
 	sprs.push_back(m_sprs[selected]);
-	EditAddRecordSJ::Instance()->Add(new DeleteSpriteAOP(sprs));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<DeleteSpriteAOP>(sprs));
 
 	VerticalImageList::Remove(selected);
 

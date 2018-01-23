@@ -47,7 +47,7 @@ bool ZoomViewOP::OnKeyDown(int keyCode)
 		break;
 	case WXK_ESCAPE:
 		{
-			CameraCanvas* canvas = dynamic_cast<CameraCanvas*>(m_stage->GetCanvas());
+			auto canvas = std::dynamic_pointer_cast<CameraCanvas>(m_stage->GetCanvas());
 			if (canvas) {
 				canvas->GetCamera()->Reset();
 			}

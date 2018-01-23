@@ -135,7 +135,7 @@ void StageCanvas::DrawBackground() const
 
 void StageCanvas::DrawStat() const
 {
-	s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(m_cam2d);
+	auto cam = std::dynamic_pointer_cast<s2::OrthoCamera>(m_cam2d);
 	S2_MAT mt;
 	float s = std::max(1.0f, cam->GetScale());
 	mt.Scale(s, s);

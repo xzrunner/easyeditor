@@ -41,9 +41,9 @@ void ChangeLayerMgrSJ::Change(LayerMgr* mgr)
 //////////////////////////////////////////////////////////////////////////
 
 SUBJECT_DEFINITION(EditAddRecordSJ, MSG_EDIT_ADD_RECORD)
-void EditAddRecordSJ::Add(AtomicOP* op)
+void EditAddRecordSJ::Add(const std::shared_ptr<AtomicOP>& op)
 {
-	Notify(op);
+	Notify(&const_cast<std::shared_ptr<AtomicOP>&>(op));
 }
 
 SUBJECT_DEFINITION(EditRedoSJ, MSG_EDIT_REDO)

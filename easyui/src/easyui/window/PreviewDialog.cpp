@@ -24,7 +24,7 @@ void PreviewDialog::InitLayout(wxGLContext* glctx)
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
 	ee::EditPanel* stage = new ee::EditPanel(this, this);
-	stage->SetCanvas(new PreviewCanvas(stage, stage->GetStageImpl(), m_control, m_sprs, glctx));
+	stage->SetCanvas(std::make_shared<PreviewCanvas>(stage, stage->GetStageImpl(), m_control, m_sprs, glctx));
 	sizer->Add(stage, 1, wxEXPAND);	
 
 	SetSizer(sizer);

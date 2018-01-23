@@ -35,12 +35,12 @@ public:
 
 	void DrawEditOP() const;
 
-	const EditOP* GetEditOP() const { return m_edit_op.get(); }
-	EditOP* GetEditOP() { return m_edit_op.get(); }
+	const std::shared_ptr<ee::EditOP>& GetEditOP() const { return m_edit_op; }
+	std::shared_ptr<ee::EditOP>& GetEditOP() { return m_edit_op; }
 	void SetEditOP(const std::shared_ptr<EditOP>& op);
 
-	const StageCanvas* GetCanvas() const { return m_canvas.get(); }
-	StageCanvas* GetCanvas() { return m_canvas.get(); }
+	const std::shared_ptr<StageCanvas>& GetCanvas() const { return m_canvas; }
+	std::shared_ptr<StageCanvas>& GetCanvas() { return m_canvas; }
 	void SetCanvas(const std::shared_ptr<StageCanvas>& canvas) { m_canvas = canvas; }
 
 	void OnMouse(wxMouseEvent& event);
@@ -89,7 +89,7 @@ private:
 
 	void InitSubjects();
 
-	void AddOpRecord(AtomicOP* op);
+	void AddOpRecord(const std::shared_ptr<AtomicOP>& op);
 
 	void SetWndDirty(bool dirty);
 

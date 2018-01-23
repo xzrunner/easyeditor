@@ -17,7 +17,7 @@ class Shader;
 class FileIO
 {
 public:
-	static Shader* LoadShader(const std::string& filepath, ee::StageCanvas* canvas,
+	static Shader* LoadShader(const std::string& filepath, const std::shared_ptr<ee::StageCanvas>& canvas,
 		ToolbarPanel* toolbar, bool is_2d);
 	static void StoreShader(const std::string& filepath, const ToolbarPanel* toolbar);
 

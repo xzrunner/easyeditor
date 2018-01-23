@@ -20,7 +20,7 @@ public:
 
 	bool IsKeyFrame(int time) const;
 
-	ee::AtomicOP* RemoveFrameRegion(int begin, int end);
+	std::shared_ptr<ee::AtomicOP> RemoveFrameRegion(int begin, int end);
 
 	void InsertNullFrame(int time);
 	void RemoveNullFrame(int time);

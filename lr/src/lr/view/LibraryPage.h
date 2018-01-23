@@ -33,8 +33,8 @@ public:
 	Layer* GetLayer() { return m_layer; }
 	void SetLayer(Layer* layer);
 
-	void AddEditOP(ee::EditOP* editop);
-	ee::EditOP* GetNextEditOP();
+	void AddEditOP(const std::shared_ptr<ee::EditOP>& editop);
+	std::shared_ptr<ee::EditOP> GetNextEditOP();
 
 	LayerType GetLayerType() const { return m_layer_type; }
 	s2::CameraMode GetLayerCameraMode() const { return m_cam_mode; }
@@ -67,7 +67,7 @@ private:
 	wxButton* m_reset;
 
 	int m_curr_op_idx;
-	std::vector<ee::EditOP*> m_editops;
+	std::vector<std::shared_ptr<ee::EditOP>> m_editops;
 
 }; // LibraryPage 
 

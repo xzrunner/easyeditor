@@ -25,7 +25,7 @@ public:
 	virtual bool OnMouseWheelRotation(int x, int y, int direction) override;
 
 private:
-	StageCanvas* m_canvas;
+	std::shared_ptr<StageCanvas> m_canvas = nullptr;
 
 	std::unique_ptr<EditOpState> m_op_state = nullptr;
 

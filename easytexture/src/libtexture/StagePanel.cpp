@@ -17,8 +17,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 	, ee::ShapesPanelImpl(std::make_shared<SymbolContainer>(m_sym = std::make_shared<Symbol>()))
 {
-	SetEditOP(new ee::ZoomViewOP(this, GetStageImpl(), true));
-	SetCanvas(new StageCanvas(this));
+	SetEditOP(std::make_shared<ee::ZoomViewOP>(this, GetStageImpl(), true));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -29,13 +29,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 	, ee::ShapesPanelImpl(std::make_shared<SymbolContainer>(std::dynamic_pointer_cast<Symbol>(edited->GetSymbol())))
 {
-	ee::EditOP* op = new eshape::EditPolylineOP<eshape::DrawPolygonOP, ee::SelectShapesOP>(this, 
-		GetStageImpl(), this, NULL, new ee::OneFloatValueStatic(5), NULL);
-	SetEditOP(op);
-	op->RemoveReference();
-
-	StageCanvas* canvas = new StageCanvas(this, glctx, edited, bg_sprites);
-	SetCanvas(canvas);
+	SetEditOP(std::make_shared<eshape::EditPolylineOP<eshape::DrawPolygonOP, ee::SelectShapesOP>>(
+		this, GetStageImpl(), this, nullptr, new ee::OneFloatValueStatic(5), nullptr));
+	SetCanvas(std::make_shared<StageCanvas>(this, glctx, edited, bg_sprites));
 
 	m_sym = std::dynamic_pointer_cast<Symbol>(edited->GetSymbol());
 }

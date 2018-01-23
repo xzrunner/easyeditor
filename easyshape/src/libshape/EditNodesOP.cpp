@@ -171,7 +171,8 @@ void EditNodesOP::UpdateModified()
 		chainsDst.push_back(result);
 	}
 
-	ee::EditAddRecordSJ::Instance()->Add(new edit_nodes::ModifyNodesAOP(polylines, chainsDst));
+	ee::EditAddRecordSJ::Instance()->Add(
+		std::make_shared<edit_nodes::ModifyNodesAOP>(polylines, chainsDst));
 
 	m_buffer.clear();
 	ClearSelectedNodes();

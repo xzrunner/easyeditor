@@ -14,7 +14,7 @@ ResizeCMPT::ResizeCMPT(wxWindow* parent, const std::string& name,
 	: EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editop = new ResizeOP(stage, toolbar, this);
+	m_editop = std::make_shared<ResizeOP>(stage, toolbar, this);
 }
 
 void ResizeCMPT::setSize(int width, int height)

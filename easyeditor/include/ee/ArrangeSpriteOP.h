@@ -22,9 +22,9 @@ class ArrangeSpriteOP : public TBase
 {
 public:
 	ArrangeSpriteOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* sprites_impl, 
-		PropertySettingPanel* property = NULL, EditCMPT* callback = NULL, 
+		PropertySettingPanel* property = nullptr, EditCMPT* callback = nullptr,
 		const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig(), 
-		ArrangeSpriteImpl* impl = NULL);
+		ArrangeSpriteImpl* impl = nullptr);
 	virtual ~ArrangeSpriteOP();
 
 	virtual bool OnKeyDown(int keyCode) override;

@@ -18,7 +18,7 @@ PerspectiveSpriteState::PerspectiveSpriteState(const SprPtr& spr,
 
 void PerspectiveSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
-	AtomicOP* aop = new PerspectiveSpriteAOP(m_spr, m_spr->GetPerspective(), m_first_persp);
+	auto aop = std::make_shared<PerspectiveSpriteAOP>(m_spr, m_spr->GetPerspective(), m_first_persp);
 	EditAddRecordSJ::Instance()->Add(aop);
 }
 

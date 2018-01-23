@@ -28,8 +28,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 	, ee::ShapesPanelImpl()
 {
-	SetEditOP(new ee::ZoomViewOP(this, GetStageImpl(), true));
-	SetCanvas(new StageCanvas(this));
+	SetEditOP(std::make_shared<ee::ZoomViewOP>(this, GetStageImpl(), true));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
  	SetDropTarget(new StageDropTarget(this, library));
 }
@@ -42,8 +42,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 	, ee::ShapesPanelImpl()
 {
-	SetEditOP(new ee::ZoomViewOP(this, GetStageImpl(), true));
-	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
+	SetEditOP(std::make_shared<ee::ZoomViewOP>(this, GetStageImpl(), true));
+	SetCanvas(std::make_shared<StageCanvas>(this, glctx, edited, bg_sprites));
 
 	m_oceans = dynamic_cast<Symbol*>(edited->GetSymbol())->GetOceans();
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {

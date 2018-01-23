@@ -197,7 +197,7 @@ void KeysContentEdit::DeleteSelection()
  	int index = DataMgr::Instance()->GetLayers().Size() - m_row - 1;
  	Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(index);
 	if (layer) {
-		ee::AtomicOP* aop = layer->RemoveFrameRegion(m_col_min + 1, m_col_max + 1);
+		auto aop = layer->RemoveFrameRegion(m_col_min + 1, m_col_max + 1);
 		ee::EditAddRecordSJ::Instance()->Add(aop);
 	}
 }

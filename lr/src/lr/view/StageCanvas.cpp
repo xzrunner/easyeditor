@@ -182,7 +182,7 @@ void StageCanvas::DrawPseudo3dBound() const
 {
 	if (m_camera->Type() == s2::CAM_PSEUDO3D)
 	{
-		s2::Pseudo3DCamera* cam = static_cast<s2::Pseudo3DCamera*>(m_camera);
+		auto cam = std::dynamic_pointer_cast<s2::Pseudo3DCamera>(m_camera);
 		int w = gum::RenderContext::Instance()->GetWidth(),
 			h = gum::RenderContext::Instance()->GetHeight();
 //		sm::vec2 center_world(0, 0);

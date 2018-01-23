@@ -17,15 +17,9 @@ EditMeshCMPT::EditMeshCMPT(wxWindow* parent, const std::string& name,
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_points_op = new EditPointsMeshOP(stage);
-	m_skin_op = new EditSkeletonOP(stage);
+	m_points_op = std::make_shared<EditPointsMeshOP>(stage);
+	m_skin_op = std::make_shared<EditSkeletonOP>(stage);
 	LoadEditOP(m_points_op);
-}
-
-EditMeshCMPT::~EditMeshCMPT()
-{
-	m_points_op->RemoveReference();
-	m_skin_op->RemoveReference();
 }
 
 void EditMeshCMPT::SetEditOP(int pm_mesh_type)

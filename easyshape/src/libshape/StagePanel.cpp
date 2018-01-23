@@ -21,7 +21,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, MultiShapesImpl()
 	, m_toolbar(NULL)
 {
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 	m_sym = std::make_shared<Symbol>();
 
 	SetDropTarget(new DropTarget(this, library));
@@ -36,7 +36,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, MultiShapesImpl()
 	, m_toolbar(NULL)
 {
-	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
+	SetCanvas(std::make_shared<StageCanvas>(this, glctx, edited, bg_sprites));
 	m_sym = std::dynamic_pointer_cast<Symbol>(edited->GetSymbol());
 
 	InitSubjects();
@@ -49,7 +49,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_sym(sym)
 	, m_toolbar(NULL)
 {
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
 //	SetDropTarget(new DropTarget(this, library));
 

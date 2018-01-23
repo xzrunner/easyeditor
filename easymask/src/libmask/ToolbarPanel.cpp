@@ -37,7 +37,7 @@ wxSizer* ToolbarPanel::InitLayout()
 void ToolbarPanel::OnChangeMaskRender(wxCommandEvent& event)
 {
 	bool mask_render = event.IsChecked();
-	static_cast<StageCanvas*>(m_stage->GetCanvas())->SetMaskRender(mask_render);
+	std::dynamic_pointer_cast<StageCanvas>(m_stage->GetCanvas())->SetMaskRender(mask_render);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	if (mask_render) 

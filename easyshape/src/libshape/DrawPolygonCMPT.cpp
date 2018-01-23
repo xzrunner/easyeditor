@@ -34,9 +34,8 @@ DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const std::string& name, wxWi
 	// draw polygon with pen, node capture
 	{
 		ee::OneFloatValueCMPT* cmpt = new ee::OneFloatValueCMPT(this, "pen", stage, "node capture", 5, 30, 10);
-		ee::EditOP* op = new EditPolylineOP<DrawPolygonOP, ee::SelectShapesOP>
-			(stage_wnd, stage, shapes_impl, property, cmpt, /*cmpt*/this);
-		cmpt->SetEditOP(op);
+		cmpt->SetEditOP(std::make_shared<EditPolylineOP<DrawPolygonOP, ee::SelectShapesOP>>(
+			stage_wnd, stage, shapes_impl, property, cmpt, /*cmpt*/this));
 		AddChild(cmpt);
 	}
 	// draw polygon with pencil, simplify threshold

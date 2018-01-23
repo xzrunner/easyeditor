@@ -17,21 +17,19 @@ CameraCanvas::CameraCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, s2::Camera
 	, m_cam3d(nullptr)
 {
 	if (cam_type == s2::CAM_ORTHO2D) {
-		m_cam2d = new s2::OrthoCamera();
+		m_cam2d = std::make_shared<s2::OrthoCamera>();
 	} else if (cam_type == s2::CAM_PSEUDO3D) {
-		m_cam2d = new s2::Pseudo3DCamera();
+		m_cam2d = std::make_shared<s2::Pseudo3DCamera>();
 	}
 
 	if (has_3d) {
-		m_cam3d = new n3::Camera(sm::vec3(0, 0, 2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0));
+		m_cam3d = std::make_shared<n3::Camera>(sm::vec3(0, 0, 2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0));
 	}
 }
 
 CameraCanvas::~CameraCanvas()
 {
 	s2::Blackboard::Instance()->SetCamera(NULL);
-	delete m_cam2d;
-	delete m_cam3d;
 }
 
 void CameraCanvas::SetCurrentCanvas()
@@ -57,7 +55,7 @@ sm::rect CameraCanvas::GetVisibleRegion() const
 		return sm::rect();
 	}
 
-	s2::OrthoCamera* ortho_cam = static_cast<s2::OrthoCamera*>(m_cam2d);
+	auto ortho_cam = std::dynamic_pointer_cast<s2::OrthoCamera>(m_cam2d);
 	float s = ortho_cam->GetScale();
 	sm::rect r(sm::vec2(0, 0), ctx->GetScreenWidth() * s, ctx->GetScreenHeight() * s);
 	r.Translate(ortho_cam->GetPosition());
@@ -69,7 +67,7 @@ float CameraCanvas::GetCameraScale() const
 	if (m_cam2d->Type() == s2::CAM_PSEUDO3D) {
 		return 1;
 	}
-	return static_cast<s2::OrthoCamera*>(m_cam2d)->GetScale();
+	return std::dynamic_pointer_cast<s2::OrthoCamera>(m_cam2d)->GetScale();
 }
 
 void CameraCanvas::UpdateCam3D(int w, int h)

@@ -17,8 +17,8 @@ PreviewPanel::PreviewPanel(wxWindow* parent,
 {
 	createGround();
 
-	SetCanvas(new PreviewCanvas(this));
-	SetEditOP(new ee::DragPhysicsOP(this, GetStageImpl(), m_world, m_ground));
+	SetCanvas(std::make_shared<PreviewCanvas>(this));
+	SetEditOP(std::make_shared<ee::DragPhysicsOP>(this, GetStageImpl(), m_world, m_ground));
 
 	std::map<Body*, b2Body*> mapBody;
 	Context::Instance()->stage->traverseBodies(LoadBodyVisitor(m_world, mapBody));

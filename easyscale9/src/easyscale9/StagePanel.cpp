@@ -23,7 +23,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_library(library)
 	, m_toolbar(NULL)
 {
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
 	memset(m_sprs, 0, sizeof(int) * 9);
 
@@ -77,7 +77,7 @@ void StagePanel::rebuildPatchSymbol()
 void StagePanel::setToolbarPanel(ToolbarPanel* toolbar)
 {
 	m_toolbar = toolbar;
-	static_cast<StageCanvas*>(GetCanvas())->setToolbarPanel(toolbar);
+	std::dynamic_pointer_cast<StageCanvas>(GetCanvas())->setToolbarPanel(toolbar);
 }
 
 void StagePanel::OnNotify(int sj_id, void* ud)

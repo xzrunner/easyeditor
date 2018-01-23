@@ -15,25 +15,25 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 {
 	// Rect
 	{
-		ee::EditOP* op = new EditRectOP(stage);
+		auto op = std::make_shared<EditRectOP>(stage);
 		AddChild(new ee::UniversalCMPT(this, "矩形", stage->GetStageImpl(), op));
 		stage->SetEditOP(op);
 	}
 	// Quad
 	{
-		ee::EditOP* op = new EditQuadOP(stage);
+		auto op = std::make_shared<EditQuadOP>(stage);
 		AddChild(new ee::UniversalCMPT(this, "四边形", stage->GetStageImpl(), op));
 		stage->SetEditOP(op);
 	}
  	// Changed Rect
  	{
- 		ee::EditOP* op = new EditChangedRectOP(stage);
+		auto op = std::make_shared<EditChangedRectOP>(stage);
  		AddChild(new ee::UniversalCMPT(this, "可变的矩形", stage->GetStageImpl(), op));
  		stage->SetEditOP(op);
  	}
 	// Changed Sector
 	{
-		ee::EditOP* op = new EditChangedSectorOP(stage);
+		auto op = std::make_shared<EditChangedSectorOP>(stage);
 		AddChild(new ee::UniversalCMPT(this, "可变的扇形", stage->GetStageImpl(), op));
 		stage->SetEditOP(op);
 	}

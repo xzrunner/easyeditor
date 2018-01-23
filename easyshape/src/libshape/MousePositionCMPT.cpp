@@ -10,7 +10,7 @@ MousePositionCMPT::MousePositionCMPT(wxWindow* parent, const std::string& name,
 									 wxWindow* stage_wnd, ee::EditPanelImpl* stage)
 	: ee::MousePositionCMPT(parent, name, stage_wnd, stage, false)
 {
-	m_editop = new MousePositionOP(stage_wnd, stage, this);
+	m_editop = std::make_shared<MousePositionOP>(stage_wnd, stage, this);
 }
 
 }

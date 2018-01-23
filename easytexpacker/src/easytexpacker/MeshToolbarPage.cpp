@@ -62,7 +62,7 @@ void MeshToolbarPage::InitLayout()
 
 void MeshToolbarPage::OnSetSrcDir(wxCommandEvent& event)
 {
- 	ee::ZoomViewOP* op = static_cast<ee::ZoomViewOP*>(m_stage->GetEditOP());
+ 	auto op = std::dynamic_pointer_cast<ee::ZoomViewOP>(m_stage->GetEditOP());
  	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Src Dir", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);

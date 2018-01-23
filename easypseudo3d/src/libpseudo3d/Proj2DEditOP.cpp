@@ -23,7 +23,7 @@ Proj2DEditOP::~Proj2DEditOP()
 bool Proj2DEditOP::OnKeyDown(int keyCode)
 {
 	static const int OFFSET = 10;
-	ee::Camera* cam = m_stage->GetCamera();
+	auto cam = m_stage->GetCamera();
 	switch (keyCode)
 	{
 	case 'a': case 'A':
@@ -49,7 +49,7 @@ bool Proj2DEditOP::OnKeyDown(int keyCode)
 bool Proj2DEditOP::onDraw() const
 {
 	if (m_player) {
-		ee::Camera* cam = m_stage->GetCamera();
+		auto cam = m_stage->GetCamera();
 		const sm::vec2& center = cam->GetPosition();
 		ee::SpriteRenderer::Instance()->Draw(m_player, S2_MAT(), center);
 	}

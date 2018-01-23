@@ -9,7 +9,7 @@ PixelDiffCMPT::PixelDiffCMPT(wxWindow* parent, const std::string& name,
 							 StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 {
-	m_editop = new PixelDiffOP(stage);	
+	m_editop = std::make_shared<PixelDiffOP>(stage);
 }
 
 wxSizer* PixelDiffCMPT::InitLayout()

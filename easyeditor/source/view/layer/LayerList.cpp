@@ -127,7 +127,7 @@ void LayerList::LoadFromLayerMgr(LayerMgr* layer_mgr)
 
 void LayerList::ClearLayer(Layer* layer)
 {
-	EditAddRecordSJ::Instance()->Add(new DeleteLayerAOP(this, layer));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<DeleteLayerAOP>(this, layer));
 
 	std::vector<SprPtr> sprs;
 	layer->TraverseSprite(FetchAllRefVisitor<Sprite>(sprs));

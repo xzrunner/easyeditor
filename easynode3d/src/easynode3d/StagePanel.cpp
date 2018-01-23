@@ -18,7 +18,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 sm::vec3 StagePanel::TransPosScrToProj(int x, int y) const
 {
-	auto canvas = dynamic_cast<const StageCanvas*>(GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<const StageCanvas>(GetCanvas());
 	if (!canvas) {
 		return sm::vec3();
 	}

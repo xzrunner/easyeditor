@@ -14,14 +14,14 @@ StagePanel2D::StagePanel2D(wxWindow* parent, wxTopLevelWindow* frame,
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 	, m_shader(NULL)
 {
-	SetCanvas(new StageCanvas2D(this));
+	SetCanvas(std::make_shared<StageCanvas2D>(this));
 
 	ee::ArrangeSpriteConfig cfg;
 	cfg.is_auto_align_open = false;
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	SetEditOP(new ee::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, NULL, NULL, cfg));
+	SetEditOP(std::make_shared<ee::ArrangeSpriteOP<SelectSpritesOP>>(this, GetStageImpl(), this, NULL, NULL, cfg));
 }
 
 }

@@ -10,12 +10,7 @@ END_EVENT_TABLE()
 RGBColorPanel::RGBColorPanel(wxWindow* parent, wxSize size)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, size, wxBORDER_DEFAULT)
 {
-	m_canvas = new Canvas(this);
-}
-
-RGBColorPanel::~RGBColorPanel()
-{
-	delete m_canvas;
+	m_canvas = std::make_shared<Canvas>(this);
 }
 
 void RGBColorPanel::SetColor(const s2::Color& begin, const s2::Color& end)

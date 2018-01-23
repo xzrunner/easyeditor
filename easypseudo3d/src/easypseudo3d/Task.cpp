@@ -66,11 +66,11 @@ void Task::InitLayout()
 {
 	m_stage = new ee::EditPanel(m_parent, m_parent);
 
-//	m_stage->SetCanvas(new epseudo3d::StageCanvas3D(m_stage));
-//	m_stage->setEditOP(new e3d::ControlCameraOP(m_stage));
+//	m_stage->SetCanvas(std::make_shared<epseudo3d::StageCanvas3D>(m_stage));
+//	m_stage->setEditOP(std::make_shared<e3d::ControlCameraOP>(m_stage));
 
-	m_stage->SetCanvas(new epseudo3d::StageCanvas2D(m_stage, m_stage->GetStageImpl()));
-	m_stage->SetEditOP(new epseudo3d::Proj2DEditOP(m_stage, m_stage->GetStageImpl()));
+	m_stage->SetCanvas(std::make_shared<epseudo3d::StageCanvas2D>(m_stage, m_stage->GetStageImpl()));
+	m_stage->SetEditOP(std::make_shared<epseudo3d::Proj2DEditOP>(m_stage, m_stage->GetStageImpl()));
 }
 
 }

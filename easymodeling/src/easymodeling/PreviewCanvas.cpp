@@ -26,7 +26,7 @@ void PreviewCanvas::OnDrawSprites() const
 {
  	m_stage_panel->drawPhysics();
  
- 	ee::DragPhysicsOP* op = static_cast<ee::DragPhysicsOP*>(m_stage->GetEditOP());
+ 	auto op = std::dynamic_pointer_cast<ee::DragPhysicsOP>(m_stage->GetEditOP());
  	if (op->m_mouseJoint)
  	{
  		b2Vec2 target = op->m_mouseJoint->GetAnchorB();

@@ -552,7 +552,7 @@ void SpritePropertySetting::SetColMul(const ee::SprPtr& spr, const std::string& 
 		return;
 	}
 
-	EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteMulColorAOP>(spr, col));
 	s2::RenderColor rc = spr->GetColor();
 	rc.SetMul(col);
 	spr->SetColor(rc);
@@ -573,7 +573,7 @@ void SpritePropertySetting::SetColAdd(const ee::SprPtr& spr, const std::string& 
 		return;
 	}
 
-	EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, col));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteAddColorAOP>(spr, col));
 	s2::RenderColor rc = spr->GetColor();
 	rc.SetAdd(col);
 	spr->SetColor(rc);
@@ -593,7 +593,7 @@ void SpritePropertySetting::SetColAlpha(const ee::SprPtr& spr, const std::string
 
 	s2::Color col = spr->GetColor().GetMul();
 	col.a = alpha;
-	EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteMulColorAOP>(spr, col));
 
 	s2::RenderColor rc = spr->GetColor();
 	rc.SetMul(col);
@@ -613,7 +613,7 @@ void SpritePropertySetting::SetColOverlap(const ee::SprPtr& spr, const std::stri
 
 	s2::Color add = spr->GetColor().GetAdd();
 	add.a = overlay;
-	EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, add));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteAddColorAOP>(spr, add));
 
 	s2::RenderColor rc = spr->GetColor();
 	rc.SetAdd(add);

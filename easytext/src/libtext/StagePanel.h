@@ -21,7 +21,7 @@ public:
 	virtual ~StagePanel();
 
 private:
-	StageCanvas* m_canvas;
+	std::shared_ptr<StageCanvas> m_canvas = nullptr;
 
 }; // StagePanel
 

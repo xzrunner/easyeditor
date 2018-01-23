@@ -7,12 +7,7 @@ MousePositionOP::MousePositionOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 								 ee::MousePositionCMPT* cmpt)
 	: ee::MousePositionOP(wnd, stage, cmpt)
 {
-	m_draw_impl = new DrawPolylineOP(wnd, stage, false);
-}
-
-MousePositionOP::~MousePositionOP()
-{
-	delete m_draw_impl;
+	m_draw_impl = std::make_shared<DrawPolylineOP>(wnd, stage, false);
 }
 
 bool MousePositionOP::OnMouseLeftDown(int x, int y)

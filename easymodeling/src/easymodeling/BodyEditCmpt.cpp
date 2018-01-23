@@ -17,7 +17,8 @@ BodyEditCmpt::BodyEditCmpt(wxWindow* parent, const std::string& name,
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	m_editop = new ee::ArrangeSpriteOP<SelectBodyOP>(editPanel, editPanel->GetStageImpl(), editPanel, property, NULL, cfg);
+	m_editop = std::make_shared<ee::ArrangeSpriteOP<SelectBodyOP>>(
+		editPanel, editPanel->GetStageImpl(), editPanel, property, NULL, cfg);
 }
 
 wxSizer* BodyEditCmpt::InitLayout()

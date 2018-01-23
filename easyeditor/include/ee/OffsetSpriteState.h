@@ -12,14 +12,14 @@ namespace ee
 class OffsetSpriteState : public ArrangeSpriteState
 {
 public:
-	OffsetSpriteState(const SprPtr& spr, const s2::Camera* camera);
+	OffsetSpriteState(const SprPtr& spr, const std::shared_ptr<s2::Camera>& camera);
 
 	virtual void OnMouseRelease(const sm::vec2& pos) override;
 	virtual	bool OnMouseDrag(const sm::vec2& pos) override;
 
 private:
 	SprPtr m_spr;
-	const s2::Camera* m_camera;
+	std::shared_ptr<s2::Camera> m_camera = nullptr;
 
 	sm::vec2 m_old_offset;
 

@@ -30,7 +30,7 @@ AutoTriCutCMPT::AutoTriCutCMPT(wxWindow* parent, const std::string& name,
 	, m_raw(NULL)
 	, m_fine(NULL)
 {
-	m_editop = new AutoTriCutOP(stage, stage->GetStageImpl());
+	m_editop = std::make_shared<AutoTriCutOP>(stage, stage->GetStageImpl());
 }
 
 wxSizer* AutoTriCutCMPT::InitLayout()
@@ -96,7 +96,7 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 	const ee::Image* img = sym->GetImage();
 
 	Json::Value value;
-	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
+	auto op = std::dynamic_pointer_cast<AutoTriCutOP>(m_editop);
 
 	sm::vec2 offset;
 	offset.x = img->GetOriginSize().x * -0.5f;
@@ -127,7 +127,7 @@ void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 	assert(sym);
 	auto img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
-	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
+	auto op = std::dynamic_pointer_cast<AutoTriCutOP>(m_editop);
 	m_raw = new ExtractOutlineRaw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
 	m_raw->CreateBorderLineAndMerge();
 	op->m_raw_bound_line = m_raw->GetBorderLine();
@@ -146,7 +146,7 @@ void AutoTriCutCMPT::ReduceOutlineCount(wxCommandEvent& event)
 	if (m_fine)
 	{
 		m_fine->ReduceOutlineCount(AREA_TOLERANCE, PERIMETER_TOLERANCE);
-		AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
+		auto op = std::dynamic_pointer_cast<AutoTriCutOP>(m_editop);
 		op->m_fine_bound_line = m_fine->GetResult();
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -162,7 +162,7 @@ void AutoTriCutCMPT::Trigger()
 	assert(sym);
 	auto img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
-	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
+	auto op = std::dynamic_pointer_cast<AutoTriCutOP>(m_editop);
 	ExtractOutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
 	raw.CreateBorderLineAndMerge();
 	op->m_raw_bound_line = raw.GetBorderLine();
@@ -187,7 +187,7 @@ void AutoTriCutCMPT::OnDebug(wxCommandEvent& event)
 	assert(sym);
 	auto img_data = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
-	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
+	auto op = std::dynamic_pointer_cast<AutoTriCutOP>(m_editop);
 	ExtractOutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
 	raw.CreateBorderLineAndMerge();
 	raw.CreateBorderConvexHull();

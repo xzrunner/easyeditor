@@ -17,7 +17,7 @@ ScaleJointState::ScaleJointState(const std::shared_ptr<Joint>& joint, const sm::
 void ScaleJointState::OnMouseRelease(const sm::vec2& pos)
 {
 	if (m_joint && pos != m_first_pos) {
- 		ee::AtomicOP* aop = new ScaleJointAOP(m_joint, m_scale);
+ 		auto aop = std::make_shared<ScaleJointAOP>(m_joint, m_scale);
  		ee::EditAddRecordSJ::Instance()->Add(aop);
 	}
 }

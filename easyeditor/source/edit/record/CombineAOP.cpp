@@ -3,7 +3,7 @@
 namespace ee
 {
 
-void CombineAOP::Insert(AtomicOP* atomic)
+void CombineAOP::Insert(const std::shared_ptr<AtomicOP>& atomic)
 {
 	m_atomics.push_back(atomic);
 }

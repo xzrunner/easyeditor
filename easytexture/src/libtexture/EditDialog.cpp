@@ -97,8 +97,8 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 
 void EditDialog::InitCamera(const ee::SprPtr& spr) const
 {
-	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
-	s2::Camera* cam = canvas->GetCamera();
+	auto canvas = std::dynamic_pointer_cast<ee::CameraCanvas>(m_stage->GetCanvas());
+	auto cam = canvas->GetCamera();
 	if (cam->Type() == s2::CAM_PSEUDO3D) {
 		return;
 	}
@@ -107,7 +107,7 @@ void EditDialog::InitCamera(const ee::SprPtr& spr) const
 	sm::vec2 r_sz = spr->GetBounding()->GetSize().Size();
 	float scale = std::min(sz.GetWidth() / r_sz.x, sz.GetHeight() / r_sz.y);
 
-	s2::OrthoCamera* ortho_cam = static_cast<s2::OrthoCamera*>(cam);
+	auto ortho_cam = std::dynamic_pointer_cast<s2::OrthoCamera>(cam);
 	ortho_cam->Set(sm::vec2(0, 0), 1 / scale);
 }
 

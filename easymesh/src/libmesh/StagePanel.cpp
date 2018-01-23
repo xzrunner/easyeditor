@@ -25,13 +25,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* g
 {
 	m_sym = std::make_shared<Symbol>();
 
-	ee::EditOP* editop = new ee::ZoomViewOP(this, GetStageImpl(), true);
-	SetEditOP(editop);
-	editop->RemoveReference();
-
-	ee::StageCanvas* canvas = new StageCanvas(this, glctx);
-	SetCanvas(canvas);
-	canvas->RemoveReference();
+	SetEditOP(std::make_shared<ee::ZoomViewOP>(this, GetStageImpl(), true));
+	SetCanvas(std::make_shared<StageCanvas>(this, glctx));
 
 	if (library) {
 		SetDropTarget(new StageDropTarget(this, library));
@@ -49,13 +44,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	m_sym = std::make_shared<Symbol>();
 
-	ee::EditOP* editop = new ee::ZoomViewOP(this, GetStageImpl(), true);
-	SetEditOP(editop);
-	editop->RemoveReference();
-
-	ee::StageCanvas* canvas = new StageCanvas(this, glctx, edited, bg_sprites);
-	SetCanvas(canvas);
-	canvas->RemoveReference();
+	SetEditOP(std::make_shared<ee::ZoomViewOP>(this, GetStageImpl(), true));
+	SetCanvas(std::make_shared<StageCanvas>(this, glctx, edited, bg_sprites));
 
 	InitSubjects();
 }

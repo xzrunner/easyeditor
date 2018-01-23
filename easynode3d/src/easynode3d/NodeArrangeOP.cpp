@@ -18,7 +18,7 @@ namespace enode3d
 NodeArrangeOP::NodeArrangeOP(StagePanel& stage)
 	: NodeSelectOP(stage)
 {
-	m_canvas = static_cast<enode3d::StageCanvas*>(stage.GetCanvas());
+	m_canvas = std::dynamic_pointer_cast<enode3d::StageCanvas>(stage.GetCanvas());
 }
 
 bool NodeArrangeOP::OnKeyDown(int keyCode)

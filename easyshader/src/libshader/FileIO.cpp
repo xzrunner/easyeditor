@@ -29,7 +29,7 @@ static const std::string STR_MAT4	= "mat4";
 static const std::string STR_TIME	= "time";
 static const std::string STR_INPUT	= "input";
 
-Shader* FileIO::LoadShader(const std::string& filepath, ee::StageCanvas* canvas,
+Shader* FileIO::LoadShader(const std::string& filepath, const std::shared_ptr<ee::StageCanvas>& canvas,
 						   ToolbarPanel* toolbar, bool is_2d)
 {
 	toolbar->Clear();

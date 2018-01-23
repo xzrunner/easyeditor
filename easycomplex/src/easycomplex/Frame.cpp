@@ -94,7 +94,7 @@ void Frame::onPreview(wxCommandEvent& event)
 
 	std::vector<ee::SprPtr> sprs;
 	m_task->GetAllSprite(sprs);
-	ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
+	auto canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
  	PreviewDialog dlg(this, canvas->GetGLContext(), sprs);
  	dlg.ShowModal();
 }
@@ -132,16 +132,16 @@ void Frame::onSetBackground(wxCommandEvent& event)
 	std::string formatFilter = "*.png;*.jpg;*.json";
 	wxFileDialog dlg(this, wxT("Choose Background Symbol"), wxEmptyString, 
 		wxEmptyString, formatFilter, wxFD_OPEN);
-	ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
+	auto canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 	if (dlg.ShowModal() == wxID_OK)
 	{
  		std::string filename = dlg.GetPath().ToStdString();
 		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
-  		static_cast<StageCanvas*>(canvas)->SetBackground(sym);
+  		std::dynamic_pointer_cast<StageCanvas>(canvas)->SetBackground(sym);
 	}
 	else
 	{
-		static_cast<StageCanvas*>(canvas)->SetBackground(NULL);
+		std::dynamic_pointer_cast<StageCanvas>(canvas)->SetBackground(NULL);
 	}
 }
 

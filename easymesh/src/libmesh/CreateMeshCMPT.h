@@ -12,7 +12,6 @@ class CreateMeshCMPT : public ee::EditCMPT
 public:
 	CreateMeshCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage);
-	virtual ~CreateMeshCMPT();
 
 	void SetEditOP(int pm_mesh_type);
 
@@ -26,7 +25,10 @@ private:
 private:
 	StagePanel* m_stage;
 
-	ee::EditOP *m_network_op, *m_strip_op, *m_skeleton_op;
+	std::shared_ptr<ee::EditOP> 
+		m_network_op = nullptr, 
+		m_strip_op = nullptr, 
+		m_skeleton_op = nullptr;
 
 }; // CreateMeshCMPT
 

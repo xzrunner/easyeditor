@@ -239,7 +239,7 @@ void MultiSpritesPropertyImpl::SetTag(const std::string& tag)
 void MultiSpritesPropertyImpl::SetPos(float x, float y)
 {
 	sm::vec2 pos(x, y);
-	EditAddRecordSJ::Instance()->Add(new SetSpritePosAOP(m_sprs, pos));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpritePosAOP>(m_sprs, pos));
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) {
 		const SprPtr& spr = m_sprs[i];
 		spr->SetPosition(pos);
@@ -621,7 +621,7 @@ void MultiSpritesPropertyImpl::OnPosChange(float dx, float dy)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 
-	EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(m_sprs, sm::vec2(dx, dy)));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<TranslateSpriteAOP>(m_sprs, sm::vec2(dx, dy)));
 	for (int i = 0, n = m_sprs.size(); i < n; ++i)
 	{
 		const SprPtr& spr = m_sprs[i];

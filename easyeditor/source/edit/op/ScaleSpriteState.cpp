@@ -23,10 +23,10 @@ ScaleSpriteState::ScaleSpriteState(const SprPtr& spr, const SpriteCtrlNode::Node
 
 void ScaleSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
-	CombineAOP* comb = new CombineAOP();
+	auto comb = std::make_shared<CombineAOP>();
 
-	comb->Insert(new TranslateSpriteAOP(m_spr, m_spr->GetPosition() - m_first_pos));
-	comb->Insert(new ScaleSpriteAOP(m_spr, m_spr->GetScale(), m_first_scale));
+	comb->Insert(std::make_shared<TranslateSpriteAOP>(m_spr, m_spr->GetPosition() - m_first_pos));
+	comb->Insert(std::make_shared<ScaleSpriteAOP>(m_spr, m_spr->GetScale(), m_first_scale));
 
 	EditAddRecordSJ::Instance()->Add(comb);
 

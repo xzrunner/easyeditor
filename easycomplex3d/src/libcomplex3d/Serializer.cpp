@@ -35,7 +35,7 @@ void Serializer::StoreToJson(const std::string& filepath, const enode3d::StagePa
 	}
 	doc.AddMember("nodes", nodes_val, alloc);
 
-	auto canvas = dynamic_cast<const enode3d::StageCanvas*>(stage->GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<const enode3d::StageCanvas>(stage->GetCanvas());
 	auto& cam = canvas->GetCamera();
 	rapidjson::Value cam_val = StoreCamera(cam, alloc);
 	doc.AddMember("camera", cam_val, alloc);
@@ -56,7 +56,7 @@ void Serializer::LoadFroimJson(const std::string& filepath, enode3d::StagePanel*
 		stage->InsertNode(node);
 	}
 
-	auto canvas = dynamic_cast<enode3d::StageCanvas*>(stage->GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<enode3d::StageCanvas>(stage->GetCanvas());
 	auto& cam = canvas->GetCamera();
 	auto& cam_val = doc["camera"];
 	LoadCamera(cam_val, cam);

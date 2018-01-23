@@ -8,7 +8,7 @@ DrawPencilPolygonCMPT::DrawPencilPolygonCMPT(wxWindow* parent, const std::string
 											 ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl)
 	: ee::OneFloatValueCMPT(parent, name, stage, "Simplify", 0, 100, 30, 0.1f)
 {
-	m_editop = new DrawPencilPolygonOP(stage_wnd, stage, shapes_impl, this, this); 
+	m_editop = std::make_shared<DrawPencilPolygonOP>(stage_wnd, stage, shapes_impl, this, this);
 }
 
 int DrawPencilPolygonCMPT::GetSelected() const

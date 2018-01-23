@@ -31,8 +31,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	, m_refresh(false)
 {
 //	m_editop = new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, this);
-	SetEditOP(new ArrangeSpriteOP(this));
-	SetCanvas(new StageCanvas(this)); 
+	SetEditOP(std::make_shared<ArrangeSpriteOP>(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
 	SetDropTarget(new StageDropTarget(this, ViewMgr::Instance()->library));
 

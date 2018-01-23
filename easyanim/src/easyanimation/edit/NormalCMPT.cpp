@@ -32,7 +32,7 @@ NormalCMPT::NormalCMPT(wxWindow* parent, const std::string& name, bool vertical)
 	: ee::EditCMPT(parent, name, ViewMgr::Instance()->stage->GetStageImpl())
 	, m_vertical(vertical)
 {
-	m_editop = new ArrangeSpriteOP(ViewMgr::Instance()->stage);
+	m_editop = std::make_shared<ArrangeSpriteOP>(ViewMgr::Instance()->stage);
 }
 
 wxSizer* NormalCMPT::InitLayout()
@@ -120,7 +120,7 @@ wxSizer* NormalCMPT::InitSettingsPanel()
 
 void NormalCMPT::OnLoadFromFolder(wxCommandEvent& event)
 {
-	ArrangeSpriteOP* op = static_cast<ArrangeSpriteOP*>(m_editop);
+	auto op = std::dynamic_pointer_cast<ArrangeSpriteOP>(m_editop);
 	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Images", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
@@ -261,13 +261,13 @@ void NormalCMPT::OnChangeAnim(wxCommandEvent& event)
 
 void NormalCMPT::OnAddCross(wxCommandEvent& event)
 {
-	static_cast<ArrangeSpriteOP*>(m_editop)->AddCross();
+	std::dynamic_pointer_cast<ArrangeSpriteOP>(m_editop)->AddCross();
 
 }
 
 void NormalCMPT::OnDelCross(wxCommandEvent& event)
 {
-	static_cast<ArrangeSpriteOP*>(m_editop)->DelCross();
+	std::dynamic_pointer_cast<ArrangeSpriteOP>(m_editop)->DelCross();
 }
 
 }

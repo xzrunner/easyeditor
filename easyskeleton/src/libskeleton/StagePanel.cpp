@@ -14,13 +14,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: EditPanel(parent, frame)
 	, m_sk(sk)
 {
-	ee::EditOP* editop = new EditJointPoseOP(this);
-	SetEditOP(editop);
-	editop->RemoveReference();
-
-	ee::StageCanvas* canvas = new StageCanvas(this, glctx);
-	SetCanvas(canvas);
-	canvas->RemoveReference();
+	SetEditOP(std::make_shared<EditJointPoseOP>(this));
+	SetCanvas(std::make_shared<StageCanvas>(this, glctx));
 }
 
 bool StagePanel::UpdateStage()

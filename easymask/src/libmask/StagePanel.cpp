@@ -21,13 +21,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, LibraryPanel* 
 	, m_library(library)
 	, m_sym(new Symbol)
 {
-	ee::EditOP* op = new ee::ZoomViewOP(this, GetStageImpl(), true);
-	SetEditOP(op);
-	op->RemoveReference();
-
-	ee::StageCanvas* canvas = new StageCanvas(this);
-	SetCanvas(canvas);
-	canvas->RemoveReference();
+	SetEditOP(std::make_shared<ee::ZoomViewOP>(this, GetStageImpl(), true));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
 	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 }

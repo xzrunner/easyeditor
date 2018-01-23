@@ -39,17 +39,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 {
 	SetDropTarget(new SpriteDropTarget(GetStageImpl(), top_pannels->library->GetUILibrary()));
 
-	ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>* edit_op = new ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>(
+	auto edit_op = std::make_shared<ee::ArrangeSpriteOP<ecomplex::SelectSpritesOP>>(
 		this, GetStageImpl(), this, top_pannels->property, NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, top_pannels->property));
-	ecomplex::SelectSpritesOP* select_op = static_cast<ecomplex::SelectSpritesOP*>(edit_op);
+	auto select_op = std::dynamic_pointer_cast<ecomplex::SelectSpritesOP>(edit_op);
 	select_op->SetGuides(&m_guides);
 	select_op->SetOpenSymbolDialogViewlist(top_pannels->viewlist);
 	SetEditOP(edit_op);
-	edit_op->RemoveReference();
 
-	ee::StageCanvas* canvas = new StageCanvas(this);
-	SetCanvas(canvas);
-	canvas->RemoveReference();
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
 	int w, h;
 	QueryWindowViewSizeSJ::Instance()->Query(w, h);

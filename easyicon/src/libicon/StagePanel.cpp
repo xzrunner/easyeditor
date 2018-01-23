@@ -14,7 +14,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   ee::LibraryPanel* library)
 	: ee::EditPanel(parent, frame)
 {
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 	m_sym = std::make_shared<Symbol>();
 
 	SetDropTarget(new StageDropTarget(this, library));
@@ -25,7 +25,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   const ee::MultiSpritesImpl* bg_sprites)
 	: ee::EditPanel(parent, frame)
 {
-	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
+	SetCanvas(std::make_shared<StageCanvas>(this, glctx, edited, bg_sprites));
 }
 
 void StagePanel::SetIcon(std::unique_ptr<s2::Icon>& icon)

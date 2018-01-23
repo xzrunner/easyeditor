@@ -46,7 +46,7 @@ void EditDialog::InitLayout(wxGLContext* glctx, const ee::SprPtr& edited,
 
 void EditDialog::InitEditOP(const ee::SprPtr& edited)
 {
-	ee::EditOP* op = NULL;
+	std::shared_ptr<ee::EditOP> op = nullptr;
 
 	auto sym = std::dynamic_pointer_cast<Symbol>(edited->GetSymbol());
 	const Icon* icon = dynamic_cast<const Icon*>(sym->GetIcon().get());
@@ -54,16 +54,16 @@ void EditDialog::InitEditOP(const ee::SprPtr& edited)
 	switch (type)
 	{
 	case IT_RECT:
-		op = new EditRectOP(m_stage);
+		op = std::make_shared<EditRectOP>(m_stage);
 		break;
 	case IT_QUAD:
-		op = new EditQuadOP(m_stage);
+		op = std::make_shared<EditQuadOP>(m_stage);
 		break;
 	case IT_CHANGED_RECT:
-		op = new EditChangedRectOP(m_stage);
+		op = std::make_shared<EditChangedRectOP>(m_stage);
 		break;
 	case IT_CHANGED_SECTOR:
-		op = new EditChangedSectorOP(m_stage);
+		op = std::make_shared<EditChangedSectorOP>(m_stage);
 		break;
 	}
 

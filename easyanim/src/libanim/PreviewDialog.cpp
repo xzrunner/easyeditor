@@ -51,14 +51,14 @@ void PreviewDialog::BuildToolBar(wxSizer* topSizer)
 void PreviewDialog::BuildEditPanel(wxSizer* topSizer, wxGLContext* glctx)
 {
 	m_stage = new ee::EditPanel(this, this);
-	m_stage->SetEditOP(new ee::ZoomViewOP(m_stage, m_stage->GetStageImpl(), false));
-	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_stage->GetStageImpl(), m_sym, glctx));
+	m_stage->SetEditOP(std::make_shared<ee::ZoomViewOP>(m_stage, m_stage->GetStageImpl(), false));
+	m_stage->SetCanvas(std::make_shared<PreviewCanvas>(m_stage, m_stage->GetStageImpl(), m_sym, glctx));
 	topSizer->Add(m_stage, 1, wxEXPAND);
 }
 
 void PreviewDialog::OnSetLoop(wxCommandEvent& event)
 {
-	PreviewCanvas* canvas = static_cast<PreviewCanvas*>(m_stage->GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<PreviewCanvas>(m_stage->GetCanvas());
 	assert(canvas);
 	PreviewCanvas::PlaySetting& setting = canvas->getPlaySetting();
 	setting.isCirculate = event.IsChecked();
@@ -69,7 +69,7 @@ void PreviewDialog::OnSetLoop(wxCommandEvent& event)
 
 void PreviewDialog::OnSetStop(wxCommandEvent& event)
 {
-	PreviewCanvas* canvas = static_cast<PreviewCanvas*>(m_stage->GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<PreviewCanvas>(m_stage->GetCanvas());
 	assert(canvas);
 	PreviewCanvas::PlaySetting& setting = canvas->getPlaySetting();
 	setting.isStop = event.IsChecked();

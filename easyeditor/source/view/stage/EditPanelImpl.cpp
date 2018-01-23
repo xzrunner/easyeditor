@@ -59,7 +59,7 @@ sm::vec2 EditPanelImpl::TransPosScrToProj(int x, int y) const
 		return sm::vec2(0, 0);
 	}
 
-	s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(cam_canvas->GetCamera());
+	auto cam = std::dynamic_pointer_cast<s2::OrthoCamera>(cam_canvas->GetCamera());
 	int w = m_stage->GetSize().GetWidth(),
 		h = m_stage->GetSize().GetHeight();
 	return cam->TransPosScreenToProject(x, y, w, h);
@@ -76,7 +76,7 @@ sm::vec2 EditPanelImpl::TransPosProjToScr(const sm::vec2& proj) const
 		return sm::vec2(0, 0);
 	}
 
-	s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(cam_canvas->GetCamera());
+	auto cam = std::dynamic_pointer_cast<s2::OrthoCamera>(cam_canvas->GetCamera());
 	int w = m_stage->GetSize().GetWidth(),
 		h = m_stage->GetSize().GetHeight();
 	return cam->TransPosProjectToScreen(proj, w, h);
@@ -215,13 +215,13 @@ void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 			}
 			const float cx = static_cast<float>(x),
 				        cy = static_cast<float>(h - y);
-			s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
+			auto cam = std::dynamic_pointer_cast<s2::OrthoCamera>(canvas->GetCamera());
 			cam->Scale(scale, cx, cy, w, h);
 		}
 		break;
 	case s2::CAM_PSEUDO3D:
 		{
-			s2::Pseudo3DCamera* cam = static_cast<s2::Pseudo3DCamera*>(canvas->GetCamera());
+			auto cam = std::dynamic_pointer_cast<s2::Pseudo3DCamera>(canvas->GetCamera());
 			const sm_vec3* pos = cam->GetPos();
 			float dz = direction < 0 ? pos->z * 0.1f : - pos->z * 0.1f;
 			cam->Translate(sm::vec3(0, 0, dz));
@@ -374,7 +374,7 @@ void EditPanelImpl::OnNotify(int sj_id, void* ud)
 		RedoTop();
 		break;
 	case MSG_EDIT_ADD_RECORD:
-		AddOpRecord((AtomicOP*)ud);
+		AddOpRecord(*(std::shared_ptr<AtomicOP>*)ud);
 		break;
 	case MSG_GET_KEY_STATE:
 		{
@@ -412,7 +412,7 @@ void EditPanelImpl::InitSubjects()
 	RegistSubject(SetWndDirtySJ::Instance());
 }
 
-void EditPanelImpl::AddOpRecord(AtomicOP* op)
+void EditPanelImpl::AddOpRecord(const std::shared_ptr<AtomicOP>& op)
 {
 	m_history_list.Insert(op);
 	SetWndDirty(true);

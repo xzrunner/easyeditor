@@ -43,9 +43,9 @@ bool CtrlCamOP::OnKeyDown(int keyCode)
 
 void CtrlCamOP::OffsetCamera(float dx, float dy)
 {
-	s2::Camera* cam = static_cast<ee::CameraCanvas*>(m_stage->GetCanvas())->GetCamera();
+	auto cam = std::dynamic_pointer_cast<ee::CameraCanvas>(m_stage->GetCanvas())->GetCamera();
 	if (cam->Type() == s2::CAM_ORTHO2D) {
-		s2::OrthoCamera* ortho_cam = static_cast<s2::OrthoCamera*>(cam);
+		auto ortho_cam = std::dynamic_pointer_cast<s2::OrthoCamera>(cam);
 		ortho_cam->Translate(sm::vec2(dx, dy));
 	}
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

@@ -28,7 +28,7 @@ public:
 	Type Undo();
 	Type Redo();
 	Type RedoTop();
-	void Insert(AtomicOP* op);
+	void Insert(const std::shared_ptr<AtomicOP>& op);
 
 	void OnSave();
 
@@ -36,17 +36,17 @@ public:
 	void Load(const Json::Value& value, const std::vector<SprPtr>& sprs);
 
 private:
-	void Clear(std::stack<AtomicOP*>& stack);
+	void Clear(std::stack<std::shared_ptr<AtomicOP>>& stack);
 
-	void Store(std::stack<AtomicOP*>& stack, Json::Value& val, 
+	void Store(std::stack<std::shared_ptr<AtomicOP>>& stack, Json::Value& val,
 		const std::vector<SprPtr>& sprs);
-	void Load(std::stack<AtomicOP*>& stack, const Json::Value& val, 
+	void Load(std::stack<std::shared_ptr<AtomicOP>>& stack, const Json::Value& val, 
 		const std::vector<SprPtr>& sprs);
 
 private:
-	std::stack<AtomicOP*> m_undo_stack, m_redo_stack;
+	std::stack<std::shared_ptr<AtomicOP>> m_undo_stack, m_redo_stack;
 
-	AtomicOP* m_saved_op;
+	std::shared_ptr<AtomicOP> m_saved_op;
 
 }; // HistoryList
 

@@ -11,7 +11,7 @@ ArrangeSpriteCMPT::ArrangeSpriteCMPT(wxWindow* parent, const std::string& name,
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage_panel(stage)
 {
-	m_editop = new ArrangeSpriteOP(property, stage);
+	m_editop = std::make_shared<ArrangeSpriteOP>(property, stage);
 }
 
 wxSizer* ArrangeSpriteCMPT::InitLayout()

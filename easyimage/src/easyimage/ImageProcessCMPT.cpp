@@ -18,7 +18,7 @@ ImageProcessCMPT::ImageProcessCMPT(wxWindow* parent, const std::string& name,
 {
 //	m_editop = new ImageProcessOP(stage);
 
-	m_editop = new ee::ZoomViewOP(stage, stage->GetStageImpl(), true);
+	m_editop = std::make_shared<ee::ZoomViewOP>(stage, stage->GetStageImpl(), true);
 }
 
 wxSizer* ImageProcessCMPT::InitLayout()

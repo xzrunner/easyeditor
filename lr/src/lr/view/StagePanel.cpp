@@ -64,11 +64,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	}
 
 	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(library, property, this, &m_chara_dirs);
-	m_arrange_op = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		NULL, ee::ArrangeSpriteConfig(), arrange_impl);
+	m_arrange_op = std::make_shared<ee::ArrangeSpriteOP<SelectSpritesOP>>(
+		this, GetStageImpl(), this, property, NULL, ee::ArrangeSpriteConfig(), arrange_impl);
 
 	SetEditOP(m_arrange_op);
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
 	ee::MultiSpritesImpl::RegistSubject(ee::ReorderSpriteSJ::Instance());
 	ee::MultiSpritesImpl::RegistSubject(ee::ReorderSpriteMostSJ::Instance());
@@ -225,19 +225,19 @@ void StagePanel::BuildGrids(int w, int h)
 
 s2::Color& StagePanel::GetScreenMultiColor()
 {
-	StageCanvas* canvas = static_cast<StageCanvas*>(GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<StageCanvas>(GetCanvas());
 	return canvas->GetMultiColor();
 }
 
 s2::Color& StagePanel::GetScreenAddColor()
 {
-	StageCanvas* canvas = static_cast<StageCanvas*>(GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<StageCanvas>(GetCanvas());
 	return canvas->GetAddColor();	
 }
 
 void StagePanel::EnableColorGrading(bool enable)
 {
-	StageCanvas* canvas = static_cast<StageCanvas*>(GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<StageCanvas>(GetCanvas());
 	canvas->EnableColGrading(enable);
 }
 

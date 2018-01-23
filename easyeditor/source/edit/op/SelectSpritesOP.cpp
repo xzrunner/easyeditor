@@ -363,7 +363,7 @@ void SelectSpritesOP::CopyFromSelection()
 		sprs.push_back(spr);
 		CopySprFromClipboard(spr, sval);
 		InsertSpriteSJ::Instance()->Insert(spr);
-		EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
+		EditAddRecordSJ::Instance()->Add(std::make_shared<InsertSpriteAOP>(spr));
 		sval = value["sprite"][i++];
 	}
 

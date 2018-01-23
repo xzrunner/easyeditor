@@ -19,17 +19,10 @@ CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const std::string& name,
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_network_op = new CreatePointsMeshOP(stage);
-	m_strip_op= new CreateStripOP(stage);
-	m_skeleton_op = new CreateSkeletonOP(stage);
+	m_network_op = std::make_shared<CreatePointsMeshOP>(stage);
+	m_strip_op = std::make_shared<CreateStripOP>(stage);
+	m_skeleton_op = std::make_shared<CreateSkeletonOP>(stage);
 	LoadEditOP(m_network_op);
-}
-
-CreateMeshCMPT::~CreateMeshCMPT()
-{
-	m_network_op->RemoveReference();
-	m_strip_op->RemoveReference();
-	m_skeleton_op->RemoveReference();
 }
 
 void CreateMeshCMPT::SetEditOP(int pm_mesh_type)

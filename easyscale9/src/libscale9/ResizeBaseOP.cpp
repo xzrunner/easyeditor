@@ -52,7 +52,8 @@ bool ResizeBaseOP::OnMouseLeftUp(int x, int y)
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		const sm::vec2 src(fabs(m_firstPos.x)*2, fabs(m_firstPos.y)*2),
 			dst(fabs(pos.x)*2, fabs(pos.y)*2);
-		ee::EditAddRecordSJ::Instance()->Add(new ResizeAtomicOP(m_sym, src, dst));
+		auto op = std::make_shared<ResizeAtomicOP>(m_sym, src, dst);
+		ee::EditAddRecordSJ::Instance()->Add(op);
 	}
 
 	m_status = e_null;

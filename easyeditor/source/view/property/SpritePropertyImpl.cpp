@@ -29,7 +29,7 @@ void SpritePropertyImpl::Translate(float x, float y)
 
 	std::vector<SprPtr> sprs;
 	sprs.push_back(m_spr);
-	EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(sprs, new_pos - m_spr->GetPosition()));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<TranslateSpriteAOP>(sprs, new_pos - m_spr->GetPosition()));
 
 	m_spr->SetPosition(new_pos);
 }
@@ -44,7 +44,7 @@ void SpritePropertyImpl::Rotate(float angle)
 
 	std::vector<SprPtr> sprs;
 	sprs.push_back(m_spr);
-	EditAddRecordSJ::Instance()->Add(new RotateSpriteAOP(sprs, offset_angle));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<RotateSpriteAOP>(sprs, offset_angle));
 
 	m_spr->SetAngle(angle);
 }
@@ -55,7 +55,7 @@ void SpritePropertyImpl::Scale(float sx, float sy)
 		return;
 	}
 
-	EditAddRecordSJ::Instance()->Add(new ScaleSpriteAOP(m_spr, sm::vec2(sx, sy), m_spr->GetScale()));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<ScaleSpriteAOP>(m_spr, sm::vec2(sx, sy), m_spr->GetScale()));
 	m_spr->SetScale(sm::vec2(sx, sy));
 }
 
@@ -65,15 +65,15 @@ void SpritePropertyImpl::Shear(float kx, float ky)
 		return;
 	}
 
-	EditAddRecordSJ::Instance()->Add(new ShearSpriteAOP(m_spr, 
-		sm::vec2(kx, ky), m_spr->GetShear()));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<ShearSpriteAOP>(
+		m_spr, sm::vec2(kx, ky), m_spr->GetShear()));
 	m_spr->SetShear(sm::vec2(kx, ky));
 }
 
 void SpritePropertyImpl::Offset(float ox, float oy)
 {
-	EditAddRecordSJ::Instance()->Add(new OffsetSpriteAOP(m_spr, 
-		sm::vec2(ox, oy), m_spr->GetOffset()));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<OffsetSpriteAOP>(
+		m_spr, sm::vec2(ox, oy), m_spr->GetOffset()));
 	m_spr->SetOffset(sm::vec2(ox, oy));
 }
 
@@ -83,8 +83,8 @@ void SpritePropertyImpl::Mirror(bool mx, bool my)
 		return;
 	}
 
-	EditAddRecordSJ::Instance()->Add(new MirrorSpriteAOP(m_spr, 
-		m_spr->GetScale().x < 0, m_spr->GetScale().y < 0, mx, my));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<MirrorSpriteAOP>(
+		m_spr, m_spr->GetScale().x < 0, m_spr->GetScale().y < 0, mx, my));
 	sm::vec2 scale = m_spr->GetScale();
 	if (mx) {
 		scale.x = -fabs(scale.x);
@@ -105,8 +105,8 @@ void SpritePropertyImpl::Perspective(float px, float py)
 		return;
 	}
 
-	EditAddRecordSJ::Instance()->Add(new PerspectiveSpriteAOP(m_spr, 
-		sm::vec2(px, py), m_spr->GetPerspective()));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<PerspectiveSpriteAOP>(
+		m_spr, sm::vec2(px, py), m_spr->GetPerspective()));
 	m_spr->SetPerspective(sm::vec2(px, py));
 }
 

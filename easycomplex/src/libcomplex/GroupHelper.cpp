@@ -136,7 +136,7 @@ void GroupHelper::BuildGroup(const std::vector<ee::SprPtr>& sprs)
 	sym->SetName("_group");
 	spr->SetName("_group");
 
-	ee::AtomicOP* move_op = new ee::TranslateSpriteAOP(sprs, -spr->GetPosition());
+	auto move_op = std::make_shared<ee::TranslateSpriteAOP>(sprs, -spr->GetPosition());
 
 	std::vector<ee::SprPtr> removed;
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
@@ -144,12 +144,12 @@ void GroupHelper::BuildGroup(const std::vector<ee::SprPtr>& sprs)
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
 		removed.push_back(spr);
 	}
-	ee::AtomicOP* del_op = new ee::DeleteSpriteAOP(removed);
+	auto del_op = std::make_shared<ee::DeleteSpriteAOP>(removed);
 
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
-	ee::AtomicOP* add_op = new ee::InsertSpriteAOP(spr);
+	auto add_op = std::make_shared<ee::InsertSpriteAOP>(spr);
 
-	ee::CombineAOP* combine = new ee::CombineAOP;
+	auto combine = std::make_shared<ee::CombineAOP>();
 	combine->Insert(move_op);
 	combine->Insert(del_op);
 	combine->Insert(add_op);

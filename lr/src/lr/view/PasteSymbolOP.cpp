@@ -17,10 +17,8 @@ PasteSymbolOP::PasteSymbolOP(StagePanel* stage, ee::LibraryPanel* library,
 void PasteSymbolOP::ChangeCurrOP()
 {
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-	ee::EditOP* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(
-		stage, stage->GetStageImpl(), stage, m_property);
-
-	m_stage->SetEditOP(editop);	
+	m_stage->SetEditOP(std::make_shared<ee::ArrangeSpriteOP<SelectSpritesOP>>(
+		stage, stage->GetStageImpl(), stage, m_property));
 }
 
 }

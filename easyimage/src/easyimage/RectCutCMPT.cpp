@@ -34,7 +34,7 @@ RectCutCMPT::RectCutCMPT(wxWindow* parent, const std::string& name,
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editop = new RectCutOP(this, stage);
+	m_editop = std::make_shared<RectCutOP>(this, stage);
 }
 
 void RectCutCMPT::OnSaveEditOP(wxCommandEvent& event)
@@ -43,7 +43,7 @@ void RectCutCMPT::OnSaveEditOP(wxCommandEvent& event)
 		wxT("*_") + FILTER + wxT(".json"), wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		RectCutOP* op = static_cast<RectCutOP*>(m_editop);
+		auto op = std::dynamic_pointer_cast<RectCutOP>(m_editop);
 
 		Json::Value value;
 
@@ -89,7 +89,7 @@ void RectCutCMPT::OnLoadEditOP(wxCommandEvent& event)
 		reader.parse(fin, value);
 		fin.close();
 
-		RectCutOP* op = static_cast<RectCutOP*>(m_editop);
+		auto op = std::dynamic_pointer_cast<RectCutOP>(m_editop);
 
 		sm::vec2 center;
 		center.x = value["center"]["x"].asDouble();
@@ -229,7 +229,7 @@ wxSizer* RectCutCMPT::InitAddRectLayout()
 
 void RectCutCMPT::OnSetImagesPath(wxCommandEvent& event)
 {
-	RectCutOP* op = static_cast<RectCutOP*>(m_editop);
+	auto op = std::dynamic_pointer_cast<RectCutOP>(m_editop);
 	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Images Path", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
@@ -243,7 +243,7 @@ void RectCutCMPT::OnSetImagesPath(wxCommandEvent& event)
 
 void RectCutCMPT::OnSetJsonPath(wxCommandEvent& event)
 {
-	RectCutOP* op = static_cast<RectCutOP*>(m_editop);
+	auto op = std::dynamic_pointer_cast<RectCutOP>(m_editop);
 	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Json Path", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
@@ -257,7 +257,7 @@ void RectCutCMPT::OnSetJsonPath(wxCommandEvent& event)
 
 void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 {
-	RectCutOP* op = static_cast<RectCutOP*>(m_editop);
+	auto op = std::dynamic_pointer_cast<RectCutOP>(m_editop);
 	const std::vector<sm::rect*>& rects = op->GetRectMgr().GetAllRect();
 	if (rects.empty()) {
 		return;
@@ -344,7 +344,7 @@ void RectCutCMPT::OnAddRect(wxCommandEvent& event)
 	m_widthCtrl->GetValue().ToDouble(&width);
 	m_heightCtrl->GetValue().ToDouble(&height);
 	
-	RectCutOP* op = static_cast<RectCutOP*>(m_editop);
+	auto op = std::dynamic_pointer_cast<RectCutOP>(m_editop);
 	op->GetRectMgr().Insert(sm::rect(sm::vec2(0, 0), sm::vec2((float)width, (float)height)));
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -357,7 +357,7 @@ void RectCutCMPT::OnAutoCreateRects(wxCommandEvent& event)
 	assert(sym);
 	auto img = ee::ImageDataMgr::Instance()->GetItem(sym->GetFilepath());
 
-	RectMgr& rects = static_cast<RectCutOP*>(m_editop)->GetRectMgr();
+	RectMgr& rects = std::dynamic_pointer_cast<RectCutOP>(m_editop)->GetRectMgr();
 
 	m_part_rects.clear();
 	std::vector<Rect> pre_rects;

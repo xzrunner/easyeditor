@@ -58,7 +58,7 @@ public:
 
 	const CharacterAllDirections* GetCharaDirs() const { return &m_chara_dirs; }
 
-	ee::EditOP* GetBaseOP() { return m_arrange_op; }
+	std::shared_ptr<ee::EditOP>& GetBaseOP() { return m_arrange_op; }
 
 	ee::LibraryPanel* GetLibrary() { return m_library; }
 
@@ -95,7 +95,7 @@ private:
 private:
 	ee::LibraryPanel* m_library;
 
-	ee::EditOP* m_arrange_op;
+	std::shared_ptr<ee::EditOP> m_arrange_op;
 
 	Grids* m_grids;
 

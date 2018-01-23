@@ -3,6 +3,8 @@
 
 #include "IOperaterBase.h"
 
+#include <memory>
+
 namespace ee { class EditPanelImpl; class MultiShapesImpl; class PropertySettingPanel; class OneFloatValue; class EditCMPT; }
 
 class wxWindow;
@@ -48,7 +50,7 @@ protected:
 private:
 	EditPolylineImpl* m_impl;
 
-	TSelected* m_select_op;
+	std::shared_ptr<TSelected> m_select_op;
 
 	ee::OneFloatValue* m_node_capture;
 

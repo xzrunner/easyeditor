@@ -103,7 +103,7 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 
 void Frame::OnConnect(wxCommandEvent& event)
 {
-	ee::ZoomViewOP* op = dynamic_cast<ee::ZoomViewOP*>
+	auto op = dynamic_cast<ee::ZoomViewOP>
 		(m_task->GetStagePanel()->GetEditOP());
 	if (op) {
 		op->SetMouseMoveFocus(false);

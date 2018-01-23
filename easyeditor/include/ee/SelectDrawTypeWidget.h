@@ -3,6 +3,8 @@
 
 #include "Widget.h"
 
+#include <memory>
+
 namespace ee
 {
 
@@ -11,13 +13,13 @@ class CameraCanvas;
 class SelectDrawTypeWidget : public Widget
 {
 public:
-	SelectDrawTypeWidget(wxWindow* parent, CameraCanvas* canvas);
+	SelectDrawTypeWidget(wxWindow* parent, const std::shared_ptr<CameraCanvas>& canvas);
 
 private:
 	void OnSetDrawType(wxCommandEvent& event);
 
 private:
-	CameraCanvas* m_canvas;
+	std::shared_ptr<CameraCanvas> m_canvas = nullptr;
 
 }; // SelectDrawTypeWidget
 

@@ -56,8 +56,8 @@ void PreviewDialog::BuildToolBar(wxSizer* top_sizer)
 void PreviewDialog::BuildEditPanel(wxSizer* top_sizer, wxGLContext* glctx)
 {
 	m_stage = new PreviewPanel(this, this, m_curr);
-	m_stage->SetEditOP(new PreviewOP(m_stage, m_stage->GetStageImpl(), m_curr));
-	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_stage->GetStageImpl(), glctx, m_curr));
+	m_stage->SetEditOP(std::make_shared<PreviewOP>(m_stage, m_stage->GetStageImpl(), m_curr));
+	m_stage->SetCanvas(std::make_shared<PreviewCanvas>(m_stage, m_stage->GetStageImpl(), glctx, m_curr));
 	top_sizer->Add(m_stage, 1, wxEXPAND);
 }
 

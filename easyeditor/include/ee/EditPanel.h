@@ -38,12 +38,12 @@ public:
 
 	void DrawEditOP() const;
 
-	const EditOP* GetEditOP() const;
-	EditOP* GetEditOP();
+	const std::shared_ptr<ee::EditOP>& GetEditOP() const;
+	std::shared_ptr<ee::EditOP>& GetEditOP();
 	void SetEditOP(const std::shared_ptr<EditOP>& op);
 
-	const StageCanvas* GetCanvas() const;
-	StageCanvas* GetCanvas();
+	const std::shared_ptr<StageCanvas>& GetCanvas() const;
+	std::shared_ptr<StageCanvas>& GetCanvas();
 	void SetCanvas(const std::shared_ptr<StageCanvas>& canvas);
 
 	// In Stage, class StagePanel can't get focus, only its class StageCanvas has the focus, so 

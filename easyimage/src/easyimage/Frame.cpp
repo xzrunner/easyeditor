@@ -15,14 +15,14 @@ Frame::Frame(const std::string& title)
 
 void Frame::OnNew(wxCommandEvent& event)
 {
-	ee::EditOP* editop = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetEditOP();
+	auto editop = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetEditOP();
 	editop->Clear();
 }
 
 void Frame::OnOpen(wxCommandEvent& event)
 {
-	ee::EditOP* editop = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetEditOP();
-	if (RectCutOP* op = dynamic_cast<RectCutOP*>(editop))
+	auto editop = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetEditOP();
+	if (auto op = std::dynamic_pointer_cast<RectCutOP>(editop))
 	{
 		op->GetEditCMPT()->OnLoadEditOP(event);
 	}
@@ -30,8 +30,8 @@ void Frame::OnOpen(wxCommandEvent& event)
 
 void Frame::OnSave(wxCommandEvent& event)
 {
-	ee::EditOP* editop = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetEditOP();
-	if (RectCutOP* op = dynamic_cast<RectCutOP*>(editop))
+	auto editop = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetEditOP();
+	if (auto op = std::dynamic_pointer_cast<RectCutOP>(editop))
 	{
 		op->GetEditCMPT()->OnSaveEditOP(event);
 	}
@@ -39,8 +39,8 @@ void Frame::OnSave(wxCommandEvent& event)
 
 void Frame::OnSaveAs(wxCommandEvent& event)
 {
-	ee::EditOP* editop = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetEditOP();
-	if (RectCutOP* op = dynamic_cast<RectCutOP*>(editop))
+	auto editop = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetEditOP();
+	if (auto op = std::dynamic_pointer_cast<RectCutOP>(editop))
 	{
 		op->GetEditCMPT()->OnSaveEditOP(event);
 	}

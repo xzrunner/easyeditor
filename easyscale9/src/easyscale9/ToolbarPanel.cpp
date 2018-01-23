@@ -13,7 +13,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage,
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
  	AddChild(new ee::UniversalCMPT(this, "compose", stage->GetStageImpl(), 
-		new ComposeOP(stage, this)));
+		std::make_shared<ComposeOP>(stage, this)));
 	AddChild(m_resizeCmpt = new ResizeCMPT(this, "resize", stage, this));
 
 	SetSizer(InitLayout());	

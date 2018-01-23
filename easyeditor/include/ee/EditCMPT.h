@@ -22,7 +22,7 @@ public:
 	virtual void UpdateControlValue() {}
 
 	void SetEditOP(const std::shared_ptr<EditOP>& op);
-	EditOP* GetChildEditOP();		// todo
+	std::shared_ptr<EditOP> GetChildEditOP();
 
 protected:
 	virtual wxSizer* InitLayout() = 0;

@@ -14,8 +14,8 @@ EditPolylineOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 	: TBase(wnd, stage, shapes_impl)
 	, m_node_capture(node_capture)
 {
-	m_select_op = new TSelected(wnd, stage, shapes_impl, cmpt);
-	m_impl = new EditPolylineImpl(wnd, stage, shapes_impl, property, m_node_capture, this, m_select_op, this);
+	m_select_op = std::make_shared<TSelected>(wnd, stage, shapes_impl, cmpt);
+	m_impl = new EditPolylineImpl(wnd, stage, shapes_impl, property, m_node_capture, *this, *m_select_op, this);
 }
 
 template <typename TBase, typename TSelected>
@@ -23,7 +23,6 @@ eshape::EditPolylineOP<TBase, TSelected>::
 ~EditPolylineOP() 
 {
 	delete m_impl;
-	delete m_select_op;
 }
 
 template <typename TBase, typename TSelected>

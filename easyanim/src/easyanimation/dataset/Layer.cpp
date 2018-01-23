@@ -30,7 +30,7 @@ bool Layer::IsKeyFrame(int time) const
 	return m_frames.find(time) != m_frames.end();
 }
 
-ee::AtomicOP* Layer::RemoveFrameRegion(int begin, int end)
+std::shared_ptr<ee::AtomicOP> Layer::RemoveFrameRegion(int begin, int end)
 {
 	if (begin > end || begin < 1 || end < 1) {
 		return NULL;
@@ -41,7 +41,7 @@ ee::AtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 		return NULL;
 	}
 
-	EditKeyFramesAOP* aop = new EditKeyFramesAOP(this);
+	auto aop = std::make_shared<EditKeyFramesAOP>(this);
 
 	std::vector<KeyFrame*> frames;
 

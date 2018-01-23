@@ -51,20 +51,20 @@ bool PanViewState::OnMouseDrag(int x, int y)
 	sm::vec2 offset(m_last_pos.x - x, m_last_pos.y - y);
 	offset.y = -offset.y;
 
-	ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_stage->GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<ee::CameraCanvas>(m_stage->GetCanvas());
 	if (canvas)
 	{
 		switch (canvas->GetCamera()->Type())
 		{
 		case s2::CAM_ORTHO2D:
 			{
-				s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
+				auto cam = std::dynamic_pointer_cast<s2::OrthoCamera>(canvas->GetCamera());
 				cam->Translate(offset);
 			}
 			break;
 		case s2::CAM_PSEUDO3D:
 			{
-				s2::Pseudo3DCamera* cam = static_cast<s2::Pseudo3DCamera*>(canvas->GetCamera());		
+				auto cam = std::dynamic_pointer_cast<s2::Pseudo3DCamera>(canvas->GetCamera());		
 				int w = gum::RenderContext::Instance()->GetWidth(),
 					h = gum::RenderContext::Instance()->GetHeight();		
 				sm::vec2 last = cam->TransPosScreenToProject(m_last_pos.x, m_last_pos.y, w, h);

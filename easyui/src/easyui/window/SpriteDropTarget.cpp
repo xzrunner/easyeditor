@@ -49,7 +49,7 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	auto spr = ee::SpriteFactory::Instance()->Create(sym);
 	spr->Translate(pos);
 	ee::InsertSpriteSJ::Instance()->Insert(spr);
-	ee::EditAddRecordSJ::Instance()->Add(new ee::InsertSpriteAOP(spr));
+	ee::EditAddRecordSJ::Instance()->Add(std::make_shared<ee::InsertSpriteAOP>(spr));
 
 	return true;
 }

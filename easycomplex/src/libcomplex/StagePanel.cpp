@@ -33,14 +33,10 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_sym = std::make_shared<Symbol>();
 	SetContainer(std::make_shared<SymbolContainer>(m_sym));
 
-	ee::EditOP* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
-	SetEditOP(editop);
-	editop->RemoveReference();
+	SetEditOP(std::make_shared<ee::ArrangeSpriteOP<SelectSpritesOP>>(
+		this, GetStageImpl(), this, property, nullptr, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
 
-	ee::StageCanvas* canvas = new StageCanvas(this, library);
-	SetCanvas(canvas);
-	canvas->RemoveReference();
+	SetCanvas(std::make_shared<StageCanvas>(this, library));
 
 	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 
@@ -62,15 +58,12 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	SetContainer(std::make_shared<SymbolContainer>(m_sym));
 
-	ee::ArrangeSpriteOP<SelectSpritesOP>* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(
-		this, GetStageImpl(), this, property, NULL, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
-	static_cast<SelectSpritesOP*>(editop)->SetGuides(guides);
+	auto editop = std::make_shared<ee::ArrangeSpriteOP<SelectSpritesOP>>(
+		this, GetStageImpl(), this, property, nullptr, ee::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
+	std::dynamic_pointer_cast<SelectSpritesOP>(editop)->SetGuides(guides);
 	SetEditOP(editop);
-	editop->RemoveReference();
 
-	ee::StageCanvas* canvas = new StageCanvas(this, library, glctx);
-	SetCanvas(canvas);
-	canvas->RemoveReference();
+	SetCanvas(std::make_shared<StageCanvas>(this, library, glctx));
 
 	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 

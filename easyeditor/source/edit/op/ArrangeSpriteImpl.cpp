@@ -514,14 +514,14 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 		return;
 	}
 
-	CombineAOP* comb = new CombineAOP();
+	auto comb = std::make_shared<CombineAOP>();
 	for (int i = 0, n = sprs.size(); i < n; ++i) 
 	{
 		const SprPtr& spr = sprs[i];
 
-		comb->Insert(new TranslateSpriteAOP(spr, -spr->GetPosition()));
-		comb->Insert(new ScaleSpriteAOP(spr, sm::vec2(1, 1), spr->GetScale()));
-		comb->Insert(new ShearSpriteAOP(spr, sm::vec2(0, 0), spr->GetShear()));
+		comb->Insert(std::make_shared<TranslateSpriteAOP>(spr, -spr->GetPosition()));
+		comb->Insert(std::make_shared<ScaleSpriteAOP>(spr, sm::vec2(1, 1), spr->GetScale()));
+		comb->Insert(std::make_shared<ShearSpriteAOP>(spr, sm::vec2(0, 0), spr->GetShear()));
 		//comb->Insert(new OffsetSpriteAOP(spr, sm::vec2(0, 0), spr->getOffset()));
 
 		spr->SetPosition(sm::vec2(0, 0));
@@ -561,8 +561,8 @@ ArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(const SprPtr& spr, const
 
 ArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(const SprPtr& spr) const
 {
-	s2::Camera* cam = NULL;
-	if (ee::CameraCanvas* canvas = dynamic_cast<ee::CameraCanvas*>(m_stage->GetCanvas())) {
+	std::shared_ptr<s2::Camera> cam = nullptr;
+	if (auto canvas = std::dynamic_pointer_cast<ee::CameraCanvas>(m_stage->GetCanvas())) {
 		cam = canvas->GetCamera();
 	}
 	return new OffsetSpriteState(spr, cam);
@@ -586,7 +586,7 @@ void ArrangeSpriteImpl::OnDeleteKeyDown()
 	// add to history
 	std::vector<SprPtr> sprs;
 	m_selection->Traverse(FetchAllRefVisitor<Sprite>(sprs));
-	EditAddRecordSJ::Instance()->Add(new DeleteSpriteAOP(sprs));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<DeleteSpriteAOP>(sprs));
 
 	m_sprites_impl->ClearSelectedSprite();
 
@@ -603,7 +603,7 @@ void ArrangeSpriteImpl::UpOneLayer()
 		ReorderSpriteSJ::Instance()->Reorder(selected[i], true);
 	}
 
-	EditAddRecordSJ::Instance()->Add(new ReorderSpriteAOP(selected, true));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<ReorderSpriteAOP>(selected, true));
 
 	ClearSpriteSelectionSJ::Instance()->Clear();
 	for (int i = selected.size() - 1; i >= 0; --i) {
@@ -621,7 +621,7 @@ void ArrangeSpriteImpl::DownOneLayer()
 		ReorderSpriteSJ::Instance()->Reorder(selected[i], false);
 	}
 
-	EditAddRecordSJ::Instance()->Add(new ReorderSpriteAOP(selected, false));
+	EditAddRecordSJ::Instance()->Add(std::make_shared<ReorderSpriteAOP>(selected, false));
 
 	ClearSpriteSelectionSJ::Instance()->Clear();
 	for (int i = 0, n = selected.size(); i < n; ++i) {
@@ -664,7 +664,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		for (auto& spr : sprs) {
 			spr->SetEditable(editable);
 		}
-		EditAddRecordSJ::Instance()->Add(new EditableSpriteAOP(sprs));
+		EditAddRecordSJ::Instance()->Add(std::make_shared<EditableSpriteAOP>(sprs));
 		RefreshPanelSJ::Instance()->Refresh();
 		return true;
 	}
@@ -675,7 +675,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		for (auto& spr : sprs) {
 			spr->SetVisible(visible);
 		}
-		EditAddRecordSJ::Instance()->Add(new VisibleSpriteAOP(sprs));
+		EditAddRecordSJ::Instance()->Add(std::make_shared<VisibleSpriteAOP>(sprs));
 		SetCanvasDirtySJ::Instance()->SetDirty();
 		RefreshPanelSJ::Instance()->Refresh();
 		return true;

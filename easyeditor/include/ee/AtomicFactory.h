@@ -13,7 +13,7 @@ class AtomicOP;
 class AtomicFactory
 {
 public:
-	static AtomicOP* Create(const Json::Value& val,
+	static std::shared_ptr<AtomicOP> Create(const Json::Value& val,
 		const std::vector<SprPtr>& sprs);
 
 }; // AtomicFactory

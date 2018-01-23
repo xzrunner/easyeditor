@@ -23,8 +23,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, ee::MultiSpritesImpl(GetStageImpl())
 	, m_top_pannels(top_pannels)
 {
-	SetEditOP(static_cast<EditClipboxOP*>(new EditOP(this, top_pannels->property)));
-	SetCanvas(new StageCanvas(this, glctx));
+	SetEditOP(std::make_shared<EditClipboxOP>(this, top_pannels->property));
+	SetCanvas(std::make_shared<StageCanvas>(this, glctx));
 
 	ee::LibraryPanel* library = top_pannels->library->GetRawLibrary();
 	SetDropTarget(new ee::SpriteDropTarget(GetStageImpl(), library));

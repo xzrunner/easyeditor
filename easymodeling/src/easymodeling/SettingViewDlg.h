@@ -3,6 +3,8 @@
 
 #include <wx/dialog.h>
 
+#include <memory>
+
 namespace ee { class StageCanvas; }
 
 namespace emodeling
@@ -11,7 +13,7 @@ namespace emodeling
 class SettingViewDlg : public wxDialog
 {
 public:
-	SettingViewDlg(wxWindow* parent, ee::StageCanvas* canvas);
+	SettingViewDlg(wxWindow* parent, const std::shared_ptr<ee::StageCanvas>& canvas);
 
 private:
 	wxSizer* initDisplayTypePanel();
@@ -23,7 +25,7 @@ private:
 	void onChangeDisplayPolygonBound(wxCommandEvent& event);
 
 private:
-	ee::StageCanvas* m_canvas;
+	std::shared_ptr<ee::StageCanvas> m_canvas;
 
 	wxSpinCtrl* m_ctlPointSize;
 

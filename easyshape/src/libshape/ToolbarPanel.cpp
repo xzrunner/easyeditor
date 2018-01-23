@@ -35,22 +35,19 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::PropertySettingPanel* property,
 	// point
 	{
 		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "点", stage->GetStageImpl(), "node capture", 5, 30, 10);
-		ee::EditOP* op = new EditPointOP(stage, stage->GetStageImpl(), stage, capture_cmpt);
-		capture_cmpt->SetEditOP(op);
+		capture_cmpt->SetEditOP(std::make_shared<EditPointOP>(stage, stage->GetStageImpl(), stage, capture_cmpt));
 		AddChild(capture_cmpt);
 	}
 	// rect
 	{
 		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "矩形", stage->GetStageImpl(), "node capture", 5, 30, 10);
-		ee::EditOP* op = new EditRectOP(stage, stage->GetStageImpl(), stage, property, capture_cmpt);
-		capture_cmpt->SetEditOP(op);
+		capture_cmpt->SetEditOP(std::make_shared<EditRectOP>(stage, stage->GetStageImpl(), stage, property, capture_cmpt));
 		AddChild(capture_cmpt);
 	}
 	// circle
 	{
 		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "圆形", stage->GetStageImpl(), "node capture", 5, 30, 10);
-		ee::EditOP* op = new EditCircleOP(stage, stage->GetStageImpl(), stage, property, capture_cmpt);
-		capture_cmpt->SetEditOP(op);
+		capture_cmpt->SetEditOP(std::make_shared<EditCircleOP>(stage, stage->GetStageImpl(), stage, property, capture_cmpt));
 		AddChild(capture_cmpt);
 	}
 	// chain
@@ -71,8 +68,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::PropertySettingPanel* property,
 	// bezier
 	{
 		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "贝塞尔曲线", stage->GetStageImpl(), "node capture", 5, 30, 10);
-		ee::EditOP* op = new EditBezierOP(stage, stage->GetStageImpl(), stage, property, capture_cmpt);
-		capture_cmpt->SetEditOP(op);
+		capture_cmpt->SetEditOP(std::make_shared<EditBezierOP>(stage, stage->GetStageImpl(), stage, property, capture_cmpt));
 		AddChild(capture_cmpt);
 	}
 	SetSizer(InitLayout());	

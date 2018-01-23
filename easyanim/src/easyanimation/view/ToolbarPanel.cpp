@@ -127,7 +127,7 @@ void ToolbarPanel::OnChangeAnim(wxCommandEvent& event)
 
 void ToolbarPanel::OnSetTemplateDir(wxCommandEvent& event)
 {
-	ee::ZoomViewOP* op = static_cast<ee::ZoomViewOP*>(m_stage->GetEditOP());
+	auto op = std::dynamic_pointer_cast<ee::ZoomViewOP>(m_stage->GetEditOP());
 	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Template Dir", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);

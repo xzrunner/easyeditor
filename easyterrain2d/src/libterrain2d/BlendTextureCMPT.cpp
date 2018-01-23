@@ -13,7 +13,7 @@ BlendTextureCMPT::BlendTextureCMPT(wxWindow* parent, const std::string& name, St
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage_panel(stage)
 {
-	m_editop = new WaveVerticesOP(stage);
+	m_editop = std::make_shared<WaveVerticesOP>(stage);
 }
 
 void BlendTextureCMPT::SetControlersValue(const OceanMesh* ocean)

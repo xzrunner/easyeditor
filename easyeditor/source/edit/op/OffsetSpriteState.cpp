@@ -12,7 +12,7 @@
 namespace ee
 {
 
-OffsetSpriteState::OffsetSpriteState(const SprPtr& spr, const s2::Camera* camera)
+OffsetSpriteState::OffsetSpriteState(const SprPtr& spr, const std::shared_ptr<s2::Camera>& camera)
 	: m_spr(spr)
 	, m_camera(camera)
 {
@@ -23,7 +23,7 @@ void OffsetSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
 	float s = 1;
 	if (m_camera->Type() == s2::CAM_ORTHO2D) {
-		s = static_cast<const s2::OrthoCamera*>(m_camera)->GetScale();
+		s = std::dynamic_pointer_cast<const s2::OrthoCamera>(m_camera)->GetScale();
 	}
 
 	float r = ArrangeSpriteImpl::CTRL_NODE_RADIUS * s * 2;
@@ -44,7 +44,7 @@ void OffsetSpriteState::OnMouseRelease(const sm::vec2& pos)
 
 	sm::vec2 new_offset = sm::rotate_vector(fixed - m_spr->GetCenter(), -m_spr->GetAngle());
 	m_spr->SetOffset(new_offset);
-	AtomicOP* aop = new OffsetSpriteAOP(m_spr, new_offset, m_old_offset);
+	auto aop = std::make_shared<OffsetSpriteAOP>(m_spr, new_offset, m_old_offset);
 	EditAddRecordSJ::Instance()->Add(aop);
 }
 

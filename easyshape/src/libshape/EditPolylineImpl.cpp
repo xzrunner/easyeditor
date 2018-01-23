@@ -27,9 +27,11 @@ EditPolylineImpl::EditPolylineImpl(wxWindow* wnd, ee::EditPanelImpl* stage,
 								   ee::MultiShapesImpl* shapes_impl,
 								   ee::PropertySettingPanel* property, 
 								   ee::OneFloatValue* node_capture, 
-								   DrawPolylineOP* draw_op,
-								   ee::EditOP* select_op,
+								   DrawPolylineOP& draw_op,
+								   ee::EditOP& select_op,
 								   IOperaterBase* base_op)
+	: m_draw_op(draw_op)
+	, m_select_op(select_op)
 {
 	m_stage = stage;
 
@@ -39,11 +41,8 @@ EditPolylineImpl::EditPolylineImpl(wxWindow* wnd, ee::EditPanelImpl* stage,
 
 	m_node_capture = node_capture;
 
-	m_selectOP = select_op;
 	m_last_left_down_pos.MakeInvalid();
 	m_is_select_open = false;
-
-	m_draw_op = draw_op;
 
 	m_base_op = base_op;
 
@@ -57,12 +56,12 @@ bool EditPolylineImpl::OnKeyDown(int keyCode)
 		m_captured_editable.Clear();
 		m_captureSelectable.Clear();
 	}
-	return m_selectOP->OnKeyDown(keyCode);
+	return m_select_op.OnKeyDown(keyCode);
 }
 
 bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 {
-	if (m_draw_op->ShouldFixPos())
+	if (m_draw_op.ShouldFixPos())
 	{
 		return m_base_op->OnMouseLeftDownBase(x, y);
 	}
@@ -81,27 +80,27 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 		if (m_captured_editable.shape)
 		{
 			// 			sm::vec2 screen = m_stage->transPosProjectToScreen(m_capturedEditable.pos);
-			// 			bNotDeliver = m_draw_op->OnMouseLeftDown(screen.x, screen.y);
+			// 			bNotDeliver = m_draw_op.OnMouseLeftDown(screen.x, screen.y);
 
 			if (m_captured_editable.pos.IsValid())
-				m_draw_op->m_polyline.push_back(m_captured_editable.pos);
+				m_draw_op.m_polyline.push_back(m_captured_editable.pos);
 
 			checkActiveShape(m_captured_editable);
 		}
 		else if (m_captureSelectable.shape)
 		{
 			if (m_captureSelectable.pos.IsValid())
-				m_draw_op->m_polyline.push_back(m_captureSelectable.pos);
+				m_draw_op.m_polyline.push_back(m_captureSelectable.pos);
 
 			checkActiveShape(m_captureSelectable);
 		}
 		else
 		{
-			if (m_draw_op->m_polyline.empty()) {
+			if (m_draw_op.m_polyline.empty()) {
 				m_last_left_down_pos = sm::vec2(x, y);
 			}
 
-			if (tolerance != 0 && m_draw_op->m_polyline.empty())
+			if (tolerance != 0 && m_draw_op.m_polyline.empty())
 			{
 				sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 				InterruptChainVisitor interrupt(pos, tolerance);
@@ -166,7 +165,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 
 	if (m_is_select_open)
 	{
-		m_selectOP->OnMouseLeftUp(x, y);
+		m_select_op.OnMouseLeftUp(x, y);
 		m_is_select_open = false;
 		m_last_left_down_pos.MakeInvalid();
 	}
@@ -177,7 +176,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 
 bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 {
-	if (m_draw_op->m_polyline.empty())
+	if (m_draw_op.m_polyline.empty())
 	{
 		int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 		if (tolerance != 0)
@@ -243,17 +242,17 @@ bool EditPolylineImpl::OnMouseMove(int x, int y)
 bool EditPolylineImpl::OnMouseDrag(int x, int y)
 {
 	if (m_is_select_open)
-		m_selectOP->OnMouseDrag(x, y);
+		m_select_op.OnMouseDrag(x, y);
 	else if (m_captured_editable.shape)
 	{
-		if (m_draw_op->m_polyline.size() > 1)
+		if (m_draw_op.m_polyline.size() > 1)
 		{
 			m_captured_editable.shape = NULL;
 			return false;
 		}
 
-		if (m_draw_op->m_polyline.size() == 1)
-			m_draw_op->m_polyline.clear();
+		if (m_draw_op.m_polyline.size() == 1)
+			m_draw_op.m_polyline.clear();
 
 		sm::vec2 pos = m_stage->TransPosScrToProj(x, y);
 		if (auto polyline = std::dynamic_pointer_cast<EditedPolyShape>(m_captured_editable.shape))
@@ -281,10 +280,10 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 		&& sm::dis_pos_to_pos(m_last_left_down_pos, sm::vec2(x, y)) < DRAG_SELECT_TOL)
 		//		&& (m_lastLeftDownPos.x != x || m_lastLeftDownPos.y != y))
 	{
-		if (m_draw_op->m_polyline.size() == 1)
-			m_draw_op->m_polyline.clear();
+		if (m_draw_op.m_polyline.size() == 1)
+			m_draw_op.m_polyline.clear();
 		m_is_select_open = true;
-		m_selectOP->OnMouseLeftDown(x, y);
+		m_select_op.OnMouseLeftDown(x, y);
 	}
 
 	return false;
@@ -292,7 +291,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 
 void EditPolylineImpl::OnDraw() const
 {
-	m_selectOP->OnDraw();
+	m_select_op.OnDraw();
 	if (m_node_capture)
 	{
 		if (m_captured_editable.shape) {
@@ -305,7 +304,7 @@ void EditPolylineImpl::OnDraw() const
 
 void EditPolylineImpl::Clear()
 {
-	m_selectOP->Clear();
+	m_select_op.Clear();
 	m_captured_editable.shape = NULL;
 	m_captureSelectable.shape = NULL;
 }

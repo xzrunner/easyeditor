@@ -15,14 +15,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 {
-	StageCanvas* canvas = new StageCanvas(this);
-	SetCanvas(canvas);
-	canvas->RemoveReference();
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
 	ee::OneFloatValue* capture_val = new ee::OneFloatValueStatic(10);
-	ee::EditOP* editop = new eshape::EditPolylineOP<eshape::DrawPolygonOP, ee::SelectShapesOP>(this, GetStageImpl(), this, property, capture_val, NULL);
-	SetEditOP(editop);
-	editop->RemoveReference();
+	SetEditOP(std::make_shared<eshape::EditPolylineOP<eshape::DrawPolygonOP, ee::SelectShapesOP>>(
+		this, GetStageImpl(), this, property, capture_val, NULL));
 
 	const int HW = 512;
 	const int HH = 512;

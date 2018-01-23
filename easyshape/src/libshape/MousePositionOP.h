@@ -13,7 +13,6 @@ class MousePositionOP : public ee::MousePositionOP
 public:
 	MousePositionOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
 		ee::MousePositionCMPT* cmpt);
-	virtual ~MousePositionOP();
 
 	virtual bool OnMouseLeftDown(int x, int y) override;
 	virtual bool OnMouseRightDown(int x, int y) override;
@@ -24,7 +23,7 @@ public:
 	virtual bool Clear() override;
 
 private:
-	DrawPolylineOP* m_draw_impl;
+	std::shared_ptr<DrawPolylineOP> m_draw_impl;
 
 }; // MousePositionOP
 

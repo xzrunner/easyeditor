@@ -63,10 +63,10 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	stage->BuildGrids(cfg->m_map_width, cfg->m_map_height);
 
 	// camera
-	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(stage->GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<ee::CameraCanvas>(stage->GetCanvas());
 	if (canvas->GetCamera()->Type() == s2::CAM_ORTHO2D)
 	{
-		s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
+		auto cam = std::dynamic_pointer_cast<s2::OrthoCamera>(canvas->GetCamera());
 		float s = value["camera"]["scale"].asDouble();
 		float x = value["camera"]["x"].asDouble(),
 			  y = value["camera"]["y"].asDouble();
@@ -104,7 +104,7 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 			if (img) {
 				SettingCfg::Instance()->m_post_effect_file = filepath;
 				prog->SetLUTTex(img->GetTexID());
-				static_cast<StageCanvas*>(stage->GetCanvas())->EnableColGrading(true);
+				std::dynamic_pointer_cast<StageCanvas>(stage->GetCanvas())->EnableColGrading(true);
 			}
 		}
 	}
@@ -147,10 +147,10 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	value["size"]["view offset y"] = cfg->m_view_dy;
 
 	// camera
-	ee::CameraCanvas* canvas = static_cast<ee::CameraCanvas*>(stage->GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<ee::CameraCanvas>(stage->GetCanvas());
 	if (canvas->GetCamera()->Type() == s2::CAM_ORTHO2D)
 	{
-		s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
+		auto cam = std::dynamic_pointer_cast<s2::OrthoCamera>(canvas->GetCamera());
 		value["camera"]["scale"] = cam->GetScale();
 		value["camera"]["x"] = cam->GetPosition().x;
 		value["camera"]["y"] = cam->GetPosition().y;

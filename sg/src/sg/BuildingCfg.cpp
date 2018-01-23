@@ -90,8 +90,8 @@ void BuildingCfg::InitBackground(const Json::Value& value)
 {
 	std::string filepath = value["background"].asString();
 	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	ee::StageCanvas* canvas = m_stage->GetCanvas();
-	static_cast<StageCanvas*>(canvas)->SetBackground(sym);
+	auto canvas = m_stage->GetCanvas();
+	std::dynamic_pointer_cast<StageCanvas>(canvas)->SetBackground(sym);
 }
 
 void BuildingCfg::InitGrid(const Json::Value& value)

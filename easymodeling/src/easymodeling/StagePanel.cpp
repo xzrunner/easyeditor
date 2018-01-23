@@ -21,7 +21,7 @@ StagePanel::StagePanel(wxWindow* parent,
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), Context::Instance()->library)
 {
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
 	RegistSubject(ee::InsertSpriteSJ::Instance());
 	RegistSubject(ee::RemoveSpriteSJ::Instance());

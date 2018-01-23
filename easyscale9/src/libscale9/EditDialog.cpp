@@ -32,8 +32,8 @@ void EditDialog::InitLayout(wxGLContext* glctx)
 	wxSplitterWindow* splitter = new wxSplitterWindow(this);
 	
 	m_stage = new ee::EditPanel(splitter, this);
-	m_stage->SetEditOP(new ResizeBaseOP(m_stage, m_stage->GetStageImpl(), m_sym));
-	m_stage->SetCanvas(new ee::DialogStageCanvas(m_stage, m_stage->GetStageImpl(), m_sym, glctx));
+	m_stage->SetEditOP(std::make_shared<ResizeBaseOP>(m_stage, m_stage->GetStageImpl(), m_sym));
+	m_stage->SetCanvas(std::make_shared<ee::DialogStageCanvas>(m_stage, m_stage->GetStageImpl(), m_sym, glctx));
 
 	ToolbarPanel* toolbar = new ToolbarPanel(splitter, m_stage, m_sym);
 	

@@ -16,7 +16,7 @@ EditUVCMPT::EditUVCMPT(wxWindow* parent, const std::string& name,
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editop = new EditUVOP(stage);
+	m_editop = std::make_shared<EditUVOP>(stage);
 }
 
 wxSizer* EditUVCMPT::InitLayout()

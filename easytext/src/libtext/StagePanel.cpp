@@ -12,8 +12,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 {
-	SetEditOP(new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, GetStageImpl(), this));
-	SetCanvas(new StageCanvas(this));
+	SetEditOP(std::make_shared<ee::ArrangeSpriteOP<ee::SelectSpritesOP>>(this, GetStageImpl(), this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx,
@@ -22,8 +22,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* g
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 {
-	SetEditOP(new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, GetStageImpl(), this));
-	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));	
+	SetEditOP(std::make_shared<ee::ArrangeSpriteOP<ee::SelectSpritesOP>>(this, GetStageImpl(), this));
+	SetCanvas(std::make_shared<StageCanvas>(this, glctx, edited, bg_sprites));
 }
 
 StagePanel::~StagePanel()

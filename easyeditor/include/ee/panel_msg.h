@@ -3,6 +3,8 @@
 
 #include "Subject.h"
 
+#include <memory>
+
 namespace ee
 {
 
@@ -51,7 +53,7 @@ class AtomicOP;
 class EditAddRecordSJ : public Subject
 {
 public:
-	void Add(AtomicOP* op);
+	void Add(const std::shared_ptr<AtomicOP>& op);
 	SUBJECT_DECLARATION(EditAddRecordSJ)
 }; // EditAddRecordSJ
 

@@ -34,14 +34,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	m_db = new Database;
 	m_sym = new Symbol(m_db);
 
-	ee::EditOP* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, this->GetStageImpl(), this, 
-		NULL, NULL, ee::ArrangeSpriteConfig(false, false, false, false));
-	SetEditOP(editop);
-	editop->RemoveReference();
-
-	ee::StageCanvas* canvas = new StageCanvas(this);
-	SetCanvas(canvas);
-	canvas->RemoveReference();
+	SetEditOP(std::make_shared<ee::ArrangeSpriteOP<SelectSpritesOP>>(
+		this, this->GetStageImpl(), this, NULL, NULL, ee::ArrangeSpriteConfig(false, false, false, false)));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
 	SetDropTarget(new DropTarget(this, this));
 }

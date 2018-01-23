@@ -20,7 +20,7 @@ RotateJointState::RotateJointState(const std::shared_ptr<Joint>& joint, const sm
 void RotateJointState::OnMouseRelease(const sm::vec2& pos)
 {
 	if (m_joint && pos != m_first_pos) {
-		ee::AtomicOP* aop = new RotateJointAOP(m_joint, m_angle);
+		auto aop = std::make_shared<RotateJointAOP>(m_joint, m_angle);
 		ee::EditAddRecordSJ::Instance()->Add(aop);
 	}
 }

@@ -19,13 +19,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 {
-	ee::EditOP* op = new ComposeSkeletonOP(this, property);
-	SetEditOP(op);
-	op->RemoveReference();
-
-	ee::StageCanvas* canvas = new StageCanvas(this);
-	SetCanvas(canvas);
-	canvas->RemoveReference();
+	SetEditOP(std::make_shared<ComposeSkeletonOP>(this, property));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnMenuAddJointNode, this, Menu_AddJointNode);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnMenuDelJointNode, this, Menu_DelJointNode);

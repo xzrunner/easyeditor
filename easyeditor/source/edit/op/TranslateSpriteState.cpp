@@ -38,7 +38,7 @@ void TranslateSpriteState::OnMouseRelease(const sm::vec2& pos)
 
 	if (m_selection) {
 		sm::vec2 offset = pos - m_first_pos;
-		AtomicOP* aop = new TranslateSpriteAOP(*m_selection, offset);
+		auto aop = std::make_shared<TranslateSpriteAOP>(*m_selection, offset);
 		EditAddRecordSJ::Instance()->Add(aop);
 
 		EditSprMsg::Translate(*m_selection, offset);
@@ -87,7 +87,7 @@ bool TranslateSpriteState::OnDirectionKeyDown(int type)
 	Translate(offset);
 
 	if (m_selection) {
-		EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(*m_selection, offset));
+		EditAddRecordSJ::Instance()->Add(std::make_shared<TranslateSpriteAOP>(*m_selection, offset));
 		EditSprMsg::Translate(*m_selection, offset);
 	}
 

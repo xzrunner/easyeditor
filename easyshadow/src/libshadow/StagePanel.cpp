@@ -18,7 +18,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, ee::MultiShapesImpl()
 	, m_loop(NULL)
 {
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 
 	m_sym = new Symbol;
 
@@ -32,7 +32,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, ee::MultiShapesImpl()
 	, m_loop(NULL)
 {
-	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
+	SetCanvas(std::make_shared<StageCanvas>(this, glctx, edited, bg_sprites));
 
 	m_sym = dynamic_cast<Symbol*>(edited->GetSymbol());
 	if (m_sym) {

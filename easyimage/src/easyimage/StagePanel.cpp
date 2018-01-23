@@ -21,7 +21,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	m_left = m_right = NULL;
 
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 	SetDropTarget(new StageDropTarget(this, library));
 }
 

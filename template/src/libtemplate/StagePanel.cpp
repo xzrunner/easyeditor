@@ -13,13 +13,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 {
-	ee::EditOP* op = new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, GetStageImpl(), this, property);
-	SetEditOP(op);
-	op->RemoveReference();
-
-	ee::StageCanvas* canvas = new StageCanvas(this);
-	SetCanvas(canvas);
-	canvas->RemoveReference();
+	SetEditOP(std::make_shared<ee::ArrangeSpriteOP<ee::SelectSpritesOP>>(
+		this, GetStageImpl(), this, property));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 }
 
 StagePanel::~StagePanel()

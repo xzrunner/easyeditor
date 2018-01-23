@@ -23,7 +23,7 @@ EditPolylinesCMPT::EditPolylinesCMPT(wxWindow* parent, const std::string& name,
 	, m_simplify_spin(NULL)
 	, m_btn_merge(NULL)
 {
-	m_editop = new EditPolylinesOP(editPanel, editPanel->GetStageImpl(), shapes_impl, this);
+	m_editop = std::make_shared<EditPolylinesOP>(editPanel, editPanel->GetStageImpl(), shapes_impl, this);
 }
 
 void EditPolylinesCMPT::UpdateControlValue()
@@ -95,12 +95,12 @@ wxSizer* EditPolylinesCMPT::InitEditPanel()
 
 void EditPolylinesCMPT::OnSimplifyThresholdChanged(wxSpinEvent& event)
 {
-	static_cast<EditPolylinesOP*>(m_editop)->simplify();
+	std::dynamic_pointer_cast<EditPolylinesOP>(m_editop)->simplify();
 }
 
 void EditPolylinesCMPT::OnUpdateFromSimplified(wxCommandEvent& event)
 {
-	static_cast<EditPolylinesOP*>(m_editop)->updateFromSimplified();
+	std::dynamic_pointer_cast<EditPolylinesOP>(m_editop)->updateFromSimplified();
 }
 
 void EditPolylinesCMPT::OnMergeTwoChain(wxCommandEvent& event)

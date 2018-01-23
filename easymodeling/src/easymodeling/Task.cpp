@@ -54,12 +54,12 @@ void Task::OnPreview() const
 	dlg.ShowModal();
 }
 
-ee::StageCanvas* Task::GetCanvas() const
+std::shared_ptr<ee::StageCanvas> Task::GetCanvas() const
 {
 	if (ee::EditPanel* stage = Context::Instance()->stage)
 		return stage->GetCanvas();
 	else
-		return NULL;
+		return nullptr;
 }
 
 void Task::InitWindows(wxSplitterWindow* leftHorizontalSplitter, 

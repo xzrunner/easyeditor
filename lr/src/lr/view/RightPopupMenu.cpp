@@ -243,7 +243,7 @@ void RightPopupMenu::HandleLayerTagMenu(int id)
 	}
 	SetLayerTagAOP::Set(sprs, type);
 
-	ee::EditAddRecordSJ::Instance()->Add(new SetLayerTagAOP(type));
+	ee::EditAddRecordSJ::Instance()->Add(std::make_shared<SetLayerTagAOP>(type));
 }
 
 void RightPopupMenu::HandleMoveToLayerMenu(int id)

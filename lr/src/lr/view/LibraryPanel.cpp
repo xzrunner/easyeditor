@@ -142,11 +142,13 @@ void LibraryPanel::LoadSymbolFromLayer()
 
 void LibraryPanel::InitPages(StagePanel* stage, ee::PropertySettingPanel* property) 
 {
-	ee::EditOP* paste_op = new ee::PasteSymbolOP(stage, stage->GetStageImpl(), this);
+	auto paste_op = std::make_shared<ee::PasteSymbolOP>(stage, stage->GetStageImpl(), this);
 
 	ee::OneFloatValue* capture_val = new ee::OneFloatValueStatic(10);
-	ee::EditOP* draw_line_op = new eshape::EditPolylineOP<eshape::DrawPenLineOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
-	ee::EditOP* draw_poly_op = new eshape::EditPolylineOP<eshape::DrawPolygonOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
+	auto draw_line_op = std::make_shared<eshape::EditPolylineOP<eshape::DrawPenLineOP, ee::SelectShapesOP>>(
+		stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
+	auto draw_poly_op = std::make_shared<eshape::EditPolylineOP<eshape::DrawPolygonOP, ee::SelectShapesOP>>(
+		stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
 
 	int id = 0;
 	{
@@ -218,10 +220,6 @@ void LibraryPanel::InitPages(StagePanel* stage, ee::PropertySettingPanel* proper
 		AddPage(page);
 		m_level_page = page;
 	}
-
-	paste_op->RemoveReference();
-	draw_line_op->RemoveReference();
-	draw_poly_op->RemoveReference();
 
 	std::vector<Layer*> layers;
 	for (int i = 0, n = m_pages.size(); i < n; ++i) {

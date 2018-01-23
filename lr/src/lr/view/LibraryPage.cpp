@@ -68,19 +68,18 @@ void LibraryPage::SetLayer(Layer* layer)
 	}
 }
 
-void LibraryPage::AddEditOP(ee::EditOP* editop)
+void LibraryPage::AddEditOP(const std::shared_ptr<ee::EditOP>& editop)
 {
-	editop->AddReference();
 	m_editops.push_back(editop);
 	if (m_curr_op_idx < 0) {
 		m_curr_op_idx = 0;
 	}
 }
 
-ee::EditOP* LibraryPage::GetNextEditOP()
+std::shared_ptr<ee::EditOP> LibraryPage::GetNextEditOP()
 {
 	if (m_editops.empty()) {
-		return NULL;
+		return nullptr;
 	}
 
 	++m_curr_op_idx;

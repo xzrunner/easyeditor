@@ -6,6 +6,8 @@
 
 #include <wx/wx.h>
 
+#include <memory>
+
 namespace ee
 {
 
@@ -13,7 +15,6 @@ class RGBColorPanel : public wxPanel, public TweenColorPanel
 {
 public:
 	RGBColorPanel(wxWindow* parent, wxSize size);
-	virtual ~RGBColorPanel();
 
 	//
 	// interface TweenColorPanel
@@ -40,7 +41,7 @@ private:
 	}; // Canvas
 
 private:
-	Canvas* m_canvas;
+	std::shared_ptr<Canvas> m_canvas = nullptr;
 
 	DECLARE_EVENT_TABLE()
 

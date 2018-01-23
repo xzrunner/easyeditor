@@ -20,8 +20,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	xRot = yRot = 0;
 
-	SetCanvas(new StageCanvas(this));
-	SetEditOP(new EditOP(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
+	SetEditOP(std::make_shared<EditOP>(this));
 }
 
 StagePanel::~StagePanel()

@@ -38,8 +38,8 @@ void Frame::onSetBackground(wxCommandEvent& event)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
 		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(filename);
-		ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
-		static_cast<StageCanvas*>(canvas)->SetBackground(sym);
+		auto canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
+		std::dynamic_pointer_cast<StageCanvas>(canvas)->SetBackground(sym);
 	}
 }
 

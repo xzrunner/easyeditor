@@ -16,7 +16,7 @@ TranslateJointState::TranslateJointState(const std::shared_ptr<Joint>& joint, co
 void TranslateJointState::OnMouseRelease(const sm::vec2& pos)
 {
 	if (m_joint && pos != m_first_pos) {
-		ee::AtomicOP* aop = new TranslateJointAOP(m_joint, pos - m_first_pos);
+		auto aop = std::make_shared<TranslateJointAOP>(m_joint, pos - m_first_pos);
 		ee::EditAddRecordSJ::Instance()->Add(aop);
 	}
 }

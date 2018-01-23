@@ -65,7 +65,7 @@ void Projection2DScene::Draw() const
 
 void Projection2DScene::InitCamera()
 {
-	ee::Camera* cam = m_stage->GetCamera();
+	auto cam = m_stage->GetCamera();
 	cam->Translate(sm::vec2(600, 0));
 	cam->SetScale(2);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -73,14 +73,14 @@ void Projection2DScene::InitCamera()
 
 void Projection2DScene::InitEditOP()
 {
-	static_cast<Proj2DEditOP*>(m_stage->GetEditOP())->InitPlayer();
+	std::dynamic_pointer_cast<Proj2DEditOP>(m_stage->GetEditOP())->InitPlayer();
 }
 
 void Projection2DScene::CalProjInfo(const sm::vec2& src_pos, sm::vec2* dst_pos, float* dst_scale) const
 {
 	static const int VIEW_DIS = 600;
 
-	ee::Camera* cam = m_stage->GetCamera();
+	auto cam = m_stage->GetCamera();
 	const sm::vec2& cam_pos = cam->GetPosition();
 
 	float x = cam_pos.x;

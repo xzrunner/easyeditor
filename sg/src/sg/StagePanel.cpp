@@ -26,7 +26,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_building_cfg(this, library)
 	, m_checkboard(this)
 {
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(std::make_shared<StageCanvas>(this));
 	m_row = m_col = m_edge = 0;
 
 	m_base_level = 1;

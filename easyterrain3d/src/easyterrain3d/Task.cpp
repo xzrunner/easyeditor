@@ -44,8 +44,8 @@ const ee::EditPanel* Task::GetEditPanel() const
 void Task::InitLayout()
 {
 	ee::EditPanel* stage = new ee::EditPanel(m_parent, m_parent);
-	stage->SetCanvas(new eterrain3d::StageCanvas(stage, stage->GetStageImpl()));
-	stage->SetEditOP(new enode3d::CamControlOP(stage, stage->GetStageImpl()));
+	stage->SetCanvas(std::make_shared<eterrain3d::StageCanvas>(stage, stage->GetStageImpl()));
+	stage->SetEditOP(std::make_shared<enode3d::CamControlOP>(stage, stage->GetStageImpl()));
 }
 
 }

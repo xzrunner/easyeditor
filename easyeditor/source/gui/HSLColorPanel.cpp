@@ -11,12 +11,7 @@ END_EVENT_TABLE()
 HSLColorPanel::HSLColorPanel(wxWindow* parent, wxSize size)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, size, wxBORDER_DEFAULT)
 {
-	m_canvas = new Canvas(this);
-}
-
-HSLColorPanel::~HSLColorPanel()
-{
-	delete m_canvas;
+	m_canvas = std::make_shared<Canvas>(this);
 }
 
 void HSLColorPanel::SetColor(const s2::Color& begin, const s2::Color& end)

@@ -98,7 +98,7 @@ n3::NodePtr NodeSelectOP::SelectByPos(const sm::vec2& pos) const
 {
 	auto& nodes = m_stage.GetAllNodes();
 
-	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage.GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<StageCanvas>(m_stage.GetCanvas());
 	sm::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
 	n3::Ray ray(canvas->GetCamera().GetPos(), ray_dir);
 	for (auto& node : nodes)

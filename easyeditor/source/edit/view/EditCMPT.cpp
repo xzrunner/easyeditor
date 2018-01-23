@@ -30,13 +30,13 @@ void EditCMPT::SetEditOP(const std::shared_ptr<EditOP>& op)
 	LoadEditOP(op);
 }
 
-EditOP* EditCMPT::GetChildEditOP()
+std::shared_ptr<EditOP> EditCMPT::GetChildEditOP()
 {
 	int index = m_edit_choice->GetSelection();
 	if (index < static_cast<int>(m_children.size())) {
-		return m_children[index]->m_editop.get();
+		return m_children[index]->m_editop;
 	} else {
-		return NULL;
+		return nullptr;
 	}
 }
 

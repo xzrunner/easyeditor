@@ -19,7 +19,7 @@ public:
 
 	virtual void OnPreview() const override;
 
-	ee::StageCanvas* GetCanvas() const;
+	std::shared_ptr<ee::StageCanvas> GetCanvas() const;
 
 	static Task* Create(wxFrame* parent)
 	{

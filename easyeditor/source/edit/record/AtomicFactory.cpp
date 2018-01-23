@@ -8,12 +8,12 @@
 namespace ee
 {
 
-AtomicOP* AtomicFactory::Create(const Json::Value& val,
-								const std::vector<SprPtr>& sprs)
+std::shared_ptr<AtomicOP> AtomicFactory::Create(const Json::Value& val, 
+	                                            const std::vector<SprPtr>& sprs)
 {
 	AtomicType type = AtomicType(val["type"].asInt());
 
-	AtomicOP* ret = NULL;
+	std::shared_ptr<AtomicOP> ret = nullptr;
 
 	switch (type) 
 	{
@@ -21,7 +21,7 @@ AtomicOP* AtomicFactory::Create(const Json::Value& val,
 			{
 				float dx = static_cast<float>(val["dx"].asDouble()),
 					  dy = static_cast<float>(val["dy"].asDouble());
-				ret = new TranslateSpriteAOP(sprs, sm::vec2(dx, dy));
+				ret = std::make_shared<TranslateSpriteAOP>(sprs, sm::vec2(dx, dy));
 			}
 			break;
 		case AT_ROTATE:
@@ -36,9 +36,9 @@ AtomicOP* AtomicFactory::Create(const Json::Value& val,
 				float angle = static_cast<float>(val["angle"].asDouble());
 
 				if (valid) {
-					ret = new RotateSpriteAOP(sprs, start, end);
+					ret = std::make_shared<RotateSpriteAOP>(sprs, start, end);
 				} else {
-					ret = new RotateSpriteAOP(sprs, angle);
+					ret = std::make_shared<RotateSpriteAOP>(sprs, angle);
 				}
 			}
 			break;

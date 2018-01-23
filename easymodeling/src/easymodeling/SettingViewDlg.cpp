@@ -10,7 +10,7 @@
 namespace emodeling
 {
 
-SettingViewDlg::SettingViewDlg(wxWindow* parent, ee::StageCanvas* canvas)
+SettingViewDlg::SettingViewDlg(wxWindow* parent, const std::shared_ptr<ee::StageCanvas>& canvas)
 	: wxDialog(parent, wxID_ANY, wxT("Display Setting"))
 	, m_canvas(canvas)
 	, m_ctlPointSize(NULL)

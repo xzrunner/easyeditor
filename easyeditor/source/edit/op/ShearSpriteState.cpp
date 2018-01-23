@@ -20,7 +20,7 @@ ShearSpriteState::ShearSpriteState(const SprPtr& spr,
 
 void ShearSpriteState::OnMouseRelease(const sm::vec2& pos)
 {
-	AtomicOP* aop = new ShearSpriteAOP(m_spr, m_spr->GetShear(), m_first_shear);
+	auto aop = std::make_shared<ShearSpriteAOP>(m_spr, m_spr->GetShear(), m_first_shear);
 	EditAddRecordSJ::Instance()->Add(aop);
 }
 

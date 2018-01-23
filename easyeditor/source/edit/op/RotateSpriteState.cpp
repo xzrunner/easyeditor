@@ -31,7 +31,7 @@ void RotateSpriteState::OnMouseRelease(const sm::vec2& pos)
 		return;
 	}
 
-	AtomicOP* aop = new RotateSpriteAOP(*m_selection, m_angle);
+	auto aop = std::make_shared<RotateSpriteAOP>(*m_selection, m_angle);
 	EditAddRecordSJ::Instance()->Add(aop);
 
 	EditSprMsg::Rotate(*m_selection, m_angle);

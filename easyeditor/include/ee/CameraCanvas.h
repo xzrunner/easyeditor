@@ -5,6 +5,8 @@
 
 #include <SM_Rect.h>
 
+#include <memory>
+
 namespace s2 { enum CameraType; class Camera; }
 namespace n3 { class Camera; }
 
@@ -20,7 +22,7 @@ public:
 
 	virtual void SetCurrentCanvas() override;
 
-	s2::Camera* GetCamera() { return m_cam2d; }
+	const std::shared_ptr<s2::Camera>& GetCamera() const { return m_cam2d; }
 
 protected:
 	virtual void OnSize(int w, int h) override;
@@ -33,9 +35,9 @@ private:
 	void UpdateCam3D(int w, int h);
 
 protected:
-	s2::Camera* m_cam2d;
+	std::shared_ptr<s2::Camera> m_cam2d = nullptr;
 
-	n3::Camera* m_cam3d;
+	std::shared_ptr<n3::Camera> m_cam3d = nullptr;
 
 }; // CameraCanvas
 

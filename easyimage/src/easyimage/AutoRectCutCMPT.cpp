@@ -23,7 +23,7 @@ AutoRectCutCMPT::AutoRectCutCMPT(wxWindow* parent, const std::string& name,
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editop = new AutoRectCutOP(stage, stage->GetStageImpl());
+	m_editop = std::make_shared<AutoRectCutOP>(stage, stage->GetStageImpl());
 }
 
 wxSizer* AutoRectCutCMPT::InitLayout()
@@ -98,7 +98,7 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 	cut.AutoCut();
 
 	const std::vector<Rect>& result = cut.GetResult();
-	RectMgr& rects = static_cast<AutoRectCutOP*>(m_editop)->getRectMgr();
+	RectMgr& rects = std::dynamic_pointer_cast<AutoRectCutOP>(m_editop)->getRectMgr();
 	for (int i = 0, n = result.size(); i < n; ++i) {
 		int x = result[i].x,
 			y = result[i].y,

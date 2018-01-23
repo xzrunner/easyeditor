@@ -48,7 +48,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			spr->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(spr);
 		}
-		EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
+		EditAddRecordSJ::Instance()->Add(std::make_shared<InsertSpriteAOP>(spr));
 	}
 }
 
@@ -70,7 +70,7 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 			auto spr = SpriteFactory::Instance()->CreateRoot(sym);
 			spr->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(spr);
-			EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(spr));
+			EditAddRecordSJ::Instance()->Add(std::make_shared<InsertSpriteAOP>(spr));
 		}
 	}
 }

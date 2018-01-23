@@ -23,8 +23,9 @@ JointEditCmpt::JointEditCmpt(wxWindow* parent, const std::string& name,
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	m_editop = new ee::ArrangeSpriteOP<SelectJointOP>(editPanel, editPanel->GetStageImpl(), editPanel, property, this, cfg);
-	static_cast<SelectJointOP*>(m_editop)->SetPropertyPanel(property);
+	m_editop = std::make_shared<ee::ArrangeSpriteOP<SelectJointOP>>(
+		editPanel, editPanel->GetStageImpl(), editPanel, property, this, cfg);
+	std::dynamic_pointer_cast<SelectJointOP>(m_editop)->SetPropertyPanel(property);
 }
 
 void JointEditCmpt::UpdateControlValue()
@@ -37,7 +38,7 @@ void JointEditCmpt::UpdateControlValue()
 	{
 		if (m_typeChoice->GetString(m_typeChoice->GetSelection()) == wxT("Gear"))
 		{
-			SelectJointOP* op = static_cast<SelectJointOP*>(m_editop);
+			auto op = std::dynamic_pointer_cast<SelectJointOP>(m_editop);
 			if (op->jointSelection.Size() == 2)
 			{
 				std::vector<Joint*> joints;
@@ -118,7 +119,7 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 		m_stage_panel->insertJoint(new PulleyJoint(body0, body1));
 	else if (type == wxT("Gear"))
 	{
-		SelectJointOP* op = static_cast<SelectJointOP*>(m_editop);
+		auto op = std::dynamic_pointer_cast<SelectJointOP>(m_editop);
 		assert(op->jointSelection.Size() == 2);
 		std::vector<Joint*> joints;
 		op->jointSelection.Traverse(ee::FetchAllVisitor<Joint>(joints));

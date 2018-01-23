@@ -22,7 +22,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::LibraryPanel* library,
 	, m_stage(stage)
 {
 	AddChild(new ee::UniversalCMPT(this, "paste", stage->GetStageImpl(), 
-		new PasteSymbolOP(stage, library)));
+		std::make_shared<PasteSymbolOP>(stage, library)));
 	AddChild(new ee::PasteSpriteCMPT(this, "batch", stage, stage->GetStageImpl(), stage));
 	AddChild(new ArrangeSpriteCMPT(this, "arrange", property, stage));
 

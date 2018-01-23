@@ -31,20 +31,17 @@ void MainDialog::InitLayout(wxGLContext* glctx)
 
 	ee::EditPanel* stage = new ee::EditPanel(this, this);
 
-	StageCanvas* canvas = new StageCanvas(stage, stage->GetStageImpl(), m_control, m_sprs, glctx);
-	stage->SetCanvas(canvas);
-	canvas->RemoveReference();
+	stage->SetCanvas(std::make_shared<StageCanvas>(stage, stage->GetStageImpl(), m_control, m_sprs, glctx));
 
 	if (canvas->GetCamera()->Type() == s2::CAM_ORTHO2D)
 	{
-		s2::OrthoCamera* cam = static_cast<s2::OrthoCamera*>(canvas->GetCamera());
+		auto cam = std::dynamic_pointer_cast<s2::OrthoCamera>(canvas->GetCamera());
 		float old_scale = cam->GetScale();
 		cam->Set(cam->GetPosition(), old_scale / PREVIEW_SCALE);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();		
 	}
 	
-	ee::EditOP* op = new CtrlCamOP(stage, stage->GetStageImpl());
-	stage->SetEditOP(op);
+	stage->SetEditOP(std::make_shared<CtrlCamOP>(stage, stage->GetStageImpl()));
 
 	sizer->Add(stage, 1, wxEXPAND);	
 
