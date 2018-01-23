@@ -4,6 +4,7 @@
 #include "view/StageCanvas.h"
 #include "view/SceneTreeCtrl.h"
 #include "view/NodeCompPanel.h"
+#include "editop/NodeArrangeOP.h"
 
 #include <easynode3d/CamControlOP.h>
 
@@ -80,12 +81,7 @@ wxWindow* Task::CreateStagePanel()
 	m_stage = new StagePanel(m_frame, m_frame, m_library);
 	auto canvas = std::make_shared<StageCanvas>(m_stage);
 	m_stage->SetCanvas(canvas);
-	m_stage->SetEditOP(std::make_shared<enode3d::CamControlOP>(
-		m_stage, m_stage->GetStageImpl(), canvas->GetCamera(), canvas->GetViewport()));
-
-	auto& msg_mgr = m_stage->GetSubjectMgr();
-	msg_mgr.RegisterObserver(MSG_INSERT_SCENE_NODE, m_stage);
-	msg_mgr.RegisterObserver(MSG_SET_CANVAS_DIRTY, canvas.get());
+	m_stage->SetEditOP(std::make_shared<NodeArrangeOP>(*m_stage));
 
 	ctrl->AddPage(m_stage, ("New 3d"));
 
@@ -96,11 +92,7 @@ wxWindow* Task::CreateStagePanel()
 
 wxWindow* Task::CreateTreePanel()
 {
-	auto tree = new SceneTreeCtrl(m_frame);
-
-	auto& msg_mgr = m_stage->GetSubjectMgr();
-	msg_mgr.RegisterObserver(MSG_INSERT_SCENE_NODE, tree);
-
+	auto tree = new SceneTreeCtrl(m_frame, m_stage->GetSubjectMgr());
 	return tree;
 }
 

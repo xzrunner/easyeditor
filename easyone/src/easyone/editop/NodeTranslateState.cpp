@@ -47,13 +47,14 @@ void NodeTranslateState::Translate(const sm::vec2& first, const sm::vec2& curr)
 void NodeTranslateState::Visitor::
 Visit(const SceneNodePtr& node, bool& next)
 {
-	//auto& cam = m_canvas.GetCamera();
-	//float dist = cam.GetToward().Dot(node->GetPos() - cam.GetPos());
+	auto& ctrans = node->GetComponent<n3::CompTransform>();
 
-	//const sm::vec3& old = node->GetPos();
-	//sm::vec3 last = m_canvas.TransPos3ScreenToDir(m_last).Normalized() * dist;
-	//sm::vec3 curr = m_canvas.TransPos3ScreenToDir(m_curr).Normalized() * dist;
-	//node->Translate(curr - last);
+	auto& cam = m_canvas.GetCamera();
+	float dist = cam.GetToward().Dot(ctrans.GetPosition() - cam.GetPos());
+
+	sm::vec3 last = m_canvas.TransPos3ScreenToDir(m_last).Normalized() * dist;
+	sm::vec3 curr = m_canvas.TransPos3ScreenToDir(m_curr).Normalized() * dist;
+	ctrans.Translate(curr - last);
 
 	next = true;
 }

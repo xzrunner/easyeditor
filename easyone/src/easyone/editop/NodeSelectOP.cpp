@@ -1,5 +1,6 @@
 #include "editop/NodeSelectOP.h"
 #include "view/StagePanel.h"
+#include "view/StageCanvas.h"
 
 #include <ee/FetchAllVisitor.h>
 #include <ee/color_config.h>
@@ -8,6 +9,7 @@
 #include <node3/PrimitiveDraw.h>
 #include <node3/Ray.h>
 #include <node3/Math.h>
+#include <node3/CompAABB.h>
 
 namespace eone
 {
@@ -51,8 +53,7 @@ bool NodeSelectOP::OnMouseLeftDown(int x, int y)
 		VariantSet vars;
 		Variant var;
 		var.m_type = VT_PVOID;
-		var.m_val.pv = const_cast<ee::SelectionSet<SceneNode>*>
-			(&m_stage.GetNodeSelection());
+		var.m_val.pv = &selected;
 		vars.SetVariant("node", var);
 
 		if (m_stage.GetKeyState(WXK_CONTROL)) 
@@ -91,8 +92,9 @@ bool NodeSelectOP::OnDraw() const
 		{
 			n3::PrimitiveDraw::SetColor(ee::MID_RED.ToABGR());
 
+			auto& caabb = node->GetComponent<n3::CompAABB>();
 			auto& ctrans = node->GetComponent<n3::CompTransform>();
-//			n3::PrimitiveDraw::Cube(ctrans.GetTransformMat(), node->GetModel()->GetAABB());
+			n3::PrimitiveDraw::Cube(ctrans.GetTransformMat(), caabb.GetAABB());
 
 			return true;
 		}
@@ -104,24 +106,27 @@ bool NodeSelectOP::OnDraw() const
 // AABB not changed, transform ray from Camera and spr's mat
 SceneNodePtr NodeSelectOP::SelectByPos(const sm::vec2& pos) const
 {
-	//auto& nodes = m_stage.GetAllNodes();
+	auto& nodes = m_stage.GetAllNodes();
 
-	//StageCanvas* canvas = static_cast<StageCanvas*>(m_stage.GetCanvas());
-	//sm::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
-	//n3::Ray ray(canvas->GetCamera().GetPos(), ray_dir);
-	//for (auto& node : nodes)
-	//{				
-	//	sm::vec3 cross;
-	//	bool intersect = n3::Math::RayOBBIntersection(
-	//		node->GetModel()->GetAABB(), 
-	//		node->GetPos(), 
-	//		node->GetAngle(), 
-	//		ray, 
-	//		&cross);
-	//	if (intersect) {
-	//		return node;
-	//	}
-	//}
+	auto canvas = std::dynamic_pointer_cast<StageCanvas>(m_stage.GetCanvas());
+	sm::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
+	n3::Ray ray(canvas->GetCamera().GetPos(), ray_dir);
+	for (auto& node : nodes)
+	{
+		auto& caabb = node->GetComponent<n3::CompAABB>();
+		auto& ctrans = node->GetComponent<n3::CompTransform>();
+
+		sm::vec3 cross;
+		bool intersect = n3::Math::RayOBBIntersection(
+			caabb.GetAABB(),
+			ctrans.GetPosition(), 
+			ctrans.GetAngle(), 
+			ray, 
+			&cross);
+		if (intersect) {
+			return node;
+		}
+	}
 
 	return nullptr;
 }

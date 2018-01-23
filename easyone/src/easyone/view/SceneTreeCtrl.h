@@ -9,11 +9,12 @@ namespace eone
 {
 
 class SceneTreePanel;
+class SubjectMgr;
 
 class SceneTreeCtrl : public wxTreeCtrl, public Observer
 {
 public:
-	SceneTreeCtrl(wxWindow* parent);
+	SceneTreeCtrl(wxWindow* parent, SubjectMgr& sub_mgr);
 
 	virtual void OnNotify(MessageID msg, const VariantSet& variants) override;
 

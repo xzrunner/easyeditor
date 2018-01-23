@@ -1,18 +1,19 @@
 #pragma once
 
-#include "editop/EditOpState.h"
 #include "data/SceneNode.h"
-#include "msg/SubjectMgr.h"
 
 #include <ee/Visitor.h>
 #include <ee/SelectionSet.h>
+
+#include <easynode3d/EditOpState.h>
 
 namespace eone
 {
 
 class StageCanvas;
+class SubjectMgr;
 
-class NodeTranslateState : public EditOpState
+class NodeTranslateState : public enode3d::EditOpState
 {
 public:
 	NodeTranslateState(StageCanvas& canvas, SubjectMgr& sub_mgr,

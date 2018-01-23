@@ -27,12 +27,18 @@ public:
 	const ee::SelectionSet<SceneNode>& GetNodeSelection() const { 
 		return m_node_selection; 
 	}
+	ee::SelectionSet<SceneNode>& GetNodeSelection() {
+		return m_node_selection;
+	}
 
 	SubjectMgr& GetSubjectMgr() { return m_sub_mgr; }
 
 private:
 	void InsertSceneNode(const VariantSet& variants);
 	void DeleteSceneNode(const VariantSet& variants);
+
+	void NodeSelectionInsert(const VariantSet& variants);
+	void NodeSelectionDelete(const VariantSet& variants);
 
 private:
 	std::vector<SceneNodePtr> m_nodes;

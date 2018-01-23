@@ -114,9 +114,6 @@
     <ClInclude Include="..\..\..\src\easyone\editop\NodeSelectOP.h">
       <Filter>editop\node</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\editop\EditOpState.h">
-      <Filter>editop</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easyone\frame\main.cpp">

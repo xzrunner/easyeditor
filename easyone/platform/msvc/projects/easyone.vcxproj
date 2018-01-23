@@ -296,7 +296,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easyone\data\NodeFactory.h" />
     <ClInclude Include="..\..\..\src\easyone\data\SceneNode.h" />
-    <ClInclude Include="..\..\..\src\easyone\editop\EditOpState.h" />
     <ClInclude Include="..\..\..\src\easyone\editop\NodeArrangeOP.h" />
     <ClInclude Include="..\..\..\src\easyone\editop\NodeRotateState.h" />
     <ClInclude Include="..\..\..\src\easyone\editop\NodeSelectOP.h" />

@@ -17,6 +17,7 @@ StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx)
 	, m_stage(stage)
 	, m_camera(sm::vec3(0, 2, -2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0))
 {
+	stage->GetSubjectMgr().RegisterObserver(MSG_SET_CANVAS_DIRTY, this);
 }
 
 void StageCanvas::OnNotify(MessageID msg, const VariantSet& variants)
@@ -101,9 +102,7 @@ void StageCanvas::DrawNodes() const
 		}
 
 		auto& cmodel = node->GetComponent<n3::CompModel>();
-		assert(node->HasComponent<n3::CompTransform>());
-		auto& ctrans = node->GetComponent<n3::CompTransform>();
-		
+		auto& ctrans = node->GetComponent<n3::CompTransform>();	
 		n3::RenderSystem::DrawModel(cmodel.GetModel(), ctrans.GetTransformMat() * cam_mt);
 	}
 }
