@@ -33,7 +33,7 @@ bool NodeSelectOP::OnKeyDown(int keyCode)
 			(&m_stage.GetNodeSelection());
 		vars.SetVariant("selection", var);
 
-		bool succ = m_stage.GetSubjectMgr().NotifyObservers(MSG_INSERT_SCENE_NODE, vars);
+		bool succ = m_stage.GetSubjectMgr().NotifyObservers(MSG_NODE_SELECTION_DELETE, vars);
 		GD_ASSERT(succ, "no MSG_INSERT_SCENE_NODE");
 	}
 
@@ -61,6 +61,9 @@ bool NodeSelectOP::OnMouseLeftDown(int x, int y)
 			if (selection.IsExist(selected)) {
 				sub_mgr.NotifyObservers(MSG_NODE_SELECTION_DELETE, vars);
 			} else {
+				if (selection.IsEmpty()) {
+					sub_mgr.NotifyObservers(MSG_SELECTED_ONE_NODE, vars);
+				}
 				sub_mgr.NotifyObservers(MSG_NODE_SELECTION_INSERT, vars);
 			}
 		}
@@ -69,6 +72,9 @@ bool NodeSelectOP::OnMouseLeftDown(int x, int y)
 			if (!selection.IsExist(selected))
 			{
 				sub_mgr.NotifyObservers(MSG_NODE_SELECTION_CLEAR);
+				if (selection.IsEmpty()) {
+					sub_mgr.NotifyObservers(MSG_SELECTED_ONE_NODE, vars);
+				}
 				sub_mgr.NotifyObservers(MSG_NODE_SELECTION_INSERT, vars);
 			}
 		}

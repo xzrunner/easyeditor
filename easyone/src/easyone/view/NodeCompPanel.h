@@ -8,10 +8,10 @@ namespace eone
 class NodeCompPanel : public wxPanel
 {
 public:
-	NodeCompPanel(wxWindow* parent);
-
-private:
-	void InitLayout();
+	NodeCompPanel(wxWindow* parent)
+		: wxPanel(parent, wxID_ANY)
+	{}
+	virtual void RefreshNodeComp() = 0;
 
 }; // NodeCompPanel
 

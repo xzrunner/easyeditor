@@ -3,7 +3,7 @@
 #include "view/StagePanel.h"
 #include "view/StageCanvas.h"
 #include "view/SceneTreeCtrl.h"
-#include "view/NodeCompPanel.h"
+#include "view/DetailPanel.h"
 #include "editop/NodeArrangeOP.h"
 
 #include <easynode3d/CamControlOP.h>
@@ -52,11 +52,11 @@ void Task::InitLayout()
 
 	m_mgr.AddPane(CreateTreePanel(),
 		wxAuiPaneInfo().Name("Tree").Caption("Tree").
-		Right().Row(1).MinSize(100, 0).PaneBorder(false));
+		Right().Row(1).MinSize(200, 0).PaneBorder(false));
 
 	m_mgr.AddPane(CreateDetailPanel(),
 		wxAuiPaneInfo().Name("Detail").Caption("Detail").
-		Right().MinSize(100, 0).PaneBorder(false));
+		Right().MinSize(300, 0).PaneBorder(false));
 
 	m_mgr.Update();
 }
@@ -92,14 +92,12 @@ wxWindow* Task::CreateStagePanel()
 
 wxWindow* Task::CreateTreePanel()
 {
-	auto tree = new SceneTreeCtrl(m_frame, m_stage->GetSubjectMgr());
-	return tree;
+	return new SceneTreeCtrl(m_frame, m_stage->GetSubjectMgr());
 }
 
 wxWindow* Task::CreateDetailPanel()
 {
-	auto detail = new NodeCompPanel(m_frame);
-	return detail;
+	return new DetailPanel(m_frame, m_stage->GetSubjectMgr());
 }
 
 }

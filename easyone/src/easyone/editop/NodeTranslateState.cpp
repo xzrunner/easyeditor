@@ -20,7 +20,7 @@ void NodeTranslateState::OnMousePress(const sm::vec2& pos)
 
 void NodeTranslateState::OnMouseRelease(const sm::vec2& pos)
 {
-	// todo history
+	m_sub_mgr.NotifyObservers(MSG_UPDATE_COMPONENTS);
 }
 
 void NodeTranslateState::OnMouseDrag(const sm::vec2& pos)

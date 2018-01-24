@@ -20,7 +20,7 @@ void NodeRotateState::OnMousePress(const sm::vec2& pos)
 
 void NodeRotateState::OnMouseRelease(const sm::vec2& pos)
 {
-	// todo history
+	m_sub_mgr.NotifyObservers(MSG_UPDATE_COMPONENTS);
 }
 
 void NodeRotateState::OnMouseDrag(const sm::vec2& pos)

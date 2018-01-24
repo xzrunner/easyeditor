@@ -40,6 +40,9 @@
     <Filter Include="editop\node\state">
       <UniqueIdentifier>{364a0dde-6c68-4876-b492-96c476565ea4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="view\detail\comp">
+      <UniqueIdentifier>{cbf1a63c-4e62-4c25-a4c4-bed91b4b045a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easyone\frame\main.h">
@@ -62,9 +65,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\easyone\data\NodeFactory.h">
       <Filter>data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\NodeCompPanel.h">
-      <Filter>view\detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\easyone\view\SceneTreeCtrl.h">
       <Filter>view\tree</Filter>
@@ -114,6 +114,15 @@
     <ClInclude Include="..\..\..\src\easyone\editop\NodeSelectOP.h">
       <Filter>editop\node</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\easyone\view\CompTransformPanel.h">
+      <Filter>view\detail\comp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyone\view\DetailPanel.h">
+      <Filter>view\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyone\view\NodeCompPanel.h">
+      <Filter>view\detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easyone\frame\main.cpp">
@@ -139,9 +148,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easyone\data\NodeFactory.cpp">
       <Filter>data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\NodeCompPanel.cpp">
-      <Filter>view\detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\easyone\view\SceneTreeCtrl.cpp">
       <Filter>view\tree</Filter>
@@ -172,6 +178,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easyone\editop\NodeSelectOP.cpp">
       <Filter>editop\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyone\view\CompTransformPanel.cpp">
+      <Filter>view\detail\comp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyone\view\DetailPanel.cpp">
+      <Filter>view\detail</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
