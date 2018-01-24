@@ -28,6 +28,7 @@ void DetailPanel::OnNotify(MessageID msg, const VariantSet& variants)
 	switch (msg)
 	{
 	case MSG_SELECTED_ONE_NODE:
+		ClearComponents();
 		InitComponents(variants);
 		break;
 	case MSG_NODE_SELECTION_CLEAR:

@@ -42,6 +42,7 @@ void StagePanel::OnNotify(MessageID msg, const VariantSet& variants)
 		break;
 	case MSG_NODE_SELECTION_CLEAR:
 		m_node_selection.Clear();
+		m_sub_mgr.NotifyObservers(MSG_SET_CANVAS_DIRTY);
 		break;
 	}
 }
@@ -94,12 +95,22 @@ void StagePanel::DeleteSceneNode(const VariantSet& variants)
 
 void StagePanel::NodeSelectionInsert(const VariantSet& variants)
 {
+	auto var_clear = variants.GetVariant("clear");
+	if (var_clear.m_type == VT_BOOL && var_clear.m_val.bl) {
+		m_node_selection.Clear();
+	}
+
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
 	SceneNodePtr* node = static_cast<SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
 
+	if (m_node_selection.IsEmpty()) {
+		m_sub_mgr.NotifyObservers(MSG_SELECTED_ONE_NODE, variants);
+	}
 	m_node_selection.Add(*node);
+
+	m_sub_mgr.NotifyObservers(MSG_SET_CANVAS_DIRTY);
 }
 
 void StagePanel::NodeSelectionDelete(const VariantSet& variants)
@@ -110,6 +121,8 @@ void StagePanel::NodeSelectionDelete(const VariantSet& variants)
 	GD_ASSERT(node, "err scene node");
 
 	m_node_selection.Remove(*node);
+
+	m_sub_mgr.NotifyObservers(MSG_SET_CANVAS_DIRTY);
 }
 
 }

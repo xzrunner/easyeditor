@@ -18,19 +18,31 @@ public:
 
 	virtual void OnNotify(MessageID msg, const VariantSet& variants) override;
 
+	void Traverse(wxTreeItemId id, std::function<bool(wxTreeItemId)> func) const;
+
 private:
+	void InitRoot();
+
+	void OnSelChanged(wxTreeEvent& event);
+	//void OnSelChanging(wxTreeEvent& event);
+	void OnLabelEdited(wxTreeEvent& event);
+
+	void SelectSceneNode(const VariantSet& variants);
+	void UnselectSceneNode(const VariantSet& variants);
 	void InsertSceneNode(const VariantSet& variants);
 
 private:
 	enum
 	{
-		//ID_MENU_ADD = 100,
-		//ID_MENU_CLEAR,
-		//ID_MENU_VISIBLE,
-		//ID_MENU_EDITABLE,
-
-		ID_GROUP_TREE_CTRL = 1000
+		ID_SCENE_TREE_CTRL = 1000
 	};
+
+private:
+	SubjectMgr& m_sub_mgr;
+
+	wxTreeItemId m_root;
+
+	DECLARE_EVENT_TABLE()
 
 }; // SceneTreeCtrl
 
