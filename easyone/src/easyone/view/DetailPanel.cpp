@@ -46,7 +46,9 @@ void DetailPanel::InitLayout()
 	m_comp_sizer = new wxBoxSizer(wxVERTICAL);
 	top_sizer->Add(m_comp_sizer);
 
-	top_sizer->Add(new wxButton(this, wxID_ANY, "Add Component"));
+	top_sizer->AddSpacer(100);
+
+	top_sizer->Add(new wxButton(this, wxID_ANY, "Add Component"), 0, wxALIGN_CENTER_HORIZONTAL);
 
 	SetSizer(top_sizer);
 }

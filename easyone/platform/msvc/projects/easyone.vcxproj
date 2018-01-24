@@ -336,6 +336,7 @@
     <ClCompile Include="..\..\..\src\easyone\view\LibGeoPage.cpp" />
     <ClCompile Include="..\..\..\src\easyone\view\LibraryPanel.cpp" />
     <ClCompile Include="..\..\..\src\easyone\view\DetailPanel.cpp" />
+    <ClCompile Include="..\..\..\src\easyone\view\NodeCompPanel.cpp" />
     <ClCompile Include="..\..\..\src\easyone\view\SceneTreeCtrl.cpp" />
     <ClCompile Include="..\..\..\src\easyone\view\SceneTreeImpl.cpp" />
     <ClCompile Include="..\..\..\src\easyone\view\SceneTreeItem.cpp" />
