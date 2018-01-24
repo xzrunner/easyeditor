@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 #include "ResizeCMPT.h"
 #include "ToolbarPanel.h"
+#include "LoadFromBin.h"
 
 #include <fstream>
 
@@ -19,6 +20,8 @@
 #include <ee/Config.h>
 #include <ee/SymbolPath.h>
 
+#include <boost/filesystem.hpp>
+
 namespace escale9
 {
 
@@ -28,6 +31,12 @@ static const int VERSION = OFFSET_VERSION;
 void FileIO::Load(const char* filename, ee::LibraryPanel* library, 
 				  ee::MultiSpritesImpl* stage, ToolbarPanel* toolbar)
 {
+	auto ext = boost::filesystem::extension(filename);
+	if (ext == ".bin") {
+		LoadFromBin::Load(filename);
+		return;
+	}
+
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));

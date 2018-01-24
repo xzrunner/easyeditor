@@ -5,6 +5,7 @@
 #include <ee/SymbolFile.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
+#include <ee/FileHelper.h>
 
 #include <sprite2/SymType.h>
 #include <gum/StringHelper.h>
@@ -30,7 +31,12 @@ bool Symbol::LoadResources()
 
 	auto spr_loader(std::make_shared<ee::SpriteLoader>());
 	gum::Scale9SymLoader loader(*this, spr_loader);
-	loader.LoadJson(m_filepath.c_str());
+	auto ext = ee::FileHelper::GetExtension(m_filepath);
+	if (ext == "json") {
+		loader.LoadJson(m_filepath.c_str());
+	} else if (ext == "bin") {
+		loader.LoadSns(m_filepath.c_str());
+	}
 
 	setting.open_image_edge_clip = true;
 

@@ -321,7 +321,10 @@ void Frame::OnConnANDROID(wxCommandEvent& event)
 
 std::string Frame::GetFileFilter() const
 {
-	return ee::FileHelper::GetJsonFileFilter(m_filetag);
+	std::string filter;
+	filter += ee::FileHelper::GetJsonFileFilter(m_filetag) + "|";
+	filter += ee::FileHelper::GetBinFileFilter(m_filetag);
+	return filter;
 }
 
 void Frame::OnQuit(wxCommandEvent& event)

@@ -22,6 +22,9 @@
     <Filter Include="dataset">
       <UniqueIdentifier>{cc3b60dc-bec5-4864-b942-722a36c921b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="frame\io">
+      <UniqueIdentifier>{9b5c377d-6306-4391-b789-858e1ee6ad4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easyscale9\StageCanvas.cpp">
@@ -34,9 +37,6 @@
       <Filter>toolbar</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\easyscale9\Context.cpp">
-      <Filter>frame</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyscale9\FileIO.cpp">
       <Filter>frame</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\easyscale9\main.cpp">
@@ -57,6 +57,12 @@
     <ClCompile Include="..\..\..\src\easyscale9\ComposeGrids.cpp">
       <Filter>dataset</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\FileIO.cpp">
+      <Filter>frame\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyscale9\LoadFromBin.cpp">
+      <Filter>frame\io</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easyscale9\StageCanvas.h">
@@ -69,9 +75,6 @@
       <Filter>toolbar</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\easyscale9\Context.h">
-      <Filter>frame</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyscale9\FileIO.h">
       <Filter>frame</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\easyscale9\main.h">
@@ -91,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\easyscale9\ComposeGrids.h">
       <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\FileIO.h">
+      <Filter>frame\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyscale9\LoadFromBin.h">
+      <Filter>frame\io</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

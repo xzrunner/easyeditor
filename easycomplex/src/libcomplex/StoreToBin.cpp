@@ -22,7 +22,7 @@ void StoreToBin::Store(const std::string& filepath, const Symbol& sym, const std
 
 	// load sns from json
 	mm::LinearAllocator alloc;
-	sns::NodeSym* sns_sym = sns::NodeFactory::CreateSymFromJson(alloc, doc, sns::NODE_COMPLEX);
+	sns::NodeSym* sns_sym = sns::NodeFactory::CreateSymFromJson(alloc, dir, doc, sns::NODE_COMPLEX);
 
 	// store sns to bin
 	uint8_t* data = nullptr;

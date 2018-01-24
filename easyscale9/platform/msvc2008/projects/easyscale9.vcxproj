@@ -46,16 +46,18 @@
     <OutDir>..\easyscale9\x86\Debug\</OutDir>
     <IntDir>..\easyscale9\x86\Debug\obj\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>easyscale9</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\easyscale9\x86\Release\</OutDir>
     <IntDir>..\easyscale9\x86\Release\obj\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>easyscale9</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\sprite2\include;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\easyeditor\include;..\..\..\src\easyscale9;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\sprite2\include;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\gum\include;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\sns\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\easyeditor\include;..\..\..\src\easyscale9;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -81,7 +83,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\sprite2\include;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\gum\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\easyeditor\include;..\..\..\src\easyscale9;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\sprite2\include;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\gum\include;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\sns\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\easyeditor\include;..\..\..\src\easyscale9;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -109,6 +111,7 @@
     <ClCompile Include="..\..\..\src\easyscale9\ComposeOP.cpp" />
     <ClCompile Include="..\..\..\src\easyscale9\Context.cpp" />
     <ClCompile Include="..\..\..\src\easyscale9\FileIO.cpp" />
+    <ClCompile Include="..\..\..\src\easyscale9\LoadFromBin.cpp" />
     <ClCompile Include="..\..\..\src\easyscale9\main.cpp" />
     <ClCompile Include="..\..\..\src\easyscale9\ResizeCMPT.cpp" />
     <ClCompile Include="..\..\..\src\easyscale9\ResizeOP.cpp" />
@@ -122,6 +125,7 @@
     <ClInclude Include="..\..\..\src\easyscale9\ComposeOP.h" />
     <ClInclude Include="..\..\..\src\easyscale9\Context.h" />
     <ClInclude Include="..\..\..\src\easyscale9\FileIO.h" />
+    <ClInclude Include="..\..\..\src\easyscale9\LoadFromBin.h" />
     <ClInclude Include="..\..\..\src\easyscale9\main.h" />
     <ClInclude Include="..\..\..\src\easyscale9\ResizeCMPT.h" />
     <ClInclude Include="..\..\..\src\easyscale9\ResizeOP.h" />
@@ -139,6 +143,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\bimp\platform\msvc2008\projects\bimp.vcxproj">
       <Project>{f22a86e7-b73f-4f6a-9ea8-e4ae9cc9d885}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\bs\platform\msvc2017\projects\bs.vcxproj">
+      <Project>{f5e6ae49-23dc-421b-ad33-c422e8590520}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\camera25\platform\msvc2008\projects\camera25.vcxproj">
       <Project>{510eaacb-b026-43f3-a68d-3ec421e46dd0}</Project>
@@ -204,9 +211,15 @@
     <ProjectReference Include="..\..\..\..\gtxt\platform\msvc2008\projects\gtxt.vcxproj">
       <Project>{eb4f1ee0-cb3b-4b2e-9655-a8e22f948575}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\guard\platform\msvc2017\projects\guard.vcxproj">
+      <Project>{cc45ae0e-8c51-4759-9614-8bc321c565a0}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\gum\platform\msvc2008\projects\gum.vcxproj">
       <Project>{70c5478d-6d53-4f75-99d4-f06373175c83}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\js\platform\msvc2017\projects\js.vcxproj">
+      <Project>{68c18da9-79bb-43a5-9e0c-79740aea954b}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\logger\platform\msvc2008\projects\logger.vcxproj">
       <Project>{4031b66e-39a3-401e-918a-e1424a4af944}</Project>
@@ -220,6 +233,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\multitask\platform\msvc2008\projects\multitask.vcxproj">
       <Project>{6728bb94-9882-4804-87d3-ce9ceb62fdab}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\node3\platform\msvc2017\projects\node3.vcxproj">
+      <Project>{6030cf6b-1a8b-421b-92ce-4eb965751636}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\particle\platform\msvc2008\projects\particle.vcxproj">
       <Project>{ee2229a3-ad5f-46e7-afab-729f8aa18036}</Project>
@@ -250,6 +266,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\sm\platform\msvc2008\projects\sm.vcxproj">
       <Project>{81630e0d-e1ef-4837-a0ee-30435ed4fe59}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\sns\platform\msvc2017\projects\sns.vcxproj">
+      <Project>{b6939acb-3794-4b2a-95da-f99ecdf79d0f}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\sprite2\platform\msvc2008\projects\sprite2.vcxproj">
       <Project>{ccdd6dc3-9da2-4215-bac6-6031699fb7e4}</Project>
