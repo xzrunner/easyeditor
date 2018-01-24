@@ -14,7 +14,8 @@ class RecentFilesMenu;
 class Frame : public wxFrame
 {
 public:
-	Frame(const std::string& title, const std::string& filetag, const wxSize& size = wxSize(800, 600));
+	Frame(const std::string& title, const std::string& filetag, 
+		const wxSize& size = wxSize(800, 600), bool maxmize = false);
 	virtual ~Frame();
 
 	void SetTask(Task* task);
