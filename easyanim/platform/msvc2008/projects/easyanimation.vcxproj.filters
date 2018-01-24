@@ -234,6 +234,9 @@
     <ClCompile Include="..\..\..\src\easyanimation\message\messages.cpp">
       <Filter>message</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\easyanimation\frame\LoadFromBin.cpp">
+      <Filter>frame\file\loader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easyanimation\dataset\AnimTemplate.h">
@@ -394,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\easyanimation\message\messages.h">
       <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\easyanimation\frame\LoadFromBin.h">
+      <Filter>frame\file\loader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

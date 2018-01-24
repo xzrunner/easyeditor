@@ -3,6 +3,7 @@
 #include "BodymovinLoader.h"
 #include "FlashLoader.h"
 #include "FileSaver.h"
+#include "frame/LoadFromBin.h"
 #include "dataset/DataMgr.h"
 #include "view/ViewMgr.h"
 #include "view/LibraryPanel.h"
@@ -11,6 +12,7 @@
 #include <ee/FileHelper.h>
 
 #include <gum/ExtendSymFile.h>
+#include <gum/FilepathHelper.h>
 
 #include <fstream>
 
@@ -22,6 +24,12 @@ std::string FileIO::m_filepath;
 void FileIO::Load(const std::string& filepath)
 {
 	FileIO::m_filepath = filepath;
+
+	auto ext = gum::FilepathHelper::Extension(filepath);
+	if (ext == ".bin") {
+		LoadFromBin::Load(filepath);
+		return;
+	}
 
 	Json::Value value;
 	Json::Reader reader;

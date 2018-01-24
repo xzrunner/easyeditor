@@ -54,9 +54,10 @@ void Frame::OnOpen(wxCommandEvent& event)
 	try {
 		std::string all_filter = "All ani | *_ani?.json";
 		std::string single_filter = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION));
+		std::string single_bin_filter = ee::FileHelper::GetBinFileFilter(ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION));
 		std::string template_filter = ee::FileHelper::GetJsonFileFilter(ee::SymbolFile::Instance()->Tag(ee::SYM_ANIS));
 		std::string json_filter = "JSON files (*.json)|*.json";
-		std::string filter = all_filter + "|" + single_filter + "|" + template_filter + "|" + json_filter;
+		std::string filter = all_filter + "|" + single_filter + "|" + single_bin_filter + "|" + template_filter + "|" + json_filter;
 		wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
 		if (dlg.ShowModal() == wxID_OK)
 		{
