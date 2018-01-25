@@ -23,16 +23,17 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
-	Icon* icon = FileIO::LoadFromFile(filename);
-	m_toolbar->ChangeIconType(get_icon_type(icon->GetIconDesc()));
-	m_stage->GetSymbol().SetIcon(icon);
+	auto icon = FileIO::LoadFromFile(filename);
+	m_toolbar->ChangeIconType(get_icon_type(
+		dynamic_cast<eicon::Icon*>(icon.get())->GetIconDesc()));
+	m_stage->GetSymbol()->SetIcon(icon);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void Task::Store(const char* filename) const
 {
-	const Icon* icon = dynamic_cast<const Icon*>(m_stage->GetSymbol().GetIcon());
-	FileIO::StoreToFile(filename, icon);
+	auto icon = dynamic_cast<const Icon*>(m_stage->GetSymbol()->GetIcon().get());
+	FileIO::StoreToFile(filename, *icon);
 }
 
 bool Task::IsDirty() const
