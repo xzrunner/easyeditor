@@ -202,7 +202,10 @@ void SceneTreeCtrl::InsertSceneNode(const VariantSet& variants)
 	wxTreeItemId id = InsertItem(parent, pos, (*node)->GetName());
 	SetItemData(id, item);
 
-	if (parent != m_root) {
+	if (parent != m_root) 
+	{
+		pdata->GetNode()->AddChild(*node);
+		(*node)->SetParent(pdata->GetNode());
 		Expand(parent);
 	}
 }

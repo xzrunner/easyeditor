@@ -6,6 +6,7 @@
 
 #include <node3/Camera.h>
 #include <node3/Viewport.h>
+#include <node3/SceneNode.h>
 
 namespace ee { class LibraryPanel; }
 
@@ -37,6 +38,7 @@ protected:
 
 private:
 	void DrawNodes() const;
+	void DrawNode(const n3::SceneNodePtr& node, const sm::mat4& mt) const;
 
 private:
 	StagePanel* m_stage;

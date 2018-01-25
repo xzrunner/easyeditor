@@ -92,18 +92,26 @@ void StageCanvas::DrawNodes() const
 {
 	auto& nodes = m_stage->GetAllNodes();
 
-	auto cam_mt = m_camera.GetModelViewMat();
-	
-	// draw model
-	for (auto& node : nodes)
-	{
-		if (!node->HasComponent<n3::CompModel>()) {
-			continue;
-		}
+	auto mt = m_camera.GetModelViewMat();
+	for (auto& node : nodes) {
+		DrawNode(node, mt);
+	}
+}
 
+void StageCanvas::DrawNode(const n3::SceneNodePtr& node, const sm::mat4& mt) const
+{
+	auto& ctrans = node->GetComponent<n3::CompTransform>();
+	sm::mat4 mt_child = ctrans.GetTransformMat() * mt;
+
+	if (node->HasComponent<n3::CompModel>()) 
+	{
 		auto& cmodel = node->GetComponent<n3::CompModel>();
-		auto& ctrans = node->GetComponent<n3::CompTransform>();	
-		n3::RenderSystem::DrawModel(cmodel.GetModel(), ctrans.GetTransformMat() * cam_mt);
+		n3::RenderSystem::DrawModel(cmodel.GetModel(), mt_child);
+	}
+
+	auto& children = node->GetAllChildren();
+	for (auto& child : children) {
+		DrawNode(child, mt_child);
 	}
 }
 

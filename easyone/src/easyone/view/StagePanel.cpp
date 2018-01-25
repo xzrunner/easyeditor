@@ -67,7 +67,9 @@ void StagePanel::InsertSceneNode(const VariantSet& variants)
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
 	SceneNodePtr* node = static_cast<SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
-	m_nodes.push_back(*node);
+	if (m_node_selection.IsEmpty()) {
+		m_nodes.push_back(*node);
+	}
 
 	m_sub_mgr.NotifyObservers(MSG_SET_CANVAS_DIRTY);
 }
