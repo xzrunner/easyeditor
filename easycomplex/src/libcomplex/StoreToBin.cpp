@@ -27,7 +27,7 @@ void StoreToBin::Store(const std::string& filepath, const Symbol& sym, const std
 	// store sns to bin
 	uint8_t* data = nullptr;
 	size_t len = 0;
-	sns_sym->StoreToBin(&data, len);
+	sns_sym->StoreToBin(dir, &data, len);
 	delete sns_sym;
 
 	// bin to file

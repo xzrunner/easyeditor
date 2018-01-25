@@ -67,6 +67,14 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	val["animation"] = anim_val;
 }
 
+void Sprite::Load(const sns::NodeSpr* spr)
+{
+	ee::Sprite::Load(spr);
+
+	gum::AnimSprLoader loader(*this);
+	loader.LoadSns(spr);
+}
+
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
 	return new PropertySetting(stage, std::dynamic_pointer_cast<Sprite>(shared_from_this()));

@@ -2,6 +2,8 @@
 #include "Symbol.h"
 #include "SpritePropertySetting.h"
 
+#include <sns/Scale9Spr.h>
+
 namespace escale9
 {
 
@@ -45,6 +47,14 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	sm::vec2 sz = m_s9.GetSize();
 	val["scale9"]["width"] = sz.x;
 	val["scale9"]["height"] = sz.y;
+}
+
+void Sprite::Load(const sns::NodeSpr* spr)
+{
+	ee::Sprite::Load(spr);
+
+	auto s9_spr = dynamic_cast<const sns::Scale9Spr*>(spr);
+	m_s9.SetSize(s9_spr->Width(), s9_spr->Height());
 }
 
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)

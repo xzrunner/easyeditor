@@ -24,6 +24,7 @@ public:
 	 */
 	virtual void Load(const Json::Value& val, const std::string& dir = "") override;
 	virtual void Store(Json::Value& val, const std::string& dir = "") const override;
+	virtual void Load(const sns::NodeSpr* spr) override;
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage) override;
 

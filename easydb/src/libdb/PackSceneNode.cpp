@@ -77,7 +77,7 @@ void PackSceneNode::Pack(const std::string& src_dir, const std::string& dst_dir,
 	
 		uint8_t* data = nullptr;
 		size_t len = 0;
-		sym->StoreToBin(&data, len);
+		sym->StoreToBin(dst_dir, &data, len);
 
 		auto relative_path = ee::FileHelper::GetRelativePath(src_dir, filepath);
 		auto dst_path = ee::FileHelper::GetAbsolutePath(dst_dir, relative_path);
