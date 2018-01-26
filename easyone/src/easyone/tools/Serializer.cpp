@@ -48,8 +48,6 @@ void Serializer::LoadFroimJson(const std::string& filepath, StagePanel* stage)
 		n3::SceneNodePtr n3_node = node;
 		n3::SerializeSystem::LoadNodeFromJson(n3_node, node_val);
 
-		
-
 		VariantSet vars;
 		Variant var;
 		var.m_type = VT_PVOID;

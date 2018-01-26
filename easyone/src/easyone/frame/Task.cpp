@@ -33,6 +33,8 @@ Task::~Task()
 void Task::Load(const char* filename)
 {
 	Serializer::LoadFroimJson(filename, m_stage);
+
+	m_tree->ExpandAll();
 }
 
 void Task::Store(const char* filename) const
@@ -109,7 +111,8 @@ wxWindow* Task::CreateStagePanel()
 
 wxWindow* Task::CreateTreePanel()
 {
-	return new SceneTreeCtrl(m_frame, m_stage->GetSubjectMgr());
+	m_tree = new SceneTreeCtrl(m_frame, m_stage->GetSubjectMgr());
+	return m_tree;
 }
 
 wxWindow* Task::CreateDetailPanel()

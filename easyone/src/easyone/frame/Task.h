@@ -13,6 +13,7 @@ namespace eone
 {
 
 class StagePanel;
+class SceneTreeCtrl;
 
 class Task : public ee::Task
 {
@@ -46,6 +47,8 @@ private:
 	ee::LibraryPanel* m_library;
 
 	StagePanel* m_stage;
+
+	SceneTreeCtrl* m_tree;
 
 }; // Task
 
