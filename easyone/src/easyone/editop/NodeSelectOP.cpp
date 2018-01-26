@@ -94,7 +94,17 @@ bool NodeSelectOP::OnDraw() const
 
 			auto& caabb = node->GetComponent<n3::CompAABB>();
 			auto& ctrans = node->GetComponent<n3::CompTransform>();
-			n3::PrimitiveDraw::Cube(ctrans.GetTransformMat(), caabb.GetAABB());
+
+			sm::mat4 prev_mt;
+			auto parent = node->GetParent();
+			while (parent)
+			{
+				auto& pctrans = parent->GetComponent<n3::CompTransform>();
+				prev_mt = pctrans.GetTransformMat() * prev_mt;
+				parent = parent->GetParent();
+			}
+
+			n3::PrimitiveDraw::Cube(prev_mt * ctrans.GetTransformMat(), caabb.GetAABB());
 
 			return true;
 		}
