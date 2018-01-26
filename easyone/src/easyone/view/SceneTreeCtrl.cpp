@@ -23,6 +23,8 @@ SceneTreeCtrl::SceneTreeCtrl(wxWindow* parent, SubjectMgr& sub_mgr)
 		wxTR_HIDE_ROOT | wxTR_EDIT_LABELS | wxTR_MULTIPLE | wxTR_NO_LINES | wxTR_DEFAULT_STYLE)
 	, m_sub_mgr(sub_mgr)
 {
+	SetBackgroundColour(wxColour(229, 229, 229));
+
 	InitRoot();
 
 	sub_mgr.RegisterObserver(MSG_INSERT_SCENE_NODE, this);

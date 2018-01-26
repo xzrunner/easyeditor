@@ -16,6 +16,8 @@ DetailPanel::DetailPanel(wxWindow* parent, SubjectMgr& sub_mgr)
 	: wxPanel(parent, wxID_ANY)
 	, m_sub_mgr(sub_mgr)
 {
+	SetBackgroundColour(wxColour(229, 229, 229));
+
 	InitLayout();
 
 	sub_mgr.RegisterObserver(MSG_SELECTED_ONE_NODE, this);
