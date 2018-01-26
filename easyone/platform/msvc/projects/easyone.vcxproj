@@ -57,7 +57,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\src\easyone;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\guard\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easyone\src;..\..\..\..\easynode3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src\easyone;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\js\include;..\..\..\..\guard\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easyone\src;..\..\..\..\easynode3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -83,7 +83,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\src\easyone;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\guard\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easyone\src;..\..\..\..\easynode3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src\easyone;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\js\include;..\..\..\..\guard\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easyone\src;..\..\..\..\easynode3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -309,6 +309,7 @@
     <ClInclude Include="..\..\..\src\easyone\msg\Variant.h" />
     <ClInclude Include="..\..\..\src\easyone\msg\VariantSet.h" />
     <ClInclude Include="..\..\..\src\easyone\msg\VariantType.h" />
+    <ClInclude Include="..\..\..\src\easyone\tools\Serializer.h" />
     <ClInclude Include="..\..\..\src\easyone\view\CompTransformPanel.h" />
     <ClInclude Include="..\..\..\src\easyone\view\LibGeoPage.h" />
     <ClInclude Include="..\..\..\src\easyone\view\LibraryPanel.h" />
@@ -332,6 +333,7 @@
     <ClCompile Include="..\..\..\src\easyone\frame\Task.cpp" />
     <ClCompile Include="..\..\..\src\easyone\msg\Subject.cpp" />
     <ClCompile Include="..\..\..\src\easyone\msg\SubjectMgr.cpp" />
+    <ClCompile Include="..\..\..\src\easyone\tools\Serializer.cpp" />
     <ClCompile Include="..\..\..\src\easyone\view\CompTransformPanel.cpp" />
     <ClCompile Include="..\..\..\src\easyone\view\LibGeoPage.cpp" />
     <ClCompile Include="..\..\..\src\easyone\view\LibraryPanel.cpp" />

@@ -43,6 +43,9 @@
     <Filter Include="view\detail\comp">
       <UniqueIdentifier>{cbf1a63c-4e62-4c25-a4c4-bed91b4b045a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{298781f4-8bfe-4eec-98d8-f7eec0aed701}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easyone\frame\main.h">
@@ -123,6 +126,9 @@
     <ClInclude Include="..\..\..\src\easyone\view\NodeCompPanel.h">
       <Filter>view\detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\easyone\tools\Serializer.h">
+      <Filter>tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easyone\frame\main.cpp">
@@ -187,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easyone\view\NodeCompPanel.cpp">
       <Filter>view\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyone\tools\Serializer.cpp">
+      <Filter>tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

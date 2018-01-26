@@ -5,6 +5,7 @@
 #include "view/SceneTreeCtrl.h"
 #include "view/DetailPanel.h"
 #include "editop/NodeArrangeOP.h"
+#include "tools/Serializer.h"
 
 #include <easynode3d/CamControlOP.h>
 
@@ -27,10 +28,12 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
+	Serializer::LoadFroimJson(filename, m_stage);
 }
 
 void Task::Store(const char* filename) const
 {
+	Serializer::StoreToJson(filename, m_stage);
 }
 
 bool Task::IsDirty() const

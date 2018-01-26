@@ -9,6 +9,7 @@
 #include <node3/ObjectModel.h>
 #include <node3/ModelType.h>
 #include <node3/AABB.h>
+#include <node3/ParametricEquations.h>
 
 namespace eone
 {
@@ -28,12 +29,12 @@ bool LibGeoPage::IsHandleSymbol(const ee::SymPtr& sym) const
 
 void LibGeoPage::LoadDefaultSymbol()
 {
-	LoadGeometric("Cone");
-	LoadGeometric("Sphere");
-	LoadGeometric("Torus");
-	LoadGeometric("TrefoilKnot");
-	LoadGeometric("MobiusStrip");
-	LoadGeometric("KleinBottle");
+	LoadGeometric(n3::Cone::TYPE_NAME);
+	LoadGeometric(n3::Sphere::TYPE_NAME);
+	LoadGeometric(n3::Torus::TYPE_NAME);
+	LoadGeometric(n3::TrefoilKnot::TYPE_NAME);
+	LoadGeometric(n3::MobiusStrip::TYPE_NAME);
+	LoadGeometric(n3::KleinBottle::TYPE_NAME);
 }
 
 void LibGeoPage::LoadGeometric(const std::string& name)
