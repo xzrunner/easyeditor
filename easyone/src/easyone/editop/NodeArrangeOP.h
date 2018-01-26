@@ -12,6 +12,7 @@ namespace eone
 {
 
 class StageCanvas;
+class SubjectMgr;
 
 class NodeArrangeOP : public NodeSelectOP
 {
@@ -28,6 +29,8 @@ public:
 	virtual bool OnMouseWheelRotation(int x, int y, int direction) override;
 
 private:
+	SubjectMgr& m_sub_mgr;
+
 	ee::SelectionSet<n3::SceneNode>& m_node_selection;
 
 	std::shared_ptr<StageCanvas> m_canvas = nullptr;

@@ -9,6 +9,7 @@
 #include "CamZoomState.h"
 
 #include <ee/FetchAllVisitor.h>
+#include <ee/panel_msg.h>
 
 #include <sprite2/ModelSprite.h>
 
@@ -43,10 +44,11 @@ bool NodeArrangeOP::OnKeyDown(int keyCode)
 				node->SetAngle(sm::Quaternion());
 				node->SetScale(sm::vec3(1, 1, 1));
 			}
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	}
-
+	
 	return false;
 }
 

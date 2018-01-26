@@ -18,6 +18,7 @@ namespace eone
 
 NodeArrangeOP::NodeArrangeOP(StagePanel& stage)
 	: NodeSelectOP(stage)
+	, m_sub_mgr(stage.GetSubjectMgr())
 	, m_node_selection(stage.GetNodeSelection())
 	, m_canvas(std::dynamic_pointer_cast<StageCanvas>(stage.GetCanvas()))
 {
@@ -46,6 +47,7 @@ bool NodeArrangeOP::OnKeyDown(int keyCode)
 					return true;
 				}
 			);
+			m_sub_mgr.NotifyObservers(MSG_SET_CANVAS_DIRTY);
 		}
 		break;
 	}
