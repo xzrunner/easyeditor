@@ -42,7 +42,7 @@ void LibraryPage::LoadGeometric(const std::string& name)
 	n3::Surface* surface = n3::SurfaceFactory::Create(name);
 
 	n3::AABB aabb;
-	auto model = std::unique_ptr<n3::Model>(new n3::ModelParametric(surface, aabb));
+	auto model = std::make_shared<n3::ModelParametric>(surface, aabb);
 	auto obj_model = std::make_shared<n3::ObjectModel>();
 	obj_model->SetModel(model);
 	obj_model->SetAABB(aabb);

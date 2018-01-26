@@ -49,9 +49,8 @@ void Serializer::LoadFroimJson(const std::string& filepath, enode3d::StagePanel*
 	js::RapidJsonHelper::ReadFromFile(filepath.c_str(), doc);
 
 	auto& nodes_val = doc["nodes"];
-	rapidjson::Value::ConstValueIterator itr = nodes_val.Begin();
-	for ( ; itr != nodes_val.End(); ++itr) {
-		auto node = LoadNode(*itr);
+	for (auto& node_val : nodes_val.GetArray()) {
+		auto node = LoadNode(node_val);
 		GD_ASSERT(node != nullptr, "unknown node.");
 		stage->InsertNode(node);
 	}
@@ -198,7 +197,7 @@ void Serializer::LoadCamera(const rapidjson::Value& val, n3::Camera& cam)
 n3::ModelPtr Serializer::LoadGeometric(n3::Surface* surface, const std::string& name)
 {
 	n3::AABB aabb;
-	auto model = std::unique_ptr<n3::Model>(new n3::ModelParametric(surface, aabb));
+	auto model = std::make_shared<n3::ModelParametric>(surface, aabb);
 	auto obj_model = std::make_shared<n3::ObjectModel>();
 	obj_model->SetModel(model);
 	obj_model->SetAABB(aabb);

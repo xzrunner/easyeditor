@@ -106,7 +106,10 @@ void StageCanvas::DrawNode(const n3::SceneNodePtr& node, const sm::mat4& mt) con
 	if (node->HasComponent<n3::CompModel>()) 
 	{
 		auto& cmodel = node->GetComponent<n3::CompModel>();
-		n3::RenderSystem::DrawModel(cmodel.GetModel(), mt_child);
+		auto& model = cmodel.GetModel();
+		if (model) {
+			n3::RenderSystem::DrawModel(*model, mt_child);
+		}
 	}
 
 	auto& children = node->GetAllChildren();

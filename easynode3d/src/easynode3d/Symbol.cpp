@@ -50,8 +50,7 @@ bool Symbol::LoadResources()
 bool Symbol::LoadModelFromFile(const std::string& filepath)
 {
 	n3::AABB aabb;
-	auto model = std::unique_ptr<n3::Model>(
-		n3::AssimpHelper::Load(filepath, aabb));
+	auto model = n3::AssimpHelper::Load(filepath, aabb);
 	if (!model) {
 		return false;
 	}

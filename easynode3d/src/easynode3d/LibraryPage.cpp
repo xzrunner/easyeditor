@@ -37,8 +37,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			n3::AABB aabb;
-			auto model = std::unique_ptr<n3::Model>(
-				n3::AssimpHelper::Load(filenames[i].ToStdString(), aabb));
+			auto model = n3::AssimpHelper::Load(filenames[i].ToStdString(), aabb);
 			if (!model) {
 				continue;
 			}

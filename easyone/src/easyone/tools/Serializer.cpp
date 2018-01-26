@@ -1,10 +1,12 @@
 #include "tools/Serializer.h"
 #include "view/StagePanel.h"
 #include "view/StageCanvas.h"
+#include "data/SceneNode.h"
 
 #include <node3/SerializeSystem.h>
 #include <node3/Camera.h>
 #include <js/RapidJsonHelper.h>
+#include <guard/check.h>
 
 namespace eone
 {
@@ -37,7 +39,29 @@ void Serializer::StoreToJson(const std::string& filepath, const StagePanel* stag
 
 void Serializer::LoadFroimJson(const std::string& filepath, StagePanel* stage)
 {
+	rapidjson::Document doc;
+	js::RapidJsonHelper::ReadFromFile(filepath.c_str(), doc);
 
+	auto& nodes_val = doc["nodes"];
+	for (auto& node_val : nodes_val.GetArray()) 
+	{
+		auto node = std::make_shared<SceneNode>();
+		n3::SceneNodePtr n3_node = node;
+		n3::SerializeSystem::LoadNodeFromJson(n3_node, node_val);
+
+		VariantSet vars;
+		Variant var;
+		var.m_type = VT_PVOID;
+		var.m_val.pv = const_cast<SceneNodePtr*>(&node);
+		vars.SetVariant("node", var);
+
+		bool succ = stage->GetSubjectMgr().NotifyObservers(MSG_INSERT_SCENE_NODE, vars);
+		GD_ASSERT(succ, "no MSG_INSERT_SCENE_NODE");
+	}
+
+	auto canvas = std::dynamic_pointer_cast<const StageCanvas>(stage->GetCanvas());
+	auto& cam = const_cast<n3::Camera&>(canvas->GetCamera());
+	LoadCamera(doc["camera"], cam);
 }
 
 rapidjson::Value Serializer::StoreCamera(const n3::Camera& cam, rapidjson::MemoryPoolAllocator<>& alloc)

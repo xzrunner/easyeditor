@@ -30,7 +30,7 @@ SceneNodePtr NodeFactory::Create(const ee::SymPtr& sym)
 		auto model = model_sym->GetModel();
 		if (model->Type() == n3::MODEL_OBJECT)
 		{
-			const n3::Model* m = std::dynamic_pointer_cast<n3::ObjectModel>(model)->GetModel();
+			auto m = std::dynamic_pointer_cast<n3::ObjectModel>(model)->GetModel();
 
 			node = std::make_shared<SceneNode>();
 
