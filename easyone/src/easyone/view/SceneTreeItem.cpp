@@ -7,7 +7,7 @@ SceneTreeItem::SceneTreeItem()
 {
 }
 
-SceneTreeItem::SceneTreeItem(const SceneNodePtr& node)
+SceneTreeItem::SceneTreeItem(const n3::SceneNodePtr& node)
 	: m_node(node)
 {
 }

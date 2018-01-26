@@ -6,7 +6,7 @@ namespace eone
 {
 
 NodeRotateState::NodeRotateState(StageCanvas& canvas, SubjectMgr& sub_mgr,
-	                             const ee::SelectionSet<SceneNode>& selection)
+	                             const ee::SelectionSet<n3::SceneNode>& selection)
 	: m_canvas(canvas)
 	, m_sub_mgr(sub_mgr)
 	, m_selection(selection)
@@ -41,7 +41,7 @@ void NodeRotateState::Rotate(const sm::vec2& start, const sm::vec2& end)
 //////////////////////////////////////////////////////////////////////////
 
 void NodeRotateState::Visitor::
-Visit(const SceneNodePtr& node, bool& next)
+Visit(const n3::SceneNodePtr& node, bool& next)
 {
 	auto& ctrans = node->GetComponent<n3::CompTransform>();
 

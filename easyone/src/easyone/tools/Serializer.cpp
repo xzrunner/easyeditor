@@ -1,7 +1,6 @@
 #include "tools/Serializer.h"
 #include "view/StagePanel.h"
 #include "view/StageCanvas.h"
-#include "data/SceneNode.h"
 
 #include <node3/SerializeSystem.h>
 #include <node3/Camera.h>
@@ -45,14 +44,16 @@ void Serializer::LoadFroimJson(const std::string& filepath, StagePanel* stage)
 	auto& nodes_val = doc["nodes"];
 	for (auto& node_val : nodes_val.GetArray()) 
 	{
-		auto node = std::make_shared<SceneNode>();
+		auto node = std::make_shared<n3::SceneNode>();
 		n3::SceneNodePtr n3_node = node;
 		n3::SerializeSystem::LoadNodeFromJson(n3_node, node_val);
+
+		
 
 		VariantSet vars;
 		Variant var;
 		var.m_type = VT_PVOID;
-		var.m_val.pv = const_cast<SceneNodePtr*>(&node);
+		var.m_val.pv = &node;
 		vars.SetVariant("node", var);
 
 		bool succ = stage->GetSubjectMgr().NotifyObservers(MSG_INSERT_SCENE_NODE, vars);

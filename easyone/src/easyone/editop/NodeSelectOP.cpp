@@ -29,7 +29,7 @@ bool NodeSelectOP::OnKeyDown(int keyCode)
 		VariantSet vars;
 		Variant var;
 		var.m_type = VT_PVOID;
-		var.m_val.pv = const_cast<ee::SelectionSet<SceneNode>*>
+		var.m_val.pv = const_cast<ee::SelectionSet<n3::SceneNode>*>
 			(&m_stage.GetNodeSelection());
 		vars.SetVariant("selection", var);
 
@@ -88,7 +88,7 @@ bool NodeSelectOP::OnDraw() const
 	if (ee::EditOP::OnDraw()) return true;
 
 	m_stage.GetNodeSelection().Traverse(
-		[](const SceneNodePtr& node)->bool 
+		[](const n3::SceneNodePtr& node)->bool
 		{
 			n3::PrimitiveDraw::SetColor(ee::MID_RED.ToABGR());
 
@@ -114,7 +114,7 @@ bool NodeSelectOP::OnDraw() const
 }
 
 // AABB not changed, transform ray from Camera and spr's mat
-SceneNodePtr NodeSelectOP::SelectByPos(const sm::vec2& pos) const
+n3::SceneNodePtr NodeSelectOP::SelectByPos(const sm::vec2& pos) const
 {
 	auto& nodes = m_stage.GetAllNodes();
 

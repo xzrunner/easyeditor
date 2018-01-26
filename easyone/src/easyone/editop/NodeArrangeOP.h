@@ -28,7 +28,7 @@ public:
 	virtual bool OnMouseWheelRotation(int x, int y, int direction) override;
 
 private:
-	ee::SelectionSet<SceneNode>& m_node_selection;
+	ee::SelectionSet<n3::SceneNode>& m_node_selection;
 
 	std::shared_ptr<StageCanvas> m_canvas = nullptr;
 

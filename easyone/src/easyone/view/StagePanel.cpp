@@ -65,7 +65,7 @@ void StagePanel::InsertSceneNode(const VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
-	SceneNodePtr* node = static_cast<SceneNodePtr*>(var.m_val.pv);
+	n3::SceneNodePtr* node = static_cast<n3::SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
 	if (m_node_selection.IsEmpty()) {
 		m_nodes.push_back(*node);
@@ -78,7 +78,7 @@ void StagePanel::DeleteSceneNode(const VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
-	SceneNodePtr* node = static_cast<SceneNodePtr*>(var.m_val.pv);
+	n3::SceneNodePtr* node = static_cast<n3::SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
 
 	bool dirty = false;
@@ -104,7 +104,7 @@ void StagePanel::NodeSelectionInsert(const VariantSet& variants)
 
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
-	SceneNodePtr* node = static_cast<SceneNodePtr*>(var.m_val.pv);
+	n3::SceneNodePtr* node = static_cast<n3::SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
 
 	if (m_node_selection.IsEmpty()) {
@@ -119,7 +119,7 @@ void StagePanel::NodeSelectionDelete(const VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
-	SceneNodePtr* node = static_cast<SceneNodePtr*>(var.m_val.pv);
+	n3::SceneNodePtr* node = static_cast<n3::SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
 
 	m_node_selection.Remove(*node);

@@ -2,6 +2,7 @@
 #include "view/SceneTreeItem.h"
 #include "msg/MessageID.h"
 #include "msg/SubjectMgr.h"
+#include "data/CompEditor.h"
 
 #include <guard/check.h>
 
@@ -107,7 +108,7 @@ void SceneTreeCtrl::OnSelChanged(wxTreeEvent& event)
 
 	Variant var;
 	var.m_type = VT_PVOID;
-	var.m_val.pv = &std::const_pointer_cast<SceneNode>(node);
+	var.m_val.pv = &std::const_pointer_cast<n3::SceneNode>(node);
 	vars.SetVariant("node", var);
 
 	var.m_type = VT_BOOL;
@@ -146,7 +147,7 @@ void SceneTreeCtrl::SelectSceneNode(const VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
-	SceneNodePtr* node = static_cast<SceneNodePtr*>(var.m_val.pv);
+	n3::SceneNodePtr* node = static_cast<n3::SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
 
 	Traverse(m_root, [&](wxTreeItemId item)->bool
@@ -166,7 +167,7 @@ void SceneTreeCtrl::UnselectSceneNode(const VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
-	SceneNodePtr* node = static_cast<SceneNodePtr*>(var.m_val.pv);
+	n3::SceneNodePtr* node = static_cast<n3::SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
 
 	Traverse(m_root, [&](wxTreeItemId item)->bool
@@ -186,27 +187,39 @@ void SceneTreeCtrl::InsertSceneNode(const VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
-	SceneNodePtr* node = static_cast<SceneNodePtr*>(var.m_val.pv);
+	n3::SceneNodePtr* node = static_cast<n3::SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
-
-	auto item = new SceneTreeItem(*node);
 
 	wxTreeItemId parent = GetFocusedItem();
 	if (!parent.IsOk()) {
 		parent = m_root;
 	}
+
+	InsertSceneNode(parent, *node);
+
+	if (parent != m_root) 
+	{
+		auto pdata = (SceneTreeItem*)GetItemData(parent);
+		pdata->GetNode()->AddChild(*node);
+		(*node)->SetParent(pdata->GetNode());
+		Expand(parent);
+	}
+}
+
+void SceneTreeCtrl::InsertSceneNode(wxTreeItemId parent, const n3::SceneNodePtr& node)
+{
+	auto item = new SceneTreeItem(node);
+
 	auto pdata = (SceneTreeItem*)GetItemData(parent);
 	auto pos = pdata->GetChildrenNum();
 	pdata->AddChild(item);
 
-	wxTreeItemId id = InsertItem(parent, pos, (*node)->GetName());
+	auto& ceditor = node->GetComponent<CompEditor>();
+	wxTreeItemId id = InsertItem(parent, pos, ceditor.GetName());
 	SetItemData(id, item);
 
-	if (parent != m_root) 
-	{
-		pdata->GetNode()->AddChild(*node);
-		(*node)->SetParent(pdata->GetNode());
-		Expand(parent);
+	for (auto& child : node->GetAllChildren()) {
+		InsertSceneNode(id, std::dynamic_pointer_cast<n3::SceneNode>(child));
 	}
 }
 

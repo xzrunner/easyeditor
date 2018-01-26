@@ -1,7 +1,8 @@
 #pragma once
 
 #include "msg/Observer.h"
-#include "data/SceneNode.h"
+
+#include <node3/SceneNode.h>
 
 #include <wx/panel.h>
 
@@ -32,7 +33,7 @@ private:
 
 	std::vector<NodeCompPanel*> m_components;
 
-	SceneNodePtr m_node = nullptr;
+	n3::SceneNodePtr m_node = nullptr;
 
 }; // DetailPanel
 

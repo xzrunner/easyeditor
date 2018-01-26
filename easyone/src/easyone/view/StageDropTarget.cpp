@@ -62,12 +62,12 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 {
 }
 
-void StageDropTarget::InsertNode(const SceneNodePtr& node)
+void StageDropTarget::InsertNode(const n3::SceneNodePtr& node)
 {
 	VariantSet vars;
 	Variant var;
 	var.m_type = VT_PVOID;
-	var.m_val.pv = const_cast<SceneNodePtr*>(&node);
+	var.m_val.pv = &std::const_pointer_cast<n3::SceneNode>(node);
 	vars.SetVariant("node", var);
 	
 	bool succ = m_stage->GetSubjectMgr().NotifyObservers(MSG_INSERT_SCENE_NODE, vars);

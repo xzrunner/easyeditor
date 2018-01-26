@@ -60,9 +60,6 @@
     <ClInclude Include="..\..\..\src\easyone\view\StagePanel.h">
       <Filter>view\stage</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\data\SceneNode.h">
-      <Filter>data</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\easyone\view\StageDropTarget.h">
       <Filter>view\stage</Filter>
     </ClInclude>
@@ -129,6 +126,9 @@
     <ClInclude Include="..\..\..\src\easyone\tools\Serializer.h">
       <Filter>tools</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\easyone\data\CompEditor.h">
+      <Filter>data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easyone\frame\main.cpp">
@@ -145,9 +145,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easyone\view\StagePanel.cpp">
       <Filter>view\stage</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\data\SceneNode.cpp">
-      <Filter>data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\easyone\view\StageDropTarget.cpp">
       <Filter>view\stage</Filter>
@@ -196,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easyone\tools\Serializer.cpp">
       <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\easyone\data\CompEditor.cpp">
+      <Filter>data</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

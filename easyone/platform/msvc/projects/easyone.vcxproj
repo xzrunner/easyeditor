@@ -294,8 +294,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\easyone\data\CompEditor.h" />
     <ClInclude Include="..\..\..\src\easyone\data\NodeFactory.h" />
-    <ClInclude Include="..\..\..\src\easyone\data\SceneNode.h" />
     <ClInclude Include="..\..\..\src\easyone\editop\NodeArrangeOP.h" />
     <ClInclude Include="..\..\..\src\easyone\editop\NodeRotateState.h" />
     <ClInclude Include="..\..\..\src\easyone\editop\NodeSelectOP.h" />
@@ -323,8 +323,8 @@
     <ClInclude Include="..\..\..\src\easyone\view\StagePanel.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\easyone\data\CompEditor.cpp" />
     <ClCompile Include="..\..\..\src\easyone\data\NodeFactory.cpp" />
-    <ClCompile Include="..\..\..\src\easyone\data\SceneNode.cpp" />
     <ClCompile Include="..\..\..\src\easyone\editop\NodeArrangeOP.cpp" />
     <ClCompile Include="..\..\..\src\easyone\editop\NodeRotateState.cpp" />
     <ClCompile Include="..\..\..\src\easyone\editop\NodeSelectOP.cpp" />

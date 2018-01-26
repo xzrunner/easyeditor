@@ -6,8 +6,11 @@
 #include "view/DetailPanel.h"
 #include "editop/NodeArrangeOP.h"
 #include "tools/Serializer.h"
+#include "data/CompEditor.h"
 
 #include <easynode3d/CamControlOP.h>
+
+#include <node3/ComponentFactory.h>
 
 #include <wx/aui/auibook.h>
 
@@ -20,6 +23,7 @@ Task::Task(wxFrame* frame)
 	m_mgr.SetManagedWindow(frame);
 
 	InitLayout();
+	InitCallback();
 }
 
 Task::~Task()
@@ -62,6 +66,16 @@ void Task::InitLayout()
 		Right().MinSize(300, 0).PaneBorder(false));
 
 	m_mgr.Update();
+}
+
+void Task::InitCallback()
+{
+	n3::ComponentFactory::Instance()->AddCreator(CompEditor::TYPE_NAME,
+		[](n3::SceneNodePtr& node, const rapidjson::Value& val)
+	{
+		auto& comp = node->AddComponent<CompEditor>();
+		comp.LoadFromJson(val);
+	});
 }
 
 wxWindow* Task::CreateLibraryPanel()

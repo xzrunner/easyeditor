@@ -37,7 +37,7 @@ bool NodeArrangeOP::OnKeyDown(int keyCode)
 	case WXK_SPACE:
 		{
 			m_node_selection.Traverse(
-				[](const SceneNodePtr& node)->bool
+				[](const n3::SceneNodePtr& node)->bool
 				{
 					auto& ctrans = node->GetComponent<n3::CompTransform>();
 					ctrans.SetPosition(sm::vec3(0, 0, 0));

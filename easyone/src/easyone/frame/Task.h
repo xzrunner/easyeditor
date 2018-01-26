@@ -31,6 +31,7 @@ public:
 
 private:
 	void InitLayout();
+	void InitCallback();
 
 	wxWindow* CreateLibraryPanel();
 	wxWindow* CreateStagePanel();

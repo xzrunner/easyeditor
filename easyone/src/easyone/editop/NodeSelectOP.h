@@ -1,8 +1,8 @@
 #pragma once
 
-#include <data/SceneNode.h>
-
 #include <ee/EditOP.h>
+
+#include <node3/SceneNode.h>
 
 #include <SM_Vector.h>
 
@@ -22,7 +22,7 @@ public:
 	virtual bool OnDraw() const override;
 
 private:
-	SceneNodePtr SelectByPos(const sm::vec2& pos) const;
+	n3::SceneNodePtr SelectByPos(const sm::vec2& pos) const;
 
 protected:
 	StagePanel& m_stage;

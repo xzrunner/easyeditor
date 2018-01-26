@@ -1,4 +1,5 @@
 #include "data/NodeFactory.h"
+#include "data/CompEditor.h"
 
 #include <sprite2/SymType.h>
 #include <sprite2/ModelSymbol.h>
@@ -16,13 +17,13 @@ NodeFactory::NodeFactory()
 {
 }
 
-SceneNodePtr NodeFactory::Create(const ee::SymPtr& sym)
+n3::SceneNodePtr NodeFactory::Create(const ee::SymPtr& sym)
 {
 	if (!sym) {
 		return nullptr;
 	}
 
-	SceneNodePtr node = nullptr;
+	n3::SceneNodePtr node = nullptr;
 
 	if (sym->Type() == s2::SYM_MODEL)
 	{
@@ -32,7 +33,7 @@ SceneNodePtr NodeFactory::Create(const ee::SymPtr& sym)
 		{
 			auto m = std::dynamic_pointer_cast<n3::ObjectModel>(model)->GetModel();
 
-			node = std::make_shared<SceneNode>();
+			node = std::make_shared<n3::SceneNode>();
 
 			// model
 			auto& cmodel = node->AddComponent<n3::CompModel>();
@@ -41,6 +42,9 @@ SceneNodePtr NodeFactory::Create(const ee::SymPtr& sym)
 			// aabb
 			auto& caabb = node->AddComponent<n3::CompAABB>();
 			caabb.SetAABB(model->GetAABB());
+
+			// editor
+			node->AddComponent<CompEditor>();
 		}
 	}
 

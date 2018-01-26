@@ -1,7 +1,8 @@
 #pragma once
 
-#include "data/SceneNode.h"
 #include "msg/Observer.h"
+
+#include <node3/SceneNode.h>
 
 #include <wx/treectrl.h>
 
@@ -30,6 +31,7 @@ private:
 	void SelectSceneNode(const VariantSet& variants);
 	void UnselectSceneNode(const VariantSet& variants);
 	void InsertSceneNode(const VariantSet& variants);
+	void InsertSceneNode(wxTreeItemId parent, const n3::SceneNodePtr& child);
 
 private:
 	enum

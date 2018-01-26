@@ -1,8 +1,8 @@
 #pragma once
 
-#include "data/SceneNode.h"
-
 #include <ee/CombinedDropTarget.h>
+
+#include <node3/SceneNode.h>
 
 namespace ee { class LibraryPanel; }
 
@@ -22,7 +22,7 @@ public:
 	virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) override;
 
 private:
-	void InsertNode(const SceneNodePtr& node);
+	void InsertNode(const n3::SceneNodePtr& node);
 
 private:
 	ee::LibraryPanel* m_library;
