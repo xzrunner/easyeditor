@@ -27,7 +27,7 @@ void CamTranslateState::CamTranslateState::OnMouseDrag(const sm::vec2& pos)
 	float dy = pos.y - m_last_pos.y;
 
 	float dist = m_cam.GetDistance();
-	static const float SCALE = 0.005f;
+	static const float SCALE = 0.002f;
 	m_cam.Translate(dx * dist * SCALE, dy * dist * SCALE);
 
 	m_last_pos = pos;

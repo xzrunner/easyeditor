@@ -15,7 +15,7 @@ CamZoomState::CamZoomState(n3::Camera& cam, const n3::Viewport& vp)
 void CamZoomState::OnMouseWheelRotation(int x, int y, int direction)
 {
 	sm::vec3 dir = m_vp.TransPos3ScreenToDir(sm::vec2(x, y), m_cam);
-	static const float OFFSET = 0.1f;
+	static const float OFFSET = 0.05f;
 	if (direction > 0) {
 		m_cam.Move(dir, m_cam.GetDistance() * OFFSET);
 	} else {
