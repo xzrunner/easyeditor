@@ -49,10 +49,16 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
+		InsertNode(node);
+
 		// transform
 		auto& ctrans = node->AddComponent<n3::CompTransform>();
+		auto parent = node->GetParent();
+		if (parent) {
+			auto p_pos = parent->GetComponent<n3::CompTransform>().GetTransformMat() * sm::vec3(0, 0, 0);
+			pos -= p_pos;
+		}
 		ctrans.SetPosition(pos);
-		InsertNode(node);
 	}
 
 	m_stage->GetSubjectMgr().NotifyObservers(MSG_SET_CANVAS_DIRTY);
