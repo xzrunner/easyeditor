@@ -2,6 +2,10 @@
 
 #include <ee/ImageSymbol.h>
 
+#include <gum/JsonSerializer.h>
+#include <sns/IconSym.h>
+#include <bs/FixedPointNum.h>
+
 namespace eicon
 {
 
@@ -30,6 +34,19 @@ void QuadIcon::StoreToFile(Json::Value& value) const
 		value["src"][i]["y"] = m_src[i].y;
 		value["screen"][i]["x"] = m_screen[i].x;
 		value["screen"][i]["y"] = m_screen[i].y;
+	}
+}
+
+void QuadIcon::LoadFromFile(const sns::IconSym& sym)
+{
+	auto vertices = sym.GetVertices();
+
+	size_t idx = 0;
+	for (int i = 0; i < 4; ++i) {
+		m_src[i].x = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
+		m_src[i].y = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
+		m_screen[i].x = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
+		m_screen[i].y = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
 	}
 }
 

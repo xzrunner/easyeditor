@@ -8,12 +8,17 @@
 namespace eicon
 {
 
-std::unique_ptr<s2::Icon> IconFactory::CreateIconFromFile(const Json::Value& value)
+std::unique_ptr<s2::Icon> IconFactory::Create(const Json::Value& value)
+{
+	std::string desc = value["type"].asString();
+	IconType type = get_icon_type(desc);
+	return Create(type);
+}
+
+std::unique_ptr<s2::Icon> IconFactory::Create(int type)
 {
 	std::unique_ptr<s2::Icon> icon = nullptr;
 
-	std::string desc = value["type"].asString();
-	IconType type = get_icon_type(desc);
 	switch (type)
 	{
 	case IT_RECT:

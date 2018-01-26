@@ -21,6 +21,7 @@ public:
 
 	virtual void LoadFromFile(const Json::Value& value) override;
 	virtual void StoreToFile(Json::Value& value) const override;
+	virtual void LoadFromFile(const sns::IconSym& sym) override;
 
 }; // RectIcon
 

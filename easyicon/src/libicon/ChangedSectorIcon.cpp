@@ -11,4 +11,8 @@ void ChangedSectorIcon::StoreToFile(Json::Value& value) const
 {
 }
 
+void ChangedSectorIcon::LoadFromFile(const sns::IconSym& sym)
+{
+}
+
 }

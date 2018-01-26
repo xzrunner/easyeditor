@@ -2,6 +2,8 @@
 #include "Symbol.h"
 #include "SpritePropertySetting.h"
 
+#include <sns/IconSpr.h>
+
 namespace eicon
 {
 
@@ -37,6 +39,14 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::Sprite::Store(val);
 	val["process"] = m_process;
+}
+
+void Sprite::Load(const sns::NodeSpr* spr)
+{
+	ee::Sprite::Load(spr);
+
+	auto icon_spr = dynamic_cast<const sns::IconSpr*>(spr);
+	SetProcess(icon_spr->GetProcess());
 }
 
 ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
