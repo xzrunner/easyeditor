@@ -7,8 +7,8 @@
 namespace ecomplex3d
 {
 
-StageCanvas::StageCanvas(enode3d::StagePanel* stage, ee::LibraryPanel* library)
-	: enode3d::StageCanvas(stage, nullptr, true)
+StageCanvas::StageCanvas(ee3::StagePanel* stage, ee::LibraryPanel* library)
+	: ee3::StageCanvas(stage, nullptr, true)
 {
 }
 

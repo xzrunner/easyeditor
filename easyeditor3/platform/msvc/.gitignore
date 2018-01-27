@@ -1,0 +1,4 @@
+easyeditor3/
+projects/*
+
+!projects/easyeditor3.vcxproj

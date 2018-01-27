@@ -5,8 +5,8 @@
 namespace eanim3d
 {
 
-StageCanvas::StageCanvas(enode3d::StagePanel* stage)
-	: enode3d::StageCanvas(stage)
+StageCanvas::StageCanvas(ee3::StagePanel* stage)
+	: ee3::StageCanvas(stage)
 {
 }
 

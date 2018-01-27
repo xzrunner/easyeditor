@@ -3,8 +3,8 @@
 #include <ee/SymbolMgr.h>
 #include <ee/PropertySettingPanel.h>
 
-#include <easynode3d/StagePanel.h>
-#include <easynode3d/CamControlOP.h>
+#include <ee3/StagePanel.h>
+#include <ee3/CamControlOP.h>
 
 #include <easyanim3d.h>
 
@@ -79,9 +79,11 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	auto stage = new enode3d::StagePanel(parent, m_parent, m_library);
-	stage->SetCanvas(std::make_shared<StageCanvas>(stage, stage->GetStageImpl(), stage));
-	stage->SetEditOP(std::make_shared<enode3d::CamControlOP>(stage, stage->GetStageImpl()));
+	auto stage = new ee3::StagePanel(parent, m_parent, m_library);
+	auto canvas = std::make_shared<StageCanvas>(stage);
+	stage->SetCanvas(canvas);
+	stage->SetEditOP(std::make_shared<ee3::CamControlOP>(
+		stage, stage->GetStageImpl(), canvas->GetCamera(), canvas->GetViewport(), stage->GetSubjectMgr()));
 
 	m_stage = stage;
 	m_property->SetEditPanel(m_stage->GetStageImpl());
@@ -91,7 +93,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
-	ToolbarPanel* toolbar = new ToolbarPanel(parent, static_cast<enode3d::StagePanel*>(m_stage));
+	ToolbarPanel* toolbar = new ToolbarPanel(parent, static_cast<ee3::StagePanel*>(m_stage));
 	return toolbar;
 }
 

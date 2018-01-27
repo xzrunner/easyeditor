@@ -4,9 +4,8 @@
 #include <ee/LibraryPanel.h>
 #include <ee/PropertySettingPanel.h>
 
-#include <easynode3d/StagePanel.h>
-#include <easynode3d/NodeArrangeOP.h>
-#include <easynode3d/PropertySettingPanel.h>
+#include <ee3/StagePanel.h>
+#include <ee3/NodeArrangeOP.h>
 
 #include <easycomplex3d.h>
 
@@ -20,8 +19,6 @@ Task::Task(wxFrame* parent)
 	, m_parent(parent)
 {
 	InitLayout();
-
-	m_library->LoadDefaultSymbol();
 }
 
 Task::~Task()
@@ -32,12 +29,12 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
-	Serializer::LoadFroimJson(filename, dynamic_cast<enode3d::StagePanel*>(m_stage));
+//	Serializer::LoadFroimJson(filename, dynamic_cast<ee3::StagePanel*>(m_stage));
 }
 
 void Task::Store(const char* filename) const
 {
-	Serializer::StoreToJson(filename, dynamic_cast<enode3d::StagePanel*>(m_stage));
+//	Serializer::StoreToJson(filename, dynamic_cast<ee3::StagePanel*>(m_stage));
 }
 
 bool Task::IsDirty() const
@@ -70,22 +67,25 @@ void Task::InitLayout()
 
 wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 {
-	wxSplitterWindow* split = new wxSplitterWindow(parent);
+	//wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_library  = new LibraryPanel(split);
-	m_property = new enode3d::PropertySettingPanel(split);
+	//m_library  = new LibraryPanel(split);
+	//m_property = new ee3::PropertySettingPanel(split);
 
-	split->SetSashGravity(0.55f);
-	split->SplitHorizontally(m_library, m_property);
+	//split->SetSashGravity(0.55f);
+	//split->SplitHorizontally(m_library, m_property);
 
-	return split;
+	//return split;
+
+	m_library = new LibraryPanel(parent);
+	return m_library;
 }
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	auto stage = new enode3d::StagePanel(parent, m_parent, m_library);
+	auto stage = new ee3::StagePanel(parent, m_parent, m_library);
 	stage->SetCanvas(std::make_shared<StageCanvas>(stage, m_library));
-	stage->SetEditOP(std::make_shared<enode3d::NodeArrangeOP>(*stage));
+	stage->SetEditOP(std::make_shared<ee3::NodeArrangeOP>(*stage));
 
 	m_stage = stage;
 //	m_property->SetEditPanel(m_stage->GetStageImpl());
@@ -95,7 +95,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
-	m_toolbar = new ecomplex3d::ToolbarPanel(parent, static_cast<enode3d::StagePanel*>(m_stage));
+	m_toolbar = new ecomplex3d::ToolbarPanel(parent, static_cast<ee3::StagePanel*>(m_stage));
 	return m_toolbar;
 }
 	

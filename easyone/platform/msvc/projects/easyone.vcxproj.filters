@@ -4,198 +4,75 @@
     <Filter Include="frame">
       <UniqueIdentifier>{f2ac435f-2b29-4461-ba51-b7df3f28bf31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="view">
-      <UniqueIdentifier>{4afd409c-0477-4656-a418-53044fb88ff4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="gui">
-      <UniqueIdentifier>{98cb6987-4a2b-49d1-9c0c-e40e4112f74e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="view\library">
-      <UniqueIdentifier>{d22de338-67a5-4535-9061-a35e56341ffd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="view\stage">
-      <UniqueIdentifier>{2b669b8d-56ac-448c-b2f9-43d2e63230ce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="view\tree">
-      <UniqueIdentifier>{fabe2985-214e-40e8-a5a1-9e2f42db58b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="data">
-      <UniqueIdentifier>{7d5dd436-a5d7-4641-a157-98fb4bef76cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="view\detail">
+    <Filter Include="detail">
       <UniqueIdentifier>{701e7fd5-4d82-4ec7-9aa6-edb2f4a43e0c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="msg">
-      <UniqueIdentifier>{05f9cabd-26b8-4203-9e3b-a79794d821e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="msg\variant">
-      <UniqueIdentifier>{e3122886-7d57-43bd-9e02-6ece0774f5c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="editop">
-      <UniqueIdentifier>{162e7aca-51bc-427d-b109-3731074839ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="editop\node">
-      <UniqueIdentifier>{ec1a1f95-a2e2-4482-a7d4-a8e05c317142}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="editop\node\state">
-      <UniqueIdentifier>{364a0dde-6c68-4876-b492-96c476565ea4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="view\detail\comp">
+    <Filter Include="detail\comp">
       <UniqueIdentifier>{cbf1a63c-4e62-4c25-a4c4-bed91b4b045a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="tools">
-      <UniqueIdentifier>{298781f4-8bfe-4eec-98d8-f7eec0aed701}</UniqueIdentifier>
+    <Filter Include="library">
+      <UniqueIdentifier>{d22de338-67a5-4535-9061-a35e56341ffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tree">
+      <UniqueIdentifier>{fabe2985-214e-40e8-a5a1-9e2f42db58b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\easyone\frame\main.h">
+    <ClInclude Include="..\..\..\src\easyone\main.h">
       <Filter>frame</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\LibraryPanel.h">
-      <Filter>view\library</Filter>
+    <ClInclude Include="..\..\..\src\easyone\LibraryPanel.h">
+      <Filter>library</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\StageCanvas.h">
-      <Filter>view\stage</Filter>
+    <ClInclude Include="..\..\..\src\easyone\SceneTreeCtrl.h">
+      <Filter>tree</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\StagePanel.h">
-      <Filter>view\stage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\StageDropTarget.h">
-      <Filter>view\stage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\data\NodeFactory.h">
-      <Filter>data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\SceneTreeCtrl.h">
-      <Filter>view\tree</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\frame\Task.h">
+    <ClInclude Include="..\..\..\src\easyone\Task.h">
       <Filter>frame</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\LibGeoPage.h">
-      <Filter>view\library</Filter>
+    <ClInclude Include="..\..\..\src\easyone\SceneTreeImpl.h">
+      <Filter>tree</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\SceneTreeImpl.h">
-      <Filter>view\tree</Filter>
+    <ClInclude Include="..\..\..\src\easyone\SceneTreeItem.h">
+      <Filter>tree</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\SceneTreeItem.h">
-      <Filter>view\tree</Filter>
+    <ClInclude Include="..\..\..\src\easyone\CompTransformPanel.h">
+      <Filter>detail\comp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\msg\Subject.h">
-      <Filter>msg</Filter>
+    <ClInclude Include="..\..\..\src\easyone\DetailPanel.h">
+      <Filter>detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\msg\Observer.h">
-      <Filter>msg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\msg\Variant.h">
-      <Filter>msg\variant</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\msg\VariantType.h">
-      <Filter>msg\variant</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\msg\VariantSet.h">
-      <Filter>msg\variant</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\msg\MessageID.h">
-      <Filter>msg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\msg\SubjectMgr.h">
-      <Filter>msg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\editop\NodeTranslateState.h">
-      <Filter>editop\node\state</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\editop\NodeRotateState.h">
-      <Filter>editop\node\state</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\editop\NodeArrangeOP.h">
-      <Filter>editop\node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\editop\NodeSelectOP.h">
-      <Filter>editop\node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\CompTransformPanel.h">
-      <Filter>view\detail\comp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\DetailPanel.h">
-      <Filter>view\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\view\NodeCompPanel.h">
-      <Filter>view\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\tools\Serializer.h">
-      <Filter>tools</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\data\CompEditor.h">
-      <Filter>data</Filter>
+    <ClInclude Include="..\..\..\src\easyone\NodeCompPanel.h">
+      <Filter>detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\easyone\frame\main.cpp">
+    <ClCompile Include="..\..\..\src\easyone\main.cpp">
       <Filter>frame</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\frame\Task.cpp">
+    <ClCompile Include="..\..\..\src\easyone\Task.cpp">
       <Filter>frame</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\LibraryPanel.cpp">
-      <Filter>view\library</Filter>
+    <ClCompile Include="..\..\..\src\easyone\LibraryPanel.cpp">
+      <Filter>library</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\StageCanvas.cpp">
-      <Filter>view\stage</Filter>
+    <ClCompile Include="..\..\..\src\easyone\SceneTreeCtrl.cpp">
+      <Filter>tree</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\StagePanel.cpp">
-      <Filter>view\stage</Filter>
+    <ClCompile Include="..\..\..\src\easyone\SceneTreeImpl.cpp">
+      <Filter>tree</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\StageDropTarget.cpp">
-      <Filter>view\stage</Filter>
+    <ClCompile Include="..\..\..\src\easyone\SceneTreeItem.cpp">
+      <Filter>tree</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\data\NodeFactory.cpp">
-      <Filter>data</Filter>
+    <ClCompile Include="..\..\..\src\easyone\CompTransformPanel.cpp">
+      <Filter>detail\comp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\SceneTreeCtrl.cpp">
-      <Filter>view\tree</Filter>
+    <ClCompile Include="..\..\..\src\easyone\DetailPanel.cpp">
+      <Filter>detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\LibGeoPage.cpp">
-      <Filter>view\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\SceneTreeImpl.cpp">
-      <Filter>view\tree</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\SceneTreeItem.cpp">
-      <Filter>view\tree</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\msg\SubjectMgr.cpp">
-      <Filter>msg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\msg\Subject.cpp">
-      <Filter>msg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\editop\NodeTranslateState.cpp">
-      <Filter>editop\node\state</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\editop\NodeRotateState.cpp">
-      <Filter>editop\node\state</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\editop\NodeArrangeOP.cpp">
-      <Filter>editop\node</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\editop\NodeSelectOP.cpp">
-      <Filter>editop\node</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\CompTransformPanel.cpp">
-      <Filter>view\detail\comp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\DetailPanel.cpp">
-      <Filter>view\detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\view\NodeCompPanel.cpp">
-      <Filter>view\detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\tools\Serializer.cpp">
-      <Filter>tools</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\data\CompEditor.cpp">
-      <Filter>data</Filter>
+    <ClCompile Include="..\..\..\src\easyone\NodeCompPanel.cpp">
+      <Filter>detail</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

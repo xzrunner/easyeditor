@@ -19,7 +19,7 @@ void IDemo::Update()
 
 void IDemo::Draw() const 
 { 
-	//enode3d::LogViewer* log = enode3d::LogViewer::Instance();
+	//ee3::LogViewer* log = ee3::LogViewer::Instance();
 
 	//log->Add(ee::StringHelper::Format("FPS:  %7.0f", m_timer.GetFps()));
 	//log->Add(ee::StringHelper::Format("Vertices: %d", m_verts_per_frame));

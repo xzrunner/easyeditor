@@ -78,59 +78,34 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easynode3d.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\CamControlOP.h" />
     <ClInclude Include="..\..\..\src\easynode3d\EditDialog.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\EditOpState.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\LibraryPage.h" />
     <ClInclude Include="..\..\..\src\easynode3d\LogViewer.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\CamRotateState.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\Model.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\Node.h" />
     <ClInclude Include="..\..\..\src\easynode3d\NodeFactory.h" />
     <ClInclude Include="..\..\..\src\easynode3d\NodePropertySetting.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\NodeSelection.h" />
     <ClInclude Include="..\..\..\src\easynode3d\PropertySetting.h" />
     <ClInclude Include="..\..\..\src\easynode3d\PropertySetting2.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\NodeArrangeOP.h" />
     <ClInclude Include="..\..\..\src\easynode3d\PropertySettingPanel.h" />
     <ClInclude Include="..\..\..\src\easynode3d\Sprite.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\NodeRotateState.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\NodeSelectOP.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\NodeTranslateState.h" />
     <ClInclude Include="..\..\..\src\easynode3d\StageCanvas.h" />
     <ClInclude Include="..\..\..\src\easynode3d\ModelFile.h" />
     <ClInclude Include="..\..\..\src\easynode3d\StageDropTarget.h" />
     <ClInclude Include="..\..\..\src\easynode3d\StagePanel.h" />
     <ClInclude Include="..\..\..\src\easynode3d\Symbol.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\CamTranslateState.h" />
-    <ClInclude Include="..\..\..\src\easynode3d\CamZoomState.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\easynode3d\CamControlOP.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\EditDialog.cpp" />
-    <ClCompile Include="..\..\..\src\easynode3d\LibraryPage.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\LogViewer.cpp" />
-    <ClCompile Include="..\..\..\src\easynode3d\CamRotateState.cpp" />
-    <ClCompile Include="..\..\..\src\easynode3d\Model.cpp" />
-    <ClCompile Include="..\..\..\src\easynode3d\Node.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\NodeFactory.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\NodePropertySetting.cpp" />
-    <ClCompile Include="..\..\..\src\easynode3d\NodeSelection.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\PropertySetting.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\PropertySetting2.cpp" />
-    <ClCompile Include="..\..\..\src\easynode3d\NodeArrangeOP.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\PropertySettingPanel.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\Sprite.cpp" />
-    <ClCompile Include="..\..\..\src\easynode3d\NodeRotateState.cpp" />
-    <ClCompile Include="..\..\..\src\easynode3d\NodeSelectOP.cpp" />
-    <ClCompile Include="..\..\..\src\easynode3d\NodeTranslateState.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\StageCanvas.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\ModelFile.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\StageDropTarget.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\StagePanel.cpp" />
     <ClCompile Include="..\..\..\src\easynode3d\Symbol.cpp" />
-    <ClCompile Include="..\..\..\src\easynode3d\CamTranslateState.cpp" />
-    <ClCompile Include="..\..\..\src\easynode3d\CamZoomState.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

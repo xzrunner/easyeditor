@@ -3,7 +3,8 @@
 #include <ee/SymbolMgr.h>
 #include <ee/EditPanel.h>
 
-#include <easynode3d/CamControlOP.h>
+#include <ee3/CamControlOP.h>
+#include <ee3/StagePanel.h>
 
 #include <easyterrain3d.h>
 
@@ -43,9 +44,11 @@ const ee::EditPanel* Task::GetEditPanel() const
 
 void Task::InitLayout()
 {
-	ee::EditPanel* stage = new ee::EditPanel(m_parent, m_parent);
-	stage->SetCanvas(std::make_shared<eterrain3d::StageCanvas>(stage, stage->GetStageImpl()));
-	stage->SetEditOP(std::make_shared<enode3d::CamControlOP>(stage, stage->GetStageImpl()));
+	auto stage = new ee3::StagePanel(m_parent, m_parent, nullptr);
+	auto canvas = std::make_shared<eterrain3d::StageCanvas>(stage);
+	stage->SetCanvas(canvas);
+	stage->SetEditOP(std::make_shared<ee3::CamControlOP>(
+		stage, stage->GetStageImpl(), canvas->GetCamera(), canvas->GetViewport(), stage->GetSubjectMgr()));
 }
 
 }

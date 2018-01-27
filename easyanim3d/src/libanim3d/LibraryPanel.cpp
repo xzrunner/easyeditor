@@ -1,6 +1,6 @@
 #include "LibraryPanel.h"
 
-#include <easynode3d/LibraryPage.h>
+#include <ee3/LibObjPage.h>
 
 #include <wx/notebook.h>
 
@@ -12,7 +12,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 {
 	wxWindow* nb = GetNotebook();
 //	AddPage(new ee::LibraryImagePage(nb));
-	AddPage(new enode3d::LibraryPage(nb));
+	AddPage(new ee3::LibObjPage(nb));
 }
 
 }

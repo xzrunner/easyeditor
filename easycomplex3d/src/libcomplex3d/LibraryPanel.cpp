@@ -1,9 +1,9 @@
 #include "LibraryPanel.h"
-#include "LibraryPage.h"
 
 #include <ee/LibraryImagePage.h>
 
-#include <easynode3d/LibraryPage.h>
+#include <ee3/LibGeoPage.h>
+#include <ee3/LibObjPage.h>
 
 #include <easycomplex.h>
 
@@ -14,8 +14,8 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	: ee::LibraryPanel(parent)
 {
 	wxWindow* nb = GetNotebook();
-	AddPage(new LibraryPage(nb));
-	AddPage(new enode3d::LibraryPage(nb));
+	AddPage(new ee3::LibGeoPage(nb));
+	AddPage(new ee3::LibObjPage(nb));
 	AddPage(new ee::LibraryImagePage(nb));
 	AddPage(new ecomplex::LibraryPage(nb));
 }

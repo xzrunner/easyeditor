@@ -7,7 +7,7 @@ class wxFrame;
 class wxWindow;
 
 namespace ee { class LibraryPanel; class ToolbarPanel; }
-namespace enode3d { class PropertySettingPanel; }
+namespace ee3 { class PropertySettingPanel; }
 
 namespace ecomplex3d
 {
@@ -39,7 +39,7 @@ private:
 	wxFrame* m_parent;
 
 	ee::LibraryPanel* m_library;
-	enode3d::PropertySettingPanel* m_property;
+	ee3::PropertySettingPanel* m_property;
 	ee::EditPanel* m_stage;
 	ee::ToolbarPanel* m_toolbar;
 

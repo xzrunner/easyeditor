@@ -4,23 +4,11 @@
     <Filter Include="view">
       <UniqueIdentifier>{b806f60e-47ba-4f9c-97a5-6c8485ab967b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="editop">
-      <UniqueIdentifier>{e5950ddf-d18a-4cc1-9ff4-eb09113952e7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="tools">
       <UniqueIdentifier>{8fad499d-8e2e-49a6-856e-ddb541133011}</UniqueIdentifier>
     </Filter>
     <Filter Include="dataset">
       <UniqueIdentifier>{7658fda3-233d-4c61-9168-01cfc64aa21f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="editop\camera">
-      <UniqueIdentifier>{9e108305-6335-4ef8-9163-a4f1b8b1c7be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="editop\camera\state">
-      <UniqueIdentifier>{ad0d8b72-5784-4665-b6ac-67f8a4f2dea3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="view\library">
-      <UniqueIdentifier>{52ab64cd-c9e3-4ab7-90fe-b621ab5badf6}</UniqueIdentifier>
     </Filter>
     <Filter Include="view\stage">
       <UniqueIdentifier>{38156d39-3809-4770-b6b6-e7495c391218}</UniqueIdentifier>
@@ -31,20 +19,11 @@
     <Filter Include="dataset\sprite2">
       <UniqueIdentifier>{cc657a68-6cb1-4fe8-b57e-3d0921372ffc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="editop\node">
-      <UniqueIdentifier>{e3437034-803d-4bda-a7dc-1cc7dbb3db7f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="editop\node\state">
-      <UniqueIdentifier>{cf384e16-84de-43ea-810c-6ada8723acce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="view\property2">
       <UniqueIdentifier>{916686b4-ac4f-4891-b0a3-9ead1e1ffc4d}</UniqueIdentifier>
     </Filter>
     <Filter Include="view\property3">
       <UniqueIdentifier>{97e2ee0e-a69e-4cf6-9709-e804979fafe5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="dataset\node3">
-      <UniqueIdentifier>{ff02cd70-2724-4fe3-890c-5b67fd4e05c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -53,24 +32,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\easynode3d\ModelFile.h">
       <Filter>dataset</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\EditOpState.h">
-      <Filter>editop</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\CamControlOP.h">
-      <Filter>editop\camera</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\CamZoomState.h">
-      <Filter>editop\camera\state</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\CamRotateState.h">
-      <Filter>editop\camera\state</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\CamTranslateState.h">
-      <Filter>editop\camera\state</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\LibraryPage.h">
-      <Filter>view\library</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\easynode3d\StageCanvas.h">
       <Filter>view\stage</Filter>
@@ -88,26 +49,11 @@
     <ClInclude Include="..\..\..\src\easynode3d\NodeFactory.h">
       <Filter>tools</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\NodeSelection.h">
-      <Filter>dataset</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\easynode3d\Sprite.h">
       <Filter>dataset\sprite2</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\easynode3d\Symbol.h">
       <Filter>dataset\sprite2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\NodeSelectOP.h">
-      <Filter>editop\node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\NodeArrangeOP.h">
-      <Filter>editop\node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\NodeTranslateState.h">
-      <Filter>editop\node\state</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\NodeRotateState.h">
-      <Filter>editop\node\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\easynode3d\PropertySettingPanel.h">
       <Filter>view\property3</Filter>
@@ -121,12 +67,6 @@
     <ClInclude Include="..\..\..\src\easynode3d\NodePropertySetting.h">
       <Filter>view\property3</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\Node.h">
-      <Filter>dataset\node3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easynode3d\Model.h">
-      <Filter>dataset\node3</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easynode3d\LogViewer.cpp">
@@ -134,21 +74,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easynode3d\ModelFile.cpp">
       <Filter>dataset</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\CamControlOP.cpp">
-      <Filter>editop\camera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\CamRotateState.cpp">
-      <Filter>editop\camera\state</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\CamTranslateState.cpp">
-      <Filter>editop\camera\state</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\CamZoomState.cpp">
-      <Filter>editop\camera\state</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\LibraryPage.cpp">
-      <Filter>view\library</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\easynode3d\StageCanvas.cpp">
       <Filter>view\stage</Filter>
@@ -165,26 +90,11 @@
     <ClCompile Include="..\..\..\src\easynode3d\NodeFactory.cpp">
       <Filter>tools</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\NodeSelection.cpp">
-      <Filter>dataset</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\easynode3d\Sprite.cpp">
       <Filter>dataset\sprite2</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\easynode3d\Symbol.cpp">
       <Filter>dataset\sprite2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\NodeSelectOP.cpp">
-      <Filter>editop\node</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\NodeArrangeOP.cpp">
-      <Filter>editop\node</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\NodeTranslateState.cpp">
-      <Filter>editop\node\state</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\NodeRotateState.cpp">
-      <Filter>editop\node\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\easynode3d\PropertySettingPanel.cpp">
       <Filter>view\property3</Filter>
@@ -197,12 +107,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\easynode3d\NodePropertySetting.cpp">
       <Filter>view\property3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\Node.cpp">
-      <Filter>dataset\node3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easynode3d\Model.cpp">
-      <Filter>dataset\node3</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -4,7 +4,6 @@
 #include "KeysState.h"
 #include "Observer.h"
 #include "HistoryList.h"
-#include "Sprite.h"
 
 #include <SM_Vector.h>
 #include <cu/CU_RefCountObj.h>
