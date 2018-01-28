@@ -1,5 +1,5 @@
 #include "ee2/StageDropTarget.h"
-#include "ee2/StagePanel.h"
+#include "ee2/StagePage.h"
 #include "ee2/NodeFactory.h"
 #include "ee2/StageCanvas.h"
 
@@ -17,7 +17,7 @@ namespace ee2
 {
 
 StageDropTarget::StageDropTarget(wxWindow* stage_wnd, ee::LibraryPanel* library,
-		                         StagePanel* stage)
+		                         StagePage* stage)
 	: CombinedDropTarget(stage_wnd)
 	, m_library(library)
 	, m_stage(stage)

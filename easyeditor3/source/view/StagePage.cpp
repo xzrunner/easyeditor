@@ -1,4 +1,4 @@
-#include "ee3/StagePanel.h"
+#include "ee3/StagePage.h"
 #include "ee3/StageCanvas.h"
 #include "ee3/StageDropTarget.h"
 
@@ -9,9 +9,9 @@
 namespace ee3
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-	                   ee::LibraryPanel* library)
-	: ee::EditPanel(parent, frame)
+StagePage::StagePage(wxWindow* parent, wxTopLevelWindow* frame,
+	                 ee::LibraryPanel* library)
+	: ee0::StagePage(parent, frame)
 {
 	m_sub_mgr.RegisterObserver(ee0::MSG_INSERT_SCENE_NODE, this);
 	m_sub_mgr.RegisterObserver(ee0::MSG_DELETE_SCENE_NODE, this);
@@ -22,7 +22,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetDropTarget(new StageDropTarget(this, library, this));
 }
 
-void StagePanel::OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants)
+void StagePage::OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants)
 {
 	switch (msg)
 	{
@@ -48,7 +48,7 @@ void StagePanel::OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants)
 	}
 }
 
-sm::vec3 StagePanel::TransPosScrToProj3d(int x, int y) const
+sm::vec3 StagePage::TransPosScrToProj3d(int x, int y) const
 {
 	auto canvas = std::dynamic_pointer_cast<const StageCanvas>(GetCanvas());
 	if (!canvas) {
@@ -63,7 +63,7 @@ sm::vec3 StagePanel::TransPosScrToProj3d(int x, int y) const
 	return ret;
 }
 
-void StagePanel::InsertSceneNode(const ee0::VariantSet& variants)
+void StagePage::InsertSceneNode(const ee0::VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
@@ -76,7 +76,7 @@ void StagePanel::InsertSceneNode(const ee0::VariantSet& variants)
 	m_sub_mgr.NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
 }
 
-void StagePanel::DeleteSceneNode(const ee0::VariantSet& variants)
+void StagePage::DeleteSceneNode(const ee0::VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
@@ -97,7 +97,7 @@ void StagePanel::DeleteSceneNode(const ee0::VariantSet& variants)
 	}
 }
 
-void StagePanel::NodeSelectionInsert(const ee0::VariantSet& variants)
+void StagePage::NodeSelectionInsert(const ee0::VariantSet& variants)
 {
 	auto var_clear = variants.GetVariant("clear");
 	if (var_clear.m_type == VT_BOOL && var_clear.m_val.bl) {
@@ -117,7 +117,7 @@ void StagePanel::NodeSelectionInsert(const ee0::VariantSet& variants)
 	m_sub_mgr.NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
 }
 
-void StagePanel::NodeSelectionDelete(const ee0::VariantSet& variants)
+void StagePage::NodeSelectionDelete(const ee0::VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");

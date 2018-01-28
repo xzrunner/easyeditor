@@ -307,6 +307,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\easyone\main.h" />
+    <ClInclude Include="..\..\..\src\easyone\StagePanel.h" />
     <ClInclude Include="..\..\..\src\easyone\Task.h" />
     <ClInclude Include="..\..\..\src\easyone\CompTransformPanel.h" />
     <ClInclude Include="..\..\..\src\easyone\LibraryPanel.h" />
@@ -318,6 +319,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\easyone\main.cpp" />
+    <ClCompile Include="..\..\..\src\easyone\StagePanel.cpp" />
     <ClCompile Include="..\..\..\src\easyone\Task.cpp" />
     <ClCompile Include="..\..\..\src\easyone\CompTransformPanel.cpp" />
     <ClCompile Include="..\..\..\src\easyone\LibraryPanel.cpp" />

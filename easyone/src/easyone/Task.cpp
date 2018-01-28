@@ -1,21 +1,19 @@
 #include "Task.h"
 #include "LibraryPanel.h"
+#include "StagePanel.h"
 #include "SceneTreeCtrl.h"
 #include "DetailPanel.h"
 
-#include <ee2/StagePanel.h>
+#include <ee0/CompEditor.h>
+#include <ee2/StagePage.h>
 #include <ee2/StageCanvas.h>
 #include <ee2/CamControlOP.h>
-
-#include <ee3/CompEditor.h>
-#include <ee3/StagePanel.h>
+#include <ee3/StagePage.h>
 #include <ee3/StageCanvas.h>
 #include <ee3/NodeArrangeOP.h>
 #include <ee3/Serializer.h>
 
 #include <node3/ComponentFactory.h>
-
-#include <wx/aui/auibook.h>
 
 namespace eone
 {
@@ -35,14 +33,14 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
-	ee3::Serializer::LoadFroimJson(filename, m_stage);
+//	ee3::Serializer::LoadFroimJson(filename, m_stage);
 
 	m_tree->ExpandAll();
 }
 
 void Task::Store(const char* filename) const
 {
-	ee3::Serializer::StoreToJson(filename, m_stage);
+//	ee3::Serializer::StoreToJson(filename, m_stage);
 }
 
 bool Task::IsDirty() const
@@ -75,10 +73,10 @@ void Task::InitLayout()
 
 void Task::InitCallback()
 {
-	n3::ComponentFactory::Instance()->AddCreator(ee3::CompEditor::TYPE_NAME,
+	n3::ComponentFactory::Instance()->AddCreator(ee0::CompEditor::TYPE_NAME,
 		[](n0::SceneNodePtr& node, const rapidjson::Value& val)
 	{
-		auto& comp = node->AddComponent<ee3::CompEditor>();
+		auto& comp = node->AddComponent<ee0::CompEditor>();
 		comp.LoadFromJson(val);
 	});
 }
@@ -91,49 +89,53 @@ wxWindow* Task::CreateLibraryPanel()
 
 wxWindow* Task::CreateStagePanel()
 {
-	// create the notebook off-window to avoid flicker
-	wxSize client_size = m_frame->GetClientSize();
+	//// create the notebook off-window to avoid flicker
+	//wxSize client_size = m_frame->GetClientSize();
 
-	wxAuiNotebook* ctrl = new wxAuiNotebook(m_frame, wxID_ANY,
-		wxPoint(client_size.x, client_size.y),
-		wxSize(430, 200),
-		wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_EXTERNAL_MOVE | wxNO_BORDER);
-	ctrl->Freeze();
+	//wxAuiNotebook* ctrl = new wxAuiNotebook(m_frame, wxID_ANY,
+	//	wxPoint(client_size.x, client_size.y),
+	//	wxSize(430, 200),
+	//	wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_EXTERNAL_MOVE | wxNO_BORDER);
+	//ctrl->Freeze();
+
+	m_stage = new StagePanel(m_frame);
 
 	wxGLContext* gl_ctx = nullptr;
 	{
-		auto stage2 = new ee2::StagePanel(m_frame, m_frame, m_library);
-		auto canvas = std::make_shared<ee2::StageCanvas>(stage2);
+		auto page = new ee2::StagePage(m_frame, m_frame, m_library);
+		auto canvas = std::make_shared<ee2::StageCanvas>(page);
 		gl_ctx = canvas->GetGLContext();
-		stage2->SetCanvas(canvas);
-		stage2->SetEditOP(std::make_shared<ee2::CamControlOP>(
-			stage2, stage2->GetStageImpl(), *canvas->GetCamera(), stage2->GetSubjectMgr()));
+		page->SetCanvas(canvas);
+		page->SetEditOP(std::make_shared<ee2::CamControlOP>(
+			page, page->GetStageImpl(), *canvas->GetCamera(), page->GetSubjectMgr()));
 
-		ctrl->AddPage(stage2, ("New 2d"));
+		m_stage->AddPage(page, ("New 2d"));
 	}
 	{
-		m_stage = new ee3::StagePanel(m_frame, m_frame, m_library);
-		auto canvas = std::make_shared<ee3::StageCanvas>(m_stage, gl_ctx);
-		m_stage->SetCanvas(canvas);
-		m_stage->SetEditOP(std::make_shared<ee3::NodeArrangeOP>(*m_stage));
+		auto page = new ee3::StagePage(m_frame, m_frame, m_library);
+		auto canvas = std::make_shared<ee3::StageCanvas>(page, gl_ctx);
+		page->SetCanvas(canvas);
+		page->SetEditOP(std::make_shared<ee3::NodeArrangeOP>(*page));
 
-		ctrl->AddPage(m_stage, ("New 3d"));
+		m_stage->AddPage(page, ("New 3d"));
 	}
 
-	ctrl->Thaw();
+//	m_stage->Thaw();
 
-	return ctrl;
+	return m_stage;
 }
 
 wxWindow* Task::CreateTreePanel()
 {
-	m_tree = new SceneTreeCtrl(m_frame, m_stage->GetSubjectMgr());
+	auto& sub_mgr = m_stage->GetCurrentStagePage()->GetSubjectMgr();
+	m_tree = new SceneTreeCtrl(m_frame, sub_mgr);
 	return m_tree;
 }
 
 wxWindow* Task::CreateDetailPanel()
 {
-	return new DetailPanel(m_frame, m_stage->GetSubjectMgr());
+	auto& sub_mgr = m_stage->GetCurrentStagePage()->GetSubjectMgr();
+	return new DetailPanel(m_frame, sub_mgr);
 }
 
 }

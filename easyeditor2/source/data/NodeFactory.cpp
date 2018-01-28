@@ -1,5 +1,6 @@
 #include "ee2/NodeFactory.h"
-#include "ee2/CompEditor.h"
+
+#include <ee0/CompEditor.h>
 
 #include <sprite2/SymType.h>
 #include <sprite2/ImageSymbol.h>
@@ -33,7 +34,7 @@ n0::SceneNodePtr NodeFactory::Create(const ee::SymPtr& sym)
 		cimage.SetTexture(img_sym->GetTexture());
 
 		// editor
-		node->AddComponent<CompEditor>();
+		node->AddComponent<ee0::CompEditor>();
 
 		auto& tex = img_sym->GetTexture();
 	}

@@ -1,8 +1,8 @@
-#include "ee3/CompEditor.h"
+#include "ee0/CompEditor.h"
 
 #include <string>
 
-namespace ee3
+namespace ee0
 {
 
 const char* const CompEditor::TYPE_NAME = "editor";

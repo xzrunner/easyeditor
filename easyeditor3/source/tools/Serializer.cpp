@@ -1,5 +1,5 @@
 #include "ee3/Serializer.h"
-#include "ee3/StagePanel.h"
+#include "ee3/StagePage.h"
 #include "ee3/StageCanvas.h"
 
 #include <node3/SerializeSystem.h>
@@ -10,7 +10,7 @@
 namespace ee3
 {
 
-void Serializer::StoreToJson(const std::string& filepath, const StagePanel* stage)
+void Serializer::StoreToJson(const std::string& filepath, const StagePage* stage)
 {
 	rapidjson::Document doc;
 	doc.SetObject();
@@ -36,7 +36,7 @@ void Serializer::StoreToJson(const std::string& filepath, const StagePanel* stag
 	js::RapidJsonHelper::WriteToFile(filepath.c_str(), doc);
 }
 
-void Serializer::LoadFroimJson(const std::string& filepath, StagePanel* stage)
+void Serializer::LoadFroimJson(const std::string& filepath, StagePage* stage)
 {
 	rapidjson::Document doc;
 	js::RapidJsonHelper::ReadFromFile(filepath.c_str(), doc);

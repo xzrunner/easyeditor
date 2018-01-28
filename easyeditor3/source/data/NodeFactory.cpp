@@ -1,5 +1,6 @@
 #include "ee3/NodeFactory.h"
-#include "ee3/CompEditor.h"
+
+#include <ee0/CompEditor.h>
 
 #include <sprite2/SymType.h>
 #include <sprite2/ModelSymbol.h>
@@ -42,7 +43,7 @@ n0::SceneNodePtr NodeFactory::Create(const ee::SymPtr& sym)
 			caabb.SetAABB(src_aabb.GetAABB());
 
 			// editor
-			node->AddComponent<CompEditor>();
+			node->AddComponent<ee0::CompEditor>();
 		}
 	}
 

@@ -13,12 +13,12 @@ namespace ee { class LibraryPanel; }
 namespace ee3
 {
 
-class StagePanel;
+class StagePage;
 
 class StageCanvas : public ee::OnePassCanvas, public ee0::Observer
 {
 public:
-	StageCanvas(StagePanel* stage, wxGLContext* glctx = nullptr,
+	StageCanvas(StagePage* stage, wxGLContext* glctx = nullptr,
 		bool has2d = false);
 
 	virtual void OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants) override;
@@ -41,7 +41,7 @@ private:
 	void DrawNodes() const;
 
 private:
-	StagePanel* m_stage;
+	StagePage* m_stage;
 
 	bool m_has2d;
 

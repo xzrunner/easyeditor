@@ -9,13 +9,13 @@ namespace ee { class LibraryPanel; }
 namespace ee3
 {
 
-class StagePanel;
+class StagePage;
 
 class StageDropTarget : public ee::CombinedDropTarget
 {
 public:
 	StageDropTarget(wxWindow* stage_wnd, ee::LibraryPanel* library,
-		StagePanel* stage);
+		StagePage* stage);
 
 	virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text) override;
 	virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) override;
@@ -25,7 +25,7 @@ private:
 
 private:
 	ee::LibraryPanel* m_library;
-	StagePanel*       m_stage;
+	StagePage*       m_stage;
 
 }; // StageDropTarget
 

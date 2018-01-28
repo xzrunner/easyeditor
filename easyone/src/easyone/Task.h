@@ -8,10 +8,11 @@ class wxFrame;
 class wxWindow;
 
 namespace ee { class LibraryPanel; }
-namespace ee3 { class StagePanel; }
 
 namespace eone
 {
+
+class StagePanel;
 
 class SceneTreeCtrl;
 
@@ -46,7 +47,7 @@ private:
 
 	ee::LibraryPanel* m_library;
 
-	ee3::StagePanel* m_stage;
+	StagePanel* m_stage;
 
 	SceneTreeCtrl* m_tree;
 

@@ -1,5 +1,5 @@
 #include "ee3/NodeSelectOP.h"
-#include "ee3/StagePanel.h"
+#include "ee3/StagePage.h"
 #include "ee3/StageCanvas.h"
 
 #include <ee/FetchAllVisitor.h>
@@ -17,7 +17,7 @@
 namespace ee3
 {
 
-NodeSelectOP::NodeSelectOP(StagePanel& stage)
+NodeSelectOP::NodeSelectOP(StagePage& stage)
 	: ee::EditOP(&stage, stage.GetStageImpl())
 	, m_stage(stage)
 {

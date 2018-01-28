@@ -9,12 +9,12 @@
 namespace ee3
 {
 
-class StagePanel;
+class StagePage;
 
 class NodeSelectOP : public ee::EditOP
 {
 public:	
-	NodeSelectOP(StagePanel& stage);
+	NodeSelectOP(StagePage& stage);
 
 	virtual bool OnKeyDown(int keyCode) override;
 	virtual bool OnMouseLeftDown(int x, int y) override;
@@ -25,7 +25,7 @@ private:
 	n0::SceneNodePtr SelectByPos(const sm::vec2& pos) const;
 
 protected:
-	StagePanel& m_stage;
+	StagePage& m_stage;
 
 }; // NodeSelectOP
 

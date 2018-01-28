@@ -1,5 +1,5 @@
 #include "ee3/NodeArrangeOP.h"
-#include "ee3/StagePanel.h"
+#include "ee3/StagePage.h"
 #include "ee3/StageCanvas.h"
 #include "ee3/CamTranslateState.h"
 #include "ee3/CamRotateState.h"
@@ -14,7 +14,7 @@
 namespace ee3
 {
 
-NodeArrangeOP::NodeArrangeOP(StagePanel& stage)
+NodeArrangeOP::NodeArrangeOP(StagePage& stage)
 	: NodeSelectOP(stage)
 	, m_sub_mgr(stage.GetSubjectMgr())
 	, m_node_selection(stage.GetNodeSelection())

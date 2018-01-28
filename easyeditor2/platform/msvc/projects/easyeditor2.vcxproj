@@ -14,21 +14,19 @@
     <ClInclude Include="..\..\..\include\ee2\CamControlOP.h" />
     <ClInclude Include="..\..\..\include\ee2\CamTranslateState.h" />
     <ClInclude Include="..\..\..\include\ee2\CamZoomState.h" />
-    <ClInclude Include="..\..\..\include\ee2\CompEditor.h" />
     <ClInclude Include="..\..\..\include\ee2\NodeFactory.h" />
     <ClInclude Include="..\..\..\include\ee2\StageCanvas.h" />
     <ClInclude Include="..\..\..\include\ee2\StageDropTarget.h" />
-    <ClInclude Include="..\..\..\include\ee2\StagePanel.h" />
+    <ClInclude Include="..\..\..\include\ee2\StagePage.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\data\CompEditor.cpp" />
     <ClCompile Include="..\..\..\source\data\NodeFactory.cpp" />
     <ClCompile Include="..\..\..\source\editop\CamControlOP.cpp" />
     <ClCompile Include="..\..\..\source\editop\CamTranslateState.cpp" />
     <ClCompile Include="..\..\..\source\editop\CamZoomState.cpp" />
     <ClCompile Include="..\..\..\source\view\StageCanvas.cpp" />
     <ClCompile Include="..\..\..\source\view\StageDropTarget.cpp" />
-    <ClCompile Include="..\..\..\source\view\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\source\view\StagePage.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>4.easyeditor2</ProjectName>

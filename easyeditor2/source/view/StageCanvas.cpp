@@ -1,5 +1,5 @@
 #include "ee2/StageCanvas.h"
-#include "ee2/StagePanel.h"
+#include "ee2/StagePage.h"
 
 #include <ee/color_config.h>
 
@@ -11,7 +11,7 @@
 namespace ee2
 {
 
-StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx)
+StageCanvas::StageCanvas(StagePage* stage, wxGLContext* glctx)
 	: ee::OnePassCanvas(stage, stage->GetStageImpl(), glctx, USE_CONTEXT_STACK | HAS_2D)
 	, m_stage(stage)
 {

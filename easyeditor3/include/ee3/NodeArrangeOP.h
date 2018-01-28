@@ -16,7 +16,7 @@ class StageCanvas;
 class NodeArrangeOP : public NodeSelectOP
 {
 public:
-	NodeArrangeOP(StagePanel& stage);
+	NodeArrangeOP(StagePage& stage);
 
 	virtual bool OnKeyDown(int keyCode) override;
 	virtual bool OnMouseLeftDown(int x, int y) override;

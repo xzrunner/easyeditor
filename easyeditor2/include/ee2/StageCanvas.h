@@ -11,12 +11,12 @@ namespace s2 { class Camera; }
 namespace ee2
 {
 
-class StagePanel;
+class StagePage;
 
 class StageCanvas : public ee::OnePassCanvas, public ee0::Observer
 {
 public:
-	StageCanvas(StagePanel* stage, wxGLContext* glctx = nullptr);
+	StageCanvas(StagePage* stage, wxGLContext* glctx = nullptr);
 
 	virtual void OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants) override;
 
@@ -33,7 +33,7 @@ private:
 	void DrawNodes() const;
 
 private:
-	StagePanel* m_stage;
+	StagePage* m_stage;
 
 	std::shared_ptr<s2::Camera> m_cam = nullptr;
 

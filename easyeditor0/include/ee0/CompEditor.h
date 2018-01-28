@@ -2,7 +2,7 @@
 
 #include <node0/NodeComponent.h>
 
-namespace ee2
+namespace ee0
 {
 
 class CompEditor : public n0::NodeComponent

@@ -15,7 +15,6 @@
     <ClInclude Include="..\..\..\include\ee3\CamRotateState.h" />
     <ClInclude Include="..\..\..\include\ee3\CamTranslateState.h" />
     <ClInclude Include="..\..\..\include\ee3\CamZoomState.h" />
-    <ClInclude Include="..\..\..\include\ee3\CompEditor.h" />
     <ClInclude Include="..\..\..\include\ee3\EditOpState.h" />
     <ClInclude Include="..\..\..\include\ee3\LibGeoPage.h" />
     <ClInclude Include="..\..\..\include\ee3\LibObjPage.h" />
@@ -29,11 +28,10 @@
     <ClInclude Include="..\..\..\include\ee3\Serializer.h" />
     <ClInclude Include="..\..\..\include\ee3\StageCanvas.h" />
     <ClInclude Include="..\..\..\include\ee3\StageDropTarget.h" />
-    <ClInclude Include="..\..\..\include\ee3\StagePanel.h" />
+    <ClInclude Include="..\..\..\include\ee3\StagePage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\include\ee3\LibObjPage.cpp" />
-    <ClCompile Include="..\..\..\source\data\CompEditor.cpp" />
     <ClCompile Include="..\..\..\source\data\NodeFactory.cpp" />
     <ClCompile Include="..\..\..\source\data\NodeSprite.cpp" />
     <ClCompile Include="..\..\..\source\data\NodeSymbol.cpp" />
@@ -49,7 +47,7 @@
     <ClCompile Include="..\..\..\source\view\LibGeoPage.cpp" />
     <ClCompile Include="..\..\..\source\view\StageCanvas.cpp" />
     <ClCompile Include="..\..\..\source\view\StageDropTarget.cpp" />
-    <ClCompile Include="..\..\..\source\view\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\source\view\StagePage.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>4.easyeditor3</ProjectName>
