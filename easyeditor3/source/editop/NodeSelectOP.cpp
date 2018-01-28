@@ -12,6 +12,7 @@
 #include <node3/Ray.h>
 #include <node3/Math.h>
 #include <node3/CompAABB.h>
+#include <node3/CompTransform.h>
 
 namespace ee3
 {
@@ -31,7 +32,7 @@ bool NodeSelectOP::OnKeyDown(int keyCode)
 		ee0::VariantSet vars;
 		ee0::Variant var;
 		var.m_type = ee0::VT_PVOID;
-		var.m_val.pv = const_cast<ee::SelectionSet<n3::SceneNode>*>
+		var.m_val.pv = const_cast<ee::SelectionSet<n0::SceneNode>*>
 			(&m_stage.GetNodeSelection());
 		vars.SetVariant("selection", var);
 
@@ -90,7 +91,7 @@ bool NodeSelectOP::OnDraw() const
 	if (ee::EditOP::OnDraw()) return true;
 
 	m_stage.GetNodeSelection().Traverse(
-		[](const n3::SceneNodePtr& node)->bool
+		[](const n0::SceneNodePtr& node)->bool
 		{
 			n3::PrimitiveDraw::SetColor(ee::MID_RED.ToABGR());
 
@@ -116,7 +117,7 @@ bool NodeSelectOP::OnDraw() const
 }
 
 // AABB not changed, transform ray from Camera and spr's mat
-n3::SceneNodePtr NodeSelectOP::SelectByPos(const sm::vec2& pos) const
+n0::SceneNodePtr NodeSelectOP::SelectByPos(const sm::vec2& pos) const
 {
 	auto& nodes = m_stage.GetAllNodes();
 

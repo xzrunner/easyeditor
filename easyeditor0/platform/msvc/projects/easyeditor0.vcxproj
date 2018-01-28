@@ -16,6 +16,7 @@
     <ClInclude Include="..\..\..\include\ee0\Observer.h" />
     <ClInclude Include="..\..\..\include\ee0\Subject.h" />
     <ClInclude Include="..\..\..\include\ee0\SubjectMgr.h" />
+    <ClInclude Include="..\..\..\include\ee0\typedef.h" />
     <ClInclude Include="..\..\..\include\ee0\Variant.h" />
     <ClInclude Include="..\..\..\include\ee0\VariantSet.h" />
     <ClInclude Include="..\..\..\include\ee0\VariantType.h" />

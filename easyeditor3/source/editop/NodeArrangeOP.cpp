@@ -9,6 +9,8 @@
 
 #include <ee/FetchAllVisitor.h>
 
+#include <node3/CompTransform.h>
+
 namespace ee3
 {
 
@@ -18,6 +20,17 @@ NodeArrangeOP::NodeArrangeOP(StagePanel& stage)
 	, m_node_selection(stage.GetNodeSelection())
 	, m_canvas(std::dynamic_pointer_cast<StageCanvas>(stage.GetCanvas()))
 {
+	auto& cam = m_canvas->GetCamera();
+	auto& vp = m_canvas->GetViewport();
+
+	m_cam_rotate_state    = std::make_shared<CamRotateState>(cam);
+	m_cam_translate_state = std::make_shared<CamTranslateState>(cam);
+	m_cam_zoom_state      = std::make_shared<CamZoomState>(cam, vp);
+
+	m_node_rotate_state    = std::make_shared<NodeRotateState>(cam, vp, m_sub_mgr, m_node_selection);
+	m_node_translate_state = std::make_shared<NodeTranslateState>(cam, vp, m_sub_mgr, m_node_selection);
+
+	m_op_state = m_cam_rotate_state;
 }
 
 bool NodeArrangeOP::OnKeyDown(int keyCode)
@@ -34,7 +47,7 @@ bool NodeArrangeOP::OnKeyDown(int keyCode)
 	case WXK_SPACE:
 		{
 			m_node_selection.Traverse(
-				[](const n3::SceneNodePtr& node)->bool
+				[](const n0::SceneNodePtr& node)->bool
 				{
 					auto& ctrans = node->GetComponent<n3::CompTransform>();
 					ctrans.SetPosition(sm::vec3(0, 0, 0));
@@ -59,19 +72,12 @@ bool NodeArrangeOP::OnMouseLeftDown(int x, int y)
 
 	auto& selection = m_stage.GetNodeSelection();
 	if (selection.IsEmpty()) {
-		m_op_state = std::make_unique<CamRotateState>(
-			m_canvas->GetCamera(), sm::vec2(x, y));
+		ChangeEditOpState(m_cam_rotate_state);
 	} else {
-		m_op_state = std::make_unique<NodeTranslateState>(
-			m_canvas->GetCamera(), m_canvas->GetViewport(), 
-			m_stage.GetSubjectMgr(), selection);
+		ChangeEditOpState(m_node_translate_state);
 	}
 
-	if (m_op_state) {
-		m_op_state->OnMousePress(sm::vec2(x, y));
-	}
-
-	return false;
+	return m_op_state->OnMousePress(x, y);
 }
 
 bool NodeArrangeOP::OnMouseLeftUp(int x, int y)
@@ -80,12 +86,9 @@ bool NodeArrangeOP::OnMouseLeftUp(int x, int y)
 		return true;
 	}
 
-	if (m_op_state) {
-		m_op_state->OnMouseRelease(sm::vec2(x, y));
-	}
+	m_op_state->OnMouseRelease(x, y);
 
-	m_op_state = std::make_unique<CamZoomState>(
-		m_canvas->GetCamera(), m_canvas->GetViewport());
+	ChangeEditOpState(m_cam_zoom_state);
 
 	return false;
 }
@@ -98,19 +101,12 @@ bool NodeArrangeOP::OnMouseRightDown(int x, int y)
 
 	auto& selection = m_stage.GetNodeSelection();
 	if (selection.IsEmpty()) {
-		m_op_state = std::make_unique<CamTranslateState>(
-			m_canvas->GetCamera(), sm::vec2(x, y));
+		ChangeEditOpState(m_cam_translate_state);
 	} else if (selection.Size() == 1) {
-		m_op_state = std::make_unique<NodeRotateState>(
-			m_canvas->GetCamera(), m_canvas->GetViewport(),
-			m_stage.GetSubjectMgr(), selection);
+		ChangeEditOpState(m_node_rotate_state);
 	}
 
-	if (m_op_state) {
-		m_op_state->OnMousePress(sm::vec2(x, y));
-	}
-
-	return false;
+	return m_op_state->OnMousePress(x, y);
 }
 
 bool NodeArrangeOP::OnMouseRightUp(int x, int y)
@@ -119,12 +115,9 @@ bool NodeArrangeOP::OnMouseRightUp(int x, int y)
 		return true;
 	}
 
-	if (m_op_state) {
-		m_op_state->OnMouseRelease(sm::vec2(x, y));
-	}
+	m_op_state->OnMouseRelease(x, y);
 
-	m_op_state = std::make_unique<CamZoomState>(
-		m_canvas->GetCamera(), m_canvas->GetViewport());
+	ChangeEditOpState(m_cam_zoom_state);
 
 	return false;
 }
@@ -137,11 +130,7 @@ bool NodeArrangeOP::OnMouseMove(int x, int y)
 
 	//m_stage->SetFocus();
 
-	if (m_op_state) {
-		m_op_state->OnMouseMove(sm::vec2(x, y));
-	}
-
-	return false;
+	return m_op_state->OnMouseMove(x, y);
 }
 
 bool NodeArrangeOP::OnMouseDrag(int x, int y)
@@ -150,11 +139,7 @@ bool NodeArrangeOP::OnMouseDrag(int x, int y)
 		return true;
 	}
 
-	if (m_op_state) {
-		m_op_state->OnMouseDrag(sm::vec2(x, y));
-	}
-
-	return false;
+	return m_op_state->OnMouseDrag(x, y);
 }
 
 bool NodeArrangeOP::OnMouseWheelRotation(int x, int y, int direction)
@@ -163,11 +148,22 @@ bool NodeArrangeOP::OnMouseWheelRotation(int x, int y, int direction)
 		return true;
 	}
 
-	if (m_op_state) {
-		m_op_state->OnMouseWheelRotation(x, y, direction);
+	return m_op_state->OnMouseWheelRotation(x, y, direction);
+}
+
+void NodeArrangeOP::ChangeEditOpState(const ee0::EditOpStatePtr& state)
+{
+	if (m_op_state == state) {
+		return;
 	}
 
-	return false;
+	if (m_op_state) {
+		m_op_state->UnBind();
+	}
+	m_op_state = state;
+	if (m_op_state) {
+		m_op_state->Bind();
+	}
 }
 
 }

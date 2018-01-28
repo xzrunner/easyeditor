@@ -12,8 +12,8 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	: ee::LibraryPanel(parent)
 {
 	wxWindow* nb = GetNotebook();
+	AddPage(new ee::LibraryImagePage(nb));
 	AddPage(new ee3::LibGeoPage(nb));
-	//	AddPage(new ee::LibraryImagePage(nb));
 	AddPage(new ee3::LibObjPage(nb));
 }
 

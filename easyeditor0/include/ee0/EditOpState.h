@@ -1,7 +1,5 @@
 #pragma once
 
-#include <SM_Vector.h>
-
 namespace ee0
 {
 
@@ -10,14 +8,17 @@ class EditOpState
 public:
 	virtual ~EditOpState() {}
 	
-	virtual void OnMousePress(const sm::vec2& pos) {}
-	virtual void OnMouseRelease(const sm::vec2& pos) {}
-	virtual void OnMouseMove(const sm::vec2& pos) {}
-	virtual void OnMouseDrag(const sm::vec2& pos) {}
+	virtual void Bind() {}
+	virtual void UnBind() {}
 
-	virtual void OnDirectionKeyDown(int type) {}
+	virtual bool OnMousePress(int x, int y) { return false; }
+	virtual bool OnMouseRelease(int x, int y) { return false; }
+	virtual bool OnMouseMove(int x, int y) { return false; }
+	virtual bool OnMouseDrag(int x, int y) { return false; }
 
-	virtual void OnMouseWheelRotation(int x, int y, int direction) {}
+	virtual bool OnDirectionKeyDown(int type) { return false; }
+
+	virtual bool OnMouseWheelRotation(int x, int y, int direction) { return false; }
 
 }; // EditOpState
 

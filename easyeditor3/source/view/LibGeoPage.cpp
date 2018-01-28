@@ -43,7 +43,7 @@ void LibGeoPage::LoadGeometric(const std::string& name)
 	n3::AABB aabb;
 	auto model = std::make_shared<n3::ModelParametric>(surface, aabb);
 
-	auto node = std::make_shared<n3::SceneNode>();
+	auto node = std::make_shared<n0::SceneNode>();
 
 	auto& cmodel = node->AddComponent<n3::CompModel>();
 	cmodel.SetModel(model);

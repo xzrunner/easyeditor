@@ -5,7 +5,7 @@
 
 #include <ee0/EditOpState.h>
 
-#include <node3/SceneNode.h>
+#include <node0/SceneNode.h>
 
 namespace ee0 { class SubjectMgr; }
 namespace n3 { class Camera; class Viewport; }
@@ -17,29 +17,29 @@ class NodeTranslateState : public ee0::EditOpState
 {
 public:
 	NodeTranslateState(const n3::Camera& cam, const n3::Viewport& vp, 
-		ee0::SubjectMgr& sub_mgr, const ee::SelectionSet<n3::SceneNode>& selection);
+		ee0::SubjectMgr& sub_mgr, const ee::SelectionSet<n0::SceneNode>& selection);
 
-	virtual void OnMousePress(const sm::vec2& pos) override;
-	virtual void OnMouseRelease(const sm::vec2& pos) override;
-	virtual void OnMouseDrag(const sm::vec2& pos) override;
-
-private:
-	void Translate(const sm::vec2& first, const sm::vec2& curr);
+	virtual bool OnMousePress(int x, int y) override;
+	virtual bool OnMouseRelease(int x, int y) override;
+	virtual bool OnMouseDrag(int x, int y) override;
 
 private:
-	class Visitor : public ee::RefVisitor<n3::SceneNode>
+	void Translate(const sm::ivec2& first, const sm::ivec2& curr);
+
+private:
+	class Visitor : public ee::RefVisitor<n0::SceneNode>
 	{
 	public:
 		Visitor(const n3::Camera& cam, const n3::Viewport& vp, 
-			const sm::vec2& last, const sm::vec2& curr)
+			const sm::ivec2& last, const sm::ivec2& curr)
 			: m_cam(cam), m_vp(vp), m_last(last), m_curr(curr) {}
-		virtual void Visit(const n3::SceneNodePtr& node, bool& next) override;
+		virtual void Visit(const n0::SceneNodePtr& node, bool& next) override;
 
 	private:
 		const n3::Camera&   m_cam;
 		const n3::Viewport& m_vp;
 
-		sm::vec2 m_last, m_curr;
+		sm::ivec2 m_last, m_curr;
 
 	}; // Visitor
 
@@ -49,9 +49,9 @@ private:
 
 	ee0::SubjectMgr& m_sub_mgr;
 
-	const ee::SelectionSet<n3::SceneNode>& m_selection;
+	const ee::SelectionSet<n0::SceneNode>& m_selection;
 
-	sm::vec2 m_first_pos, m_last_pos;
+	sm::ivec2 m_last_pos;
 
 }; // NodeTranslateState
 

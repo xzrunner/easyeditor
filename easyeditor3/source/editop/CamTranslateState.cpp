@@ -7,33 +7,37 @@
 namespace ee3
 {
 
-CamTranslateState::CamTranslateState(n3::Camera& cam, const sm::vec2& pos)
+CamTranslateState::CamTranslateState(n3::Camera& cam)
 	: m_cam(cam)
-	, m_last_pos(pos)
 {
+	m_last_pos.MakeInvalid();
 }
 
-void CamTranslateState::OnMousePress(const sm::vec2& pos)
+bool CamTranslateState::OnMousePress(int x, int y)
 {
-	m_last_pos = pos;
+	m_last_pos.Set(x, y);
+	return false;
 }
 
-void CamTranslateState::OnMouseRelease(const sm::vec2& pos)
+bool CamTranslateState::OnMouseRelease(int x, int y)
 {
+	return false;
 }
 
-void CamTranslateState::CamTranslateState::OnMouseDrag(const sm::vec2& pos)
+bool CamTranslateState::CamTranslateState::OnMouseDrag(int x, int y)
 {
-	float dx = pos.x - m_last_pos.x;
-	float dy = pos.y - m_last_pos.y;
+	int dx = x - m_last_pos.x;
+	int dy = y - m_last_pos.y;
 
 	float dist = m_cam.GetDistance();
 	static const float SCALE = 0.002f;
 	m_cam.Translate(dx * dist * SCALE, dy * dist * SCALE);
 
-	m_last_pos = pos;
+	m_last_pos.Set(x, y);
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+
+	return false;
 }
 
 }

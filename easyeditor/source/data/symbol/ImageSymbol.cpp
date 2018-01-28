@@ -12,7 +12,7 @@
 #include <sprite2/ImageSymbol.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/RVG.h>
-#include <sprite2/Texture.h>
+#include <painting2/Texture.h>
 #include <gum/RenderContext.h>
 #include <gum/RenderTarget.h>
 #include <gum/FilepathHelper.h>

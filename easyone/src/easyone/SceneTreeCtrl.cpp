@@ -110,7 +110,7 @@ void SceneTreeCtrl::OnSelChanged(wxTreeEvent& event)
 
 	ee0::Variant var;
 	var.m_type = ee0::VT_PVOID;
-	var.m_val.pv = &std::const_pointer_cast<n3::SceneNode>(node);
+	var.m_val.pv = &std::const_pointer_cast<n0::SceneNode>(node);
 	vars.SetVariant("node", var);
 
 	var.m_type = ee0::VT_BOOL;
@@ -149,7 +149,7 @@ void SceneTreeCtrl::SelectSceneNode(const ee0::VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != ee0::VT_EMPTY, "no var in vars: node");
-	n3::SceneNodePtr* node = static_cast<n3::SceneNodePtr*>(var.m_val.pv);
+	n0::SceneNodePtr* node = static_cast<n0::SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
 
 	Traverse(m_root, [&](wxTreeItemId item)->bool
@@ -169,7 +169,7 @@ void SceneTreeCtrl::UnselectSceneNode(const ee0::VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != ee0::VT_EMPTY, "no var in vars: node");
-	n3::SceneNodePtr* node = static_cast<n3::SceneNodePtr*>(var.m_val.pv);
+	n0::SceneNodePtr* node = static_cast<n0::SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
 
 	Traverse(m_root, [&](wxTreeItemId item)->bool
@@ -189,7 +189,7 @@ void SceneTreeCtrl::InsertSceneNode(const ee0::VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != ee0::VT_EMPTY, "no var in vars: node");
-	n3::SceneNodePtr* node = static_cast<n3::SceneNodePtr*>(var.m_val.pv);
+	n0::SceneNodePtr* node = static_cast<n0::SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
 
 	wxTreeItemId parent = GetFocusedItem();
@@ -208,7 +208,7 @@ void SceneTreeCtrl::InsertSceneNode(const ee0::VariantSet& variants)
 	}
 }
 
-void SceneTreeCtrl::InsertSceneNode(wxTreeItemId parent, const n3::SceneNodePtr& node)
+void SceneTreeCtrl::InsertSceneNode(wxTreeItemId parent, const n0::SceneNodePtr& node)
 {
 	auto item = new SceneTreeItem(node);
 
@@ -221,7 +221,7 @@ void SceneTreeCtrl::InsertSceneNode(wxTreeItemId parent, const n3::SceneNodePtr&
 	SetItemData(id, item);
 
 	for (auto& child : node->GetAllChildren()) {
-		InsertSceneNode(id, std::dynamic_pointer_cast<n3::SceneNode>(child));
+		InsertSceneNode(id, std::dynamic_pointer_cast<n0::SceneNode>(child));
 	}
 }
 

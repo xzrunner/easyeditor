@@ -11,7 +11,8 @@
 
 #include <stdint.h>
 
-namespace s2 { class Sprite; class RenderParams; class Texture; class RenderTarget; }
+namespace pt2 { class Texture; }
+namespace s2 { class Sprite; class RenderParams; class RenderTarget; }
 
 namespace ee
 {
@@ -41,7 +42,7 @@ public:
 
 	void QueryTexcoords(float* texcoords, int* texid) const;
 
-	const std::shared_ptr<s2::Texture>& GetS2Tex() const { return m_s2_tex; }
+	const std::shared_ptr<pt2::Texture>& GetS2Tex() const { return m_s2_tex; }
 
 private:
 	void LoadWithClip(const std::string& filepath);
@@ -52,7 +53,7 @@ private:
 	std::string m_filepath;
 
 	std::shared_ptr<Texture> m_tex;
-	std::shared_ptr<s2::Texture> m_s2_tex;
+	std::shared_ptr<pt2::Texture> m_s2_tex;
 
 	sm::i16_vec2 m_ori_sz;
 	sm::i16_rect m_clipped_region;

@@ -9,6 +9,7 @@
 #include <ee0/VariantSet.h>
 
 #include <guard/check.h>
+#include <node3/CompTransform.h>
 
 namespace ee3
 {
@@ -68,12 +69,12 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 {
 }
 
-void StageDropTarget::InsertNode(const n3::SceneNodePtr& node)
+void StageDropTarget::InsertNode(const n0::SceneNodePtr& node)
 {
 	ee0::VariantSet vars;
 	ee0::Variant var;
 	var.m_type = ee0::VT_PVOID;
-	var.m_val.pv = &std::const_pointer_cast<n3::SceneNode>(node);
+	var.m_val.pv = &std::const_pointer_cast<n0::SceneNode>(node);
 	vars.SetVariant("node", var);
 	
 	bool succ = m_stage->GetSubjectMgr().NotifyObservers(ee0::MSG_INSERT_SCENE_NODE, vars);

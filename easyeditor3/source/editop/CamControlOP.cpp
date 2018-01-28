@@ -19,9 +19,12 @@ CamControlOP::CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage,
 	                       ee0::SubjectMgr& sub_mgr)
 	: ee::EditOP(wnd, stage)
 	, m_cam(cam)
-	, m_vp(vp)
 	, m_sub_mgr(sub_mgr)
 {
+	m_rotate_state    = std::make_shared<CamRotateState>(cam);
+	m_translate_state = std::make_shared<CamTranslateState>(cam);
+	m_zoom_state      = std::make_shared<CamZoomState>(cam, vp);
+	m_op_state = m_rotate_state;
 }
 
 bool CamControlOP::OnKeyDown(int keyCode)
@@ -63,11 +66,8 @@ bool CamControlOP::OnMouseLeftDown(int x, int y)
 		return true;
 	}
 
-	m_op_state = std::make_unique<CamRotateState>(m_cam, sm::vec2(x, y));
-
-	m_op_state->OnMousePress(sm::vec2(x, y));
-
-	return false;
+	ChangeEditOpState(m_rotate_state);
+	return m_op_state->OnMousePress(x, y);
 }
 
 bool CamControlOP::OnMouseLeftUp(int x, int y)
@@ -76,7 +76,7 @@ bool CamControlOP::OnMouseLeftUp(int x, int y)
 		return true;
 	}
 
-	m_op_state = std::make_unique<CamZoomState>(m_cam, m_vp);
+	ChangeEditOpState(m_zoom_state);
 
 	return false;
 }
@@ -87,11 +87,8 @@ bool CamControlOP::OnMouseRightDown(int x, int y)
 		return true;
 	}
 
-	m_op_state = std::make_unique<CamTranslateState>(m_cam, sm::vec2(x, y));
-
-	m_op_state->OnMousePress(sm::vec2(x, y));
-
-	return false;
+	ChangeEditOpState(m_translate_state);
+	return m_op_state->OnMousePress(x, y);
 }
 
 bool CamControlOP::OnMouseRightUp(int x, int y)
@@ -100,7 +97,7 @@ bool CamControlOP::OnMouseRightUp(int x, int y)
 		return true;
 	}
 
-	m_op_state = std::make_unique<CamZoomState>(m_cam, m_vp);
+	ChangeEditOpState(m_zoom_state);
 
 	return false;
 }
@@ -111,11 +108,7 @@ bool CamControlOP::OnMouseDrag(int x, int y)
 		return true;
 	}
 
-	if (m_op_state) {
-		m_op_state->OnMouseDrag(sm::vec2(x, y));
-	}
-	
-	return false;
+	return m_op_state->OnMouseDrag(x, y);
 }
 
 bool CamControlOP::OnMouseMove(int x, int y)
@@ -124,13 +117,7 @@ bool CamControlOP::OnMouseMove(int x, int y)
 		return true;
 	}
 
-	if (m_op_state) {
-		m_op_state->OnMouseMove(sm::vec2(x, y));
-	}
-
-//	m_stage->SetFocus();
-
-	return false;
+	return m_op_state->OnMouseMove(x, y);
 }
 
 bool CamControlOP::OnMouseWheelRotation(int x, int y, int direction)
@@ -139,11 +126,22 @@ bool CamControlOP::OnMouseWheelRotation(int x, int y, int direction)
 		return true;
 	}
 
-	if (m_op_state) {
-		m_op_state->OnMouseWheelRotation(x, y, direction);
+	return m_op_state->OnMouseWheelRotation(x, y, direction);
+}
+
+void CamControlOP::ChangeEditOpState(const ee0::EditOpStatePtr& state)
+{
+	if (m_op_state == state) {
+		return;
 	}
 
-	return false;
+	if (m_op_state) {
+		m_op_state->UnBind();
+	}
+	m_op_state = state;
+	if (m_op_state) {
+		m_op_state->Bind();
+	}
 }
 
 }

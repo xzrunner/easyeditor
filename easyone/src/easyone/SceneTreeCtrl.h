@@ -2,7 +2,7 @@
 
 #include <ee0/Observer.h>
 
-#include <node3/SceneNode.h>
+#include <node0/SceneNode.h>
 
 #include <wx/treectrl.h>
 
@@ -32,7 +32,7 @@ private:
 	void SelectSceneNode(const ee0::VariantSet& variants);
 	void UnselectSceneNode(const ee0::VariantSet& variants);
 	void InsertSceneNode(const ee0::VariantSet& variants);
-	void InsertSceneNode(wxTreeItemId parent, const n3::SceneNodePtr& child);
+	void InsertSceneNode(wxTreeItemId parent, const n0::SceneNodePtr& child);
 
 private:
 	enum

@@ -1,10 +1,8 @@
 #pragma once
 
-#include <ee0/EditOpState.h>
-
 #include <ee/EditOP.h>
 
-#include <memory>
+#include <ee0/typedef.h>
 
 namespace n3 { class Camera; class Viewport; }
 namespace ee0 { class SubjectMgr; }
@@ -30,11 +28,17 @@ public:
 	virtual bool OnMouseWheelRotation(int x, int y, int direction) override;
 
 private:
+	void ChangeEditOpState(const ee0::EditOpStatePtr& state);
+
+private:
 	n3::Camera&         m_cam;
-	const n3::Viewport& m_vp;
 	ee0::SubjectMgr&    m_sub_mgr;
 
-	std::unique_ptr<ee0::EditOpState> m_op_state = nullptr;
+	ee0::EditOpStatePtr m_op_state = nullptr;
+
+	ee0::EditOpStatePtr m_rotate_state = nullptr;
+	ee0::EditOpStatePtr m_translate_state = nullptr;
+	ee0::EditOpStatePtr m_zoom_state = nullptr;
 
 }; // CamControlOP
 

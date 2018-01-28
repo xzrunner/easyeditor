@@ -12,7 +12,7 @@ class CamZoomState : public ee0::EditOpState
 public:
 	CamZoomState(n3::Camera& cam, const n3::Viewport& vp);
 
-	virtual void OnMouseWheelRotation(int x, int y, int direction) override;
+	virtual bool OnMouseWheelRotation(int x, int y, int direction) override;
 
 private:
 	n3::Camera& m_cam;

@@ -3,6 +3,10 @@
 #include "SceneTreeCtrl.h"
 #include "DetailPanel.h"
 
+#include <ee2/StagePanel.h>
+#include <ee2/StageCanvas.h>
+#include <ee2/CamControlOP.h>
+
 #include <ee3/CompEditor.h>
 #include <ee3/StagePanel.h>
 #include <ee3/StageCanvas.h>
@@ -72,7 +76,7 @@ void Task::InitLayout()
 void Task::InitCallback()
 {
 	n3::ComponentFactory::Instance()->AddCreator(ee3::CompEditor::TYPE_NAME,
-		[](n3::SceneNodePtr& node, const rapidjson::Value& val)
+		[](n0::SceneNodePtr& node, const rapidjson::Value& val)
 	{
 		auto& comp = node->AddComponent<ee3::CompEditor>();
 		comp.LoadFromJson(val);
@@ -96,12 +100,25 @@ wxWindow* Task::CreateStagePanel()
 		wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_EXTERNAL_MOVE | wxNO_BORDER);
 	ctrl->Freeze();
 
-	m_stage = new ee3::StagePanel(m_frame, m_frame, m_library);
-	auto canvas = std::make_shared<ee3::StageCanvas>(m_stage);
-	m_stage->SetCanvas(canvas);
-	m_stage->SetEditOP(std::make_shared<ee3::NodeArrangeOP>(*m_stage));
+	wxGLContext* gl_ctx = nullptr;
+	{
+		auto stage2 = new ee2::StagePanel(m_frame, m_frame, m_library);
+		auto canvas = std::make_shared<ee2::StageCanvas>(stage2);
+		gl_ctx = canvas->GetGLContext();
+		stage2->SetCanvas(canvas);
+		stage2->SetEditOP(std::make_shared<ee2::CamControlOP>(
+			stage2, stage2->GetStageImpl(), *canvas->GetCamera(), stage2->GetSubjectMgr()));
 
-	ctrl->AddPage(m_stage, ("New 3d"));
+		ctrl->AddPage(stage2, ("New 2d"));
+	}
+	{
+		m_stage = new ee3::StagePanel(m_frame, m_frame, m_library);
+		auto canvas = std::make_shared<ee3::StageCanvas>(m_stage, gl_ctx);
+		m_stage->SetCanvas(canvas);
+		m_stage->SetEditOP(std::make_shared<ee3::NodeArrangeOP>(*m_stage));
+
+		ctrl->AddPage(m_stage, ("New 3d"));
+	}
 
 	ctrl->Thaw();
 

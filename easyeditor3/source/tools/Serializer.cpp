@@ -44,8 +44,8 @@ void Serializer::LoadFroimJson(const std::string& filepath, StagePanel* stage)
 	auto& nodes_val = doc["nodes"];
 	for (auto& node_val : nodes_val.GetArray()) 
 	{
-		auto node = std::make_shared<n3::SceneNode>();
-		n3::SceneNodePtr n3_node = node;
+		auto node = std::make_shared<n0::SceneNode>();
+		n0::SceneNodePtr n3_node = node;
 		n3::SerializeSystem::LoadNodeFromJson(n3_node, node_val);
 
 		ee0::VariantSet vars;

@@ -4,38 +4,46 @@
 
 #include <node3/Camera.h>
 #include <node3/Viewport.h>
+#include <node3/CompTransform.h>
 
 namespace ee3
 {
 
 NodeRotateState::NodeRotateState(const n3::Camera& cam, const n3::Viewport& vp, ee0::SubjectMgr& sub_mgr,
-	                             const ee::SelectionSet<n3::SceneNode>& selection)
+	                             const ee::SelectionSet<n0::SceneNode>& selection)
 	: m_cam(cam)
 	, m_vp(vp)
 	, m_sub_mgr(sub_mgr)
 	, m_selection(selection)
 {
+	m_last_pos.MakeInvalid();
 }
 
-void NodeRotateState::OnMousePress(const sm::vec2& pos)
+bool NodeRotateState::OnMousePress(int x, int y)
 {
-	m_last_pos = pos;
+	m_last_pos.Set(x, y);
+
+	return false;
 }
 
-void NodeRotateState::OnMouseRelease(const sm::vec2& pos)
+bool NodeRotateState::OnMouseRelease(int x, int y)
 {
 	m_sub_mgr.NotifyObservers(ee0::MSG_UPDATE_COMPONENTS);
+
+	return false;
 }
 
-void NodeRotateState::OnMouseDrag(const sm::vec2& pos)
+bool NodeRotateState::OnMouseDrag(int x, int y)
 {
-	Rotate(m_last_pos, pos);
-	m_last_pos = pos;
+	Rotate(m_last_pos, sm::ivec2(x, y));
+	m_last_pos.Set(x, y);
 
 	m_sub_mgr.NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
+
+	return false;
 }
 
-void NodeRotateState::Rotate(const sm::vec2& start, const sm::vec2& end)
+void NodeRotateState::Rotate(const sm::ivec2& start, const sm::ivec2& end)
 {
 	m_selection.Traverse(Visitor(m_cam, m_vp, start, end));
 }
@@ -45,15 +53,15 @@ void NodeRotateState::Rotate(const sm::vec2& start, const sm::vec2& end)
 //////////////////////////////////////////////////////////////////////////
 
 void NodeRotateState::Visitor::
-Visit(const n3::SceneNodePtr& node, bool& next)
+Visit(const n0::SceneNodePtr& node, bool& next)
 {
 	auto& ctrans = node->GetComponent<n3::CompTransform>();
 
 	sm::vec2 center = TransPos3ProjectToScreen(ctrans.GetPosition());
 	sm::vec2 base = TransPos3ProjectToScreen(sm::vec3(0, 0, 0));
 
-   	sm::vec3 start = m_vp.MapToSphere(base + m_start -  center);
-   	sm::vec3 end   = m_vp.MapToSphere(base + m_end - center);
+   	sm::vec3 start = m_vp.MapToSphere(base + sm::vec2(m_start.x, m_start.y) -  center);
+   	sm::vec3 end   = m_vp.MapToSphere(base + sm::vec2(m_end.x, m_end.y) - center);
 
 	auto cam_mat = m_cam.GetRotateMat().Inverted();
 	start = cam_mat * start;

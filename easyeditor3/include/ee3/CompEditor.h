@@ -1,11 +1,11 @@
 #pragma once
 
-#include <node3/NodeComponent.h>
+#include <node0/NodeComponent.h>
 
 namespace ee3
 {
 
-class CompEditor : public n3::NodeComponent
+class CompEditor : public n0::NodeComponent
 {
 public:
 	CompEditor();

@@ -42,7 +42,7 @@ void LibObjPage::OnAddPress(wxCommandEvent& event)
 				continue;
 			}
 
-			auto node = std::make_shared<n3::SceneNode>();
+			auto node = std::make_shared<n0::SceneNode>();
 
 			auto& cmodel = node->AddComponent<n3::CompModel>();
 			cmodel.SetModel(model);

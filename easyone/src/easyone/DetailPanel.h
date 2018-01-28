@@ -2,7 +2,7 @@
 
 #include <ee0/Observer.h>
 
-#include <node3/SceneNode.h>
+#include <node0/SceneNode.h>
 
 #include <wx/panel.h>
 
@@ -34,7 +34,7 @@ private:
 
 	std::vector<NodeCompPanel*> m_components;
 
-	n3::SceneNodePtr m_node = nullptr;
+	n0::SceneNodePtr m_node = nullptr;
 
 }; // DetailPanel
 

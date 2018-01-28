@@ -72,6 +72,7 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 	} else {
 		m_share_context = false;
 		m_gl_ctx = new wxGLContext(this);
+		SetCurrentCanvas();
 		Init();
 	}
 
@@ -144,7 +145,12 @@ void StageCanvas::OnNotify(int sj_id, void* ud)
 
 void StageCanvas::Init()
 {
-	SetCurrentCanvas();
+	//static bool inited = false;
+	//if (inited) {
+	//	return;
+	//} else {
+	//	inited = true;
+	//}
 
 	s2::SprTimer::Instance()->Init();
 	// prepare 2d
@@ -172,15 +178,7 @@ void StageCanvas::Init()
 	DTex::Init();
 	GTxt::Init();
 
-	try {
-// 		ShaderContext::Reload();
-// 		ShaderContext::Reset();
-
-		glEnable(GL_TEXTURE_2D);
-	} catch (Exception& e) {
-		ExceptionDlg dlg(m_parent, e);
-		dlg.ShowModal();	
-	}
+	glEnable(GL_TEXTURE_2D);
 }
 
 void StageCanvas::OnSize(wxSizeEvent& event)

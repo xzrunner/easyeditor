@@ -61,7 +61,7 @@ void DetailPanel::InitComponents(const ee0::VariantSet& variants)
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != ee0::VT_EMPTY, "no var in vars: node");
 	GD_ASSERT(var.m_val.pv, "err scene node")
-	m_node = *static_cast<n3::SceneNodePtr*>(var.m_val.pv);
+	m_node = *static_cast<n0::SceneNodePtr*>(var.m_val.pv);
 
 	if (m_node->HasComponent<n3::CompTransform>())
 	{

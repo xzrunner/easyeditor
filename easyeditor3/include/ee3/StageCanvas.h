@@ -6,7 +6,7 @@
 
 #include <node3/Camera.h>
 #include <node3/Viewport.h>
-#include <node3/SceneNode.h>
+#include <node0/SceneNode.h>
 
 namespace ee { class LibraryPanel; }
 

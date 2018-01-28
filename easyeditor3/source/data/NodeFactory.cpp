@@ -15,13 +15,13 @@ NodeFactory::NodeFactory()
 {
 }
 
-n3::SceneNodePtr NodeFactory::Create(const ee::SymPtr& sym)
+n0::SceneNodePtr NodeFactory::Create(const ee::SymPtr& sym)
 {
 	if (!sym) {
 		return nullptr;
 	}
 
-	n3::SceneNodePtr node = nullptr;
+	n0::SceneNodePtr node = nullptr;
 
 	if (sym->Type() == s2::SYM_MODEL)
 	{
@@ -29,7 +29,7 @@ n3::SceneNodePtr NodeFactory::Create(const ee::SymPtr& sym)
 		auto& src_node = model_sym->GetNode();
 		if (src_node)
 		{
-			node = std::make_shared<n3::SceneNode>();
+			node = std::make_shared<n0::SceneNode>();
 
 			// model
 			auto& cmodel = node->AddComponent<n3::CompModel>();

@@ -2,7 +2,7 @@
 
 #include <ee/CombinedDropTarget.h>
 
-#include <node3/SceneNode.h>
+#include <node0/SceneNode.h>
 
 namespace ee { class LibraryPanel; }
 
@@ -10,7 +10,6 @@ namespace ee3
 {
 
 class StagePanel;
-class SceneTreeCtrl;
 
 class StageDropTarget : public ee::CombinedDropTarget
 {
@@ -22,7 +21,7 @@ public:
 	virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) override;
 
 private:
-	void InsertNode(const n3::SceneNodePtr& node);
+	void InsertNode(const n0::SceneNodePtr& node);
 
 private:
 	ee::LibraryPanel* m_library;

@@ -17,7 +17,7 @@
 #include <gimg_typedef.h>
 #include <pimg/Condense.h>
 #include <sprite2/Sprite.h>
-#include <sprite2/Texture.h>
+#include <painting2/Texture.h>
 #include <gum/DTex.h>
 
 namespace ee
@@ -26,7 +26,7 @@ namespace ee
 Image::Image()
 {
 	m_tex = std::make_shared<TextureImgData>();
-	m_s2_tex = std::make_shared<s2::Texture>(0, 0, 0);
+	m_s2_tex = std::make_shared<pt2::Texture>(0, 0, 0);
 }
 
 Image::Image(const uint8_t* pixels, int w, int h, int fmt)
@@ -40,13 +40,13 @@ Image::Image(const uint8_t* pixels, int w, int h, int fmt)
 	m_clipped_region.xmax = m_ori_sz.x;
 	m_clipped_region.ymax = m_ori_sz.y;
 
-	m_s2_tex = std::make_shared<s2::Texture>(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
+	m_s2_tex = std::make_shared<pt2::Texture>(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
 }
 
 Image::Image(const std::shared_ptr<const s2::RenderTarget>& rt)
 {
 	m_tex = std::make_shared<TextureRT>(rt);
-	m_s2_tex = std::make_shared<s2::Texture>(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
+	m_s2_tex = std::make_shared<pt2::Texture>(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
 
 	m_ori_sz.x = m_tex->GetWidth();
 	m_ori_sz.y = m_tex->GetHeight();

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\Texture.cpp" />
+    <ClCompile Include="..\..\..\source\RenderSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\painting2\Texture.h" />
+    <ClInclude Include="..\..\..\include\painting2\RenderSystem.h" />
+  </ItemGroup>
+</Project>

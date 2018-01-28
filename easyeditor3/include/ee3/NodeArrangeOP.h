@@ -4,9 +4,7 @@
 
 #include <ee/SelectionSet.h>
 
-#include <ee0/EditOpState.h>
-
-#include <memory>
+#include <ee0/typedef.h>
 
 namespace ee0 { class EditOpState; class SubjectMgr; }
 
@@ -30,13 +28,23 @@ public:
 	virtual bool OnMouseWheelRotation(int x, int y, int direction) override;
 
 private:
+	void ChangeEditOpState(const ee0::EditOpStatePtr& state);
+
+private:
 	ee0::SubjectMgr& m_sub_mgr;
 
-	ee::SelectionSet<n3::SceneNode>& m_node_selection;
+	ee::SelectionSet<n0::SceneNode>& m_node_selection;
 
 	std::shared_ptr<StageCanvas> m_canvas = nullptr;
 
-	std::unique_ptr<ee0::EditOpState> m_op_state = nullptr;
+	ee0::EditOpStatePtr m_op_state = nullptr;
+
+	ee0::EditOpStatePtr m_cam_rotate_state    = nullptr;
+	ee0::EditOpStatePtr m_cam_translate_state = nullptr;
+	ee0::EditOpStatePtr m_cam_zoom_state      = nullptr;
+
+	ee0::EditOpStatePtr m_node_rotate_state    = nullptr;
+	ee0::EditOpStatePtr m_node_translate_state = nullptr;
 
 }; // NodeArrangeOP
 
