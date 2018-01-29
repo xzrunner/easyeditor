@@ -27,6 +27,11 @@ s2::SprPtr SpriteLoader::Create(const Json::Value& val, const CU_STR& dir) const
 	return SpriteFactory::Instance()->Create(val, dir.c_str());
 }
 
+s2::SprPtr SpriteLoader::Create(const sns::NodeSpr* node, const CU_STR& dir) const
+{
+	return SpriteFactory::Instance()->Create(node, dir.c_str());
+}
+
 std::string SpriteLoader::GetSymbolPath(const std::string& dir, const Json::Value& val) const
 {
 	return SymbolSearcher::GetSymbolPath(dir, val);
