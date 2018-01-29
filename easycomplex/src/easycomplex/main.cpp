@@ -7,9 +7,6 @@
 #include <ee/SymbolFile.h>
 #include <ee/SymbolType.h>
 
-#include <easynode3d/Symbol.h>
-#include <easynode3d/Sprite.h>
-
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyanim2.h>
@@ -84,9 +81,6 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(s2::SYM_AUDIO, &eaudio::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_AUDIO, &eaudio::Sprite::Create);
-
-	ee::SymbolFactory::RegisterCreator(s2::SYM_MODEL, &enode3d::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(s2::SYM_MODEL, &enode3d::Sprite::Create);
 }
 
 bool MyApp::OnInit()

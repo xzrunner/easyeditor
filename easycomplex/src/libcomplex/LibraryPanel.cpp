@@ -25,8 +25,6 @@
 #include <ee/LibraryFontBlankPage.h>
 #include <ee/LibraryScriptsPage.h>
 
-#include <easynode3d/LibraryPage.h>
-
 namespace ecomplex
 {
 
@@ -55,7 +53,6 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new eparticle2d::LibraryPage(nb));
 //	AddPage(new eterrain2d::LibraryPage(nb));
 //	AddPage(new eshadow::LibraryPage(nb));
-	AddPage(new enode3d::LibraryPage(nb));
 }
 
 } // ecomplex

@@ -22,9 +22,6 @@
 #include <ee/panel_msg.h>
 #include <ee/CurrSprTreePath.h>
 
-#include <easynode3d/EditDialog.h>
-#include <easynode3d/Sprite.h>
-
 #include <gum/Audio.h>
 
 namespace ecomplex
@@ -131,11 +128,6 @@ void OpenSymbolDialog::Open(const ee::SprPtr& spr, ee::CrossGuides* guides)
 	else if (auto shape = std::dynamic_pointer_cast<eshape::Sprite>(spr))
 	{
 		eshape::EditDialogSimple dlg(m_wnd, canvas->GetGLContext(), shape, m_sprites_impl);
-		dlg.ShowModal();
-	}
-	else if (auto node3 = std::dynamic_pointer_cast<enode3d::Sprite>(spr))
-	{
-		enode3d::EditDialog dlg(m_wnd, canvas->GetGLContext(), node3);
 		dlg.ShowModal();
 	}
 	else if (auto audio = std::dynamic_pointer_cast<eaudio::Sprite>(spr))
