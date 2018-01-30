@@ -10,6 +10,8 @@
 #include "SpriteRenderer.h"
 #include "CameraCanvas.h"
 
+#include <ee0/CameraHelper.h>
+
 #include <sm_c_vector.h>
 #include <sprite2/OrthoCamera.h>
 #include <sprite2/Pseudo3DCamera.h>
@@ -50,36 +52,24 @@ bool EditPanelImpl::Update()
 
 sm::vec2 EditPanelImpl::TransPosScrToProj(int x, int y) const
 {
-	if (!m_stage) {
-		return sm::vec2(0, 0);
-	}
-
 	auto cam_canvas = std::dynamic_pointer_cast<ee::CameraCanvas>(m_canvas);
 	if (!cam_canvas || cam_canvas->GetCamera()->Type() != s2::CAM_ORTHO2D) {
 		return sm::vec2(0, 0);
 	}
 
 	auto cam = std::dynamic_pointer_cast<s2::OrthoCamera>(cam_canvas->GetCamera());
-	int w = m_stage->GetSize().GetWidth(),
-		h = m_stage->GetSize().GetHeight();
-	return cam->TransPosScreenToProject(x, y, w, h);
+	return ee0::CameraHelper::TransPosScreenToProject(*cam, x, y);
 }
 
 sm::vec2 EditPanelImpl::TransPosProjToScr(const sm::vec2& proj) const
 {
-	if (!m_stage) {
-		return sm::vec2(0, 0);
-	}
-
 	auto cam_canvas = std::dynamic_pointer_cast<ee::CameraCanvas>(m_canvas);
 	if (!cam_canvas || cam_canvas->GetCamera()->Type() != s2::CAM_ORTHO2D) {
 		return sm::vec2(0, 0);
 	}
 
 	auto cam = std::dynamic_pointer_cast<s2::OrthoCamera>(cam_canvas->GetCamera());
-	int w = m_stage->GetSize().GetWidth(),
-		h = m_stage->GetSize().GetHeight();
-	return cam->TransPosProjectToScreen(proj, w, h);
+	return ee0::CameraHelper::TransPosProjectToScreen(*cam, proj);
 }
 
 void EditPanelImpl::DrawEditOP() const

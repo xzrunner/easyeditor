@@ -7,7 +7,7 @@
 #include <ee0/CompEditor.h>
 #include <ee2/StagePage.h>
 #include <ee2/StageCanvas.h>
-#include <ee2/CamControlOP.h>
+#include <ee2/NodeSelectOP.h>
 #include <ee3/StagePage.h>
 #include <ee3/StageCanvas.h>
 #include <ee3/NodeArrangeOP.h>
@@ -89,16 +89,8 @@ wxWindow* Task::CreateLibraryPanel()
 
 wxWindow* Task::CreateStagePanel()
 {
-	//// create the notebook off-window to avoid flicker
-	//wxSize client_size = m_frame->GetClientSize();
-
-	//wxAuiNotebook* ctrl = new wxAuiNotebook(m_frame, wxID_ANY,
-	//	wxPoint(client_size.x, client_size.y),
-	//	wxSize(430, 200),
-	//	wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_EXTERNAL_MOVE | wxNO_BORDER);
-	//ctrl->Freeze();
-
 	m_stage = new StagePanel(m_frame);
+	m_stage->Freeze();
 
 	wxGLContext* gl_ctx = nullptr;
 	{
@@ -106,8 +98,7 @@ wxWindow* Task::CreateStagePanel()
 		auto canvas = std::make_shared<ee2::StageCanvas>(page);
 		gl_ctx = canvas->GetGLContext();
 		page->SetCanvas(canvas);
-		page->SetEditOP(std::make_shared<ee2::CamControlOP>(
-			page, page->GetStageImpl(), *canvas->GetCamera(), page->GetSubjectMgr()));
+		page->SetEditOP(std::make_shared<ee2::NodeSelectOP>(*page));
 
 		m_stage->AddPage(page, ("New 2d"));
 	}
@@ -120,7 +111,7 @@ wxWindow* Task::CreateStagePanel()
 		m_stage->AddPage(page, ("New 3d"));
 	}
 
-//	m_stage->Thaw();
+	m_stage->Thaw();
 
 	return m_stage;
 }

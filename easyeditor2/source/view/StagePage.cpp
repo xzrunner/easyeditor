@@ -16,9 +16,10 @@ StagePage::StagePage(wxWindow* parent, wxTopLevelWindow* frame,
 
 void StagePage::OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants)
 {
+	ee0::StagePage::OnNotify(msg, variants);
+
 	switch (msg)
 	{
-	// scene node
 	case ee0::MSG_INSERT_SCENE_NODE:
 		InsertSceneNode(variants);
 		break;

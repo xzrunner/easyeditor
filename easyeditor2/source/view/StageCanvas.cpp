@@ -32,6 +32,8 @@ void StageCanvas::OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants)
 
 void StageCanvas::OnSize(int w, int h)
 {
+	ee::OnePassCanvas::OnSize(w, h);
+
 	auto ctx = const_cast<s2::RenderContext*>(s2::RenderCtxStack::Instance()->Top());
 	if (ctx)
 	{

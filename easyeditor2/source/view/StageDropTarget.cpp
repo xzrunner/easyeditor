@@ -8,9 +8,11 @@
 
 #include <ee0/MessageID.h>
 #include <ee0/VariantSet.h>
+#include <ee0/CameraHelper.h>
 
 #include <guard/check.h>
 #include <node2/CompTransform.h>
+#include <node2/CompBoundingBox.h>
 #include <sprite2/OrthoCamera.h>
 
 namespace ee2
@@ -41,7 +43,9 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
-		sm::vec2 pos = TransPosScrToProj(x, y);
+		auto& cam = std::dynamic_pointer_cast<StageCanvas>(m_stage->GetCanvas())->GetCamera();
+		GD_ASSERT(cam, "null cam");
+		sm::vec2 pos = ee0::CameraHelper::TransPosScreenToProject(*cam, x, y);
 		bool handled = OnDropSymbol(sym, pos);
 		if (handled) {
 			continue;
@@ -62,6 +66,10 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 		//	pos -= p_pos;
 		//}
 		ctrans.SetPosition(pos);
+
+		// bounding box
+		auto& bounding = node->GetComponent<n2::CompBoundingBox>();
+		bounding.Build(ctrans.GetTransformSRT());
 	}
 
 	m_stage->GetSubjectMgr().NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
@@ -81,20 +89,6 @@ void StageDropTarget::InsertNode(const n0::SceneNodePtr& node)
 	
 	bool succ = m_stage->GetSubjectMgr().NotifyObservers(ee0::MSG_INSERT_SCENE_NODE, vars);
 	GD_ASSERT(succ, "no MSG_INSERT_SCENE_NODE");
-}
-
-sm::vec2 StageDropTarget::TransPosScrToProj(int x, int y) const
-{
-	auto canvas = std::dynamic_pointer_cast<StageCanvas>(m_stage->GetCanvas());
-	auto& cam = canvas->GetCamera();
-	if (cam->Type() != s2::CAM_ORTHO2D) {
-		return sm::vec2(0, 0);
-	}
-	
-	int w = m_stage->GetSize().GetWidth(),
-		h = m_stage->GetSize().GetHeight();
-	return std::dynamic_pointer_cast<s2::OrthoCamera>(cam)->
-		TransPosScreenToProject(x, y, w, h);
 }
 
 }

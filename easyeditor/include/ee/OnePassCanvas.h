@@ -13,6 +13,7 @@ public:
 		wxGLContext* glctx = nullptr, uint32_t flag = USE_CONTEXT_STACK | HAS_2D);
 
 protected:
+	virtual void OnSize(int w, int h) override;
 	virtual void OnDrawWhole() const override;
 
 }; // OnePassCanvas

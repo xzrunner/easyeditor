@@ -11,9 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee0\CameraHelper.h" />
     <ClInclude Include="..\..\..\include\ee0\CompEditor.h" />
     <ClInclude Include="..\..\..\include\ee0\EditOpState.h" />
     <ClInclude Include="..\..\..\include\ee0\MessageID.h" />
+    <ClInclude Include="..\..\..\include\ee0\NodeSelectOP.h" />
     <ClInclude Include="..\..\..\include\ee0\Observer.h" />
     <ClInclude Include="..\..\..\include\ee0\StagePage.h" />
     <ClInclude Include="..\..\..\include\ee0\Subject.h" />
@@ -25,8 +27,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\data\CompEditor.cpp" />
+    <ClCompile Include="..\..\..\source\editop\NodeSelectOP.cpp" />
     <ClCompile Include="..\..\..\source\msg\Subject.cpp" />
     <ClCompile Include="..\..\..\source\msg\SubjectMgr.cpp" />
+    <ClCompile Include="..\..\..\source\tools\CameraHelper.cpp" />
+    <ClCompile Include="..\..\..\source\view\StagePage.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>4.easyeditor0</ProjectName>
@@ -71,7 +76,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -85,7 +90,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

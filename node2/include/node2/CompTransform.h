@@ -1,8 +1,8 @@
 #pragma once
 
-#include "predef.h"
+#include "node2/predef.h"
+#include "node2/SRT.h"
 
-#include <SM_Vector.h>
 #include <SM_Matrix2D.h>
 #include <node0/NodeComponent.h>
 
@@ -19,6 +19,7 @@ public:
 	void SetPosition(const sm::vec2& pos);
 
 	const sm::Matrix2D& GetTransformMat() const { return m_mat; }
+	const SRT& GetTransformSRT() const { return m_srt; }
 
 	void Reset();
 
@@ -27,22 +28,6 @@ public:
 private:
 	void UpdateCenter();
 	void UpdateMatrix();
-
-private:
-	struct SRT
-	{
-		sm::vec2 position;
-		float    angle;
-		sm::vec2 scale;
-		sm::vec2 shear;
-		sm::vec2 offset;
-		sm::vec2 center;
-
-		SRT();
-
-		void Reset();
-
-	}; // SRT
 
 private:
 	SRT    m_srt;

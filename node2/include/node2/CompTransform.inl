@@ -18,26 +18,4 @@ void CompTransform::UpdateMatrix()
 		m_srt.scale.y, 0, 0, m_srt.shear.x, m_srt.shear.y);
 }
 
-
-/************************************************************************/
-/* class CompTransform::SRT                                             */
-/************************************************************************/
-
-inline
-CompTransform::SRT::SRT()
-{
-	Reset();
-}
-
-inline
-void CompTransform::SRT::Reset()
-{
-	position.Set(0, 0);
-	angle = 0;
-	scale.Set(1, 1);
-	shear.Set(0, 0);
-	offset.Set(0, 0);
-	center.Set(0, 0);
-}
-
 }

@@ -15,35 +15,21 @@ StagePage::StagePage(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	m_sub_mgr.RegisterObserver(ee0::MSG_INSERT_SCENE_NODE, this);
 	m_sub_mgr.RegisterObserver(ee0::MSG_DELETE_SCENE_NODE, this);
-	m_sub_mgr.RegisterObserver(ee0::MSG_NODE_SELECTION_INSERT, this);
-	m_sub_mgr.RegisterObserver(ee0::MSG_NODE_SELECTION_DELETE, this);
-	m_sub_mgr.RegisterObserver(ee0::MSG_NODE_SELECTION_CLEAR, this);
 
 	SetDropTarget(new StageDropTarget(this, library, this));
 }
 
 void StagePage::OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants)
 {
+	ee0::StagePage::OnNotify(msg, variants);
+
 	switch (msg)
 	{
-	// scene node
 	case ee0::MSG_INSERT_SCENE_NODE:
 		InsertSceneNode(variants);
 		break;
 	case ee0::MSG_DELETE_SCENE_NODE:
 		DeleteSceneNode(variants);
-		break;
-
-	// selection set
-	case ee0::MSG_NODE_SELECTION_INSERT:
-		NodeSelectionInsert(variants);
-		break;
-	case ee0::MSG_NODE_SELECTION_DELETE:
-		NodeSelectionDelete(variants);
-		break;
-	case ee0::MSG_NODE_SELECTION_CLEAR:
-		m_node_selection.Clear();
-		m_sub_mgr.NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
 		break;
 	}
 }
@@ -95,38 +81,6 @@ void StagePage::DeleteSceneNode(const ee0::VariantSet& variants)
 	if (dirty) {
 		m_sub_mgr.NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
 	}
-}
-
-void StagePage::NodeSelectionInsert(const ee0::VariantSet& variants)
-{
-	auto var_clear = variants.GetVariant("clear");
-	if (var_clear.m_type == VT_BOOL && var_clear.m_val.bl) {
-		m_node_selection.Clear();
-	}
-
-	auto var = variants.GetVariant("node");
-	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
-	n0::SceneNodePtr* node = static_cast<n0::SceneNodePtr*>(var.m_val.pv);
-	GD_ASSERT(node, "err scene node");
-
-	if (m_node_selection.IsEmpty()) {
-		m_sub_mgr.NotifyObservers(ee0::MSG_SELECTED_ONE_NODE, variants);
-	}
-	m_node_selection.Add(*node);
-
-	m_sub_mgr.NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
-}
-
-void StagePage::NodeSelectionDelete(const ee0::VariantSet& variants)
-{
-	auto var = variants.GetVariant("node");
-	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
-	n0::SceneNodePtr* node = static_cast<n0::SceneNodePtr*>(var.m_val.pv);
-	GD_ASSERT(node, "err scene node");
-
-	m_node_selection.Remove(*node);
-
-	m_sub_mgr.NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
 }
 
 }

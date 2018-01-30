@@ -12,6 +12,11 @@ OnePassCanvas::OnePassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 {
 }
 
+void OnePassCanvas::OnSize(int w, int h)
+{
+	gum::RenderContext::Instance()->OnSize(w, h);
+}
+
 void OnePassCanvas::OnDrawWhole() const
 {
 	ur::RenderContext* rc = gum::RenderContext::Instance()->GetImpl();

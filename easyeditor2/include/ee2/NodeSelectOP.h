@@ -2,14 +2,14 @@
 
 #include <ee0/NodeSelectOP.h>
 
-namespace ee3
+namespace ee2
 {
 
 class StagePage;
 
 class NodeSelectOP : public ee0::NodeSelectOP
 {
-public:	
+public:
 	NodeSelectOP(StagePage& stage);
 
 	virtual bool OnDraw() const override;

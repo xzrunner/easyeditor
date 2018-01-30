@@ -1,10 +1,6 @@
 #pragma once
 
-#include <ee/SelectionSet.h>
-
 #include <ee0/StagePage.h>
-
-#include <node0/SceneNode.h>
 
 namespace ee { class LibraryPanel; }
 
@@ -27,8 +23,6 @@ private:
 
 private:
 	std::vector<n0::SceneNodePtr> m_nodes;
-
-	ee::SelectionSet<n0::SceneNode> m_node_selection;
 
 }; // StagePage
 

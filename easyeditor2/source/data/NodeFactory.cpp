@@ -5,6 +5,8 @@
 #include <sprite2/SymType.h>
 #include <sprite2/ImageSymbol.h>
 #include <node2/CompImage.h>
+#include <node2/CompBoundingBox.h>
+#include <node2/SRT.h>
 
 namespace ee2
 {
@@ -32,6 +34,10 @@ n0::SceneNodePtr NodeFactory::Create(const ee::SymPtr& sym)
 		// image
 		auto& cimage = node->AddComponent<n2::CompImage>();
 		cimage.SetTexture(img_sym->GetTexture());
+
+		// aabb
+		sm::rect sz(img_sym->GetNoTrimedSize().x, img_sym->GetNoTrimedSize().y);
+		node->AddComponent<n2::CompBoundingBox>(sz);
 
 		// editor
 		node->AddComponent<ee0::CompEditor>();

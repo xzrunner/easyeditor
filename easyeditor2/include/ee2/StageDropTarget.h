@@ -23,11 +23,9 @@ public:
 private:
 	void InsertNode(const n0::SceneNodePtr& node);
 
-	sm::vec2 TransPosScrToProj(int x, int y) const;
-
 private:
 	ee::LibraryPanel* m_library;
-	StagePage*       m_stage;
+	StagePage*        m_stage;
 
 }; // StageDropTarget
 

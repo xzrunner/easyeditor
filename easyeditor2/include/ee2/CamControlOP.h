@@ -17,10 +17,12 @@ public:
 	static const uint32_t RIGHT_TAP        = 0x00000002;
 	static const uint32_t LEFT_TAP         = 0x00000004;
 
+	static const uint32_t DEFAULT_FLAG     = MOUSE_MOVE_FOCUS | LEFT_TAP;
+
 public:
 	CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
 		s2::Camera& cam, ee0::SubjectMgr& sub_mgr, 
-		uint32_t flag = MOUSE_MOVE_FOCUS | LEFT_TAP);
+		uint32_t flag = DEFAULT_FLAG);
 
 	virtual bool OnKeyDown(int keyCode) override;
 	virtual bool OnKeyUp(int keyCode) override;
@@ -35,10 +37,11 @@ public:
 private:
 	void ChangeEditOpState(const ee0::EditOpStatePtr& state);
 
-private:
+protected:
 	s2::Camera&      m_cam;
 	ee0::SubjectMgr& m_sub_mgr;
 
+private:
 	uint32_t m_flag;
 
 	ee0::EditOpStatePtr m_op_state = nullptr;
