@@ -17,7 +17,7 @@ static const float MOUSE_SENSITIVITY = 0.3f;
 CamControlOP::CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
 	                       n3::Camera& cam, const n3::Viewport& vp,
 	                       ee0::SubjectMgr& sub_mgr)
-	: ee::EditOP(wnd, stage)
+	: ee0::EditOP(wnd, stage)
 	, m_cam(cam)
 	, m_sub_mgr(sub_mgr)
 {

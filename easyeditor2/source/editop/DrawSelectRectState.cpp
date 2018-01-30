@@ -1,4 +1,4 @@
-#include "ee2/DrawSelectRectOP.h"
+#include "ee2/DrawSelectRectState.h"
 
 #include <ee/color_config.h>
 
@@ -10,32 +10,23 @@
 namespace ee2
 {
 
-DrawSelectRectOP::DrawSelectRectOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-	                               s2::Camera& cam, ee0::SubjectMgr& sub_mgr, 
-                                   bool open_right_tap)
-	: CamControlOP(wnd, stage, cam, sub_mgr, CamControlOP::DEFAULT_FLAG | CamControlOP::RIGHT_TAP * open_right_tap)
+DrawSelectRectState::DrawSelectRectState(s2::Camera& cam, ee0::SubjectMgr& sub_mgr)
+	: m_cam(cam)
+	, m_sub_mgr(sub_mgr)
 {
 	m_first_pos.MakeInvalid();
 	m_last_pos.MakeInvalid();
 }
 
-bool DrawSelectRectOP::OnMouseLeftDown(int x, int y)
+bool DrawSelectRectState::OnMousePress(int x, int y)
 {
-	if (CamControlOP::OnMouseLeftDown(x, y)) {
-		return true;
-	}
-
 	m_first_pos = ee0::CameraHelper::TransPosScreenToProject(m_cam, x, y);
 
 	return false;
 }
 
-bool DrawSelectRectOP::OnMouseLeftUp(int x, int y)
+bool DrawSelectRectState::OnMouseRelease(int x, int y)
 {
-	if (CamControlOP::OnMouseLeftUp(x, y)) {
-		return true;
-	}
-
 	m_first_pos.MakeInvalid();
 	m_last_pos.MakeInvalid();
 
@@ -44,12 +35,8 @@ bool DrawSelectRectOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool DrawSelectRectOP::OnMouseDrag(int x, int y)
+bool DrawSelectRectState::OnMouseDrag(int x, int y)
 {
-	if (CamControlOP::OnMouseDrag(x, y)) {
-		return true;
-	}
-
 	if (m_first_pos.IsValid())
 	{
 		m_last_pos = ee0::CameraHelper::TransPosScreenToProject(m_cam, x, y);
@@ -59,12 +46,8 @@ bool DrawSelectRectOP::OnMouseDrag(int x, int y)
 	return false;
 }
 
-bool DrawSelectRectOP::OnDraw() const
+bool DrawSelectRectState::OnDraw() const
 {
-	if (CamControlOP::OnDraw()) {
-		return true;
-	}
-
 	if (!m_first_pos.IsValid() || !m_last_pos.IsValid()) {
 		return false;
 	}
@@ -88,12 +71,8 @@ bool DrawSelectRectOP::OnDraw() const
 	return false;
 }
 
-bool DrawSelectRectOP::Clear()
+bool DrawSelectRectState::Clear()
 {
-	if (CamControlOP::Clear()) {
-		return true;
-	}
-
 	m_first_pos.MakeInvalid();
 	m_last_pos.MakeInvalid();
 

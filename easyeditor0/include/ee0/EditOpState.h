@@ -20,6 +20,9 @@ public:
 
 	virtual bool OnMouseWheelRotation(int x, int y, int direction) { return false; }
 
+	virtual bool OnDraw() const { return false; };
+	virtual bool Clear() { return false; }
+
 }; // EditOpState
 
 }

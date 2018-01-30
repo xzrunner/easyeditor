@@ -14,7 +14,7 @@
     <ClInclude Include="..\..\..\include\ee2\CamControlOP.h" />
     <ClInclude Include="..\..\..\include\ee2\CamTranslateState.h" />
     <ClInclude Include="..\..\..\include\ee2\CamZoomState.h" />
-    <ClInclude Include="..\..\..\include\ee2\DrawSelectRectOP.h" />
+    <ClInclude Include="..\..\..\include\ee2\DrawSelectRectState.h" />
     <ClInclude Include="..\..\..\include\ee2\NodeFactory.h" />
     <ClInclude Include="..\..\..\include\ee2\NodeSelectOP.h" />
     <ClInclude Include="..\..\..\include\ee2\StageCanvas.h" />
@@ -26,7 +26,7 @@
     <ClCompile Include="..\..\..\source\editop\CamControlOP.cpp" />
     <ClCompile Include="..\..\..\source\editop\CamTranslateState.cpp" />
     <ClCompile Include="..\..\..\source\editop\CamZoomState.cpp" />
-    <ClCompile Include="..\..\..\source\editop\DrawSelectRectOP.cpp" />
+    <ClCompile Include="..\..\..\source\editop\DrawSelectRectState.cpp" />
     <ClCompile Include="..\..\..\source\editop\NodeSelectOP.cpp" />
     <ClCompile Include="..\..\..\source\view\StageCanvas.cpp" />
     <ClCompile Include="..\..\..\source\view\StageDropTarget.cpp" />

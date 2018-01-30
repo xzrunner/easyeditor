@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\include\ee0\CameraHelper.h" />
     <ClInclude Include="..\..\..\include\ee0\CompEditor.h" />
+    <ClInclude Include="..\..\..\include\ee0\EditOP.h" />
     <ClInclude Include="..\..\..\include\ee0\EditOpState.h" />
     <ClInclude Include="..\..\..\include\ee0\MessageID.h" />
     <ClInclude Include="..\..\..\include\ee0\NodeSelectOP.h" />
@@ -27,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\data\CompEditor.cpp" />
+    <ClCompile Include="..\..\..\source\editop\EditOP.cpp" />
     <ClCompile Include="..\..\..\source\editop\NodeSelectOP.cpp" />
     <ClCompile Include="..\..\..\source\msg\Subject.cpp" />
     <ClCompile Include="..\..\..\source\msg\SubjectMgr.cpp" />

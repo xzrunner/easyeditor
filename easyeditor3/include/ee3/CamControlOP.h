@@ -1,7 +1,6 @@
 #pragma once
 
-#include <ee/EditOP.h>
-
+#include <ee0/EditOP.h>
 #include <ee0/typedef.h>
 
 namespace n3 { class Camera; class Viewport; }
@@ -12,7 +11,7 @@ namespace ee3
 
 class Camera;
 
-class CamControlOP : public ee::EditOP
+class CamControlOP : public ee0::EditOP
 {
 public:
 	CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage,

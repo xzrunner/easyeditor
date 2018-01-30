@@ -11,7 +11,7 @@ namespace ee2
 
 CamControlOP::CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage, s2::Camera& cam, 
 	                       ee0::SubjectMgr& sub_mgr, uint32_t flag)
-	: ee::EditOP(wnd, stage)
+	: ee0::EditOP(wnd, stage)
 	, m_cam(cam)
 	, m_sub_mgr(sub_mgr)
 	, m_flag(flag)

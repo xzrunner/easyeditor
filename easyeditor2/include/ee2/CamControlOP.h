@@ -1,7 +1,6 @@
 #pragma once
 
-#include <ee/EditOP.h>
-
+#include <ee0/EditOP.h>
 #include <ee0/typedef.h>
 
 namespace ee0 { class SubjectMgr; class EditOpState; }
@@ -10,7 +9,7 @@ namespace s2 { class Camera; }
 namespace ee2
 {
 
-class CamControlOP : public ee::EditOP
+class CamControlOP : public ee0::EditOP
 {
 public:
 	static const uint32_t MOUSE_MOVE_FOCUS = 0x00000001;

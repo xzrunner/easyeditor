@@ -12,14 +12,16 @@ namespace ee0
 {
 
 NodeSelectOP::NodeSelectOP(StagePage& stage)
-	: ee::EditOP(&stage, stage.GetStageImpl())
+	: EditOP(&stage, stage.GetStageImpl())
 	, m_stage(stage)
 {
 }
 
 bool NodeSelectOP::OnKeyDown(int keyCode)
 {
-	if (ee::EditOP::OnKeyDown(keyCode)) return true;
+	if (ee::EditOP::OnKeyDown(keyCode)) {
+		return true;
+	}
 
 	if (keyCode == WXK_DELETE)
 	{
@@ -39,12 +41,14 @@ bool NodeSelectOP::OnKeyDown(int keyCode)
 
 bool NodeSelectOP::OnMouseLeftDown(int x, int y)
 {
-	if (ee::EditOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::EditOP::OnMouseLeftDown(x, y)) {
+		return true;
+	}
 
 	auto& sub_mgr = m_stage.GetSubjectMgr();
 
 	auto& selection = m_stage.GetNodeSelection();
-	auto selected = SelectByPos(x, y);
+	auto selected = QueryByPos(x, y);
 	if (selected)
 	{
 		ee0::VariantSet vars;
@@ -77,6 +81,62 @@ bool NodeSelectOP::OnMouseLeftDown(int x, int y)
 
 	sub_mgr.NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
 
+	m_last_pos.Set(x, y);
+
+	return false;
+}
+
+bool NodeSelectOP::OnMouseLeftUp(int x, int y)
+{
+	if (ee::EditOP::OnMouseLeftUp(x, y)) {
+		return true;
+	}
+
+	if (!m_last_pos.IsValid()) {
+		return false;
+	}
+
+	auto& sub_mgr = m_stage.GetSubjectMgr();
+	auto& selection = m_stage.GetNodeSelection();
+
+	std::vector<n0::SceneNodePtr> nodes;
+	QueryByRect(m_last_pos, sm::ivec2(x, y), m_last_pos.x < x, nodes);
+	if (m_stage.GetKeyState(WXK_CONTROL))
+	{
+		for (auto& node : nodes)
+		{
+			ee0::VariantSet vars;
+			ee0::Variant var;
+			var.m_type = ee0::VT_PVOID;
+			var.m_val.pv = &node;
+			vars.SetVariant("node", var);
+
+			if (selection.IsExist(node)) {
+				sub_mgr.NotifyObservers(ee0::MSG_NODE_SELECTION_DELETE, vars);
+			} else {
+				sub_mgr.NotifyObservers(ee0::MSG_NODE_SELECTION_INSERT, vars);
+			}
+		}
+	}
+	else
+	{
+		sub_mgr.NotifyObservers(ee0::MSG_NODE_SELECTION_CLEAR);
+		for (auto& node : nodes)
+		{
+			ee0::VariantSet vars;
+			ee0::Variant var;
+			var.m_type = ee0::VT_PVOID;
+			var.m_val.pv = &node;
+			vars.SetVariant("node", var);
+
+			sub_mgr.NotifyObservers(ee0::MSG_NODE_SELECTION_INSERT, vars);
+		}
+	}
+
+	sub_mgr.NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
+
+	m_last_pos.MakeInvalid();
+	
 	return false;
 }
 

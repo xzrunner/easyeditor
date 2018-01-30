@@ -55,7 +55,7 @@ bool NodeSelectOP::OnDraw() const
 }
 
 // AABB not changed, transform ray from Camera and spr's mat
-n0::SceneNodePtr NodeSelectOP::SelectByPos(int screen_x, int screen_y) const
+n0::SceneNodePtr NodeSelectOP::QueryByPos(int screen_x, int screen_y) const
 {
 	auto& nodes = dynamic_cast<StagePage&>(m_stage).GetAllNodes();
 
