@@ -4,7 +4,7 @@
 #include "Sprite.h"
 #include "Symbol.h"
 
-#include <gum/SpriteLoader.h>
+#include <s2loader/SpriteLoader.h>
 
 #include <json/json.h>
 
@@ -15,12 +15,12 @@ namespace ee
 
 class Symbol;
 
-class SpriteLoader : public gum::SpriteLoader
+class SpriteLoader : public s2loader::SpriteLoader
 {
 public:
 	/**
 	 *  @interface
-	 *    gum::SpriteLoader
+	 *    s2loader::SpriteLoader
 	 */	
 	virtual s2::SprPtr Create(const s2::SymPtr& sym) const override;
 	virtual s2::SprPtr Create(const CU_STR& filepath) const override;

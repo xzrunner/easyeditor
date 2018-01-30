@@ -4,7 +4,7 @@
 #include <ee/Symbol.h>
 
 #include <sprite2/Scale9Symbol.h>
-#include <gum/Scale9SymLoader.h>
+#include <s2loader/Scale9SymLoader.h>
 
 #include <json/json.h>
 

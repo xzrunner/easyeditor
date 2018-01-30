@@ -11,7 +11,7 @@
 #include <ee/LogMgr.h>
 #include <ee/SymbolSearcher.h>
 
-#include <gum/ComplexSymLoader.h>
+#include <s2loader/ComplexSymLoader.h>
 
 #include <assert.h>
 
@@ -142,7 +142,7 @@ ee::SprPtr LoadFromJson::LoadSprite(const Json::Value& val, const std::string& d
 void LoadFromJson::InitActions(Symbol& sym, const Json::Value& val)
 {
 // 	if (val.isMember("action")) {
-// 		gum::ComplexSymLoader::LoadJsonAction(val, sym);	
+// 		s2loader::ComplexSymLoader::LoadJsonAction(val, sym);	
 // 	} else {
 		CreateActionsFromTag(sym);
 //	}

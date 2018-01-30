@@ -6,7 +6,7 @@
 
 #include <sprite2/UpdateParams.h>
 #include <sprite2/AnimCurr.h>
-#include <gum/AnimSprLoader.h>
+#include <s2loader/AnimSprLoader.h>
 
 namespace libanim
 {
@@ -40,7 +40,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 
-	gum::AnimSprLoader loader(*this);
+	s2loader::AnimSprLoader loader(*this);
 	loader.LoadJson(val, dir.c_str());
 	
 	const Json::Value& anim_val = val["animation"];
@@ -71,7 +71,7 @@ void Sprite::Load(const sns::NodeSpr* spr)
 {
 	ee::Sprite::Load(spr);
 
-	gum::AnimSprLoader loader(*this);
+	s2loader::AnimSprLoader loader(*this);
 	loader.LoadSns(spr);
 }
 

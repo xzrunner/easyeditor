@@ -11,7 +11,7 @@
 #include <sprite2/RenderFilter.h>
 #include <gum/trans_color.h>
 #include <gum/GTxt.h>
-#include <gum/TextboxLoader.h>
+#include <s2loader/TextboxLoader.h>
 #include <gum/FilepathHelper.h>
 
 #include <fstream>
@@ -62,7 +62,7 @@ bool Symbol::LoadResources()
 	reader.parse(fin, value);
 	fin.close();
 
-	gum::TextboxLoader loader(GetTextbox());
+	s2loader::TextboxLoader loader(GetTextbox());
 	loader.LoadJson(value);
 
 	return true;

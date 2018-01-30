@@ -4,7 +4,7 @@
 
 #include <sprite2/TextTable.h>
 #include <gum/Config.h>
-#include <gum/TextTableLoader.h>
+#include <s2loader/TextTableLoader.h>
 
 #include <wx/stdpaths.h>
 
@@ -107,7 +107,7 @@ void Config::LoadTextCfg(const Json::Value& value)
 	gum::Config::Instance()->SetLanguage(lang_idx);
 
 	std::string filepath = value["filepath"].asString();
-	gum::TextTableLoader::LoadFromCSV(filepath.c_str());
+	s2loader::TextTableLoader::LoadFromCSV(filepath.c_str());
 }
 
 void Config::LoadFontCfg(const Json::Value& value)

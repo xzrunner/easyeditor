@@ -4,7 +4,7 @@
 #include <ee/Symbol.h>
 
 #include <sprite2/SkeletonSymbol.h>
-#include <gum/JointLoader.h>
+#include <s2loader/JointLoader.h>
 
 namespace s2 { class Sprite; class Joint; }
 
@@ -23,7 +23,7 @@ public:
 	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 
 private:
-	class JointLoader : public gum::JointLoader
+	class JointLoader : public s2loader::JointLoader
 	{
 	public:
 		virtual std::shared_ptr<s2::Joint> Create(const s2::SprPtr& spr, const s2::JointPose& joint_pose) const override;

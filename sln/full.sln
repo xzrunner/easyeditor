@@ -299,6 +299,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.easyeditor2", "..\easyedi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.easyeditor3", "..\easyeditor3\platform\msvc\projects\easyeditor3.vcxproj", "{CEEBD91E-9297-47EA-ADED-68D791BA6FD4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.s2loader", "..\s2loader\platform\msvc\projects\s2loader.vcxproj", "{E5A136EE-7EE1-4682-A1B1-C942CB2110E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -793,6 +795,10 @@ Global
 		{CEEBD91E-9297-47EA-ADED-68D791BA6FD4}.Debug|Win32.Build.0 = Debug|Win32
 		{CEEBD91E-9297-47EA-ADED-68D791BA6FD4}.Release|Win32.ActiveCfg = Release|Win32
 		{CEEBD91E-9297-47EA-ADED-68D791BA6FD4}.Release|Win32.Build.0 = Release|Win32
+		{E5A136EE-7EE1-4682-A1B1-C942CB2110E7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E5A136EE-7EE1-4682-A1B1-C942CB2110E7}.Debug|Win32.Build.0 = Debug|Win32
+		{E5A136EE-7EE1-4682-A1B1-C942CB2110E7}.Release|Win32.ActiveCfg = Release|Win32
+		{E5A136EE-7EE1-4682-A1B1-C942CB2110E7}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -935,6 +941,7 @@ Global
 		{9A81990C-3C18-4ADF-A9EB-46990625C107} = {2EAD0DFD-BE31-4C3B-87A9-14F9ED0636F8}
 		{58699389-F675-489E-A912-C9110D8D6E3D} = {2EAD0DFD-BE31-4C3B-87A9-14F9ED0636F8}
 		{CEEBD91E-9297-47EA-ADED-68D791BA6FD4} = {2EAD0DFD-BE31-4C3B-87A9-14F9ED0636F8}
+		{E5A136EE-7EE1-4682-A1B1-C942CB2110E7} = {FD4A873E-B658-44F9-B04A-B0FF7C8F780D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D54C01A-3C82-4351-A325-2853C3E81322}

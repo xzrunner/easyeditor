@@ -9,7 +9,7 @@
 #include <polymesh/MeshTransform.h>
 #include <sprite2/RVG.h>
 #include <gum/JsonSerializer.h>
-#include <gum/MeshIO.h>
+#include <s2loader/MeshIO.h>
 
 #include <assert.h>
 
@@ -41,7 +41,7 @@ void PointsMesh::Load(const Json::Value& value)
 	m_mesh = std::make_unique<pm::PointsMesh>(outline, points, GetWidth(), GetHeight());
 
 	pm::MeshTransform trans;
-	gum::MeshIO::Load(value, trans, *this);
+	s2loader::MeshIO::Load(value, trans, *this);
 	m_mesh->LoadFromTransform(trans);
 
 	m_vertices = outline;
@@ -63,7 +63,7 @@ void PointsMesh::Store(Json::Value& value) const
 
 	pm::MeshTransform trans;
 	m_mesh->StoreToTransform(trans);
-	gum::MeshIO::Store(value, trans, *this);
+	s2loader::MeshIO::Store(value, trans, *this);
 }
 
 void PointsMesh::Refresh()

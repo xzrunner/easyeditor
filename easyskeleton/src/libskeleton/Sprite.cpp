@@ -2,7 +2,7 @@
 #include "Symbol.h"
 
 #include <gum/SkeletonIO.h>
-#include <gum/SymbolFile.h>
+#include <s2loader/SymbolFile.h>
 
 #include <sprite2/SymType.h>
 
@@ -40,7 +40,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 
-	std::string key = gum::SymbolFile::Instance()->Tag(s2::SYM_SKELETON).c_str();
+	std::string key = s2loader::SymbolFile::Instance()->Tag(s2::SYM_SKELETON).c_str();
 	gum::SkeletonIO::Load(val[key], m_pose);
 }
 
@@ -48,7 +48,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 {
 	ee::Sprite::Store(val);
 
-	std::string key = gum::SymbolFile::Instance()->Tag(s2::SYM_SKELETON).c_str();
+	std::string key = s2loader::SymbolFile::Instance()->Tag(s2::SYM_SKELETON).c_str();
 	gum::SkeletonIO::Store(val[key], m_pose);
 }
 

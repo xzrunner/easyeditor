@@ -5,7 +5,7 @@
 
 #include <sprite2/MaskSymbol.h>
 #include <sprite2/Color.h>
-#include <gum/ShapeType.h>
+#include <s2loader/ShapeType.h>
 #include <cu/cu_stl.h>
 
 #include <vector>
@@ -38,7 +38,7 @@ public:
 	virtual void PackToBin(uint8_t** ptr, const ee::TexturePacker& tp) const override;	
 
 private:
-	gum::ShapeType m_type;
+	s2loader::ShapeType m_type;
 
 	s2::Color m_color;
 	const PackNode* m_texture;

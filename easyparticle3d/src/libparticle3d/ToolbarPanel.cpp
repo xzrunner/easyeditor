@@ -102,7 +102,7 @@ void ToolbarPanel::Store(Json::Value& val) const
 	}
 }
 
-void ToolbarPanel::Add(const gum::P3dSymLoader::Component& comp, ee::LibraryPanel* library)
+void ToolbarPanel::Add(const s2loader::P3dSymLoader::Component& comp, ee::LibraryPanel* library)
 {
 	// todo Release symbol
 	auto sym = ee::SymbolMgr::Instance()->FetchSymbol(comp.filepath.c_str());

@@ -2,7 +2,7 @@
 #include "Symbol.h"
 #include "SprPropSetting.h"
 
-#include <gum/TrailSprLoader.h>
+#include <s2loader/TrailSprLoader.h>
 
 namespace etrail
 {
@@ -40,7 +40,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	const Json::Value& t_val = val["trail"];
 	m_local = t_val["local"].asBool();
 
-	gum::TrailSprLoader loader(std::dynamic_pointer_cast<s2::TrailSprite>(shared_from_this()));
+	s2loader::TrailSprLoader loader(std::dynamic_pointer_cast<s2::TrailSprite>(shared_from_this()));
 	loader.LoadJson(val, dir);
 }
 

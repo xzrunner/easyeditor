@@ -1,17 +1,17 @@
 #ifndef _EASYEDITOR_SYMBOL_LOADER_H_
 #define _EASYEDITOR_SYMBOL_LOADER_H_
 
-#include <gum/SymbolLoader.h>
+#include <s2loader/SymbolLoader.h>
 
 namespace ee
 {
 
-class SymbolLoader : public gum::SymbolLoader
+class SymbolLoader : public s2loader::SymbolLoader
 {
 public:
 	/**
 	 *  @interface
-	 *    gum::SymbolLoader
+	 *    s2loader::SymbolLoader
 	 */		
 	virtual s2::SymPtr Create(const CU_STR& filepath, int type = s2::SYM_UNKNOWN) const override;
 	virtual s2::SymPtr Create(int type) const override;

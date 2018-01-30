@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>3.s2loader</ProjectName>
+    <ProjectGuid>{E5A136EE-7EE1-4682-A1B1-C942CB2110E7}</ProjectGuid>
+    <RootNamespace>s2loader</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\s2loader\x86\Debug\</OutDir>
+    <IntDir>..\s2loader\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\s2loader\x86\Release\</OutDir>
+    <IntDir>..\s2loader\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\mtrail\src\mtrail;..\..\..\..\rigging\src\rigging;..\..\..\..\uniaudio\include;..\..\..\..\cu\src;..\..\..\..\gimg\src\gimg;..\..\..\..\guard\include;..\..\..\..\polymesh\include;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\sns\include;..\..\..\..\memmgr\include;..\..\..\..\bimp\include;..\..\..\..\simp\include;..\..\..\..\timp\include;..\..\..\..\shaderlab\include;..\..\..\..\multitask\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\unirender\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__STDC_LIMIT_MACROS;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\gtxt\src\gtxt;..\..\..\..\particle\src;..\..\..\..\mtrail\src\mtrail;..\..\..\..\rigging\src\rigging;..\..\..\..\uniaudio\include;..\..\..\..\cu\src;..\..\..\..\gimg\src\gimg;..\..\..\..\guard\include;..\..\..\..\polymesh\include;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\sns\include;..\..\..\..\memmgr\include;..\..\..\..\bimp\include;..\..\..\..\simp\include;..\..\..\..\timp\include;..\..\..\..\shaderlab\include;..\..\..\..\multitask\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\unirender\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__STDC_LIMIT_MACROS;EASY_EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <DisableSpecificWarnings>94;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\BlendModes.cpp" />
+    <ClCompile Include="..\..\..\source\CameraModes.cpp" />
+    <ClCompile Include="..\..\..\source\FastBlendModes.cpp" />
+    <ClCompile Include="..\..\..\source\FilterModes.cpp" />
+    <ClCompile Include="..\..\..\source\GlyphStyle.cpp" />
+    <ClCompile Include="..\..\..\source\GlyphStyleID.cpp" />
+    <ClCompile Include="..\..\..\source\ImageLoader.cpp" />
+    <ClCompile Include="..\..\..\source\PkgFileParser.cpp" />
+    <ClCompile Include="..\..\..\source\ResourceUID.cpp" />
+    <ClCompile Include="..\..\..\source\Anim2SprLoader.cpp" />
+    <ClCompile Include="..\..\..\source\Anim2SymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\AnimSprLoader.cpp" />
+    <ClCompile Include="..\..\..\source\AnimSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\ArrayLoader.cpp" />
+    <ClCompile Include="..\..\..\source\AudioLoader.cpp" />
+    <ClCompile Include="..\..\..\source\AudioSprLoader.cpp" />
+    <ClCompile Include="..\..\..\source\BodymovinAnimLoader.cpp" />
+    <ClCompile Include="..\..\..\source\BodymovinParser.cpp" />
+    <ClCompile Include="..\..\..\source\ComplexSprLoader.cpp" />
+    <ClCompile Include="..\..\..\source\ComplexSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\EasyAnim2Loader.cpp" />
+    <ClCompile Include="..\..\..\source\EasyAnimLoader.cpp" />
+    <ClCompile Include="..\..\..\source\EasySkeletonLoader.cpp" />
+    <ClCompile Include="..\..\..\source\ExtendSymFile.cpp" />
+    <ClCompile Include="..\..\..\source\ShapeSaver.cpp" />
+    <ClCompile Include="..\..\..\source\SpriteFactory.cpp" />
+    <ClCompile Include="..\..\..\source\SymbolFactory.cpp" />
+    <ClCompile Include="..\..\..\source\TextTableLoader.cpp" />
+    <ClCompile Include="..\..\..\source\IconSprLoader.cpp" />
+    <ClCompile Include="..\..\..\source\IconSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\ImageSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\JointLoader.cpp" />
+    <ClCompile Include="..\..\..\source\MaskSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\MeshIO.cpp" />
+    <ClCompile Include="..\..\..\source\MeshSprLoader.cpp" />
+    <ClCompile Include="..\..\..\source\MeshSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\P2dSprLoader.cpp" />
+    <ClCompile Include="..\..\..\source\P2dSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\P3dSprLoader.cpp" />
+    <ClCompile Include="..\..\..\source\P3dSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\Scale9SprLoader.cpp" />
+    <ClCompile Include="..\..\..\source\Scale9SymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\ShapeLoader.cpp" />
+    <ClCompile Include="..\..\..\source\ShapeSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\SkeletonIO.cpp" />
+    <ClCompile Include="..\..\..\source\SkeletonSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\SpineAnim2Loader.cpp" />
+    <ClCompile Include="..\..\..\source\SpineAnimLoader.cpp" />
+    <ClCompile Include="..\..\..\source\SpineParser.cpp" />
+    <ClCompile Include="..\..\..\source\SpineSkeletonLoader.cpp" />
+    <ClCompile Include="..\..\..\source\SpriteIO.cpp" />
+    <ClCompile Include="..\..\..\source\SpriteLoader.cpp" />
+    <ClCompile Include="..\..\..\source\SprTransLoader.cpp" />
+    <ClCompile Include="..\..\..\source\SymbolFile.cpp" />
+    <ClCompile Include="..\..\..\source\SymbolLoader.cpp" />
+    <ClCompile Include="..\..\..\source\TextboxLoader.cpp" />
+    <ClCompile Include="..\..\..\source\TextboxSprLoader.cpp" />
+    <ClCompile Include="..\..\..\source\TextureSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\TrailSprLoader.cpp" />
+    <ClCompile Include="..\..\..\source\TrailSymLoader.cpp" />
+    <ClCompile Include="..\..\..\source\LoadImageTask.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\s2loader\Anim2SprLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\Anim2SymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\AnimSprLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\AnimSymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\ArrayLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\AudioLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\AudioSprLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\BlendModes.h" />
+    <ClInclude Include="..\..\..\include\s2loader\BodymovinAnimLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\BodymovinParser.h" />
+    <ClInclude Include="..\..\..\include\s2loader\CameraModes.h" />
+    <ClInclude Include="..\..\..\include\s2loader\ComplexSprLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\ComplexSymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\EasyAnim2Loader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\EasyAnimLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\EasySkeletonLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\ExtendSymFile.h" />
+    <ClInclude Include="..\..\..\include\s2loader\FastBlendModes.h" />
+    <ClInclude Include="..\..\..\include\s2loader\FilterModes.h" />
+    <ClInclude Include="..\..\..\include\s2loader\GlyphStyle.h" />
+    <ClInclude Include="..\..\..\include\s2loader\GlyphStyleID.h" />
+    <ClInclude Include="..\..\..\include\s2loader\ShapeSaver.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SpriteFactory.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SymbolFactory.h" />
+    <ClInclude Include="..\..\..\include\s2loader\TextTableLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\IconSprLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\IconSymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\IconType.h" />
+    <ClInclude Include="..\..\..\include\s2loader\ImageLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\ImageSymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\JointLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\LoadImageTask.h" />
+    <ClInclude Include="..\..\..\include\s2loader\MaskSymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\MeshIO.h" />
+    <ClInclude Include="..\..\..\include\s2loader\MeshSprLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\MeshSymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\MeshType.h" />
+    <ClInclude Include="..\..\..\include\s2loader\P2dSprLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\P2dSymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\P3dSprLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\P3dSymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\PkgFileParser.h" />
+    <ClInclude Include="..\..\..\include\s2loader\Resource.h" />
+    <ClInclude Include="..\..\..\include\s2loader\ResourceUID.h" />
+    <ClInclude Include="..\..\..\include\s2loader\Scale9SprLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\Scale9SymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\ShapeLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\ShapeSymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\ShapeType.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SkeletonIO.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SkeletonSymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SpineAnim2Loader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SpineAnimLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SpineParser.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SpineSkeletonLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SpriteIO.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SpriteLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SprTransLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SymbolFile.h" />
+    <ClInclude Include="..\..\..\include\s2loader\SymbolLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\TextboxLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\TextboxSprLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\TextureSymLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\TrailSprLoader.h" />
+    <ClInclude Include="..\..\..\include\s2loader\TrailSymLoader.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

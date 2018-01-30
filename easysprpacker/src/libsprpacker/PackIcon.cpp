@@ -19,7 +19,7 @@ namespace esprpacker
 {
 
 PackIcon::PackIcon(const std::shared_ptr<eicon::Symbol>& sym)
-	: m_type(gum::ICON_INVALID)
+	: m_type(s2loader::ICON_INVALID)
 {
 	m_base = PackNodeFactory::Instance()->Create(std::dynamic_pointer_cast<ee::Symbol>(
 		sym->GetIcon()->GetImage()));
@@ -27,7 +27,7 @@ PackIcon::PackIcon(const std::shared_ptr<eicon::Symbol>& sym)
 	auto& icon = sym->GetIcon();
 	if (const s2::StaticRectIcon* rect = dynamic_cast<const s2::StaticRectIcon*>(icon.get()))
 	{
-		m_type = gum::ICON_RECT;
+		m_type = s2loader::ICON_RECT;
 		sm::vec2 min, max;
 		rect->GetRegion(min, max);
 		m_vertices.push_back(min);
@@ -35,7 +35,7 @@ PackIcon::PackIcon(const std::shared_ptr<eicon::Symbol>& sym)
 	}
 	else if (const s2::StaticQuadIcon* quad = dynamic_cast<const s2::StaticQuadIcon*>(icon.get()))
 	{
-		m_type = gum::ICON_QUAD;
+		m_type = s2loader::ICON_QUAD;
 		const sm::vec2* scr = quad->GetScreen();
 		for (int i = 0; i < 4; ++i) {
 			m_vertices.push_back(scr[i]);
@@ -43,7 +43,7 @@ PackIcon::PackIcon(const std::shared_ptr<eicon::Symbol>& sym)
 	}
 	else if (const s2::DynamicRectIcon* drect = dynamic_cast<const s2::DynamicRectIcon*>(icon.get()))
 	{
-		m_type = gum::ICON_CHANGED_RECT;
+		m_type = s2loader::ICON_CHANGED_RECT;
 		sm::rect begin, end;
 		drect->GetRegion(begin, end);
 		m_vertices.push_back(sm::vec2(begin.xmin, begin.ymin));
@@ -53,7 +53,7 @@ PackIcon::PackIcon(const std::shared_ptr<eicon::Symbol>& sym)
 	}
 	else if (const s2::DynamicSectorIcon* dsector = dynamic_cast<const s2::DynamicSectorIcon*>(icon.get()))
 	{
-		m_type = gum::ICON_CHANGED_SECTOR;
+		m_type = s2loader::ICON_CHANGED_SECTOR;
 		float min, max;
 		dsector->GetRegion(min, max);
 		m_vertices.push_back(sm::vec2(min, max));

@@ -11,7 +11,7 @@
 
 #include <ee/FileHelper.h>
 
-#include <gum/ExtendSymFile.h>
+#include <s2loader/ExtendSymFile.h>
 #include <gum/FilepathHelper.h>
 
 #include <fstream>
@@ -39,18 +39,18 @@ void FileIO::Load(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 	
-	int type = gum::ExtendSymFile::GetType(value);
+	int type = s2loader::ExtendSymFile::GetType(value);
 	switch (type)
 	{
-	case gum::SYM_SPINE:
+	case s2loader::SYM_SPINE:
 		break;
-	case gum::SYM_BODYMOVIN:
+	case s2loader::SYM_BODYMOVIN:
 		{
 			std::string dir = ee::FileHelper::GetFileDir(filepath);
 			BodymovinLoader::Load(value, dir);
 		}
 		break;
-	case gum::SYM_UNKNOWN:
+	case s2loader::SYM_UNKNOWN:
 		{
 			std::string dir = ee::FileHelper::GetFileDir(filepath);
 			DefaultFileLoader::Load(value, dir);
@@ -85,14 +85,14 @@ void FileIO::Reload()
 	reader.parse(fin, value);
 	fin.close();
 
-	int type = gum::ExtendSymFile::GetType(value);
+	int type = s2loader::ExtendSymFile::GetType(value);
 	switch (type)
 	{
-	case gum::SYM_SPINE:
+	case s2loader::SYM_SPINE:
 		break;
-	case gum::SYM_BODYMOVIN:
+	case s2loader::SYM_BODYMOVIN:
 		break;
-	case gum::SYM_UNKNOWN:
+	case s2loader::SYM_UNKNOWN:
 		{
 			std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 			DefaultFileLoader::Reload(value, dir);

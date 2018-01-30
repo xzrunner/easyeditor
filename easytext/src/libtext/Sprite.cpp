@@ -6,8 +6,8 @@
 #include <ee/SymbolType.h>
 
 #include <gum/trans_color.h>
-#include <gum/TextboxLoader.h>
-#include <gum/TextboxSprLoader.h>
+#include <s2loader/TextboxLoader.h>
+#include <s2loader/TextboxSprLoader.h>
 
 namespace etext
 {
@@ -56,7 +56,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 
 	const Json::Value& text_val = val["text"];
 
-	gum::TextboxSprLoader loader(*this);
+	s2loader::TextboxSprLoader loader(*this);
 	loader.LoadJson(val);
 
 	m_export = text_val["export"].asBool();

@@ -2,7 +2,7 @@
 #include "Symbol.h"
 #include "PropertySetting.h"
 
-#include <gum/Anim2SprLoader.h>
+#include <s2loader/Anim2SprLoader.h>
 
 namespace libanim2
 {
@@ -33,7 +33,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 {
 	ee::Sprite::Load(val);
 
-	gum::Anim2SprLoader loader(*this);
+	s2loader::Anim2SprLoader loader(*this);
 	loader.LoadJson(val, dir.c_str());
 }
 

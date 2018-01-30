@@ -19,7 +19,7 @@
 #include <sprite2/CreateActorsVisitor.h>
 #include <sprite2/SprVisitorParams.h>
 #include <sprite2/UpdateParams.h>
-#include <gum/SymbolFile.h>
+#include <s2loader/SymbolFile.h>
 #include <sns/NodeSpr.h>
 
 namespace ee
@@ -87,7 +87,7 @@ SprPtr SpriteFactory::Create(const Json::Value& val, const std::string& dir, con
 	try {
 		sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	} catch (ee::Exception& e) {
-		if (val.isMember(gum::SymbolFile::Instance()->Tag(s2::SYM_SKELETON).c_str())) {
+		if (val.isMember(s2loader::SymbolFile::Instance()->Tag(s2::SYM_SKELETON).c_str())) {
 			sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath, s2::SYM_SKELETON);
 		} else {
 			throw e;

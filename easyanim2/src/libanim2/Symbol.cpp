@@ -3,7 +3,7 @@
 
 #include <ee/SymbolLoader.h>
 
-#include <gum/Anim2SymLoader.h>
+#include <s2loader/Anim2SymLoader.h>
 #include <gum/FilepathHelper.h>
 
 namespace libanim2
@@ -24,7 +24,7 @@ bool Symbol::LoadResources()
 	}
 
 	auto sym_loader(std::make_shared<ee::SymbolLoader>());
-	gum::Anim2SymLoader loader(*this, sym_loader);
+	s2loader::Anim2SymLoader loader(*this, sym_loader);
 	loader.LoadJson(m_filepath.c_str());
 
 	return true;

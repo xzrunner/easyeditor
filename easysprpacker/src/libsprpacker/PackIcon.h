@@ -3,7 +3,7 @@
 
 #include "PackNode.h"
 
-#include <gum/IconType.h>
+#include <s2loader/IconType.h>
 #include <SM_Vector.h>
 #include <cu/cu_stl.h>
 
@@ -39,7 +39,7 @@ public:
 private:
 	const PackNode* m_base;
 
-	gum::IconType m_type;
+	s2loader::IconType m_type;
 
 	CU_VEC<sm::vec2> m_vertices;
 

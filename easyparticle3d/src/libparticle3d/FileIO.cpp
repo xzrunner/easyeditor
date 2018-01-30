@@ -16,7 +16,7 @@
 #include <ps_3d.h>
 #include <sprite2/P3dEmitterCfg.h>
 #include <gum/JsonSerializer.h>
-#include <gum/P3dSymLoader.h>
+#include <s2loader/P3dSymLoader.h>
 
 #include <wx/spinctrl.h>
 
@@ -97,7 +97,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	reader.parse(fin, value);
 	fin.close();
 
-	gum::P3dSymLoader adapter;
+	s2loader::P3dSymLoader adapter;
 	adapter.LoadJson(filepath.c_str());
 	
 	int version = value["version"].asInt();
@@ -156,7 +156,7 @@ ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 
 s2::P3dEmitterCfgPtr FileIO::LoadPSConfig(const std::string& filepath)
 {
-	class Loader : public gum::P3dSymLoader
+	class Loader : public s2loader::P3dSymLoader
 	{
 	protected:
 		virtual s2::SymPtr LoadSymbol(const CU_STR& filepath) const override {

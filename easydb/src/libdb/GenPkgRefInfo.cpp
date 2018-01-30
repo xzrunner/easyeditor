@@ -4,7 +4,7 @@
 #include <ee/FileHelper.h>
 
 #include <fs_file.h>
-#include <gum/PkgFileParser.h>
+#include <s2loader/PkgFileParser.h>
 #include <simp/PkgIdxLoader.h>
 
 #include <wx/arrstr.h>
@@ -81,7 +81,7 @@ void GenPkgRefInfo::Trigger(const std::string& src_dir, const std::string& pkg_c
 
 		fs_file* file = fs_open(filepath.c_str(), "rb");
 		assert(file);
-		int off = gum::PkgFileParser::GetEpeIdxOffset(file);
+		int off = s2loader::PkgFileParser::GetEpeIdxOffset(file);
 		CU_MAP<CU_STR, uint32_t> export_names;
 		CU_VEC<simp::Package::PageDesc> pages;
 		CU_VEC<int> ref_pkgs;

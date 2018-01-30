@@ -5,8 +5,8 @@
 #include <ee/Shape.h>
 #include <ee/SymbolType.h>
 
-#include <gum/ShapeLoader.h>
-#include <gum/ShapeSaver.h>
+#include <s2loader/ShapeLoader.h>
+#include <s2loader/ShapeSaver.h>
 
 #include <assert.h>
 
@@ -44,7 +44,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	}
 
 	auto sym = std::dynamic_pointer_cast<Symbol>(m_sym);
-	auto shape = gum::ShapeLoader::LoadShape(val["shape"], dir.c_str());
+	auto shape = s2loader::ShapeLoader::LoadShape(val["shape"], dir.c_str());
 	sym->SetShape(std::move(shape));
 
 	UpdateBounding();
@@ -63,7 +63,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 
 		auto sym = std::dynamic_pointer_cast<s2::ShapeSymbol>(m_sym);
 		assert(sym);
-		gum::ShapeSaver::Store(sym->GetShape(), shape_val);
+		s2loader::ShapeSaver::Store(sym->GetShape(), shape_val);
 
 		val["shape"] = shape_val;
 	}

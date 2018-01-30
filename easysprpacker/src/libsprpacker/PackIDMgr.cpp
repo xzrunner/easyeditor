@@ -6,7 +6,7 @@
 #include <simp/NodeID.h>
 #include <sprite2/SymType.h>
 #include <gum/FilepathHelper.h>
-#include <gum/SymbolFile.h>
+#include <s2loader/SymbolFile.h>
 #include <gum/StringHelper.h>
 
 #include <ee/SymbolType.h>
@@ -51,7 +51,7 @@ bool PackIDMgr::IsCurrPkg(const std::string& filepath) const
 	if (filepath.empty() || filepath == ee::SYM_GROUP_TAG || filepath == SPRITE_FILEPATH) {
 		return true;
 	}
-	if (gum::SymbolFile::Instance()->Type(filepath.c_str()) == s2::SYM_TEXTBOX) {
+	if (s2loader::SymbolFile::Instance()->Type(filepath.c_str()) == s2::SYM_TEXTBOX) {
 		return true;
 	}
 	for (int i = 0, n = m_curr_paths.size(); i < n; ++i) {

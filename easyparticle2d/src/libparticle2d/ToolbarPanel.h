@@ -5,7 +5,7 @@
 #include <ee/UICallback.h>
 #include <ee/SliderCtrl.h>
 
-#include <gum/P2dSymLoader.h>
+#include <s2loader/P2dSymLoader.h>
 
 #include <wx/dnd.h>
 
@@ -33,7 +33,7 @@ public:
 	void Load(const Json::Value& val);
 	void Store(Json::Value& val) const;
 
-	void Add(const gum::P2dSymLoader::Component& comp);
+	void Add(const s2loader::P2dSymLoader::Component& comp);
 
 	void InitParticle();
 

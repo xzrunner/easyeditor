@@ -277,6 +277,9 @@
     <ProjectReference Include="..\..\..\..\rigging\platform\msvc2008\projects\rigging.vcxproj">
       <Project>{dbe6d3f5-4e3d-4df8-b520-a27bce5a5d21}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\s2loader\platform\msvc\projects\s2loader.vcxproj">
+      <Project>{e5a136ee-7ee1-4682-a1b1-c942cb2110e7}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\shaderlab\platform\msvc2008\projects\shaderlab.vcxproj">
       <Project>{5c357759-ca95-42e1-b907-dfb87a995f6c}</Project>
     </ProjectReference>

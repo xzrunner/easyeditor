@@ -10,7 +10,7 @@
 #include <ee/Symbol.h>
 
 #include <mt_2d.h>
-#include <gum/TrailSymLoader.h>
+#include <s2loader/TrailSymLoader.h>
 #include <sprite2/TrailEmitterCfg.h>
 
 #include <json/json.h>
@@ -60,7 +60,7 @@ MotionTrail* FileIO::LoadMT(const std::string& filepath)
 
 std::shared_ptr<s2::TrailEmitterCfg> FileIO::LoadMTConfig(const std::string& filepath)
 {
-	class Loader : public gum::TrailSymLoader
+	class Loader : public s2loader::TrailSymLoader
 	{
 	protected:
 		virtual s2::SymPtr LoadSymbol(const CU_STR& filepath) const override {

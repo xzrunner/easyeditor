@@ -3,8 +3,8 @@
 #include "FileHelper.h"
 
 #include <sprite2/SymType.h>
-#include <gum/SymbolFile.h>
-#include <gum/ExtendSymFile.h>
+#include <s2loader/SymbolFile.h>
+#include <s2loader/ExtendSymFile.h>
 
 #include <json/json.h>
 
@@ -48,7 +48,7 @@ SymbolFile::SymbolFile()
 
 int SymbolFile::Type(const std::string& filepath) const
 {
-	int type = gum::SymbolFile::Instance()->Type(filepath.c_str());
+	int type = s2loader::SymbolFile::Instance()->Type(filepath.c_str());
 	if (type != s2::SYM_UNKNOWN && type != s2::SYM_INVALID) {
 		return type;
 	}
@@ -110,8 +110,8 @@ int SymbolFile::Type(const std::string& filepath) const
 
 std::string SymbolFile::Tag(int type) const
 {
-	const CU_STR& tag = gum::SymbolFile::Instance()->Tag(type);
-	if (tag != gum::SymbolFile::Instance()->UNKNOWN_TAG) {
+	const CU_STR& tag = s2loader::SymbolFile::Instance()->Tag(type);
+	if (tag != s2loader::SymbolFile::Instance()->UNKNOWN_TAG) {
 		return tag.c_str();
 	}
 
@@ -119,7 +119,7 @@ std::string SymbolFile::Tag(int type) const
 	if (itr != m_type2tag.end()) {
 		return itr->second;
 	} else {
-		return gum::SymbolFile::Instance()->UNKNOWN_TAG.c_str();
+		return s2loader::SymbolFile::Instance()->UNKNOWN_TAG.c_str();
 	}
 }
 
@@ -140,13 +140,13 @@ int SymbolFile::CheckTypeFromData(const std::string& filepath) const
 	fin.close();
 
 	int ret = s2::SYM_UNKNOWN;
-	int type = gum::ExtendSymFile::GetType(val);
+	int type = s2loader::ExtendSymFile::GetType(val);
 	switch (type)
 	{
-	case gum::SYM_SPINE:
+	case s2loader::SYM_SPINE:
 		ret = val.isMember("animations") ? s2::SYM_ANIM2 : s2::SYM_SKELETON;
 		break;
-// 	case gum::SYM_BODYMOVIN:
+// 	case s2loader::SYM_BODYMOVIN:
 // 		ret = s2::SYM_ANIMATION;
 // 		break;
 	}

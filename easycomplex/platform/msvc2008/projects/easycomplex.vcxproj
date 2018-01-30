@@ -59,7 +59,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\gum\include;..\..\..\..\polymesh\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\easyeditor\include;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easytrail\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyaudio\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\easyskeleton\src;..\..\..\..\particle\src;..\..\..\..\easytext\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\polymesh\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\easyeditor\include;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easytrail\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyaudio\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\easyskeleton\src;..\..\..\..\particle\src;..\..\..\..\easytext\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -85,7 +85,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\gum\include;..\..\..\..\polymesh\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\easyeditor\include;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easytrail\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyaudio\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\easyskeleton\src;..\..\..\..\particle\src;..\..\..\..\easytext\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\polymesh\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\easyeditor\include;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyanim2\src;..\..\..\..\easytrail\src;..\..\..\..\easymesh\src;..\..\..\..\easymask\src;..\..\..\..\easyaudio\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\easyskeleton\src;..\..\..\..\particle\src;..\..\..\..\easytext\src;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -132,6 +132,9 @@
     <ProjectReference Include="..\..\..\..\bimp\platform\msvc2008\projects\bimp.vcxproj">
       <Project>{f22a86e7-b73f-4f6a-9ea8-e4ae9cc9d885}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor0\platform\msvc\projects\easyeditor0.vcxproj">
+      <Project>{9a81990c-3c18-4adf-a9eb-46990625c107}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\js\platform\msvc2017\projects\js.vcxproj">
       <Project>{68c18da9-79bb-43a5-9e0c-79740aea954b}</Project>
     </ProjectReference>
@@ -146,6 +149,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\playdb\platform\msvc2017\projects\playdb.vcxproj">
       <Project>{e421cc5f-0909-4f8d-8e9a-bcb52e0e8350}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\s2loader\platform\msvc\projects\s2loader.vcxproj">
+      <Project>{e5a136ee-7ee1-4682-a1b1-c942cb2110e7}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\sns\platform\msvc2017\projects\sns.vcxproj">
       <Project>{b6939acb-3794-4b2a-95da-f99ecdf79d0f}</Project>

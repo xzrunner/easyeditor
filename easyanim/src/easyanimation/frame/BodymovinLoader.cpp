@@ -12,7 +12,7 @@
 #include <ee/Sprite.h>
 #include <ee/SymbolMgr.h>
 
-#include <gum/BodymovinAnimLoader.h>
+#include <s2loader/BodymovinAnimLoader.h>
 
 namespace eanim
 {
@@ -22,7 +22,7 @@ void BodymovinLoader::Load(const Json::Value& val, const std::string& dir)
 	auto sym_loader = std::make_shared<ee::SymbolLoader>();
 	auto spr_loader = std::make_shared<ee::SpriteLoader>();
 	auto sym = std::make_shared<s2::AnimSymbol>();
-	gum::BodymovinAnimLoader loader(*std::dynamic_pointer_cast<s2::AnimSymbol>(sym), sym_loader, spr_loader);
+	s2loader::BodymovinAnimLoader loader(*std::dynamic_pointer_cast<s2::AnimSymbol>(sym), sym_loader, spr_loader);
 	loader.LoadJson(val, dir.c_str());
 
 	SetFpsSJ::Instance()->Set(sym->GetFPS());

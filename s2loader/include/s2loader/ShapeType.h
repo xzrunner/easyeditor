@@ -1,0 +1,20 @@
+#ifndef _S2LOADER_SHAPE_TYPE_H_
+#define _S2LOADER_SHAPE_TYPE_H_
+
+namespace s2loader
+{
+
+enum ShapeType
+{
+	SHAPE_INVALID = 0,
+	SHAPE_POINT = 0,
+	SHAPE_RECT,
+	SHAPE_CIRCLE,
+	SHAPE_POLYLINE,
+	SHAPE_POLYGON_COLOR,
+	SHAPE_POLYGON_TEXTURE,
+};
+
+}
+
+#endif // _S2LOADER_SHAPE_TYPE_H_

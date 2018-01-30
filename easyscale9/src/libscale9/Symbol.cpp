@@ -30,7 +30,7 @@ bool Symbol::LoadResources()
 	setting.open_image_edge_clip = false;
 
 	auto spr_loader(std::make_shared<ee::SpriteLoader>());
-	gum::Scale9SymLoader loader(*this, spr_loader);
+	s2loader::Scale9SymLoader loader(*this, spr_loader);
 	auto ext = ee::FileHelper::GetExtension(m_filepath);
 	if (ext == "json") {
 		loader.LoadJson(m_filepath.c_str());

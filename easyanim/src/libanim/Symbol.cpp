@@ -11,7 +11,7 @@
 
 #include <sprite2/SymType.h>
 #include <sprite2/Sprite.h>
-#include <gum/AnimSymLoader.h>
+#include <s2loader/AnimSymLoader.h>
 #include <gum/StringHelper.h>
 #include <gum/FilepathHelper.h>
 
@@ -60,12 +60,12 @@ void Symbol::Traverse(ee::RefVisitor<ee::Sprite>& visitor)
 	}
 }
 
-void Symbol::Load(const std::shared_ptr<gum::SpriteLoader>& spr_loader)
+void Symbol::Load(const std::shared_ptr<s2loader::SpriteLoader>& spr_loader)
 {
 	Clear();
 
 	auto sym_loader(std::make_shared<ee::SymbolLoader>());
-	gum::AnimSymLoader loader(*this, sym_loader, spr_loader);
+	s2loader::AnimSymLoader loader(*this, sym_loader, spr_loader);
 	loader.LoadJson(m_filepath.c_str());
 
 	LoadEE();
@@ -79,7 +79,7 @@ bool Symbol::LoadResources()
 
 	auto sym_loader(std::make_shared<ee::SymbolLoader>());
 	auto spr_loader(std::make_shared<ee::SpriteLoader>());
-	gum::AnimSymLoader loader(*this, sym_loader, spr_loader);
+	s2loader::AnimSymLoader loader(*this, sym_loader, spr_loader);
 	
 	auto ext = ee::FileHelper::GetExtension(m_filepath);
 	if (ext == "json") {

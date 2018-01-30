@@ -1,12 +1,12 @@
 #ifndef _EASYEDITOR_SPRITE_IO_H_
 #define _EASYEDITOR_SPRITE_IO_H_
 
-#include <gum/SpriteIO.h>
+#include <s2loader/SpriteIO.h>
 
 namespace ee
 {
 
-class SpriteIO : public gum::SpriteIO
+class SpriteIO : public s2loader::SpriteIO
 {
 public:
 	SpriteIO();

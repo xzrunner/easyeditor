@@ -77,7 +77,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps, ToolbarPanel*
 
 	toolbar->Load(value);
 
-	gum::P2dSymLoader adapter;
+	s2loader::P2dSymLoader adapter;
 	adapter.LoadJson(filepath.c_str());
 
 //	toolbar->m_name->SetValue(adapter.name);
@@ -109,7 +109,7 @@ ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 
 p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
-	class Loader : public gum::P2dSymLoader
+	class Loader : public s2loader::P2dSymLoader
 	{
 	protected:
 		virtual s2::SymPtr LoadSymbol(const CU_STR& filepath) const override {

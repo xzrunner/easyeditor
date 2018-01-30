@@ -7,7 +7,7 @@
 #include "CurrSprTreePath.h"
 
 #include <sprite2/DrawNode.h>
-#include <gum/FilterModes.h>
+#include <s2loader/FilterModes.h>
 #include <gum/GTxt.h>
 #include <SM_Test.h>
 

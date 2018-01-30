@@ -26,7 +26,7 @@
 #include <sprite2/CameraType.h>
 #include <sprite2/Camera.h>
 #include <sprite2/Pseudo3DCamera.h>
-#include <gum/FilterModes.h>
+#include <s2loader/FilterModes.h>
 #include <gum/GTxt.h>
 #include <gum/RenderContext.h>
 

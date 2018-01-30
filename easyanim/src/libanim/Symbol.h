@@ -7,7 +7,7 @@
 
 #include <vector>
 
-namespace gum { class SpriteLoader; }
+namespace s2loader { class SpriteLoader; }
 
 namespace libanim
 {
@@ -27,7 +27,7 @@ public:
 	virtual void ReloadTexture() const override;
 	virtual void Traverse(ee::RefVisitor<ee::Sprite>& visitor) override;
 
-	void Load(const std::shared_ptr<gum::SpriteLoader>& spr_loader);
+	void Load(const std::shared_ptr<s2loader::SpriteLoader>& spr_loader);
 
 	static ee::SymPtr Create() { return std::make_shared<Symbol>(); }
 

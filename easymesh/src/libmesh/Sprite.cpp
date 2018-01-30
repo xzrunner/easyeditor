@@ -8,7 +8,7 @@
 #include <ee/SymbolMgr.h>
 
 #include <polymesh/Mesh.h>
-#include <gum/MeshIO.h>
+#include <s2loader/MeshIO.h>
 
 namespace emesh
 {
@@ -44,7 +44,7 @@ void Sprite::Load(const Json::Value& val, const std::string& dir)
 	// reset
 	pm::MeshTransform trans;
 	mesh->GetMesh()->LoadFromTransform(trans);
-	gum::MeshIO::Load(mesh_val, m_trans, *mesh);
+	s2loader::MeshIO::Load(mesh_val, m_trans, *mesh);
 	mesh->GetMesh()->LoadFromTransform(m_trans);
 
 	if (!mesh_val["base_symbol"].isNull()) {
@@ -60,7 +60,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	Json::Value mesh_val;
 
 	auto& mesh = std::dynamic_pointer_cast<Symbol>(m_sym)->GetMesh();
-	gum::MeshIO::Store(mesh_val, m_trans, *mesh);
+	s2loader::MeshIO::Store(mesh_val, m_trans, *mesh);
 
 	mesh_val["base_symbol"] = ee::FileHelper::GetRelativePath(dir, 
 		std::dynamic_pointer_cast<const ee::Symbol>(m_base)->GetFilepath());

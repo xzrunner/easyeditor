@@ -7,7 +7,7 @@
 //
 //#include <sprite2/PolylineShape.h>
 //#include <gum/JsonSerializer.h>
-//#include <gum/MeshIO.h>
+//#include <s2loader/MeshIO.h>
 //
 //namespace emesh
 //{
@@ -40,12 +40,12 @@
 //	gum::JsonSerializer::Load(value["vertices"], vertices);
 //	m_shape = new eshape::ChainShape(vertices, true);
 //
-//	gum::MeshIO::Load(value, m_skeleton);
+//	s2loader::MeshIO::Load(value, m_skeleton);
 //
 //	RefreshTriangles();
 //
 //	pm::MeshTransform trans;
-//	gum::MeshIO::Load(value, trans, *this);
+//	s2loader::MeshIO::Load(value, trans, *this);
 //	trans.StoreToMesh(this);
 //}
 //
@@ -59,10 +59,10 @@
 //
 //	gum::JsonSerializer::Store(m_shape->GetVertices(), value["vertices"]);
 //
-//	gum::MeshIO::Store(value, m_skeleton);
+//	s2loader::MeshIO::Store(value, m_skeleton);
 //
 //	pm::MeshTransform trans;
-//	gum::MeshIO::Load(value, trans, *this);
+//	s2loader::MeshIO::Load(value, trans, *this);
 //	trans.StoreToMesh(this);
 //}
 //

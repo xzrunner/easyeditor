@@ -1,0 +1,4 @@
+s2loader/
+projects/*
+
+!projects/s2loader.vcxproj

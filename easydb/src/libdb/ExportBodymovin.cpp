@@ -18,8 +18,8 @@
 #include <sprite2/ComplexSymbol.h>
 #include <sprite2/SprSRT.h>
 #include <gum/FilepathHelper.h>
-#include <gum/BodymovinAnimLoader.h>
-#include <gum/BodymovinParser.h>
+#include <s2loader/BodymovinAnimLoader.h>
+#include <s2loader/BodymovinParser.h>
 #include <gum/StringHelper.h>
 
 #include <fstream>
@@ -69,7 +69,7 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  	fin.close();
  
  	auto dir = gum::FilepathHelper::Dir(src_file.c_str());
- 	gum::BodymovinParser parser;
+ 	s2loader::BodymovinParser parser;
  	parser.Parse(val, dir);
  
  	auto sym_loader = std::make_shared<ee::SymbolLoader>();
@@ -86,7 +86,7 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  			if (flags[i]) {
  				continue;
  			}			
- 			const gum::BodymovinParser::Asset& a = assets[i];
+ 			const s2loader::BodymovinParser::Asset& a = assets[i];
  			if (a.layers.empty()) 
  			{
  				auto filepath = gum::FilepathHelper::Absolute(".", a.filepath);
@@ -99,9 +99,9 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  				bool skip = false;
  				for (int j = 0, m = a.layers.size(); j < m; ++j) 
  				{
- 					const gum::BodymovinParser::Layer& layer = a.layers[j];
- 					if (layer.layer_type == gum::BodymovinParser::LAYER_SOLID ||
-						layer.layer_type == gum::BodymovinParser::LAYER_NULL) {
+ 					const s2loader::BodymovinParser::Layer& layer = a.layers[j];
+ 					if (layer.layer_type == s2loader::BodymovinParser::LAYER_SOLID ||
+						layer.layer_type == s2loader::BodymovinParser::LAYER_NULL) {
  						continue;
  					}
  					auto& id = a.layers[j].ref_id;
@@ -118,7 +118,7 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  				}
  
  				auto sym = std::make_shared<libanim::Symbol>();
- 				gum::BodymovinAnimLoader loader(*std::dynamic_pointer_cast<s2::AnimSymbol>(sym), sym_loader, spr_loader);
+ 				s2loader::BodymovinAnimLoader loader(*std::dynamic_pointer_cast<s2::AnimSymbol>(sym), sym_loader, spr_loader);
  				loader.LoadLayers(map_assets, a.layers, parser.GetFrameRate(), parser.GetWidth(), 
 					parser.GetHeight(), parser.GetStartFrame(), parser.GetEndFrame());
  				std::string filepath = dst_dir + "\\" + std::string(a.id.c_str()) + "_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";
@@ -136,7 +136,7 @@ void ExportBodymovin::Trigger(const std::string& src_file, const std::string& ds
  	}
  
  	auto sym = std::make_shared<libanim::Symbol>();
- 	gum::BodymovinAnimLoader loader(*sym, sym_loader, spr_loader);
+ 	s2loader::BodymovinAnimLoader loader(*sym, sym_loader, spr_loader);
  	loader.LoadLayers(map_assets, parser.GetLayers(), parser.GetFrameRate(), parser.GetWidth(), 
 		parser.GetHeight(), parser.GetStartFrame(), parser.GetEndFrame());
  	std::string filepath = dst_dir + "\\data_" + ee::SymbolFile::Instance()->Tag(s2::SYM_ANIMATION) + ".json";

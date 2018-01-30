@@ -6,7 +6,7 @@
 
 #include <sprite2/Skeleton.h>
 #include <sprite2/RenderParams.h>
-#include <gum/SkeletonSymLoader.h>
+#include <s2loader/SkeletonSymLoader.h>
 #include <gum/FilepathHelper.h>
 
 namespace libskeleton
@@ -48,7 +48,7 @@ bool Symbol::LoadResources()
 
 	auto spr_loader(std::make_shared<ee::SpriteLoader>());
 	auto joint_loader(std::make_shared<JointLoader>());
-	gum::SkeletonSymLoader loader(*this, spr_loader, joint_loader);
+	s2loader::SkeletonSymLoader loader(*this, spr_loader, joint_loader);
 	loader.LoadJson(m_filepath.c_str());
 
 	return true;

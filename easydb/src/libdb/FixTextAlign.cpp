@@ -10,7 +10,7 @@
 #include <gtxt_freetype.h>
 #include <sprite2/SymType.h>
 #include <sprite2/Textbox.h>
-#include <gum/TextboxLoader.h>
+#include <s2loader/TextboxLoader.h>
 
 namespace edb
 {
@@ -60,7 +60,7 @@ bool FixTextAlign::FixSprite(const std::string& filepath, Json::Value& spr_val) 
 	}
 
 	s2::Textbox tb;
-	gum::TextboxLoader loader(tb);
+	s2loader::TextboxLoader loader(tb);
 	loader.LoadJson(spr_val["text"]);
 
 	if (tb.align_hori != s2::Textbox::HA_CENTER) {

@@ -9,7 +9,7 @@ namespace ee
 {
 
 SpriteIO::SpriteIO()
-	: gum::SpriteIO(Config::Instance()->GetSettings().spr_output_compress, Config::Instance()->IsRenderOpen())
+	: s2loader::SpriteIO(Config::Instance()->GetSettings().spr_output_compress, Config::Instance()->IsRenderOpen())
 {
 	m_perspective	= sm::vec2(0, 0);
 
@@ -19,7 +19,7 @@ SpriteIO::SpriteIO()
 
 void SpriteIO::LoadGeometry(const s2::SprPtr& spr)
 {
-	gum::SpriteIO::LoadGeometry(spr);
+	s2loader::SpriteIO::LoadGeometry(spr);
 
 	auto ee_spr = std::dynamic_pointer_cast<Sprite>(spr);
 	ee_spr->SetPerspective(m_perspective);
@@ -27,7 +27,7 @@ void SpriteIO::LoadGeometry(const s2::SprPtr& spr)
 
 void SpriteIO::StoreGeometry(const s2::SprConstPtr& spr)
 {
-	gum::SpriteIO::StoreGeometry(spr);
+	s2loader::SpriteIO::StoreGeometry(spr);
 
 	auto ee_spr = std::dynamic_pointer_cast<const Sprite>(spr);
 	m_perspective = ee_spr->GetPerspective();
@@ -35,7 +35,7 @@ void SpriteIO::StoreGeometry(const s2::SprConstPtr& spr)
 
 void SpriteIO::LoadGeometry(const Json::Value& val)
 {
-	gum::SpriteIO::LoadGeometry(val);
+	s2loader::SpriteIO::LoadGeometry(val);
 
 	// perspective
 	sm::vec2 perspective(0, 0);
@@ -49,7 +49,7 @@ void SpriteIO::LoadGeometry(const Json::Value& val)
 
 void SpriteIO::StoreGeometry(Json::Value& val)
 {
-	gum::SpriteIO::StoreGeometry(val);
+	s2loader::SpriteIO::StoreGeometry(val);
 
 	if (!m_compress || m_perspective != sm::vec2(0, 0)) {
 		val["x perspective"] = m_perspective.x;
@@ -60,7 +60,7 @@ void SpriteIO::StoreGeometry(Json::Value& val)
 
 void SpriteIO::LoadInfo(const s2::SprPtr& spr)
 {
-	gum::SpriteIO::LoadInfo(spr);
+	s2loader::SpriteIO::LoadInfo(spr);
 
 	auto ee_spr = std::dynamic_pointer_cast<Sprite>(spr);
 	ee_spr->SetTag(m_tag);
@@ -69,7 +69,7 @@ void SpriteIO::LoadInfo(const s2::SprPtr& spr)
 
 void SpriteIO::StoreInfo(const s2::SprConstPtr& spr)
 {
-	gum::SpriteIO::StoreInfo(spr);
+	s2loader::SpriteIO::StoreInfo(spr);
 
 	auto ee_spr = std::dynamic_pointer_cast<const Sprite>(spr);
 	m_tag    = ee_spr->GetTag();
@@ -78,7 +78,7 @@ void SpriteIO::StoreInfo(const s2::SprConstPtr& spr)
 
 void SpriteIO::LoadInfo(const Json::Value& val)
 {
-	gum::SpriteIO::LoadInfo(val);
+	s2loader::SpriteIO::LoadInfo(val);
 
 	if (!val["tag"].isNull()) {
 		m_tag = val["tag"].asString();
@@ -101,7 +101,7 @@ void SpriteIO::LoadInfo(const Json::Value& val)
 
 void SpriteIO::StoreInfo(Json::Value& val)
 {
-	gum::SpriteIO::StoreInfo(val);
+	s2loader::SpriteIO::StoreInfo(val);
 
 	if (!m_compress || !m_tag.empty()) {
 		val["tag"] = m_tag.c_str();
