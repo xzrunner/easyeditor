@@ -60,11 +60,11 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 
 		// transform
 		auto& ctrans = node->AddComponent<n2::CompTransform>();
-		//auto parent = node->GetParent();
-		//if (parent) {
-		//	auto p_pos = parent->GetComponent<n3::CompTransform>().GetTransformMat() * sm::vec3(0, 0, 0);
-		//	pos -= p_pos;
-		//}
+		auto parent = node->GetParent();
+		if (parent) {
+			auto p_pos = parent->GetComponent<n2::CompTransform>().GetTransformMat() * sm::vec2(0, 0);
+			pos -= p_pos;
+		}
 		ctrans.SetPosition(pos);
 
 		// bounding box
