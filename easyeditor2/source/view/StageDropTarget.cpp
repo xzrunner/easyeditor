@@ -62,14 +62,14 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 		auto& ctrans = node->AddComponent<n2::CompTransform>();
 		auto parent = node->GetParent();
 		if (parent) {
-			auto p_pos = parent->GetComponent<n2::CompTransform>().GetTransformMat() * sm::vec2(0, 0);
+			auto p_pos = parent->GetComponent<n2::CompTransform>().GetTrans().GetMatrix() * sm::vec2(0, 0);
 			pos -= p_pos;
 		}
-		ctrans.SetPosition(pos);
+		ctrans.GetTrans().SetPosition(pos);
 
 		// bounding box
 		auto& bounding = node->GetComponent<n2::CompBoundingBox>();
-		bounding.Build(ctrans.GetTransformSRT());
+		bounding.Build(ctrans.GetTrans().GetSRT());
 	}
 
 	m_stage->GetSubjectMgr().NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);

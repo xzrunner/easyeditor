@@ -10,7 +10,7 @@ namespace n2
 void DrawNode::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
 {
 	auto& ctrans = node->GetComponent<CompTransform>();
-	auto mt_child = ctrans.GetTransformMat() * mt;
+	auto mt_child = ctrans.GetTrans().GetMatrix() * mt;
 
 	if (node->HasComponent<CompImage>())
 	{

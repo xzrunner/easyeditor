@@ -75,7 +75,7 @@ bool NodeSelectOP::OnDraw() const
 			auto parent = node->GetParent();
 			while (parent) {
 				auto& ctrans = parent->GetComponent<n2::CompTransform>();
-				world_mt = ctrans.GetTransformMat() * world_mt;
+				world_mt = ctrans.GetTrans().GetMatrix() * world_mt;
 				parent = parent->GetParent();
 			}
 			for (auto& pos : bound) {
@@ -135,7 +135,7 @@ n0::SceneNodePtr NodeSelectOP::QueryByPos(const n0::SceneNodePtr& node, const sm
 	}
 
 	auto& children = node->GetAllChildren();
-	auto mt = node->GetComponent<n2::CompTransform>().GetTransformMat().Inverted();
+	auto mt = node->GetComponent<n2::CompTransform>().GetTrans().GetMatrix().Inverted();
 	sm::vec2 child_pos = mt * pos;
 	for (auto& child : children) {
 		auto ret = QueryByPos(child, child_pos);
