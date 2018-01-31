@@ -30,11 +30,6 @@ void StagePage::OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants)
 
 void StagePage::NodeSelectionInsert(const ee0::VariantSet& variants)
 {
-	auto var_clear = variants.GetVariant("clear");
-	if (var_clear.m_type == VT_BOOL && var_clear.m_val.bl) {
-		m_node_selection.Clear();
-	}
-
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != VT_EMPTY, "no var in vars: node");
 	n0::SceneNodePtr* node = static_cast<n0::SceneNodePtr*>(var.m_val.pv);

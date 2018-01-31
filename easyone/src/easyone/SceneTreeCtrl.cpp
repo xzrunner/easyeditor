@@ -14,7 +14,6 @@ namespace eone
 
 BEGIN_EVENT_TABLE(SceneTreeCtrl, wxTreeCtrl)
 	EVT_TREE_SEL_CHANGED(ID_SCENE_TREE_CTRL, SceneTreeCtrl::OnSelChanged)
-	//EVT_TREE_SEL_CHANGING(ID_SCENE_TREE_CTRL, SceneTreeCtrl::OnSelChanging)
 	EVT_TREE_END_LABEL_EDIT(ID_SCENE_TREE_CTRL, SceneTreeCtrl::OnLabelEdited)
 END_EVENT_TABLE()
 
@@ -113,32 +112,17 @@ void SceneTreeCtrl::OnSelChanged(wxTreeEvent& event)
 	var.m_val.pv = &std::const_pointer_cast<n0::SceneNode>(node);
 	vars.SetVariant("node", var);
 
-	var.m_type = ee0::VT_BOOL;
-	var.m_val.bl = true;
-	vars.SetVariant("clear", var);
+	ee0::Variant var_skip;
+	var_skip.m_type = ee0::VT_PVOID;
+	var_skip.m_val.pv = static_cast<Observer*>(this);
+	vars.SetVariant("skip_observer", var_skip);
 
-	m_sub_mgr.NotifyObservers(ee0::MSG_NODE_SELECTION_INSERT, vars);
+	if (IsSelected(id)) {
+		m_sub_mgr.NotifyObservers(ee0::MSG_NODE_SELECTION_INSERT, vars);
+	} else {
+		m_sub_mgr.NotifyObservers(ee0::MSG_NODE_SELECTION_DELETE, vars);
+	}
 }
-
-//void SceneTreeCtrl::OnSelChanging(wxTreeEvent& event)
-//{
-//	auto id = event.GetItem();
-//	if (!id.IsOk()) {
-//		return;
-//	}
-//
-//	auto data = (SceneTreeItem*)GetItemData(id);
-//	auto& node = data->GetNode();
-//	GD_ASSERT(node, "err scene node.");
-//
-//	VariantSet vars;
-//	Variant var;
-//	var.m_type = VT_PVOID;
-//	var.m_val.pv = &std::const_pointer_cast<SceneNode>(node);
-//	vars.SetVariant("node", var);
-//
-//	m_sub_mgr.NotifyObservers(MSG_NODE_SELECTION_DELETE, vars);
-//}
 
 void SceneTreeCtrl::OnLabelEdited(wxTreeEvent& event)
 {
@@ -152,11 +136,17 @@ void SceneTreeCtrl::SelectSceneNode(const ee0::VariantSet& variants)
 	n0::SceneNodePtr* node = static_cast<n0::SceneNodePtr*>(var.m_val.pv);
 	GD_ASSERT(node, "err scene node");
 
+	bool multiple = false;
+	auto var_multi = variants.GetVariant("multiple");
+	if (var_multi.m_type == ee0::VT_BOOL && var_multi.m_val.bl) {
+		multiple = true;
+	}
+
 	Traverse(m_root, [&](wxTreeItemId item)->bool
 		{
 			auto pdata = (SceneTreeItem*)GetItemData(item);
 			if (pdata->GetNode() == *node) {
-				SelectItem(item);
+				SelectItem(item, !multiple);
 				return true;
 			} else {
 				return false;

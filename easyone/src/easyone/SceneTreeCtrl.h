@@ -26,7 +26,6 @@ private:
 	void InitRoot();
 
 	void OnSelChanged(wxTreeEvent& event);
-	//void OnSelChanging(wxTreeEvent& event);
 	void OnLabelEdited(wxTreeEvent& event);
 
 	void SelectSceneNode(const ee0::VariantSet& variants);

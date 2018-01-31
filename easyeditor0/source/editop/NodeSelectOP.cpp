@@ -121,9 +121,18 @@ bool NodeSelectOP::OnMouseLeftUp(int x, int y)
 	else
 	{
 		sub_mgr.NotifyObservers(ee0::MSG_NODE_SELECTION_CLEAR);
+
 		for (auto& node : nodes)
 		{
 			ee0::VariantSet vars;
+
+			if (nodes.size() > 1) {
+				ee0::Variant var;
+				var.m_type = ee0::VT_BOOL;
+				var.m_val.bl = true;
+				vars.SetVariant("multiple", var);
+			}
+
 			ee0::Variant var;
 			var.m_type = ee0::VT_PVOID;
 			var.m_val.pv = &node;
