@@ -3,9 +3,28 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Texture.cpp" />
     <ClCompile Include="..\..\..\source\RenderSystem.cpp" />
+    <ClCompile Include="..\..\..\source\GeoTransform.cpp">
+      <Filter>transform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\painting2\Texture.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderSystem.h" />
+    <ClInclude Include="..\..\..\include\painting2\GeoTransform.h">
+      <Filter>transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\SRT.h">
+      <Filter>transform</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="transform">
+      <UniqueIdentifier>{f3abf220-4dc0-40e9-8919-76a6aa86425d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\painting2\GeoTransform.inl">
+      <Filter>transform</Filter>
+    </None>
   </ItemGroup>
 </Project>

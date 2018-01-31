@@ -19,7 +19,6 @@
     <ClInclude Include="..\..\..\include\node2\config.h" />
     <ClInclude Include="..\..\..\include\node2\DrawNode.h" />
     <ClInclude Include="..\..\..\include\node2\predef.h" />
-    <ClInclude Include="..\..\..\include\node2\SRT.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CompBoundingBox.cpp" />
@@ -28,9 +27,6 @@
     <ClCompile Include="..\..\..\source\CompText.cpp" />
     <ClCompile Include="..\..\..\source\CompTransform.cpp" />
     <ClCompile Include="..\..\..\source\DrawNode.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\include\node2\CompTransform.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>3.node2</ProjectName>

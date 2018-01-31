@@ -6,10 +6,10 @@
 
 #include <memory>
 
+namespace pt2 { class SRT; }
+
 namespace n2
 {
-
-class SRT;
 
 class CompBoundingBox : public n0::NodeComponent
 {
@@ -22,7 +22,7 @@ public:
 		rapidjson::MemoryPoolAllocator<>& alloc) const override;
 	virtual void LoadFromJson(const rapidjson::Value& val) override;
 
-	void Build(const SRT& srt);
+	void Build(const pt2::SRT& srt);
 
 	const s2::BoundingBox& GetBounding() const;
 

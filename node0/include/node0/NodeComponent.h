@@ -26,7 +26,6 @@ inline ComponentID GetComponentTypeID() noexcept
     return type_id;
 }
 
-class SceneNode;
 class NodeComponent
 {
 public:

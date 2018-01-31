@@ -10,9 +10,6 @@
     <Filter Include="render">
       <UniqueIdentifier>{27c0fe33-3dfe-42f6-85ff-7d4564535a9d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="data">
-      <UniqueIdentifier>{534fe9a9-2e9b-4bbb-bd51-afa204b71228}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\node2\CompImage.h">
@@ -35,9 +32,6 @@
     <ClInclude Include="..\..\..\include\node2\CompBoundingBox.h">
       <Filter>components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\SRT.h">
-      <Filter>data</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CompText.cpp">
@@ -58,10 +52,5 @@
     <ClCompile Include="..\..\..\source\CompBoundingBox.cpp">
       <Filter>components</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\include\node2\CompTransform.inl">
-      <Filter>components</Filter>
-    </None>
   </ItemGroup>
 </Project>

@@ -6,7 +6,6 @@
 #include <sprite2/ImageSymbol.h>
 #include <node2/CompImage.h>
 #include <node2/CompBoundingBox.h>
-#include <node2/SRT.h>
 
 namespace ee2
 {

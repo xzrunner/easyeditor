@@ -2,7 +2,7 @@
 
 #include <SM_Vector.h>
 
-namespace n2
+namespace pt2
 {
 
 class SRT
@@ -12,6 +12,7 @@ public:
 	float    angle;
 	sm::vec2 scale;
 	sm::vec2 shear;
+
 	sm::vec2 offset;
 	sm::vec2 center;
 

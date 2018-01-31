@@ -11,12 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\source\GeoTransform.cpp" />
     <ClCompile Include="..\..\..\source\RenderSystem.cpp" />
     <ClCompile Include="..\..\..\source\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\painting2\GeoTransform.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderSystem.h" />
+    <ClInclude Include="..\..\..\include\painting2\SRT.h" />
     <ClInclude Include="..\..\..\include\painting2\Texture.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\painting2\GeoTransform.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>3.painting2</ProjectName>
