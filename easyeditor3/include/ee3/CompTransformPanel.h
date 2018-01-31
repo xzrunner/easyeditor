@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NodeCompPanel.h"
+#include <ee0/NodeCompPanel.h>
 
 #include <node3/CompTransform.h>
 
@@ -8,10 +8,10 @@ class wxTextCtrl;
 
 namespace ee0 { class SubjectMgr; }
 
-namespace eone
+namespace ee3
 {
 
-class CompTransformPanel : public NodeCompPanel
+class CompTransformPanel : public ee0::NodeCompPanel
 {
 public:
 	CompTransformPanel(wxWindow* parent, n3::CompTransform& trans,

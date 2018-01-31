@@ -309,25 +309,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\easyone\DetailPanel.h" />
     <ClInclude Include="..\..\..\src\easyone\main.h" />
     <ClInclude Include="..\..\..\src\easyone\StagePanel.h" />
     <ClInclude Include="..\..\..\src\easyone\Task.h" />
-    <ClInclude Include="..\..\..\src\easyone\CompTransformPanel.h" />
     <ClInclude Include="..\..\..\src\easyone\LibraryPanel.h" />
-    <ClInclude Include="..\..\..\src\easyone\DetailPanel.h" />
-    <ClInclude Include="..\..\..\src\easyone\NodeCompPanel.h" />
     <ClInclude Include="..\..\..\src\easyone\SceneTreeCtrl.h" />
     <ClInclude Include="..\..\..\src\easyone\SceneTreeImpl.h" />
     <ClInclude Include="..\..\..\src\easyone\SceneTreeItem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\easyone\DetailPanel.cpp" />
     <ClCompile Include="..\..\..\src\easyone\main.cpp" />
     <ClCompile Include="..\..\..\src\easyone\StagePanel.cpp" />
     <ClCompile Include="..\..\..\src\easyone\Task.cpp" />
-    <ClCompile Include="..\..\..\src\easyone\CompTransformPanel.cpp" />
     <ClCompile Include="..\..\..\src\easyone\LibraryPanel.cpp" />
-    <ClCompile Include="..\..\..\src\easyone\DetailPanel.cpp" />
-    <ClCompile Include="..\..\..\src\easyone\NodeCompPanel.cpp" />
     <ClCompile Include="..\..\..\src\easyone\SceneTreeCtrl.cpp" />
     <ClCompile Include="..\..\..\src\easyone\SceneTreeImpl.cpp" />
     <ClCompile Include="..\..\..\src\easyone\SceneTreeItem.cpp" />

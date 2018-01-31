@@ -1,4 +1,4 @@
-#include "CompTransformPanel.h"
+#include "ee3/CompTransformPanel.h"
 
 #include <ee0/SubjectMgr.h>
 
@@ -6,13 +6,13 @@
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
 
-namespace eone
+namespace ee3
 {
 
 CompTransformPanel::CompTransformPanel(wxWindow* parent, 
 	                                   n3::CompTransform& trans,
 	                                   ee0::SubjectMgr& sub_mgr)
-	: NodeCompPanel(parent, "Transform")
+	: ee0::NodeCompPanel(parent, "Transform")
 	, m_trans(trans)
 	, m_sub_mgr(sub_mgr)
 {

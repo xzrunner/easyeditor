@@ -14,6 +14,13 @@ public:
 
 	ee0::StagePage* GetCurrentStagePage() const;
 
+private:
+	void OnPageChanging(wxAuiNotebookEvent& event);
+	void OnPageChanged(wxAuiNotebookEvent& event);
+
+private:
+	ee0::StagePage* m_last_page;
+
 }; // StagePanel
 
 }

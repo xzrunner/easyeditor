@@ -1,8 +1,10 @@
 #include "DetailPanel.h"
-#include "CompTransformPanel.h"
 
 #include <ee0/SubjectMgr.h>
 #include <ee0/VariantSet.h>
+#include <ee0/NodeCompPanel.h>
+
+#include <ee3/CompTransformPanel.h>
 
 #include <guard/check.h>
 
@@ -14,15 +16,12 @@ namespace eone
 
 DetailPanel::DetailPanel(wxWindow* parent, ee0::SubjectMgr& sub_mgr)
 	: wxPanel(parent, wxID_ANY)
-	, m_sub_mgr(sub_mgr)
+	, m_sub_mgr(&sub_mgr)
 {
 	SetBackgroundColour(wxColour(229, 229, 229));
 
 	InitLayout();
-
-	sub_mgr.RegisterObserver(ee0::MSG_SELECTED_ONE_NODE, this);
-	sub_mgr.RegisterObserver(ee0::MSG_NODE_SELECTION_CLEAR, this);
-	sub_mgr.RegisterObserver(ee0::MSG_UPDATE_COMPONENTS, this);
+	RegisterMsg(*m_sub_mgr);
 }
 
 void DetailPanel::OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants)
@@ -38,6 +37,10 @@ void DetailPanel::OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants)
 		break;
 	case ee0::MSG_UPDATE_COMPONENTS:
 		UpdateComponents();
+		break;
+	case ee0::MSG_STAGE_PAGE_CHANGING:
+		ClearComponents();
+		StagePageChanging(variants);
 		break;
 	}
 }
@@ -56,17 +59,25 @@ void DetailPanel::InitLayout()
 	SetSizer(top_sizer);
 }
 
+void DetailPanel::RegisterMsg(ee0::SubjectMgr& sub_mgr)
+{
+	sub_mgr.RegisterObserver(ee0::MSG_SELECTED_ONE_NODE, this);
+	sub_mgr.RegisterObserver(ee0::MSG_NODE_SELECTION_CLEAR, this);
+	sub_mgr.RegisterObserver(ee0::MSG_UPDATE_COMPONENTS, this);
+	sub_mgr.RegisterObserver(ee0::MSG_STAGE_PAGE_CHANGING, this);
+}
+
 void DetailPanel::InitComponents(const ee0::VariantSet& variants)
 {
 	auto var = variants.GetVariant("node");
 	GD_ASSERT(var.m_type != ee0::VT_EMPTY, "no var in vars: node");
-	GD_ASSERT(var.m_val.pv, "err scene node")
+	GD_ASSERT(var.m_val.pv, "err scene node");
 	m_node = *static_cast<n0::SceneNodePtr*>(var.m_val.pv);
 
 	if (m_node->HasComponent<n3::CompTransform>())
 	{
 		auto& comp = m_node->GetComponent<n3::CompTransform>();
-		auto panel = new CompTransformPanel(this, comp, m_sub_mgr);
+		auto panel = new ee3::CompTransformPanel(this, comp, *m_sub_mgr);
 		m_comp_sizer->Insert(m_components.size(), panel);
 		m_components.push_back(panel);
 	}
@@ -97,6 +108,16 @@ void DetailPanel::UpdateComponents()
 	for (auto& comp : m_components) {
 		comp->RefreshNodeComp();
 	}
+}
+
+void DetailPanel::StagePageChanging(const ee0::VariantSet& variants)
+{
+	auto var = variants.GetVariant("sub_mgr");
+	GD_ASSERT(var.m_type != ee0::VT_EMPTY, "no var in vars: sub_mgr");
+	GD_ASSERT(var.m_val.pv, "err scene node");
+	m_sub_mgr = static_cast<ee0::SubjectMgr*>(var.m_val.pv);
+
+	RegisterMsg(*m_sub_mgr);
 }
 
 }

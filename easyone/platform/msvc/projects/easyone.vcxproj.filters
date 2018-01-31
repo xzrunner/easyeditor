@@ -4,12 +4,6 @@
     <Filter Include="frame">
       <UniqueIdentifier>{f2ac435f-2b29-4461-ba51-b7df3f28bf31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="detail">
-      <UniqueIdentifier>{701e7fd5-4d82-4ec7-9aa6-edb2f4a43e0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="detail\comp">
-      <UniqueIdentifier>{cbf1a63c-4e62-4c25-a4c4-bed91b4b045a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="library">
       <UniqueIdentifier>{d22de338-67a5-4535-9061-a35e56341ffd}</UniqueIdentifier>
     </Filter>
@@ -18,6 +12,9 @@
     </Filter>
     <Filter Include="stage">
       <UniqueIdentifier>{2b11e1a0-9b69-4748-ae7e-7337f2cf492a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="detail">
+      <UniqueIdentifier>{7653a908-a019-47e9-9c73-82f1621d2f93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,17 +36,11 @@
     <ClInclude Include="..\..\..\src\easyone\SceneTreeItem.h">
       <Filter>tree</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\CompTransformPanel.h">
-      <Filter>detail\comp</Filter>
+    <ClInclude Include="..\..\..\src\easyone\StagePanel.h">
+      <Filter>stage</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\easyone\DetailPanel.h">
       <Filter>detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\NodeCompPanel.h">
-      <Filter>detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\easyone\StagePanel.h">
-      <Filter>stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -71,17 +62,11 @@
     <ClCompile Include="..\..\..\src\easyone\SceneTreeItem.cpp">
       <Filter>tree</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\CompTransformPanel.cpp">
-      <Filter>detail\comp</Filter>
+    <ClCompile Include="..\..\..\src\easyone\StagePanel.cpp">
+      <Filter>stage</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\easyone\DetailPanel.cpp">
       <Filter>detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\NodeCompPanel.cpp">
-      <Filter>detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\easyone\StagePanel.cpp">
-      <Filter>stage</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

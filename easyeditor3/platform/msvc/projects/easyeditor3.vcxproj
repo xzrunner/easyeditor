@@ -15,6 +15,7 @@
     <ClInclude Include="..\..\..\include\ee3\CamRotateState.h" />
     <ClInclude Include="..\..\..\include\ee3\CamTranslateState.h" />
     <ClInclude Include="..\..\..\include\ee3\CamZoomState.h" />
+    <ClInclude Include="..\..\..\include\ee3\CompTransformPanel.h" />
     <ClInclude Include="..\..\..\include\ee3\EditOpState.h" />
     <ClInclude Include="..\..\..\include\ee3\LibGeoPage.h" />
     <ClInclude Include="..\..\..\include\ee3\LibObjPage.h" />
@@ -44,6 +45,7 @@
     <ClCompile Include="..\..\..\source\editop\NodeSelectOP.cpp" />
     <ClCompile Include="..\..\..\source\editop\NodeTranslateState.cpp" />
     <ClCompile Include="..\..\..\source\tools\Serializer.cpp" />
+    <ClCompile Include="..\..\..\source\view\CompTransformPanel.cpp" />
     <ClCompile Include="..\..\..\source\view\LibGeoPage.cpp" />
     <ClCompile Include="..\..\..\source\view\StageCanvas.cpp" />
     <ClCompile Include="..\..\..\source\view\StageDropTarget.cpp" />

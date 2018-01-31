@@ -1,8 +1,8 @@
-#include "NodeCompPanel.h"
+#include "ee0/NodeCompPanel.h"
 
 #include <wx/sizer.h>
 
-namespace eone
+namespace ee0
 {
 
 BEGIN_EVENT_TABLE(NodeCompPanel, wxCollapsiblePane)

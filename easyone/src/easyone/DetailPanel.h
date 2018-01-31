@@ -6,12 +6,10 @@
 
 #include <wx/panel.h>
 
-namespace ee0 { class SubjectMgr; }
+namespace ee0 { class SubjectMgr; class NodeCompPanel; }
 
 namespace eone
 {
-	
-class NodeCompPanel;
 
 class DetailPanel : public wxPanel, public ee0::Observer
 {
@@ -22,17 +20,19 @@ public:
 
 private:
 	void InitLayout();
+	void RegisterMsg(ee0::SubjectMgr& sub_mgr);
 
 	void InitComponents(const ee0::VariantSet& variants);
 	void ClearComponents();
 	void UpdateComponents();
+	void StagePageChanging(const ee0::VariantSet& variants);
 
 private:
-	ee0::SubjectMgr& m_sub_mgr;
+	ee0::SubjectMgr* m_sub_mgr;
 
 	wxSizer* m_comp_sizer;
 
-	std::vector<NodeCompPanel*> m_components;
+	std::vector<ee0::NodeCompPanel*> m_components;
 
 	n0::SceneNodePtr m_node = nullptr;
 

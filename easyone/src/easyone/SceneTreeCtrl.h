@@ -24,6 +24,7 @@ public:
 
 private:
 	void InitRoot();
+	void RegisterMsg(ee0::SubjectMgr& sub_mgr);
 
 	void OnSelChanged(wxTreeEvent& event);
 	void OnLabelEdited(wxTreeEvent& event);
@@ -32,6 +33,7 @@ private:
 	void UnselectSceneNode(const ee0::VariantSet& variants);
 	void InsertSceneNode(const ee0::VariantSet& variants);
 	void InsertSceneNode(wxTreeItemId parent, const n0::SceneNodePtr& child);
+	void StagePageChanging(const ee0::VariantSet& variants);
 
 private:
 	enum
@@ -40,7 +42,7 @@ private:
 	};
 
 private:
-	ee0::SubjectMgr& m_sub_mgr;
+	ee0::SubjectMgr* m_sub_mgr;
 
 	wxTreeItemId m_root;
 

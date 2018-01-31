@@ -20,16 +20,12 @@ END_EVENT_TABLE()
 SceneTreeCtrl::SceneTreeCtrl(wxWindow* parent, ee0::SubjectMgr& sub_mgr)
 	: wxTreeCtrl(parent, ID_SCENE_TREE_CTRL, wxDefaultPosition, wxDefaultSize,
 		wxTR_HIDE_ROOT | wxTR_EDIT_LABELS | wxTR_MULTIPLE | wxTR_NO_LINES | wxTR_DEFAULT_STYLE)
-	, m_sub_mgr(sub_mgr)
+	, m_sub_mgr(&sub_mgr)
 {
 	SetBackgroundColour(wxColour(229, 229, 229));
 
 	InitRoot();
-
-	sub_mgr.RegisterObserver(ee0::MSG_INSERT_SCENE_NODE, this);
-	sub_mgr.RegisterObserver(ee0::MSG_NODE_SELECTION_INSERT, this);
-	sub_mgr.RegisterObserver(ee0::MSG_NODE_SELECTION_DELETE, this);
-	sub_mgr.RegisterObserver(ee0::MSG_NODE_SELECTION_CLEAR, this);
+	RegisterMsg(*m_sub_mgr);
 }
 
 void SceneTreeCtrl::OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants)
@@ -47,6 +43,11 @@ void SceneTreeCtrl::OnNotify(ee0::MessageID msg, const ee0::VariantSet& variants
 		break;
 	case ee0::MSG_NODE_SELECTION_CLEAR:
 		UnselectAll();
+		break;
+	case ee0::MSG_STAGE_PAGE_CHANGING:
+		DeleteAllItems();
+		InitRoot();
+		StagePageChanging(variants);
 		break;
 	}
 }
@@ -94,6 +95,15 @@ void SceneTreeCtrl::InitRoot()
 	SetItemData(m_root, new SceneTreeItem());
 }
 
+void SceneTreeCtrl::RegisterMsg(ee0::SubjectMgr& sub_mgr)
+{
+	sub_mgr.RegisterObserver(ee0::MSG_INSERT_SCENE_NODE, this);
+	sub_mgr.RegisterObserver(ee0::MSG_NODE_SELECTION_INSERT, this);
+	sub_mgr.RegisterObserver(ee0::MSG_NODE_SELECTION_DELETE, this);
+	sub_mgr.RegisterObserver(ee0::MSG_NODE_SELECTION_CLEAR, this);
+	sub_mgr.RegisterObserver(ee0::MSG_STAGE_PAGE_CHANGING, this);
+}
+
 void SceneTreeCtrl::OnSelChanged(wxTreeEvent& event)
 {
 	auto id = event.GetItem();
@@ -118,9 +128,9 @@ void SceneTreeCtrl::OnSelChanged(wxTreeEvent& event)
 	vars.SetVariant("skip_observer", var_skip);
 
 	if (IsSelected(id)) {
-		m_sub_mgr.NotifyObservers(ee0::MSG_NODE_SELECTION_INSERT, vars);
+		m_sub_mgr->NotifyObservers(ee0::MSG_NODE_SELECTION_INSERT, vars);
 	} else {
-		m_sub_mgr.NotifyObservers(ee0::MSG_NODE_SELECTION_DELETE, vars);
+		m_sub_mgr->NotifyObservers(ee0::MSG_NODE_SELECTION_DELETE, vars);
 	}
 }
 
@@ -213,6 +223,16 @@ void SceneTreeCtrl::InsertSceneNode(wxTreeItemId parent, const n0::SceneNodePtr&
 	for (auto& child : node->GetAllChildren()) {
 		InsertSceneNode(id, std::dynamic_pointer_cast<n0::SceneNode>(child));
 	}
+}
+
+void SceneTreeCtrl::StagePageChanging(const ee0::VariantSet& variants)
+{
+	auto var = variants.GetVariant("sub_mgr");
+	GD_ASSERT(var.m_type != ee0::VT_EMPTY, "no var in vars: sub_mgr");
+	GD_ASSERT(var.m_val.pv, "err scene node");
+	m_sub_mgr = static_cast<ee0::SubjectMgr*>(var.m_val.pv);
+
+	RegisterMsg(*m_sub_mgr);
 }
 
 }
