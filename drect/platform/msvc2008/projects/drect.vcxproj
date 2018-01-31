@@ -53,7 +53,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include\drect;..\..\..\..\cu\src;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\texpack\src\texpack;..\..\..\..\gimg\src\gimg;..\..\..\..\unirender\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include\drect;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\texpack\src\texpack;..\..\..\..\gimg\src\gimg;..\..\..\..\unirender\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -67,7 +67,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include\drect;..\..\..\..\cu\src;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\texpack\src\texpack;..\..\..\..\gimg\src\gimg;..\..\..\..\unirender\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include\drect;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\logger\src\logger;..\..\..\..\fs\src\fs;..\..\..\..\texpack\src\texpack;..\..\..\..\gimg\src\gimg;..\..\..\..\unirender\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
