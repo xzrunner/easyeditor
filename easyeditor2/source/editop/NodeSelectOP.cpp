@@ -6,6 +6,7 @@
 #include <ee0/CameraHelper.h>
 
 #include <node2/CompBoundingBox.h>
+#include <node2/CompTransform.h>
 #include <sprite2/RVG.h>
 
 namespace ee2
@@ -69,6 +70,18 @@ bool NodeSelectOP::OnDraw() const
 			auto& cbb = node->GetComponent<n2::CompBoundingBox>();
 			cbb.GetBounding().GetBoundPos(bound);
 
+			// todo
+			sm::Matrix2D world_mt;
+			auto parent = node->GetParent();
+			while (parent) {
+				auto& ctrans = parent->GetComponent<n2::CompTransform>();
+				world_mt = ctrans.GetTransformMat() * world_mt;
+				parent = parent->GetParent();
+			}
+			for (auto& pos : bound) {
+				pos = world_mt * pos;
+			}
+
 			s2::RVG::SetColor(s2::Color(255, 0, 0));
 			s2::RVG::Polyline(nullptr, bound, true);
 
@@ -90,9 +103,9 @@ n0::SceneNodePtr NodeSelectOP::QueryByPos(int screen_x, int screen_y) const
 	auto& nodes = dynamic_cast<StagePage&>(m_stage).GetAllNodes();
 	for (auto& node : nodes)
 	{
-		auto& cbounding = node->GetComponent<n2::CompBoundingBox>();
-		if (cbounding.GetBounding().IsContain(pos)) {
-			return node;
+		auto ret = QueryByPos(node, pos);
+		if (ret) {
+			return ret;
 		}
 	}
 
@@ -109,15 +122,47 @@ void NodeSelectOP::QueryByRect(const sm::ivec2& p0, const sm::ivec2& p1, bool co
 	sm::rect rect(pos0, pos1);
 	
 	auto& nodes = dynamic_cast<StagePage&>(m_stage).GetAllNodes();
-	for (auto& node : nodes)
-	{
-		auto& cbounding = node->GetComponent<n2::CompBoundingBox>();
-		auto& bb = cbounding.GetBounding();
-		if (contain && sm::is_rect_contain_rect(rect, bb.GetSize())) {
-			result.push_back(node);
-		} else if (!contain && bb.IsIntersect(rect)) {
-			result.push_back(node);
+	for (auto& node : nodes) {
+		QueryByRect(node, rect, contain, result);
+	}
+}
+
+n0::SceneNodePtr NodeSelectOP::QueryByPos(const n0::SceneNodePtr& node, const sm::vec2& pos) const
+{
+	auto& cbounding = node->GetComponent<n2::CompBoundingBox>();
+	if (cbounding.GetBounding().IsContain(pos)) {
+		return node;
+	}
+
+	auto& children = node->GetAllChildren();
+	auto mt = node->GetComponent<n2::CompTransform>().GetTransformMat().Inverted();
+	sm::vec2 child_pos = mt * pos;
+	for (auto& child : children) {
+		auto ret = QueryByPos(child, child_pos);
+		if (ret) {
+			return ret;
 		}
+	}
+
+	return nullptr;
+}
+
+void NodeSelectOP::QueryByRect(const n0::SceneNodePtr& node, const sm::rect& rect, 
+	                           bool contain, std::vector<n0::SceneNodePtr>& result) const
+{
+	auto& cbounding = node->GetComponent<n2::CompBoundingBox>();
+	auto& bb = cbounding.GetBounding();
+	if (contain && sm::is_rect_contain_rect(rect, bb.GetSize())) {
+		result.push_back(node);
+	} else if (!contain && bb.IsIntersect(rect)) {
+		result.push_back(node);
+	}
+
+	auto& children = node->GetAllChildren();
+	// todo
+//	auto& mt = node->GetComponent<n2::CompTransform>().GetTransformMat();
+	for (auto& child : children) {
+		QueryByRect(child, rect, contain, result);
 	}
 }
 

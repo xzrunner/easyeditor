@@ -92,7 +92,7 @@ bool NodeSelectOP::OnMouseLeftUp(int x, int y)
 		return true;
 	}
 
-	if (!m_last_pos.IsValid()) {
+	if (!m_last_pos.IsValid() || m_last_pos == sm::ivec2(x, y)) {
 		return false;
 	}
 
