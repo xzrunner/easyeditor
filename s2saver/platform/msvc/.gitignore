@@ -1,0 +1,4 @@
+s2saver/
+projects/*
+
+!projects/s2saver.vcxproj

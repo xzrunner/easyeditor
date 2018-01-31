@@ -171,6 +171,9 @@
     <ClCompile Include="..\..\..\src\libcomplex\StoreToBin.cpp">
       <Filter>fileio\store</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\libcomplex\FileSaver.cpp">
+      <Filter>fileio\store</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\libcomplex\FileLoader.h">
@@ -205,9 +208,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\libcomplex\PictureToSpr.h">
       <Filter>fileio\load\nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libcomplex\FileStorer.h">
-      <Filter>fileio\store</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libcomplex\EditDialog.h">
       <Filter>frame</Filter>
@@ -291,6 +291,12 @@
       <Filter>fileio\store</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libcomplex\StoreToBin.h">
+      <Filter>fileio\store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\FileStorer.h">
+      <Filter>fileio\store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\libcomplex\FileSaver.h">
       <Filter>fileio\store</Filter>
     </ClInclude>
   </ItemGroup>

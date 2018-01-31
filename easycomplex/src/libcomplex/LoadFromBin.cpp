@@ -26,14 +26,16 @@ void LoadFromBin::Load(const std::string& filepath, Symbol& complex)
 	auto sym_src = dynamic_cast<sns::ComplexSym*>(sym);
 
 	sm::rect scissor;
-	int16_t xmin, ymin, xmax, ymax;
-	sym_src->GetScissor(xmin, ymin, xmax, ymax);
+	scissor.xmin = sym_src->scissor[0];
+	scissor.ymin = sym_src->scissor[1];
+	scissor.xmax = sym_src->scissor[2];
+	scissor.ymax = sym_src->scissor[3];
 	complex.SetScissor(scissor);
 
 	auto dir = ee::FileHelper::GetFileDir(filepath);
-	for (int i = 0, n = sym_src->GetChildrenNum(); i < n; ++i) 
+	for (int i = 0; i < sym_src->children_n; ++i) 
 	{
-		auto child = sym_src->GetChildByIndex(i);
+		auto& child = sym_src->children[i];
 		auto child_path = ee::FileHelper::GetAbsolutePath(
 			dir, child->GetCommon().GetFilepath());
 		auto sym = ee::SymbolMgr::Instance()->FetchSymbol(child_path);

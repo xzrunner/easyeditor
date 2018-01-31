@@ -86,6 +86,7 @@
     <ClCompile Include="..\..\..\src\libcomplex\ArrangeSpriteImpl.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex\EditDialog.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex\FileLoader.cpp" />
+    <ClCompile Include="..\..\..\src\libcomplex\FileSaver.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex\FileStorer.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex\GroupHelper.cpp" />
     <ClCompile Include="..\..\..\src\libcomplex\LabelToSpr.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="..\..\..\src\libcomplex\ArrangeSpriteImpl.h" />
     <ClInclude Include="..\..\..\src\libcomplex\EditDialog.h" />
     <ClInclude Include="..\..\..\src\libcomplex\FileLoader.h" />
+    <ClInclude Include="..\..\..\src\libcomplex\FileSaver.h" />
     <ClInclude Include="..\..\..\src\libcomplex\FileStorer.h" />
     <ClInclude Include="..\..\..\src\libcomplex\GroupHelper.h" />
     <ClInclude Include="..\..\..\src\libcomplex\LabelToSpr.h" />
