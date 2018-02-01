@@ -6,6 +6,7 @@
 #include <sprite2/PolygonShape.h>
 
 namespace ee { class ImageSymbol; }
+namespace pt2 { class Color; }
 
 namespace eshape
 {

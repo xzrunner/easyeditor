@@ -15,7 +15,7 @@
     <ProjectGuid>{8D18EB4E-FDDF-484A-9784-3AC9DCBCC2A1}</ProjectGuid>
     <RootNamespace>libedit</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -129,8 +129,12 @@
     <ClCompile Include="..\..\..\source\edit\record\ReorderSpriteAOP.cpp" />
     <ClCompile Include="..\..\..\source\edit\record\RotateSpriteAOP.cpp" />
     <ClCompile Include="..\..\..\source\edit\record\ScaleSpriteAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColAddAOP.cpp" />
     <ClCompile Include="..\..\..\source\edit\record\SetSpriteAngleAOP.cpp" />
-    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColorAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColBMapAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColGMapAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColMulAOP.cpp" />
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColRMapAOP.cpp" />
     <ClCompile Include="..\..\..\source\edit\record\SetSpritePosAOP.cpp" />
     <ClCompile Include="..\..\..\source\edit\record\SetSpriteTwoAOP.cpp" />
     <ClCompile Include="..\..\..\source\edit\record\ShearSpriteAOP.cpp" />
@@ -200,8 +204,12 @@
     <ClInclude Include="..\..\..\include\ee\ScaleSpriteState.h" />
     <ClInclude Include="..\..\..\include\ee\SelectShapesOP.h" />
     <ClInclude Include="..\..\..\include\ee\SelectSpritesOP.h" />
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColAddAOP.h" />
     <ClInclude Include="..\..\..\include\ee\SetSpriteAngleAOP.h" />
-    <ClInclude Include="..\..\..\include\ee\SetSpriteColorAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColBMapAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColGMapAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColMulAOP.h" />
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColRMapAOP.h" />
     <ClInclude Include="..\..\..\include\ee\SetSpritePosAOP.h" />
     <ClInclude Include="..\..\..\include\ee\SetSpriteTwoAOP.h" />
     <ClInclude Include="..\..\..\include\ee\ShearSpriteAOP.h" />

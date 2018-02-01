@@ -4,8 +4,6 @@
 #include "EditPanelImpl.h"
 #include "panel_msg.h"
 
-#include <sprite2/RenderColor.h>
-
 #include <wx/propgrid/advprops.h>
 
 namespace ee
@@ -103,7 +101,7 @@ void FontBlankPropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxBoolProperty(wxT("Edge"), wxPG_LABEL, spr->has_edge));
 	pg->SetPropertyAttribute("Edge", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
-	const pt2::Color& add_col = spr->GetColor().GetAdd();
+	auto& add_col = spr->GetColorCommon().add;
 	wxColour col = wxColour(add_col.r, add_col.g, add_col.b, add_col.a);
 	pg->Append(new wxColourProperty(wxT("FontColor"), wxPG_LABEL, col));
 	pg->SetPropertyAttribute("FontColor", "HasAlpha", true);

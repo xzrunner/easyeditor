@@ -30,7 +30,8 @@ s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderP
 	s2::RenderParams p = rp;
 	if (spr) {
 		p.mt = spr->GetLocalMat() * rp.mt;
-		p.color = spr->GetColor() * rp.color;
+		p.col_common = spr->GetColorCommon() * rp.col_common;
+		p.col_map    = spr->GetColorMap() * rp.col_map;
 	}
 
  	if (m_bg) {

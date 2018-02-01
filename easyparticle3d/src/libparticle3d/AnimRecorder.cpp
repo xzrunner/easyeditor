@@ -5,8 +5,6 @@
 
 #include <easyanim.h>
 
-#include <sprite2/RenderColor.h>
-
 namespace eparticle3d
 {
 
@@ -90,9 +88,9 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 			spr->SetPosition(sm::vec2(item->x, item->y));
 			spr->SetAngle(item->angle);
 			spr->SetScale(sm::vec2(item->scale, item->scale));
-			s2::RenderColor rc = spr->GetColor();
-			rc.SetMul(item->mul_col);
-			spr->SetColor(rc);
+			auto rc = spr->GetColorCommon();
+			rc.mul = item->mul_col;
+			spr->SetColorCommon(rc);
 
 			frame->sprs.push_back(spr);
 		}

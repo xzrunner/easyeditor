@@ -4,7 +4,6 @@
 #include "panel_msg.h"
 
 #include <sprite2/Sprite.h>
-#include <sprite2/RenderColor.h>
 
 namespace ee
 {
@@ -20,15 +19,15 @@ pt2::Color SprPropColMonitor::GetColor() const
 	switch (m_type)
 	{
 	case CT_MUL:
-		return m_spr->GetColor().GetMul();
+		return m_spr->GetColorCommon().mul;
 	case CT_ADD:
-		return m_spr->GetColor().GetAdd();
+		return m_spr->GetColorCommon().add;
 	case CT_RMAP:
-		return m_spr->GetColor().GetRMap();
+		return m_spr->GetColorMap().rmap;
 	case CT_GMAP:
-		return m_spr->GetColor().GetGMap();
+		return m_spr->GetColorMap().gmap;
 	case CT_BMAP:
-		return m_spr->GetColor().GetBMap();
+		return m_spr->GetColorMap().bmap;
 	default:
 		return pt2::Color();
 	}
@@ -41,26 +40,26 @@ void SprPropColMonitor::OnColorChanged()
 
 void SprPropColMonitor::OnColorChanged(const pt2::Color& col)
 {
-	s2::RenderColor rc = m_spr->GetColor();
+	auto& col_common = m_spr->GetColorCommon();
+	auto& col_map = m_spr->GetColorMap();
 	switch (m_type)
 	{
 	case CT_MUL:
-		rc.SetMul(col);
+		m_spr->SetColorCommon(pt2::RenderColorCommon(col, col_common.add));
 		break;
 	case CT_ADD:
-		rc.SetAdd(col);
+		m_spr->SetColorCommon(pt2::RenderColorCommon(col_common.mul, col));
 		break;
 	case CT_RMAP:
-		rc.SetRMap(col);
+		m_spr->SetColorMap(pt2::RenderColorMap(col, col_map.gmap, col_map.bmap));
 		break;
 	case CT_GMAP:
-		rc.SetGMap(col);
+		m_spr->SetColorMap(pt2::RenderColorMap(col_map.rmap, col, col_map.bmap));
 		break;
 	case CT_BMAP:
-		rc.SetBMap(col);
+		m_spr->SetColorMap(pt2::RenderColorMap(col_map.rmap, col_map.gmap, col));
 		break;
 	}
-	m_spr->SetColor(rc);
 
 	OnColorChanged();
 }

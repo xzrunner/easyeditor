@@ -3,7 +3,6 @@
 #include <sns/ColorParser.h>
 #include <sns/NodeSprCommon.h>
 #include <sprite2/Sprite.h>
-#include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
 #include <sprite2/RenderCamera.h>
 #include <sprite2/Symbol.h>
@@ -44,23 +43,41 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const simp::NodeTrans* trans)
 		spr->SetAngle(angle);
 	}
 
-	s2::RenderColor rc;
-	if (trans->type & simp::NodeTrans::COL_MUL_MASK) {
-		rc.SetMulABGR(sns::ColorParser::Trans(trans->data[idx++], sns::RGBA, sns::ABGR));
+	if (trans->type & simp::NodeTrans::COL_MUL_MASK) 
+	{
+		pt2::Color mul;
+		mul.FromRGBA(trans->data[idx++]);
+		auto& col_common = spr->GetColorCommon();
+		spr->SetColorCommon(pt2::RenderColorCommon(mul, col_common.add));
 	}
-	if (trans->type & simp::NodeTrans::COL_ADD_MASK) {
-		rc.SetAddABGR(sns::ColorParser::Trans(trans->data[idx++], sns::RGBA, sns::ABGR));
+	if (trans->type & simp::NodeTrans::COL_ADD_MASK) 
+	{
+		pt2::Color add;
+		add.FromRGBA(trans->data[idx++]);
+		auto& col_common = spr->GetColorCommon();
+		spr->SetColorCommon(pt2::RenderColorCommon(col_common.mul, add));
 	}
-	if (trans->type & simp::NodeTrans::COL_R_MASK) {
-		rc.SetRMapABGR(sns::ColorParser::Trans(trans->data[idx++], sns::RGBA, sns::ABGR));
+	if (trans->type & simp::NodeTrans::COL_R_MASK) 
+	{
+		pt2::Color rmap;
+		rmap.FromRGBA(trans->data[idx++]);
+		auto& col_map = spr->GetColorMap();
+		spr->SetColorMap(pt2::RenderColorMap(rmap, col_map.gmap, col_map.bmap));
 	}
-	if (trans->type & simp::NodeTrans::COL_G_MASK) {
-		rc.SetGMapABGR(sns::ColorParser::Trans(trans->data[idx++], sns::RGBA, sns::ABGR));
+	if (trans->type & simp::NodeTrans::COL_G_MASK) 
+	{
+		pt2::Color gmap;
+		gmap.FromRGBA(trans->data[idx++]);
+		auto& col_map = spr->GetColorMap();
+		spr->SetColorMap(pt2::RenderColorMap(col_map.rmap, gmap, col_map.bmap));
 	}
-	if (trans->type & simp::NodeTrans::COL_B_MASK) {
-		rc.SetBMapABGR(sns::ColorParser::Trans(trans->data[idx++], sns::RGBA, sns::ABGR));
+	if (trans->type & simp::NodeTrans::COL_B_MASK) 
+	{
+		pt2::Color bmap;
+		bmap.FromRGBA(trans->data[idx++]);
+		auto& col_map = spr->GetColorMap();
+		spr->SetColorMap(pt2::RenderColorMap(col_map.rmap, col_map.gmap, bmap));
 	}
-	spr->SetColor(rc);
 
 	s2::RenderShader rs;
 	if (trans->type & simp::NodeTrans::BLEND_MASK) {
@@ -128,45 +145,63 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const sns::NodeSprCommon& commo
 	} 
 
 
-	s2::RenderColor rc;
-	if (type & sns::NodeSprCommon::COL_MUL_MASK) {
-		rc.SetMulABGR(sns::ColorParser::Trans(data[idx++], sns::RGBA, sns::ABGR));
+	if (type & simp::NodeTrans::COL_MUL_MASK)
+	{
+		pt2::Color mul;
+		mul.FromRGBA(data[idx++]);
+		auto& col_common = spr->GetColorCommon();
+		spr->SetColorCommon(pt2::RenderColorCommon(mul, col_common.add));
 	}
-	if (type & sns::NodeSprCommon::COL_ADD_MASK) {
-		rc.SetAddABGR(sns::ColorParser::Trans(data[idx++], sns::RGBA, sns::ABGR));
+	if (type & simp::NodeTrans::COL_ADD_MASK)
+	{
+		pt2::Color add;
+		add.FromRGBA(data[idx++]);
+		auto& col_common = spr->GetColorCommon();
+		spr->SetColorCommon(pt2::RenderColorCommon(col_common.mul, add));
 	}
-	if (type & sns::NodeSprCommon::COL_R_MASK) {
-		rc.SetRMapABGR(sns::ColorParser::Trans(data[idx++], sns::RGBA, sns::ABGR));
+	if (type & simp::NodeTrans::COL_R_MASK)
+	{
+		pt2::Color rmap;
+		rmap.FromRGBA(data[idx++]);
+		auto& col_map = spr->GetColorMap();
+		spr->SetColorMap(pt2::RenderColorMap(rmap, col_map.gmap, col_map.bmap));
 	}
-	if (type & sns::NodeSprCommon::COL_G_MASK) {
-		rc.SetGMapABGR(sns::ColorParser::Trans(data[idx++], sns::RGBA, sns::ABGR));
+	if (type & simp::NodeTrans::COL_G_MASK)
+	{
+		pt2::Color gmap;
+		gmap.FromRGBA(data[idx++]);
+		auto& col_map = spr->GetColorMap();
+		spr->SetColorMap(pt2::RenderColorMap(col_map.rmap, gmap, col_map.bmap));
 	}
-	if (type & sns::NodeSprCommon::COL_B_MASK) {
-		rc.SetBMapABGR(sns::ColorParser::Trans(data[idx++], sns::RGBA, sns::ABGR));
+	if (type & simp::NodeTrans::COL_B_MASK)
+	{
+		pt2::Color bmap;
+		bmap.FromRGBA(data[idx++]);
+		auto& col_map = spr->GetColorMap();
+		spr->SetColorMap(pt2::RenderColorMap(col_map.rmap, col_map.gmap, bmap));
 	}
-	spr->SetColor(rc);
 
 	// todo
 	//s2::RenderShader rs;
-	//if (trans->type & simp::NodeTrans::BLEND_MASK) {
-	//	rs.SetBlend(s2::BlendMode(trans->data[idx++]));
+	//if (type & simp::NodeTrans::BLEND_MASK) {
+	//	rs.SetBlend(s2::BlendMode(data[idx++]));
 	//}
-	//if (trans->type & simp::NodeTrans::FAST_BLEND_MASK) {
-	//	rs.SetFastBlend(s2::FastBlendMode(trans->data[idx++]));
+	//if (type & simp::NodeTrans::FAST_BLEND_MASK) {
+	//	rs.SetFastBlend(s2::FastBlendMode(data[idx++]));
 	//}
-	//if (trans->type & simp::NodeTrans::FILTER_MASK) {
-	//	s2::FilterMode mode = s2::FilterMode(trans->data[idx++]);
+	//if (type & simp::NodeTrans::FILTER_MASK) {
+	//	s2::FilterMode mode = s2::FilterMode(data[idx++]);
 	//	rs.SetFilter(mode);
 	//}
-	//if (trans->type & simp::NodeTrans::DOWNSMAPLE_MASK) {
-	//	float downsample = static_cast<float>(trans->data[idx++]) / 0xffffffff;
+	//if (type & simp::NodeTrans::DOWNSMAPLE_MASK) {
+	//	float downsample = static_cast<float>(data[idx++]) / 0xffffffff;
 	//	rs.SetDownsample(downsample);
 	//}
 	//spr->SetShader(rs);
 
-	//if (trans->type & simp::NodeTrans::CAMERA_MASK) {
+	//if (type & simp::NodeTrans::CAMERA_MASK) {
 	//	s2::RenderCamera rc;
-	//	rc.SetMode(s2::CameraMode(trans->data[idx++]));
+	//	rc.SetMode(s2::CameraMode(data[idx++]));
 	//	spr->SetCamera(rc);
 	//}
 

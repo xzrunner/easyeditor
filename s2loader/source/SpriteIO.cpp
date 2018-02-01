@@ -131,27 +131,27 @@ void SpriteIO::Load(const sns::NodeSprCommon& node_spr)
 	if (type & sns::NodeSprCommon::COL_MUL_MASK) {
 		pt2::Color col;
 		col.FromRGBA(data[idx++]);
-		m_col.SetMul(col);
+		m_col_common.mul = col;
 	} 
 	if (type & sns::NodeSprCommon::COL_ADD_MASK) {
 		pt2::Color col;
 		col.FromRGBA(data[idx++]);
-		m_col.SetAdd(col);
+		m_col_common.add = col;
 	} 
 	if (type & sns::NodeSprCommon::COL_R_MASK) {
 		pt2::Color col;
 		col.FromRGBA(data[idx++]);
-		m_col.SetRMap(col);
+		m_col_map.rmap = col;
 	} 
 	if (type & sns::NodeSprCommon::COL_G_MASK) {
 		pt2::Color col;
 		col.FromRGBA(data[idx++]);
-		m_col.SetGMap(col);
+		m_col_map.gmap = col;
 	} 
 	if (type & sns::NodeSprCommon::COL_B_MASK) {
 		pt2::Color col;
 		col.FromRGBA(data[idx++]);
-		m_col.SetBMap(col);
+		m_col_map.bmap = col;
 	}
 }
 
@@ -266,7 +266,7 @@ void SpriteIO::LoadRender(const s2::SprPtr& spr)
 
 void SpriteIO::StoreRender(const s2::SprConstPtr& spr)
 {
-	StoreColor(spr->GetColor());
+	StoreColor(spr->GetColorCommon(), spr->GetColorMap());
 	StoreShader(spr->GetShader());
 	StoreCamera(spr->GetCamera());	
 }
@@ -381,80 +381,82 @@ void SpriteIO::StoreEdit(Json::Value& val)
 
 void SpriteIO::LoadColor(const s2::SprPtr& spr)
 {
-	spr->SetColor(m_col);
+	spr->SetColorCommon(m_col_common);
+	spr->SetColorMap(m_col_map);
 }
 
-void SpriteIO::StoreColor(const s2::RenderColor& color)
+void SpriteIO::StoreColor(const pt2::RenderColorCommon& col_common, const pt2::RenderColorMap& col_map)
 {
-	m_col = color;
+	m_col_common = col_common;
+	m_col_map    = col_map;
 }
 
 void SpriteIO::LoadColor(const Json::Value& val)
 {
-	m_col.SetMul(pt2::Color(255, 255, 255, 255));
+	m_col_common.mul = pt2::Color(255, 255, 255, 255);
 	if (val.isMember("multi color")) {
 		CU_STR str = val["multi color"].asString().c_str();
 		if (!str.empty()) {
-			m_col.SetMul(gum::str2color(str, sns::BGRA));
+			m_col_common.mul = gum::str2color(str, sns::BGRA);
 		}
 	}
 
-	m_col.SetAdd(pt2::Color(0, 0, 0, 0));
+	m_col_common.add = pt2::Color(0, 0, 0, 0);
 	if (val.isMember("add color")) {
 		CU_STR str = val["add color"].asString().c_str();
 		if (!str.empty()) {
-			m_col.SetAdd(gum::str2color(str, sns::ABGR));
+			m_col_common.add = gum::str2color(str, sns::ABGR);
 		}
 	}
 
-	m_col.SetRMap(pt2::Color(255, 0, 0, 0));
+	m_col_map.rmap = (pt2::Color(255, 0, 0, 0));
 	if (val.isMember("r trans")) {
 		CU_STR str = val["r trans"].asString().c_str();
 		if (!str.empty()) {
 			pt2::Color col(gum::str2color(str, sns::RGBA));
 			col.a = 0;
-			m_col.SetRMap(col);
+			m_col_map.rmap = col;
 		}
 	}
 
-	m_col.SetGMap(pt2::Color(0, 255, 0, 0));
+	m_col_map.gmap = pt2::Color(0, 255, 0, 0);
 	if (val.isMember("g trans")) {
 		CU_STR str = val["g trans"].asString().c_str();
 		if (!str.empty()) {
 			pt2::Color col(gum::str2color(str, sns::RGBA));
 			col.a = 0;
-			m_col.SetGMap(col);
+			m_col_map.gmap = col;
 		}
 	}
 
-	m_col.SetBMap(pt2::Color(0, 0, 255, 0));
+	m_col_map.bmap = pt2::Color(0, 0, 255, 0);
 	if (val.isMember("b trans")) {
 		CU_STR str = val["b trans"].asString().c_str();
 		if (!str.empty()) {
 			pt2::Color col(gum::str2color(str, sns::RGBA));
 			col.a = 0;
-			m_col.SetBMap(col);
+			m_col_map.bmap = col;
 		}
 	}
 }
 
 void SpriteIO::StoreColor(Json::Value& val)
 {
-	if (!m_compress || m_col.GetMul() != pt2::Color(255, 255, 255, 255)) {
-		val["multi color"]	= gum::color2str(m_col.GetMul(), sns::BGRA).c_str();;
+	if (!m_compress || m_col_common.mul != pt2::Color(255, 255, 255, 255)) {
+		val["multi color"]	= gum::color2str(m_col_common.mul, sns::BGRA).c_str();;
 	}
-	if (!m_compress || m_col.GetAdd() != pt2::Color(0, 0, 0, 0)) {
-		val["add color"]	= gum::color2str(m_col.GetAdd(), sns::ABGR).c_str();;
+	if (!m_compress || m_col_common.add != pt2::Color(0, 0, 0, 0)) {
+		val["add color"]	= gum::color2str(m_col_common.add, sns::ABGR).c_str();;
 	}
 
-	if (!m_compress || m_col.GetRMap().r != 255 || m_col.GetRMap().g != 0 || m_col.GetRMap().b != 0) {
-		val["r trans"]		= gum::color2str(m_col.GetRMap(), sns::RGBA).c_str();;
+	if (!m_compress || m_col_map.rmap.r != 255 || m_col_map.rmap.g != 0 || m_col_map.rmap.b != 0) {
+		val["r trans"]		= gum::color2str(m_col_map.rmap, sns::RGBA).c_str();;
 	}
-	if (!m_compress || m_col.GetGMap().r != 0 || m_col.GetGMap().g != 255 || m_col.GetGMap().b != 0) {
-		val["g trans"]		= gum::color2str(m_col.GetGMap(), sns::RGBA).c_str();;
+	if (!m_compress || m_col_map.gmap.r != 0 || m_col_map.gmap.g != 255 || m_col_map.gmap.b != 0) {
+		val["g trans"]		= gum::color2str(m_col_map.gmap, sns::RGBA).c_str();;
 	}
-	if (!m_compress || m_col.GetBMap().r != 0 || m_col.GetBMap().g != 0 || m_col.GetBMap().b != 255) {
-		val["b trans"]		= gum::color2str(m_col.GetBMap(), sns::RGBA).c_str();;
+	if (!m_compress || m_col_map.bmap.r != 0 || m_col_map.bmap.g != 0 || m_col_map.bmap.b != 255) {
+		val["b trans"]		= gum::color2str(m_col_map.bmap, sns::RGBA).c_str();;
 	}
 }
 

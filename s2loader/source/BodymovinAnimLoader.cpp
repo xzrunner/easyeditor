@@ -6,7 +6,6 @@
 #include <logger.h>
 #include <sprite2/Sprite.h>
 #include <sprite2/ImageSymbol.h>
-#include <sprite2/RenderColor.h>
 #include <sprite2/ShapeSymbol.h>
 #include <sprite2/ColorPolygon.h>
 #include <sprite2/PolygonShape.h>
@@ -199,11 +198,11 @@ void BodymovinAnimLoader::LoadLayersPrev(const CU_MAP<CU_STR, s2::SprPtr>& map_a
 		LoadScale(dst->frames, src.trans.scale, frame_rate);
 
 		// fix null spr
-		s2::RenderColor col;
-		col.SetMul(pt2::Color(0, 0, 0, 0));
+		pt2::RenderColorCommon col;
+		col.mul = pt2::Color(0, 0, 0, 0);
 		if (start_null) {
-			start_null->SetColor(col);
-			pre_in_null->SetColor(col);
+			start_null->SetColorCommon(col);
+			pre_in_null->SetColorCommon(col);
 		}
 
 		sym.AddLayer(dst);
@@ -315,7 +314,7 @@ void BodymovinAnimLoader::LoadLayersPost(const CU_VEC<BodymovinParser::Layer>& l
 				const s2::AnimSymbol::FramePtr& frame = dst->frames[j];
 				for (int k = 0, l = frame->sprs.size(); k < l; ++k) {
 					auto& spr = frame->sprs[k];
-					if (spr->GetColor().GetMul().a != 255) {
+					if (spr->GetColorCommon().mul.a != 255) {
 						opacity = true;
 					}
 				}
@@ -470,11 +469,10 @@ bool BodymovinAnimLoader::LoadOpacity(CU_VEC<s2::AnimSymbol::FramePtr>& frames,
 			BodymovinParser::FloatVal::Float3 data = GetLerpVal(val.frames, frame->index, frame_rate);
 			int opacity = static_cast<int>(data.data[0]);
 			auto& spr = frame->sprs[0];
-			s2::RenderColor rc = spr->GetColor();
-			pt2::Color col = spr->GetColor().GetMul();
-			col.a = (uint8_t)(255 * opacity / 100.0f);
-			rc.SetMul(col);
-			spr->SetColor(rc);
+
+			auto rc = spr->GetColorCommon();
+			rc.mul.a = (uint8_t)(255 * opacity / 100.0f);
+			spr->SetColorCommon(rc);
 
 			ret = true;
 		}
@@ -488,11 +486,9 @@ bool BodymovinAnimLoader::LoadOpacity(CU_VEC<s2::AnimSymbol::FramePtr>& frames,
 			assert(frame->sprs.size() == 1);
 			auto& spr = frame->sprs[0];
 
-			s2::RenderColor rc = spr->GetColor();
-			pt2::Color col = spr->GetColor().GetMul();
-			col.a = (uint8_t)(255 * opacity / 100.0f);
-			rc.SetMul(col);
-			spr->SetColor(rc);
+			auto rc = spr->GetColorCommon();
+			rc.mul.a = (uint8_t)(255 * opacity / 100.0f);
+			spr->SetColorCommon(rc);
 
 			ret = true;
 		}

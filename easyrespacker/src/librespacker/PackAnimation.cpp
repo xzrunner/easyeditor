@@ -17,7 +17,6 @@
 #include <ee/SymbolFile.h>
 
 #include <sprite2/SymType.h>
-#include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
 #include <sprite2/RenderCamera.h>
 #include <sprite2/RenderFilter.h>
@@ -227,14 +226,14 @@ void PackAnimation::LoadSprMat(const ee::SprConstPtr& spr, SpriteTrans& trans, b
 
 void PackAnimation::LoadSprColor(const ee::SprConstPtr& spr, SpriteTrans& trans)
 {
-	const s2::RenderColor& rc = spr->GetColor();
+	auto& col_common = spr->GetColorCommon();
+	trans.color    = gum::color2int(col_common.mul, sns::ARGB);
+	trans.additive = gum::color2int(col_common.add, sns::ARGB);
 
-	trans.color    = gum::color2int(rc.GetMul(), sns::ARGB);
-	trans.additive = gum::color2int(rc.GetAdd(), sns::ARGB);
-
-	trans.rmap = rc.GetRMap().ToRGBA();
-	trans.gmap = rc.GetGMap().ToRGBA();
-	trans.bmap = rc.GetBMap().ToRGBA();	
+	auto& col_map = spr->GetColorMap();
+	trans.rmap = col_map.rmap.ToRGBA();
+	trans.gmap = col_map.gmap.ToRGBA();
+	trans.bmap = col_map.bmap.ToRGBA();
 }
 
 bool PackAnimation::IsMatrixIdentity(const int* mat)

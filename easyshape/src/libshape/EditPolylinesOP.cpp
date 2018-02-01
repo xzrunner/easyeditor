@@ -72,7 +72,7 @@ bool EditPolylinesOP::OnDraw() const
 	if (ee::SelectShapesOP::OnDraw()) return true;
 
 	s2::RenderParams rp;
-	rp.color.SetMul(pt2::Color(0.8f, 0.8f, 0.2f));
+	rp.col_common.mul = pt2::Color(0.8f, 0.8f, 0.2f);
 
 	for (auto& item : m_simplify_buffer) {
 		item.second->Draw(nullptr, rp);

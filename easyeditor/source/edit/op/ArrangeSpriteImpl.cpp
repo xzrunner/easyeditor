@@ -34,7 +34,6 @@
 #include "PerspectiveSpriteState.h"
 
 #include <SM_Calc.h>
-#include <sprite2/RenderColor.h>
 #include <sprite2/RVG.h>
 #include <sprite2/Symbol.h>
 #include <sprite2/Camera.h>
@@ -706,30 +705,28 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) 
 		{
-			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().GetMul(), pos);
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColorCommon().mul, pos);
 			if (dlg.ShowModal() == wxID_OK) 
 			{
 				pt2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) 
 				{
-					s2::RenderColor rc = sprs[i]->GetColor();
-					rc.SetMul(col);
-					sprs[i]->SetColor(rc);
+					auto& rc = sprs[i]->GetColorCommon();
+					sprs[i]->SetColorCommon(pt2::RenderColorCommon(col, rc.add));
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		} 
 		else 
 		{
-			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().GetMul(), pos);
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColorCommon().mul, pos);
 			if (dlg.ShowModal() == wxID_OK) 
 			{
 				pt2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) 
 				{
-					s2::RenderColor rc = sprs[i]->GetColor();
-					rc.SetMul(col);
-					sprs[i]->SetColor(rc);
+					auto& rc = sprs[i]->GetColorCommon();
+					sprs[i]->SetColorCommon(pt2::RenderColorCommon(col, rc.add));
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -741,30 +738,28 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) 
 		{
-			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().GetAdd(), pos);
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColorCommon().add, pos);
 			if (dlg.ShowModal() == wxID_OK) 
 			{
 				pt2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) 
 				{
-					s2::RenderColor rc = sprs[i]->GetColor();
-					rc.SetAdd(col);
-					sprs[i]->SetColor(rc);
+					auto& rc = sprs[i]->GetColorCommon();
+					sprs[i]->SetColorCommon(pt2::RenderColorCommon(rc.mul, col));
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		} 
 		else 
 		{
-			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().GetAdd(), pos);
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColorCommon().add, pos);
 			if (dlg.ShowModal() == wxID_OK) 
 			{
 				pt2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) 
 				{
-					s2::RenderColor rc = sprs[i]->GetColor();
-					rc.SetAdd(col);
-					sprs[i]->SetColor(rc);
+					auto& rc = sprs[i]->GetColorCommon();
+					sprs[i]->SetColorCommon(pt2::RenderColorCommon(rc.mul, col));
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -775,28 +770,24 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'T') 
 	{
 		AlphaSettingDlg dlg(m_wnd, sprs[0], pos);
-		float old_alpha = sprs[0]->GetColor().GetMul().a;
+		float old_alpha = sprs[0]->GetColorCommon().mul.a;
 		int state = dlg.ShowModal();
 		if (state == wxID_OK) 
 		{
 			float alpha = dlg.GetColor().a;
 			for (int i = 0, n = sprs.size(); i < n; ++i) 
 			{
-				s2::RenderColor rc = sprs[i]->GetColor();
-				pt2::Color mul = rc.GetMul();
-				mul.a = alpha;
-				rc.SetMul(mul);
-				sprs[i]->SetColor(rc);
+				auto rc = sprs[i]->GetColorCommon();
+				rc.mul.a = alpha;
+				sprs[i]->SetColorCommon(rc);
 			}
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		} 
 		else if (state == wxID_CANCEL) 
 		{
-			s2::RenderColor rc = sprs[0]->GetColor();
-			pt2::Color mul = rc.GetMul();
-			mul.a = old_alpha;
-			rc.SetMul(mul);
-			sprs[0]->SetColor(rc);
+			auto rc = sprs[0]->GetColorCommon();
+			rc.mul.a = old_alpha;
+			sprs[0]->SetColorCommon(rc);
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		return true;

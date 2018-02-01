@@ -13,7 +13,6 @@
 #include <easyscale9.h>
 
 #include <sprite2/Sprite.h>
-#include <sprite2/RenderColor.h>
 #include <gum/trans_color.h>
 #include <SM_Calc.h>
 
@@ -644,8 +643,8 @@ void CocoPacker::resolveSpriteForFrame(const ee::SprConstPtr& spr, int id, bool 
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	const pt2::Color& mul = spr->GetColor().GetMul();
-	const pt2::Color& add = spr->GetColor().GetAdd();
+	const pt2::Color& mul = spr->GetColorCommon().mul;
+	const pt2::Color& add = spr->GetColorCommon().add;
 	if (mul != pt2::Color(255, 255, 255, 255) || add != pt2::Color(0,0,0,0))
 	{
 		std::string assignColor = lua::assign("color", gum::color2str(mul, sns::BGRA));
@@ -672,8 +671,8 @@ void CocoPacker::resolveSpriteForFrameImage(const ee::SprConstPtr& spr, int id)
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	const pt2::Color& mul = spr->GetColor().GetMul();
-	const pt2::Color& add = spr->GetColor().GetAdd();
+	const pt2::Color& mul = spr->GetColorCommon().mul;
+	const pt2::Color& add = spr->GetColorCommon().add;
 	if (mul != pt2::Color(1,1,1,1) || add != pt2::Color(0,0,0,0))
 	{
 		std::string assignColor = lua::assign("color", gum::color2str(mul, sns::BGRA));

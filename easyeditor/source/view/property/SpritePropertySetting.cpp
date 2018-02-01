@@ -15,7 +15,6 @@
 #include "subject_id.h"
 #include "sprite_msg.h"
 #include "panel_msg.h"
-#include "SetSpriteColorAOP.h"
 #include "FileHelper.h"
 #include "FilterModes.h"
 #include "WXHelper.h"
@@ -26,8 +25,12 @@
 #include "SprTagProperty.h"
 #include "StringHelper.h"
 #include "EditSprMsg.h"
+#include "SetSpriteColMulAOP.h"
+#include "SetSpriteColAddAOP.h"
+#include "SetSpriteColRMapAOP.h"
+#include "SetSpriteColGMapAOP.h"
+#include "SetSpriteColBMapAOP.h"
 
-#include <sprite2/RenderColor.h>
 #include <sprite2/RenderShader.h>
 
 #include <wx/propgrid/advprops.h>
@@ -267,8 +270,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	tag_prop->SetParent(pg);
 	tag_prop->SetSprite(spr);
 
-	const pt2::Color& mul = spr->GetColor().GetMul();
-	const pt2::Color& add = spr->GetColor().GetAdd();
+	const pt2::Color& mul = spr->GetColorCommon().mul;
+	const pt2::Color& add = spr->GetColorCommon().add;
 	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT) 
 	{
 		wxColour mul_col = wxColour(mul.r, mul.g, mul.b, mul.a);
@@ -376,8 +379,8 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	wxPGProperty* col_prop = pg->Append(new wxStringProperty(wxT("Color"), wxPG_LABEL, wxT("<composed>")));
 	col_prop->SetExpanded(false);
 
-	const pt2::Color& mul = spr->GetColor().GetMul();
-	const pt2::Color& add = spr->GetColor().GetAdd();
+	auto& mul = spr->GetColorCommon().mul;
+	auto& add = spr->GetColorCommon().add;
 	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT) {
 		wxColour mul_col = wxColour(mul.r, mul.g, mul.b, mul.a);
 		wxColour add_col = wxColour(add.r, add.g, add.b, add.a);
@@ -546,16 +549,14 @@ void SpritePropertySetting::SetColMul(const ee::SprPtr& spr, const std::string& 
 		fixed = "rgb" + fixed;
 	}
 	wxColour wx_col(fixed);
-	const pt2::Color& mul = spr->GetColor().GetMul();
-	pt2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), mul.a);
-	if (col == mul) {
+	auto& col_common = spr->GetColorCommon();
+	pt2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), col_common.mul.a);
+	if (col == col_common.mul) {
 		return;
 	}
 
-	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteMulColorAOP>(spr, col));
-	s2::RenderColor rc = spr->GetColor();
-	rc.SetMul(col);
-	spr->SetColor(rc);
+	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteColMulAOP>(spr, col));
+	spr->SetColorCommon(pt2::RenderColorCommon(col, col_common.add));
 
 	EditSprMsg::SetColMul(spr.get(), col);
 }
@@ -567,16 +568,14 @@ void SpritePropertySetting::SetColAdd(const ee::SprPtr& spr, const std::string& 
 		fixed = "rgb" + fixed;
 	}
 	wxColour wx_col(fixed);
-	const pt2::Color& add = spr->GetColor().GetAdd();
-	pt2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), add.a);
-	if (col == add) {
+	auto& col_common = spr->GetColorCommon();
+	pt2::Color col(wx_col.Red(), wx_col.Green(), wx_col.Blue(), col_common.add.a);
+	if (col == col_common.add) {
 		return;
 	}
 
-	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteAddColorAOP>(spr, col));
-	s2::RenderColor rc = spr->GetColor();
-	rc.SetAdd(col);
-	spr->SetColor(rc);
+	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteColAddAOP>(spr, col));
+	spr->SetColorCommon(pt2::RenderColorCommon(col_common.mul, col));
 
 	EditSprMsg::SetColAdd(spr.get(), col);
 }
@@ -587,19 +586,17 @@ void SpritePropertySetting::SetColAlpha(const ee::SprPtr& spr, const std::string
 	ee::StringHelper::FromString(val, alpha);
 	alpha = std::max(0, std::min(255, alpha));
 
-	if (spr->GetColor().GetMul().a == alpha) {
+	auto& col_common = spr->GetColorCommon();
+	if (col_common.mul.a == alpha) {
 		return;
 	}
 
-	pt2::Color col = spr->GetColor().GetMul();
-	col.a = alpha;
-	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteMulColorAOP>(spr, col));
+	auto mul = col_common.mul;
+	mul.a = alpha;
+	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteColMulAOP>(spr, mul));
+	spr->SetColorCommon(pt2::RenderColorCommon(mul, col_common.add));
 
-	s2::RenderColor rc = spr->GetColor();
-	rc.SetMul(col);
-	spr->SetColor(rc);
-
-	EditSprMsg::SetColMul(spr.get(), col);
+	EditSprMsg::SetColMul(spr.get(), mul);
 }
 
 void SpritePropertySetting::SetColOverlap(const ee::SprPtr& spr, const std::string& val)
@@ -607,17 +604,16 @@ void SpritePropertySetting::SetColOverlap(const ee::SprPtr& spr, const std::stri
 	int overlay;
 	ee::StringHelper::FromString(val, overlay);
 	overlay = std::max(0, std::min(255, overlay));
-	if (spr->GetColor().GetAdd().a == overlay) {
+
+	auto& col_common = spr->GetColorCommon();
+	if (col_common.add.a == overlay) {
 		return;
 	}
 
-	pt2::Color add = spr->GetColor().GetAdd();
+	auto add = col_common.add;
 	add.a = overlay;
-	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteAddColorAOP>(spr, add));
-
-	s2::RenderColor rc = spr->GetColor();
-	rc.SetAdd(add);
-	spr->SetColor(rc);
+	EditAddRecordSJ::Instance()->Add(std::make_shared<SetSpriteColAddAOP>(spr, add));
+	spr->SetColorCommon(pt2::RenderColorCommon(col_common.mul, add));
 
 	EditSprMsg::SetColAdd(spr.get(), add);
 }

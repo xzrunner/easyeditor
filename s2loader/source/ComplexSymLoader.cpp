@@ -3,7 +3,6 @@
 #include "s2loader/SprTransLoader.h"
 
 #include <sprite2/Sprite.h>
-#include <sprite2/RenderColor.h>
 #include <sprite2/ComplexSymbol.h>
 #include <simp/NodeComplex.h>
 #include <gum/FilepathHelper.h>

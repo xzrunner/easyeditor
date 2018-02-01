@@ -2,7 +2,6 @@
 #include "FontBlankSymbol.h"
 #include "FontBlankPropertySetting.h"
 
-#include <sprite2/RenderColor.h>
 #include <gum/trans_color.h>
 
 namespace ee

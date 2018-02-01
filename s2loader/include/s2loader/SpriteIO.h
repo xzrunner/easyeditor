@@ -2,7 +2,6 @@
 #define _S2LOADER_SPRITE_IO_H_
 
 #include <SM_Vector.h>
-#include <sprite2/RenderColor.h>
 #include <sprite2/BlendMode.h>
 #include <sprite2/FastBlendMode.h>
 #include <sprite2/RenderFilter.h>
@@ -11,6 +10,8 @@
 #include <sprite2/config.h>
 #include <cu/cu_stl.h>
 #include <sns/NodeSprCommon.h>
+#include <painting2/RenderColorCommon.h>
+#include <painting2/RenderColorMap.h>
 
 #include <json/json.h>
 
@@ -60,7 +61,7 @@ protected:
 
 private:
 	void LoadColor(const s2::SprPtr& spr);
-	void StoreColor(const s2::RenderColor& color);
+	void StoreColor(const pt2::RenderColorCommon& col_common, const pt2::RenderColorMap& col_map);
 	void LoadColor(const Json::Value& val);
 	void StoreColor(Json::Value& val);
 
@@ -76,32 +77,33 @@ private:
 
 public:
 	// geometry
-	sm::vec2			m_position;
-	float				m_angle;
-	sm::vec2			m_scale;
-	sm::vec2			m_shear;
-	sm::vec2			m_offset;
+	sm::vec2			   m_position;
+	float				   m_angle;
+	sm::vec2			   m_scale;
+	sm::vec2			   m_shear;
+	sm::vec2			   m_offset;
 
 	// shader
-	s2::RenderColor		m_col;
-	s2::BlendMode		m_blend;
-	s2::FastBlendMode	m_fast_blend;
+	pt2::RenderColorCommon m_col_common;
+	pt2::RenderColorMap    m_col_map;
+	s2::BlendMode		   m_blend;
+	s2::FastBlendMode	   m_fast_blend;
 #ifdef S2_FILTER_FULL
-	s2::RenderFilterPtr m_filter;
+	s2::RenderFilterPtr    m_filter;
 #else
-	s2::FilterMode      m_filter;
+	s2::FilterMode         m_filter;
 #endif // S2_FILTER_FULL
-	float               m_downsample;
-	s2::CameraMode		m_camera;
+	float                  m_downsample;
+	s2::CameraMode		   m_camera;
 	
 	// info
-	CU_STR			    m_name;
-	bool                m_need_actor;
-	bool                m_integrate;
+	CU_STR			       m_name;
+	bool                   m_need_actor;
+	bool                   m_integrate;
 
 	// edit
-	bool				m_visible;
-	bool				m_editable;
+	bool			       m_visible;
+	bool				   m_editable;
 
 protected:
 	bool m_compress;

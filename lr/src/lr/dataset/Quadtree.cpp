@@ -87,10 +87,8 @@ void Quadtree::DebugDraw() const
 		s2::RVG::Rect(sm::vec2(m_selected->m_rect.xmin, m_selected->m_rect.ymin), sm::vec2(m_selected->m_rect.xmax, m_selected->m_rect.ymax), false);
 		s2::RVG::LineWidth(2);
 
-		s2::RenderColor color;
-		color.SetMul(ee::LIGHT_BLUE);
 		s2::RenderParams params;
-		params.color = color;
+		params.col_common.mul = ee::LIGHT_BLUE;
 		for (int i = 0, n = m_selected->m_sprs.size(); i < n; ++i) {
 			ee::SpriteRenderer::Instance()->Draw(m_selected->m_sprs[i], params);
 		}

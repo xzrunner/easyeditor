@@ -3,11 +3,9 @@
 #include "Symbol.h"
 #include "color_config.h"
 #include "panel_msg.h"
-#include "SetSpriteColorAOP.h"
 #include "SetSpritePosAOP.h"
 #include "TranslateSpriteAOP.h"
 
-#include <sprite2/RenderColor.h>
 #include <SM_Calc.h>
 
 #include <wx/string.h>
@@ -70,13 +68,13 @@ pt2::Color MultiSpritesPropertyImpl::GetMultiColor() const
 		return WHITE;
 	}
 
-	const s2::RenderColor& rc = m_sprs[0]->GetColor();
+	auto& rc = m_sprs[0]->GetColorCommon();
 	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
-		if (rc.GetMul() != m_sprs[i]->GetColor().GetMul()) {
+		if (rc.mul != m_sprs[i]->GetColorCommon().mul) {
 			return WHITE;
 		}
 	}
-	return rc.GetMul();
+	return rc.mul;
 }
 
 pt2::Color MultiSpritesPropertyImpl::GetAddColor() const
@@ -85,13 +83,13 @@ pt2::Color MultiSpritesPropertyImpl::GetAddColor() const
 		return BLACK;
 	}
 	
-	const s2::RenderColor& rc = m_sprs[0]->GetColor();
+	auto& rc = m_sprs[0]->GetColorCommon();
 	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
-		if (rc.GetAdd() != m_sprs[i]->GetColor().GetAdd()) {
+		if (rc.add != m_sprs[i]->GetColorCommon().add) {
 			return BLACK;
 		}
 	}
-	return rc.GetAdd();
+	return rc.add;
 }
 
 pt2::Color MultiSpritesPropertyImpl::GetTransColorR() const
@@ -100,13 +98,13 @@ pt2::Color MultiSpritesPropertyImpl::GetTransColorR() const
 		return RED;
 	}
 
-	const s2::RenderColor& rc = m_sprs[0]->GetColor();
+	auto& rc = m_sprs[0]->GetColorMap();
 	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
-		if (rc.GetRMap() != m_sprs[i]->GetColor().GetRMap()) {
+		if (rc.rmap != m_sprs[i]->GetColorMap().rmap) {
 			return RED;
 		}
 	}
-	return rc.GetRMap();
+	return rc.rmap;
 }
 
 pt2::Color MultiSpritesPropertyImpl::GetTransColorG() const
@@ -115,13 +113,13 @@ pt2::Color MultiSpritesPropertyImpl::GetTransColorG() const
 		return GREEN;
 	}
 
-	const s2::RenderColor& rc = m_sprs[0]->GetColor();
+	auto& rc = m_sprs[0]->GetColorMap();
 	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
-		if (rc.GetGMap() != m_sprs[i]->GetColor().GetGMap()) {
+		if (rc.gmap != m_sprs[i]->GetColorMap().gmap) {
 			return GREEN;
 		}
 	}
-	return rc.GetGMap();
+	return rc.gmap;
 }
 
 pt2::Color MultiSpritesPropertyImpl::GetTransColorB() const
@@ -130,13 +128,13 @@ pt2::Color MultiSpritesPropertyImpl::GetTransColorB() const
 		return BLUE;
 	}
 
-	const s2::RenderColor& rc = m_sprs[0]->GetColor();
+	auto& rc = m_sprs[0]->GetColorMap();
 	for (int i = 1, n = m_sprs.size(); i < n; ++i) {
-		if (rc.GetBMap() != m_sprs[i]->GetColor().GetBMap()) {
+		if (rc.bmap != m_sprs[i]->GetColorMap().bmap) {
 			return BLUE;
 		}
 	}
-	return rc.GetBMap();
+	return rc.bmap;
 }
 
 float MultiSpritesPropertyImpl::GetAngle() const
@@ -251,13 +249,11 @@ void MultiSpritesPropertyImpl::SetColorMul(const pt2::Color& col)
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) 
 	{
-		s2::RenderColor rc = m_sprs[i]->GetColor();
-
-		pt2::Color mul = col;
-		mul.a = rc.GetMul().a;
-		rc.SetMul(mul);
-
-		m_sprs[i]->SetColor(rc);
+		auto rc = m_sprs[i]->GetColorCommon();
+		float old_a = rc.mul.a;
+		rc.mul = col;
+		rc.mul.a = old_a;
+		m_sprs[i]->SetColorCommon(rc);
 	}
 }
 
@@ -267,13 +263,11 @@ void MultiSpritesPropertyImpl::SetColorAdd(const pt2::Color& col)
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) 
 	{
-		s2::RenderColor rc = m_sprs[i]->GetColor();
-
-		pt2::Color add = col;
-		add.a = rc.GetAdd().a;
-		rc.SetAdd(add);
-
-		m_sprs[i]->SetColor(rc);
+		auto rc = m_sprs[i]->GetColorCommon();
+		float old_a = rc.add.a;
+		rc.add = col;
+		rc.add.a = old_a;
+		m_sprs[i]->SetColorCommon(rc);
 	}
 }
 
@@ -283,13 +277,9 @@ void MultiSpritesPropertyImpl::SetColorAlpha(int alpha)
 
 	for (int i = 0, n = m_sprs.size(); i < n; ++i) 
 	{
-		s2::RenderColor rc = m_sprs[i]->GetColor();
-
-		pt2::Color mul = rc.GetMul();
-		mul.a = alpha;
-		rc.SetMul(mul);
-
-		m_sprs[i]->SetColor(rc);
+		auto rc = m_sprs[i]->GetColorCommon();
+		rc.mul.a = alpha;
+		m_sprs[i]->SetColorCommon(rc);
 	}
 }
 

@@ -6,7 +6,6 @@
 #include <string>
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
-#include <sprite2/RenderColor.h>
 #include <sprite2/Shape.h>
 
 #include <json/json.h>

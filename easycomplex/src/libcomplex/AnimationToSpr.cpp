@@ -6,7 +6,6 @@
 #include <ee/BlendModes.h>
 
 #include <sprite2/RenderShader.h>
-#include <sprite2/RenderColor.h>
 #include <gum/trans_color.h>
 
 #include <easyanim.h>
@@ -130,16 +129,14 @@ void AnimationToSpr::TransSpriteMat(const ee::SprPtr& spr, const erespacker::Pac
 
 void AnimationToSpr::TransSpriteCol(const ee::SprPtr& spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
-	s2::RenderColor rc;
+	spr->SetColorCommon(pt2::RenderColorCommon(
+		gum::int2color(t.color, sns::RGBA),
+		gum::int2color(t.additive, sns::RGBA)));
 
-	rc.SetMul(gum::int2color(t.color, sns::RGBA));
-	rc.SetAdd(gum::int2color(t.additive, sns::RGBA));
-
-	rc.SetRMap(gum::int2color(t.rmap, sns::RGBA));
-	rc.SetGMap(gum::int2color(t.gmap, sns::RGBA));
-	rc.SetBMap(gum::int2color(t.bmap, sns::RGBA));
-
-	spr->SetColor(rc);
+	spr->SetColorMap(pt2::RenderColorMap(
+		gum::int2color(t.rmap, sns::RGBA),
+		gum::int2color(t.gmap, sns::RGBA),
+		gum::int2color(t.bmap, sns::RGBA)));
 }
 
 

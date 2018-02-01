@@ -64,6 +64,9 @@
     <Filter Include="msg">
       <UniqueIdentifier>{09063549-0269-48e5-bce5-d3ea15a67f0c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="aop\property\color">
+      <UniqueIdentifier>{7c9721ef-f5e0-49e2-a595-105065ae3b6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\edit\record\AtomicFactory.cpp">
@@ -79,9 +82,6 @@
       <Filter>aop\layer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\edit\record\SetSpriteAngleAOP.cpp">
-      <Filter>aop\property</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColorAOP.cpp">
       <Filter>aop\property</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\edit\record\SetSpritePosAOP.cpp">
@@ -255,6 +255,21 @@
     <ClCompile Include="..\..\..\source\edit\op\MsgHelper.cpp">
       <Filter>msg</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColAddAOP.cpp">
+      <Filter>aop\property\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColMulAOP.cpp">
+      <Filter>aop\property\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColRMapAOP.cpp">
+      <Filter>aop\property\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColGMapAOP.cpp">
+      <Filter>aop\property\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\edit\record\SetSpriteColBMapAOP.cpp">
+      <Filter>aop\property\color</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\ee\AtomicFactory.h">
@@ -270,9 +285,6 @@
       <Filter>aop\layer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\ee\SetSpriteAngleAOP.h">
-      <Filter>aop\property</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\ee\SetSpriteColorAOP.h">
       <Filter>aop\property</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\ee\SetSpritePosAOP.h">
@@ -460,6 +472,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\ee\MsgHelper.h">
       <Filter>msg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColAddAOP.h">
+      <Filter>aop\property\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColRMapAOP.h">
+      <Filter>aop\property\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColGMapAOP.h">
+      <Filter>aop\property\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColBMapAOP.h">
+      <Filter>aop\property\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\SetSpriteColMulAOP.h">
+      <Filter>aop\property\color</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

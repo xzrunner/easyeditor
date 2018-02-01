@@ -54,20 +54,22 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 
 	// shader
 
-	m_color = spr.GetColor();
-	if (m_color.GetMulABGR() != 0xffffffff) {
+	m_col_common = spr.GetColorCommon();
+	if (m_col_common.mul.ToABGR() != 0xffffffff) {
 		m_type |= simp::NodeTrans::COL_MUL_MASK;
 	}
-	if (m_color.GetAddABGR() != 0) {
+	if (m_col_common.add.ToABGR() != 0) {
 		m_type |= simp::NodeTrans::COL_ADD_MASK;
 	}
-	if (m_color.GetRMapABGR() != 0x000000ff) {
+
+	m_col_map = spr.GetColorMap();
+	if (m_col_map.rmap.ToABGR() != 0x000000ff) {
 		m_type |= simp::NodeTrans::COL_R_MASK;
 	}
-	if (m_color.GetGMapABGR() != 0x0000ff00) {
+	if (m_col_map.gmap.ToABGR() != 0x0000ff00) {
 		m_type |= simp::NodeTrans::COL_G_MASK;
 	}
-	if (m_color.GetBMapABGR() != 0x00ff0000) {
+	if (m_col_map.bmap.ToABGR() != 0x00ff0000) {
 		m_type |= simp::NodeTrans::COL_B_MASK;
 	}
 
@@ -151,7 +153,8 @@ bool PackTrans::operator == (const PackTrans& trans) const
 		&& m_offset == trans.m_offset 
 		&& m_position == trans.m_position 
 		&& m_angle == trans.m_angle 
-		&& m_color == trans.m_color 
+		&& m_col_common == trans.m_col_common
+		&& m_col_map == trans.m_col_map
 		&& m_blend == trans.m_blend 
 		&& m_fast_blend == trans.m_fast_blend 
 		&& fabs(m_downsample - trans.m_downsample) < FLT_EPSILON
@@ -190,19 +193,19 @@ void PackTrans::PackToLua(ebuilder::CodeGenerator& gen) const
 	// color
 	std::vector<std::string> colors;
 	if (m_type & simp::NodeTrans::COL_MUL_MASK) {
-		colors.push_back(lua::assign("mul", ee::StringHelper::ToString(m_color.GetMul().ToRGBA())));
+		colors.push_back(lua::assign("mul", ee::StringHelper::ToString(m_col_common.mul.ToRGBA())));
 	}
 	if (m_type & simp::NodeTrans::COL_ADD_MASK) {
-		colors.push_back(lua::assign("add", ee::StringHelper::ToString(m_color.GetAdd().ToRGBA())));
+		colors.push_back(lua::assign("add", ee::StringHelper::ToString(m_col_common.add.ToRGBA())));
 	}
 	if (m_type & simp::NodeTrans::COL_R_MASK) {
-		colors.push_back(lua::assign("rmap", ee::StringHelper::ToString(m_color.GetRMap().ToRGBA())));
+		colors.push_back(lua::assign("rmap", ee::StringHelper::ToString(m_col_map.rmap.ToRGBA())));
 	}
 	if (m_type & simp::NodeTrans::COL_G_MASK) {
-		colors.push_back(lua::assign("gmap", ee::StringHelper::ToString(m_color.GetGMap().ToRGBA())));
+		colors.push_back(lua::assign("gmap", ee::StringHelper::ToString(m_col_map.gmap.ToRGBA())));
 	}
 	if (m_type & simp::NodeTrans::COL_B_MASK) {
-		colors.push_back(lua::assign("bmap", ee::StringHelper::ToString(m_color.GetBMap().ToRGBA())));
+		colors.push_back(lua::assign("bmap", ee::StringHelper::ToString(m_col_map.bmap.ToRGBA())));
 	}
 	lua::connect(gen, colors);
 
@@ -375,23 +378,23 @@ void PackTrans::PackToBin(uint8_t** ptr) const
 		pack(angle, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_MUL_MASK) {
-		uint32_t col = m_color.GetMul().ToRGBA();
+		uint32_t col = m_col_common.mul.ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_ADD_MASK) {
-		uint32_t col = m_color.GetAdd().ToRGBA();
+		uint32_t col = m_col_common.add.ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_R_MASK) {
-		uint32_t col = m_color.GetRMap().ToRGBA();
+		uint32_t col = m_col_map.rmap.ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_G_MASK) {
-		uint32_t col = m_color.GetGMap().ToRGBA();
+		uint32_t col = m_col_map.gmap.ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::COL_B_MASK) {
-		uint32_t col = m_color.GetBMap().ToRGBA();
+		uint32_t col = m_col_map.bmap.ToRGBA();
 		pack(col, ptr);
 	}
 	if (m_type & simp::NodeTrans::BLEND_MASK) {

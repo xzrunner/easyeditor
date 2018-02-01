@@ -3,7 +3,6 @@
 #include "panel_msg.h"
 
 #include <sprite2/Sprite.h>
-#include <sprite2/RenderColor.h>
 
 namespace ee
 {
@@ -14,7 +13,7 @@ AlphaSettingDlg::AlphaSettingDlg(wxWindow* parent, const SprPtr& spr, const wxPo
 	, m_alpha(NULL)
 {
 	InitLayout();
-	SetColor(spr->GetColor().GetMul());
+	SetColor(spr->GetColorCommon().mul);
 }
 
 pt2::Color AlphaSettingDlg::GetColor() const
@@ -26,11 +25,10 @@ pt2::Color AlphaSettingDlg::GetColor() const
 
 void AlphaSettingDlg::OnColorChanged()
 {
-	s2::RenderColor rc = m_spr->GetColor();
-	pt2::Color mul = rc.GetMul();
+	auto mul = m_spr->GetColorCommon().mul;
 	mul.a = m_alpha->GetColorValue();
-	rc.SetMul(mul);
-	m_spr->SetColor(rc);
+	m_spr->SetColorCommon(pt2::RenderColorCommon(
+		mul, m_spr->GetColorCommon().add));
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

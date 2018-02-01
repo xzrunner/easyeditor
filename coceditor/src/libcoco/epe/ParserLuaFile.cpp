@@ -18,7 +18,6 @@
 #include <gimg_export.h>
 #include <pimg/Cropping.h>
 #include <sprite2/SymType.h>
-#include <sprite2/RenderColor.h>
 #include <gum/trans_color.h>
 #include <SM_Calc.h>
 
@@ -801,10 +800,9 @@ void ParserLuaFile::Animation::Item::transform(const ee::SprPtr& spr) const
 
 	if (is_full && valid)
 	{
-		s2::RenderColor rc;
-		rc.SetMul(gum::int2color(color, sns::BGRA));
-		rc.SetAdd(gum::int2color(add, sns::ABGR));
-		spr->SetColor(rc);
+		spr->SetColorCommon(pt2::RenderColorCommon(
+			gum::int2color(color, sns::BGRA),
+			gum::int2color(add, sns::ABGR)));
 		
 		float x = mat[4] / 16.0f,
 			y = mat[5] / 16.0f;
