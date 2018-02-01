@@ -15,6 +15,8 @@
     <ClCompile Include="..\..\..\source\BoundingBox.cpp" />
     <ClCompile Include="..\..\..\source\GeoTransform.cpp" />
     <ClCompile Include="..\..\..\source\OBB.cpp" />
+    <ClCompile Include="..\..\..\source\RenderColorCommon.cpp" />
+    <ClCompile Include="..\..\..\source\RenderColorMap.cpp" />
     <ClCompile Include="..\..\..\source\RenderSystem.cpp" />
     <ClCompile Include="..\..\..\source\Texture.cpp" />
   </ItemGroup>
@@ -24,6 +26,8 @@
     <ClInclude Include="..\..\..\include\painting2\Color.h" />
     <ClInclude Include="..\..\..\include\painting2\GeoTransform.h" />
     <ClInclude Include="..\..\..\include\painting2\OBB.h" />
+    <ClInclude Include="..\..\..\include\painting2\RenderColorCommon.h" />
+    <ClInclude Include="..\..\..\include\painting2\RenderColorMap.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderSystem.h" />
     <ClInclude Include="..\..\..\include\painting2\SRT.h" />
     <ClInclude Include="..\..\..\include\painting2\Texture.h" />

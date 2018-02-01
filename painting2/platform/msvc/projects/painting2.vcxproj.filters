@@ -15,6 +15,12 @@
     <ClCompile Include="..\..\..\source\OBB.cpp">
       <Filter>bb</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\RenderColorCommon.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\RenderColorMap.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\painting2\Texture.h" />
@@ -37,6 +43,12 @@
     <ClInclude Include="..\..\..\include\painting2\Color.h">
       <Filter>color</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RenderColorMap.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RenderColorCommon.h">
+      <Filter>render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="transform">
@@ -47,6 +59,9 @@
     </Filter>
     <Filter Include="color">
       <UniqueIdentifier>{61410980-78e7-4dc7-9e99-cfa4e4c1b396}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{427ce5ba-3b6e-4013-ac49-3327c7c3b567}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
