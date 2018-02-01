@@ -25,7 +25,7 @@ void SpatialPartition::Insert(const Sprite* spr/*, const S2_MAT& mt*/)
 // 	spr->GetTransMatrix(t);
 //	t = t * mt;
 
-	sm::rect src = spr->GetBounding()->GetSize();
+	sm::rect src = spr->GetBounding().GetSize();
 	sp_region dst;
 	dst.xmin = src.xmin;
 	dst.xmax = src.xmax;

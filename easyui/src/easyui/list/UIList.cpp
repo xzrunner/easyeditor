@@ -332,7 +332,7 @@ bool UIList::Filling()
 	m_items.clear();
 
 	sm::vec2 base = m_item_spr->GetPosition();
-	sm::vec2 item_sz = m_item_spr->GetBounding()->GetSize().Size();
+	sm::vec2 item_sz = m_item_spr->GetBounding().GetSize().Size();
 	float hw = item_sz.x * 0.5f;
 	float hh = item_sz.y * 0.5f;
 

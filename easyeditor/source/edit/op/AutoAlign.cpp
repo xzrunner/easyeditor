@@ -41,8 +41,8 @@ void AutoAlign::Align(const std::vector<SprPtr>& sprs)
 		auto& src = sources[i];
 		if (src == dst) continue;
 
-		sm::rect src_rect = src->GetBounding()->GetSize(),
-			     dst_rect = dst->GetBounding()->GetSize();
+		sm::rect src_rect = src->GetBounding().GetSize(),
+			     dst_rect = dst->GetBounding().GetSize();
 
 		float src_cy = src_rect.Center().y;
 		float src_down = src_rect.ymin;
@@ -82,8 +82,8 @@ void AutoAlign::Align(const std::vector<SprPtr>& sprs)
 		auto& src = sources[i];
 		if (src == dst) continue;
 
-		sm::rect src_rect = src->GetBounding()->GetSize(),
-			     dst_rect = dst->GetBounding()->GetSize();
+		sm::rect src_rect = src->GetBounding().GetSize(),
+			     dst_rect = dst->GetBounding().GetSize();
 
 		float src_cx = src_rect.Center().x;
 		float src_left = src_rect.xmin;
@@ -128,8 +128,8 @@ void AutoAlign::Align(const Sprite& src, Sprite& dst)
 	const float DIS = 5;
 	const float LEN = 400;
 
-	sm::rect src_rect = src.GetBounding()->GetSize(),
-		     dst_rect = dst.GetBounding()->GetSize();
+	sm::rect src_rect = src.GetBounding().GetSize(),
+		     dst_rect = dst.GetBounding().GetSize();
 
 	float src_left	= src_rect.xmin,
 		  src_right = src_rect.xmax,

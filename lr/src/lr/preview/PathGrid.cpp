@@ -19,7 +19,7 @@ PathGrid::PathGrid(const sm::rect& region, int row, int col)
 
 void PathGrid::DisableRegion(const ee::SprConstPtr& spr, bool disable)
 {
-	m_nw.SetStatus(spr->GetBounding()->GetSize(), !disable);
+	m_nw.SetStatus(spr->GetBounding().GetSize(), !disable);
 }
 
 void PathGrid::QueryRoute(const sm::vec2& start, const sm::vec2& end)

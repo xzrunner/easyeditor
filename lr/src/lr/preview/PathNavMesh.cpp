@@ -38,7 +38,7 @@ void PathNavMesh::DisableRegion(const ee::SprConstPtr& spr, bool disable)
 	}
 	else
 	{
-		sm::rect rect = spr->GetBounding()->GetSize();
+		sm::rect rect = spr->GetBounding().GetSize();
 		bound.push_back(sm::vec2(rect.xmin, rect.ymin));
 		bound.push_back(sm::vec2(rect.xmax, rect.ymin));
 		bound.push_back(sm::vec2(rect.xmax, rect.ymax));

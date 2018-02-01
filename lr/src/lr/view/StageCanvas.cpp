@@ -130,7 +130,7 @@ void StageCanvas::DrawSprite(const ee::SprPtr& spr, bool draw_edge, int name_vis
 	{
 		sm::rect screen_region = GetVisibleRegion();
 		if (screen_region.IsValid() &&
-			!sm::is_rect_intersect_rect(spr->GetBounding()->GetSize(), screen_region)) {
+			!sm::is_rect_intersect_rect(spr->GetBounding().GetSize(), screen_region)) {
 			return;
 		}		
 	}

@@ -50,7 +50,7 @@ void Symbol::DrawBackground(const Sprite* spr, const S2_MAT& mt) const
 
 	s2::RVG::SetColor(s2::Color(179, 179, 0, 179));
 
-	sm::rect r = spr->GetBounding()->GetSize();
+	sm::rect r = spr->GetBounding().GetSize();
 	s2::RVG::Rect(nullptr, r, true);
 
 // 	sm::vec2 min(r.xmin, r.ymin), max(r.xmax, r.ymax);

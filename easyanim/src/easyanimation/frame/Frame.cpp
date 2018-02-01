@@ -164,7 +164,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 	sm::rect region;
  	for (size_t i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->GetBounding()->CombineTo(region);
+		sprs[i]->GetBounding().CombineTo(region);
  	}
 
 	sm::vec2 sz = region.Size();

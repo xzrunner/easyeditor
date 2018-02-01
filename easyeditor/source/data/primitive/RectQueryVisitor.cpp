@@ -17,13 +17,10 @@ void RectQueryVisitor::Visit(const SprPtr& spr, bool& next)
 	if (!spr->IsEditable()) {
 		return;
 	}
-	const pt2::BoundingBox* bv = spr->GetBounding();
-	if (!bv) {
-		return;
-	}
-	if (m_contain && sm::is_rect_contain_rect(m_rect, bv->GetSize())) {
+	auto& bb = spr->GetBounding();
+	if (m_contain && sm::is_rect_contain_rect(m_rect, bb.GetSize())) {
 		m_selected.push_back(spr);
-	} else if (!m_contain && bv->IsIntersect(m_rect)) {
+	} else if (!m_contain && bb.IsIntersect(m_rect)) {
 		m_selected.push_back(spr);
 	}
 }

@@ -23,7 +23,7 @@ DrawSelectedSpriteVisitor::DrawSelectedSpriteVisitor(const s2::Color& color)
 void DrawSelectedSpriteVisitor::Visit(const SprPtr& spr, bool& next)
 {
 	CU_VEC<sm::vec2> bound;
-	spr->GetBounding()->GetBoundPos(bound);
+	spr->GetBounding().GetBoundPos(bound);
 	s2::RVG::SetColor(m_color);
 	s2::RVG::Polyline(nullptr, bound, true);
 	

@@ -210,7 +210,7 @@ sm::rect Symbol::GetBoundingImpl(const s2::Sprite* spr, const s2::Actor* actor, 
 	}
 	auto& sprs = GetActionChildren(action);
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->GetBounding()->CombineTo(b);
+		sprs[i]->GetBounding().CombineTo(b);
 	}
 	return b;
 }

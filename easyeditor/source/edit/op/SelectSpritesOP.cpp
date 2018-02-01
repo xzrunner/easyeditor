@@ -271,7 +271,7 @@ SprPtr SelectSpritesOP::SelectByPos(const sm::vec2& pos) const
 	std::vector<SprPtr> sprs;
 	m_sprs_impl->GetSpriteSelection()->Traverse(FetchAllRefVisitor<Sprite>(sprs));
 	for (auto& spr : sprs) {
-		if (spr->IsEditable() && spr->GetBounding()->IsContain(pos)) {
+		if (spr->IsEditable() && spr->GetBounding().IsContain(pos)) {
 			selected = spr;
 			break;
 		}

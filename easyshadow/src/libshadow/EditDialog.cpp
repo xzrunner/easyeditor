@@ -94,7 +94,7 @@ void EditDialog::InitCamera(const ee::SprPtr& spr) const
 	}
 
 	wxSize sz = GetSize();
-	sm::vec2 r_sz = spr->GetBounding()->GetSize().Size();
+	sm::vec2 r_sz = spr->GetBounding().GetSize().Size();
 	float scale = std::min(sz.GetWidth() / r_sz.x, sz.GetHeight() / r_sz.y);
 
 	auto ortho_cam = std::dynamic_pointer_cast<s2::OrthoCamera>(cam);

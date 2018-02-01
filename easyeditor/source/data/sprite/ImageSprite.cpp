@@ -55,10 +55,9 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
  	rect.ymin = -hh;
  	rect.ymax = hh;
 
-	void* ptr = mm::AllocHelper::Allocate(sizeof(pt2::OBB));
-	pt2::BoundingBox* bb = new (ptr) pt2::OBB();
-	bb->Build(rect, GetPosition(), GetAngle(), scale, GetShear(), GetOffset());
-	m_bounding.reset(bb);
+	auto& bb = GetBounding();
+	const_cast<pt2::BoundingBox&>(bb).Build(
+		rect, GetPosition(), GetAngle(), scale, GetShear(), GetOffset());
 }
 
 }

@@ -421,14 +421,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
 			const SprPtr& spr = m_sprs[i];
-			float l = spr->GetBounding()->GetSize().xmin;
+			float l = spr->GetBounding().GetSize().xmin;
 			if (l < left)
 				left = l;
 		}
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
 			const SprPtr& spr = m_sprs[i];
-			float x = spr->GetPosition().x + left - spr->GetBounding()->GetSize().xmin;
+			float x = spr->GetPosition().x + left - spr->GetBounding().GetSize().xmin;
 			m_sprs[i]->SetPosition(sm::vec2(x, spr->GetPosition().y));
 		}
 	}
@@ -438,14 +438,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
 			const SprPtr& spr = m_sprs[i];
-			float r = spr->GetBounding()->GetSize().xmax;
+			float r = spr->GetBounding().GetSize().xmax;
 			if (r > right)
 				right = r;
 		}
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
 			const SprPtr& spr = m_sprs[i];
-			float x = spr->GetPosition().x + right - spr->GetBounding()->GetSize().xmax;
+			float x = spr->GetPosition().x + right - spr->GetBounding().GetSize().xmax;
 			m_sprs[i]->SetPosition(sm::vec2(x, spr->GetPosition().y));
 		}
 	}
@@ -455,14 +455,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
 			const SprPtr& spr = m_sprs[i];
-			float u = spr->GetBounding()->GetSize().ymax;
+			float u = spr->GetBounding().GetSize().ymax;
 			if (u > up)
 				up = u;
 		}
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
 			const SprPtr& spr = m_sprs[i];
-			float y = spr->GetPosition().y + up - spr->GetBounding()->GetSize().ymax;
+			float y = spr->GetPosition().y + up - spr->GetBounding().GetSize().ymax;
 			m_sprs[i]->SetPosition(sm::vec2(spr->GetPosition().x, y));
 		}
 	}
@@ -472,14 +472,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
 			const SprPtr& spr = m_sprs[i];
-			float d = spr->GetBounding()->GetSize().ymin;
+			float d = spr->GetBounding().GetSize().ymin;
 			if (d < down)
 				down = d;
 		}
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
 			const SprPtr& spr = m_sprs[i];
-			float y = spr->GetPosition().y + down - spr->GetBounding()->GetSize().ymin;
+			float y = spr->GetPosition().y + down - spr->GetBounding().GetSize().ymin;
 			m_sprs[i]->SetPosition(sm::vec2(spr->GetPosition().x, y));
 		}
 	}
@@ -597,7 +597,7 @@ void MultiSpritesPropertyImpl::OnCenter(int center)
 		float maxArea = 0;
 		for (size_t i = 0, n = m_sprs.size(); i < n; ++i)
 		{
-			sm::vec2 sz = m_sprs[i]->GetBounding()->GetSize().Size();
+			sm::vec2 sz = m_sprs[i]->GetBounding().GetSize().Size();
 			float area = sz.x * sz.y;
 			if (area > maxArea)
 			{

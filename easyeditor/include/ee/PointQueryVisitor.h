@@ -31,7 +31,7 @@ PointQueryVisitor::PointQueryVisitor(const sm::vec2& pos)
 inline
 void PointQueryVisitor::Visit(const SprPtr& spr, bool& next)
 {
-	if (spr->GetBounding()->IsContain(m_pos))
+	if (spr->GetBounding().IsContain(m_pos))
 	{
 		m_selected = spr;
 		next = false;

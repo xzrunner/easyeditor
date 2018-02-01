@@ -157,7 +157,7 @@ Insert(const ee::SprConstPtr& spr)
 	} 
 	else 
 	{
-		sm::rect rect = spr->GetBounding()->GetSize();
+		sm::rect rect = spr->GetBounding().GetSize();
 		for (int i = 0; i < 4; ++i) {
 			Node* child = m_children[i];
 			if (child->IsIntersect(rect)) {
@@ -241,7 +241,7 @@ Split()
 		const ee::SprConstPtr& spr = m_sprs[i];
 		for (int j = 0; j < 4; ++j) {
 			Node* node = m_children[j];
-			sm::rect rect = spr->GetBounding()->GetSize();
+			sm::rect rect = spr->GetBounding().GetSize();
 			if (node->IsIntersect(rect)) {
 				node->Insert(spr);
 			}

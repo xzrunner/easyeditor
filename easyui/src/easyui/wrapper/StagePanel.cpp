@@ -131,7 +131,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	value["clipbox"]["h"] = cb_sz.y;
 	value["clipbox"]["x"] = m_clipbox.xmin;
 	value["clipbox"]["y"] = m_clipbox.ymax;
-	sm::vec2 c_sz = items_sprite->GetBounding()->GetSize().Size();
+	sm::vec2 c_sz = items_sprite->GetBounding().GetSize().Size();
 	value["children"]["w"] = c_sz.x;
 	value["children"]["h"] = c_sz.y;
 	Json::StyledStreamWriter writer;

@@ -102,7 +102,7 @@ void Frame::OnStatistics(wxCommandEvent& event)
 	int area = 0;
 	for (int i = 0; i < count; ++i) {
 		const ee::SprConstPtr& spr = sprs[i];
-		sm::rect r = spr->GetBounding()->GetSize();
+		sm::rect r = spr->GetBounding().GetSize();
 		area += (r.xmax - r.xmin) * (r.ymax - r.ymin);
 	}
 

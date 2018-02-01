@@ -39,7 +39,7 @@ StageCanvas::~StageCanvas()
 void StageCanvas::SetBackground(ee::Symbol* background)
 {
 	m_background = ee::SpriteFactory::Instance()->Create(background);
-	m_background->Translate(sm::vec2(0.0f, m_background->GetBounding()->Height() * 0.375f));
+	m_background->Translate(sm::vec2(0.0f, m_background->GetBounding().Height() * 0.375f));
 }
 
 sm::vec2 StageCanvas::TransToBirdView(const sm::vec2& pos)

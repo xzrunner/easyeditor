@@ -32,7 +32,7 @@ PointMultiQueryVisitor::PointMultiQueryVisitor(const sm::vec2& pos)
 inline
 void PointMultiQueryVisitor::Visit(const SprPtr& spr, bool& next)
 {
-	if (spr->GetBounding()->IsContain(m_pos))
+	if (spr->GetBounding().IsContain(m_pos))
 	{
 		m_sprs.push_back(spr);
 		next = false;

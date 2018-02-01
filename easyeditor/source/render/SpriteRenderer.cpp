@@ -21,7 +21,7 @@ void draw_anchor(const s2::Sprite* spr, const s2::RenderParams& params)
 	}
 
 	CU_VEC<sm::vec2> bound;
-	sm::rect rect = spr->GetBounding()->GetSize();
+	sm::rect rect = spr->GetBounding().GetSize();
 	bound.push_back(sm::vec2(rect.xmin, rect.ymin));
 	bound.push_back(sm::vec2(rect.xmax, rect.ymin));
 	bound.push_back(sm::vec2(rect.xmax, rect.ymax));

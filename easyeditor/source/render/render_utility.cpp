@@ -40,7 +40,7 @@ SprPtr draw_all_to_one_spr(const std::vector<SprPtr>& sprs)
 
 	sm::rect r;
 	for (int i = 0, n = sprs.size(); i < n; ++i) {
-		sprs[i]->GetBounding()->CombineTo(r);
+		sprs[i]->GetBounding().CombineTo(r);
 	}
 
 	sm::vec2 sz = r.Size();

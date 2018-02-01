@@ -204,7 +204,7 @@ void Bone::InitJoints()
 		return;
 	}
 
-	sm::rect r = m_skin->GetBounding()->GetSize();
+	sm::rect r = m_skin->GetBounding().GetSize();
 	sm::vec2 center = m_skin->GetCenter();
 	sm::vec2 min(r.xmin, r.ymin), max(r.xmax, r.ymax);
 	m_joints.push_back(new Joint(m_skin, s2::JointPose(min - center, 0, sm::vec2(1, 1))));
