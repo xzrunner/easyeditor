@@ -5,7 +5,6 @@
 
 #include <sprite2/RVG.h>
 #include <sprite2/RenderParams.h>
-#include <sprite2/BoundingBox.h>
 #include <gum/FilepathHelper.h>
 
 namespace eaudio

@@ -5,7 +5,6 @@
 #include "color_config.h"
 
 #include <sprite2/RVG.h>
-#include <sprite2/BoundingBox.h>
 #include <sprite2/DrawNode.h>
 
 namespace ee

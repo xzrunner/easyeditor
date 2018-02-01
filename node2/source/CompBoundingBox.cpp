@@ -1,7 +1,7 @@
 #include "node2/CompBoundingBox.h"
 
 #include <guard/check.h>
-#include <sprite2/OBB.h>
+#include <painting2/OBB.h>
 #include <painting2/SRT.h>
 
 namespace n2
@@ -20,11 +20,11 @@ void CompBoundingBox::LoadFromJson(const rapidjson::Value& val)
 
 void CompBoundingBox::Build(const pt2::SRT& srt)
 {
-	m_bounding = std::make_unique<s2::OBB>();
+	m_bounding = std::make_unique<pt2::OBB>();
 	m_bounding->Build(m_size, srt.position, srt.angle, srt.scale, srt.shear, srt.offset);
 }
 
-const s2::BoundingBox& CompBoundingBox::GetBounding() const
+const pt2::BoundingBox& CompBoundingBox::GetBounding() const
 {
 	GD_ASSERT(m_bounding, "null bounding");
 	return *m_bounding;

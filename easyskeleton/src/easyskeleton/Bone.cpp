@@ -6,7 +6,6 @@
 #include <ee/SpriteRenderer.h>
 
 #include <SM_Calc.h>
-#include <sprite2/BoundingBox.h>
 
 namespace eskeleton
 {

@@ -36,7 +36,6 @@
 #include <SM_Calc.h>
 #include <sprite2/RenderColor.h>
 #include <sprite2/RVG.h>
-#include <sprite2/BoundingBox.h>
 #include <sprite2/Symbol.h>
 #include <sprite2/Camera.h>
 

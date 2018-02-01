@@ -1,7 +1,6 @@
 #include "RectQueryVisitor.h"
 
 #include <SM_Test.h>
-#include <sprite2/BoundingBox.h>
 
 namespace ee
 {
@@ -18,7 +17,7 @@ void RectQueryVisitor::Visit(const SprPtr& spr, bool& next)
 	if (!spr->IsEditable()) {
 		return;
 	}
-	const s2::BoundingBox* bv = spr->GetBounding();
+	const pt2::BoundingBox* bv = spr->GetBounding();
 	if (!bv) {
 		return;
 	}

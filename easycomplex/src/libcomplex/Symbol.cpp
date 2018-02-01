@@ -20,7 +20,6 @@
 #include <sprite2/Sprite.h>
 #include <sprite2/RVG.h>
 #include <sprite2/RenderScissor.h>
-#include <sprite2/BoundingBox.h>
 #include <sprite2/DrawNode.h>
 
 #include <gum/StringHelper.h>

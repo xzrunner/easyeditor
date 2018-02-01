@@ -2,7 +2,6 @@
 
 #include <SM_Vector.h>
 #include <node0/NodeComponent.h>
-#include <sprite2/BoundingBox.h>
 
 #include <memory>
 
@@ -24,14 +23,14 @@ public:
 
 	void Build(const pt2::SRT& srt);
 
-	const s2::BoundingBox& GetBounding() const;
+	const pt2::BoundingBox& GetBounding() const;
 
 	static const char* const TYPE_NAME;
 
 private:
 	sm::rect m_size;
 
-	std::unique_ptr<s2::BoundingBox> m_bounding = nullptr;
+	std::unique_ptr<pt2::BoundingBox> m_bounding = nullptr;
 
 }; // CompBoundingBox
 

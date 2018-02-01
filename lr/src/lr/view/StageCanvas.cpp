@@ -22,7 +22,6 @@
 
 #include <SM_Test.h>
 #include <sprite2/RVG.h>
-#include <sprite2/BoundingBox.h>
 #include <sprite2/CameraType.h>
 #include <sprite2/Camera.h>
 #include <sprite2/Pseudo3DCamera.h>

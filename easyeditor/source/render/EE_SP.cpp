@@ -3,7 +3,6 @@
 #include "color_config.h"
 
 #include <sprite2/RVG.h>
-#include <sprite2/BoundingBox.h>
 
 #include <sp_null.h>
 #include <sp_region.h>

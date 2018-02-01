@@ -19,7 +19,6 @@
 
 #include <easyshape.h>
 
-#include <sprite2/BoundingBox.h>
 #include <sprite2/DrawRT.h>
 
 namespace lr

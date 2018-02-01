@@ -10,7 +10,6 @@
 #include <sprite2/ShapeSymbol.h>
 #include <sprite2/ColorPolygon.h>
 #include <sprite2/PolygonShape.h>
-#include <sprite2/BoundingBox.h>
 #include <sprite2/BlendMode.h>
 #include <sprite2/RenderShader.h>
 #include <sprite2/LerpWiggle.h>

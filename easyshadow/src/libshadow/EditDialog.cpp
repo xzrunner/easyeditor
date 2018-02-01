@@ -9,7 +9,6 @@
 #include <ee/SpriteFactory.h>
 #include <ee/CameraCanvas.h>
 
-#include <sprite2/BoundingBox.h>
 #include <sprite2/OrthoCamera.h>
 
 #include <wx/splitter.h>

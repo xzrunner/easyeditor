@@ -8,7 +8,7 @@
 #include <sprite2/ImageSprite.h>
 #include <sprite2/FilterMode.h>
 #include <sprite2/RenderFilter.h>
-#include <sprite2/OBB.h>
+#include <painting2/OBB.h>
 
 namespace ee
 {
@@ -55,8 +55,8 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
  	rect.ymin = -hh;
  	rect.ymax = hh;
 
-	void* ptr = mm::AllocHelper::Allocate(sizeof(s2::OBB));
-	s2::BoundingBox* bb = new (ptr) s2::OBB();
+	void* ptr = mm::AllocHelper::Allocate(sizeof(pt2::OBB));
+	pt2::BoundingBox* bb = new (ptr) pt2::OBB();
 	bb->Build(rect, GetPosition(), GetAngle(), scale, GetShear(), GetOffset());
 	m_bounding.reset(bb);
 }

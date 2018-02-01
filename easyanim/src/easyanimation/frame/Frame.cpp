@@ -23,7 +23,6 @@
 
 #include <easybuilder.h>
 
-#include <sprite2/BoundingBox.h>
 #include <sprite2/SymType.h>
 #include <sprite2/ILerp.h>
 #include <sprite2/DrawRT.h>

@@ -8,7 +8,6 @@
 #include "TranslateSpriteAOP.h"
 
 #include <sprite2/RenderColor.h>
-#include <sprite2/BoundingBox.h>
 #include <SM_Calc.h>
 
 #include <wx/string.h>

@@ -9,7 +9,6 @@
 #include <sprite2/Color.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/Sprite.h>
-#include <sprite2/BoundingBox.h>
 
 namespace libskeleton
 {

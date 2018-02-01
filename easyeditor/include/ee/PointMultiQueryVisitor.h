@@ -4,8 +4,6 @@
 #include "Visitor.h"
 #include "Sprite.h"
 
-#include <sprite2/BoundingBox.h>
-
 namespace ee
 {
 
