@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_SETTING_DATA_H_
 #define _EASYEDITOR_SETTING_DATA_H_
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 #include <json/json.h>
 
@@ -44,7 +44,7 @@ public:
 	bool visible_shape;
 	bool visible_tex_edge;
 	bool particle3d_loop;
-	s2::Color bg_color;
+	pt2::Color bg_color;
 	bool visible_spr_update;
 	bool visible_scissor;
 

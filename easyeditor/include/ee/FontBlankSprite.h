@@ -3,7 +3,7 @@
 
 #include "Sprite.h"
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 namespace ee
 {
@@ -59,7 +59,7 @@ public:
 
 	bool has_edge;
 
-	s2::Color font_color;
+	pt2::Color font_color;
 
 	HoriAlignType align_hori;
 	VertAlignType align_vert;

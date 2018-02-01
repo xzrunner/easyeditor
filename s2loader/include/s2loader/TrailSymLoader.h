@@ -2,7 +2,7 @@
 #define _S2LOADER_TRAIL_SYM_LOADER_H_
 
 #include <cu/uncopyable.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <sprite2/typedef.h>
 #include <cu/cu_stl.h>
 
@@ -40,8 +40,8 @@ public:
 		uint32_t sym_id;
 		CU_STR filepath;
 		float scale_begin, scale_end;
-		s2::Color mul_col_begin, mul_col_end;
-		s2::Color add_col_begin, add_col_end;
+		pt2::Color mul_col_begin, mul_col_end;
+		pt2::Color add_col_begin, add_col_end;
 
 		CompImage()
 			: scale_begin(0)
@@ -54,7 +54,7 @@ public:
 	{
 		float linewidth;
 		float acuity;
-		s2::Color col_begin, col_end;
+		pt2::Color col_begin, col_end;
 
 		CompShape()
 			: linewidth(1)

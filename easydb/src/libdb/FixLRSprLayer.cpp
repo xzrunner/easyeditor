@@ -5,7 +5,7 @@
 #include <ee/SymbolType.h>
 
 #include <SM_Vector.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <gum/trans_color.h>
 
 #include <fstream>

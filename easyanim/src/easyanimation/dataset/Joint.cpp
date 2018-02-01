@@ -3,7 +3,7 @@
 #include <ee/Sprite.h>
 #include <ee/Math2D.h>
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <sprite2/RVG.h>
 #include <SM_Calc.h>
 
@@ -47,9 +47,9 @@ Joint::~Joint()
 
 void Joint::Draw() const
 {
-	s2::RVG::SetColor(s2::Color(51, 204, 51, 128));
+	s2::RVG::SetColor(pt2::Color(51, 204, 51, 128));
 	s2::RVG::Circle(nullptr, GetWorldPos(), REGION, true);
-	s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
+	s2::RVG::SetColor(pt2::Color(204, 51, 51, 128));
 	s2::RVG::Circle(nullptr, GetWorldPos(), REGION, false);
 	if (m_parent)
 	{
@@ -61,7 +61,7 @@ void Joint::Draw() const
 		sm::vec2 left = mid + sm::rotate_vector_right_angle(s - mid, false);
 		sm::vec2 right = mid + sm::rotate_vector_right_angle(s - mid, true);
 
-		s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
+		s2::RVG::SetColor(pt2::Color(204, 51, 51, 128));
 		s2::RVG::Line(nullptr, s, left);
 		s2::RVG::Line(nullptr, left, e);
 		s2::RVG::Line(nullptr, e, right);

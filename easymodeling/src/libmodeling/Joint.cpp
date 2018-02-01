@@ -51,7 +51,7 @@ void Joint::DrawBodyFlag(const sm::vec2& pos) const
 	vertices[1].x += edge;
 	vertices[2].y -= edge;
 	vertices[3].y += edge;
-	s2::RVG::SetColor(s2::Color(0.4f, 0.8f, 0.8f));
+	s2::RVG::SetColor(pt2::Color(0.4f, 0.8f, 0.8f));
 	s2::RVG::LineWidth(1);
 	s2::RVG::Lines(vertices);
 	s2::RVG::LineWidth(2);

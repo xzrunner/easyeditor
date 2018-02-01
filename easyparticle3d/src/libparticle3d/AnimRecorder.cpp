@@ -25,7 +25,7 @@ AnimRecorder::~AnimRecorder()
 }
 
 void AnimRecorder::AddItem(const std::string& filepath, float x, float y, float angle, 
-						   float scale, const s2::Color& mul_col, const s2::Color& add_col)
+						   float scale, const pt2::Color& mul_col, const pt2::Color& add_col)
 {
 	while (!m_curr_frame) {
 		m_curr_frame = m_frame_pool.GetPointer();

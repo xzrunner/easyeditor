@@ -52,7 +52,7 @@ void StageCanvas::OnDrawSprites() const
 	m_panel->TraverseSprites(ee::DrawSpritesVisitor(reg, s), ee::DT_VISIBLE);
 	m_panel->TraverseShapes(ee::DrawShapesVisitor(reg, s), ee::DT_VISIBLE);
 
-	s2::RVG::SetColor(s2::Color(255, 0, 0));
+	s2::RVG::SetColor(pt2::Color(255, 0, 0));
 	s2::RVG::Cross(nullptr, sm::vec2(0, 0), 100, 100);
 
 	m_stage->DrawEditOP();

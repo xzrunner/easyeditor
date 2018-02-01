@@ -2,7 +2,7 @@
 #define _EASYEDITOR_BOX2D_RENDER_H_
 
 #include <SM_Vector.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <cu/cu_stl.h>
 
 #include <Box2D/Box2D.h>
@@ -40,7 +40,7 @@ private:
 
 	void TransVertices(const b2Vec2* src, int count, CU_VEC<sm::vec2>& dst) const;
 
-	s2::Color TransColor(const b2Color& col, float alpha = 1) const;
+	pt2::Color TransColor(const b2Color& col, float alpha = 1) const;
 
 private:
 	float m_ratio;

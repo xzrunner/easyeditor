@@ -3,7 +3,7 @@
 
 #include <ee/Sprite.h>
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <sprite2/TextboxSprite.h>
 
 namespace etext

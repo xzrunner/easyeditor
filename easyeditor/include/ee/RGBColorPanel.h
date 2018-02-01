@@ -19,7 +19,7 @@ public:
 	//
 	// interface TweenColorPanel
 	//
-	virtual void SetColor(const s2::Color& begin, const s2::Color& end) override;
+	virtual void SetColor(const pt2::Color& begin, const pt2::Color& end) override;
 
 private:
 	void OnSize(wxSizeEvent& event);
@@ -30,13 +30,13 @@ private:
 	public:
 		Canvas(wxWindow* parent);
 
-		void SetColor(const s2::Color& begin, const s2::Color& end);
+		void SetColor(const pt2::Color& begin, const pt2::Color& end);
 
 	protected:
 		virtual void OnDraw() const override;
 
 	private:
-		s2::Color m_col_begin, m_col_end;
+		pt2::Color m_col_begin, m_col_end;
 
 	}; // Canvas
 

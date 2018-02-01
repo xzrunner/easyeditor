@@ -28,7 +28,7 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawGuideLines() const
 {
-	s2::RVG::SetColor(s2::Color(255, 0, 0));
+	s2::RVG::SetColor(pt2::Color(255, 0, 0));
 	s2::RVG::Cross(sm::vec2(0, 0), 100, 100);
 }
 

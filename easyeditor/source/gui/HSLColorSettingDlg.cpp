@@ -5,7 +5,7 @@
 namespace ee
 {
 
-HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, const s2::Color& col, const wxPoint& pos)
+HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, const pt2::Color& col, const wxPoint& pos)
 	: wxDialog(parent, wxID_ANY, "HSL Color Setting", pos, wxSize(450, 300))
 	, m_lsn(lsn)
 	, m_h_ctrl(NULL)
@@ -18,11 +18,11 @@ HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, cons
 	SetColor(col);
 }
 
-s2::Color HSLColorSettingDlg::GetColor() const
+pt2::Color HSLColorSettingDlg::GetColor() const
 {
 	float r, g, b;
 	hsl2rgb(m_h, m_s, m_l, r, g, b);
-	return s2::Color((int)(r * 255 + 0.5f), (int)(g * 255 + 0.5f), (int)(b * 255 + 0.5f));
+	return pt2::Color((int)(r * 255 + 0.5f), (int)(g * 255 + 0.5f), (int)(b * 255 + 0.5f));
 }
 
 void HSLColorSettingDlg::OnColorChanged()
@@ -34,9 +34,9 @@ void HSLColorSettingDlg::OnColorChanged()
 	m_s = s / 255.0f;
 	m_l = l / 255.0f;
 
-	m_h_ctrl->SetColorRegion(s2::Color(0, s, l), s2::Color(255, s, l));
-	m_s_ctrl->SetColorRegion(s2::Color(h, 0, l), s2::Color(h, 255, l));
-	m_l_ctrl->SetColorRegion(s2::Color(h, s, 0), s2::Color(h, s, 255));
+	m_h_ctrl->SetColorRegion(pt2::Color(0, s, l), pt2::Color(255, s, l));
+	m_s_ctrl->SetColorRegion(pt2::Color(h, 0, l), pt2::Color(h, 255, l));
+	m_l_ctrl->SetColorRegion(pt2::Color(h, s, 0), pt2::Color(h, s, 255));
 
 	float r, g, b;
 	hsl2rgb(m_h, m_s, m_l, r, g, b);
@@ -44,11 +44,11 @@ void HSLColorSettingDlg::OnColorChanged()
 	m_color_bg->Refresh(true);
 
 	if (m_lsn) {
-		m_lsn->OnColorChanged(s2::Color((int)(r * 255 + 0.5f), (int)(g * 255 + 0.5f), (int)(b * 255 + 0.5f)));
+		m_lsn->OnColorChanged(pt2::Color((int)(r * 255 + 0.5f), (int)(g * 255 + 0.5f), (int)(b * 255 + 0.5f)));
 	}
 }
 
-void HSLColorSettingDlg::OnColorChanged(const s2::Color& col)
+void HSLColorSettingDlg::OnColorChanged(const pt2::Color& col)
 {
 	OnColorChanged();
 }
@@ -89,7 +89,7 @@ void HSLColorSettingDlg::InitLayout()
 	top_sizer->Fit(this);
 }
 
-void HSLColorSettingDlg::SetColor(const s2::Color& col)
+void HSLColorSettingDlg::SetColor(const pt2::Color& col)
 {
 	rgb2hsl(col.r / 255.0f, col.g / 255.0f, col.b / 255.0f, m_h, m_s, m_l);
 
@@ -99,9 +99,9 @@ void HSLColorSettingDlg::SetColor(const s2::Color& col)
 	m_h_ctrl->SetColorValue(ih);
 	m_s_ctrl->SetColorValue(is);
 	m_l_ctrl->SetColorValue(il);
-	m_h_ctrl->SetColorRegion(s2::Color(0, is, il), s2::Color(255, is, il));
-	m_s_ctrl->SetColorRegion(s2::Color(ih, 0, il), s2::Color(ih, 255, il));
-	m_l_ctrl->SetColorRegion(s2::Color(ih, is, 0), s2::Color(ih, is, 255));
+	m_h_ctrl->SetColorRegion(pt2::Color(0, is, il), pt2::Color(255, is, il));
+	m_s_ctrl->SetColorRegion(pt2::Color(ih, 0, il), pt2::Color(ih, 255, il));
+	m_l_ctrl->SetColorRegion(pt2::Color(ih, is, 0), pt2::Color(ih, is, 255));
 
 	m_color_bg->SetBackgroundColour(wxColour(col.r, col.g, col.b));
 	m_color_bg->Refresh(true);

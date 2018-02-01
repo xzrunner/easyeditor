@@ -2,7 +2,7 @@
 #define _EASYPARTICLE3D_UTILITY_H_
 
 #include <SM_Matrix.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <sprite2/pre_defined.h>
 #include S2_MAT_HEADER
 
@@ -34,7 +34,7 @@ inline sm::vec2 TransCoords3To2(const float position[3], const S2_MAT& direction
 	return sm::vec2(0, 0);
 }
 
-inline ps_color ColorFromS2(const s2::Color& col)
+inline ps_color ColorFromS2(const pt2::Color& col)
 {
 	ps_color ret;
 	ret.r = col.r;

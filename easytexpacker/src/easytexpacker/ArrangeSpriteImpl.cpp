@@ -55,7 +55,7 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 {
 	ee::ArrangeSpriteImpl::OnDraw(cam_scale);
 	m_stage->TraverseSprites(
-		ee::DrawSelectedSpriteVisitor(s2::Color(1.0f, 1.0f, 0.0f)),
+		ee::DrawSelectedSpriteVisitor(pt2::Color(1.0f, 1.0f, 0.0f)),
 		ee::DT_VISIBLE
 		);
 }

@@ -16,7 +16,7 @@
 namespace ee
 {
 
-DrawSelectedSpriteVisitor::DrawSelectedSpriteVisitor(const s2::Color& color)
+DrawSelectedSpriteVisitor::DrawSelectedSpriteVisitor(const pt2::Color& color)
 	: m_color(color)
 {}
 

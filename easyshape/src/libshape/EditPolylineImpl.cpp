@@ -314,12 +314,12 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 	if (auto polyline = dynamic_cast<EditedPolyShape*>(captured.shape.get()))
 	{
 		if (captured.pos.IsValid()) {
-			s2::RVG::SetColor(s2::Color(255, 102, 102));
+			s2::RVG::SetColor(pt2::Color(255, 102, 102));
 			s2::RVG::Circle(nullptr, captured.pos, m_node_capture->GetValue(), true);
 		}
 
 		sm::vec2 center = polyline->GetBounding().Center();
-		s2::RVG::SetColor(s2::Color(102, 255, 102));
+		s2::RVG::SetColor(pt2::Color(102, 255, 102));
 		s2::RVG::Circle(nullptr, center, m_node_capture->GetValue(), true);
 	}
 }

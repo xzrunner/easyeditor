@@ -91,7 +91,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& sym,
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
 
-	s2::Color color = valid ? s2::Color(0, 255, 0, 204) : s2::Color(255, 0, 0, 204);
+	pt2::Color color = valid ? pt2::Color(0, 255, 0, 204) : pt2::Color(255, 0, 0, 204);
 
 	SymbolExt* info = static_cast<SymbolExt*>(sym.GetUserData());
 	int center = (info->size >> 1);
@@ -171,7 +171,7 @@ void SymbolRender::DrawRegion(const ee::Symbol& sym, const sm::vec2& pos)
 
 	float s = (float)(max_reg) / m_region_size;
 	s2::RenderColor ct;
-	ct.mul = s2::Color(255, 0, 0);
+	ct.mul = pt2::Color(255, 0, 0);
 	ee::SpriteRenderer::Instance()->Draw(m_region, s2::RenderParams(S2_MAT(), ct), pos, 0, s, s, 0, 0);
 	if (min_reg != 0) {
 		float s = (float)(min_reg) / m_region_size;

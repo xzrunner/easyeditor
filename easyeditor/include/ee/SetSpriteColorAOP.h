@@ -4,7 +4,7 @@
 #include "AtomicOP.h"
 #include "Sprite.h"
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 namespace ee
 {
@@ -13,8 +13,8 @@ namespace ee
 	class SetSprite##name##ColorAOP : public AtomicOP                                        \
 	{                                                                                        \
 	public:                                                                                  \
-		SetSprite##name##ColorAOP(const SprPtr& spr, const s2::Color& color);                \
-		SetSprite##name##ColorAOP(const std::vector<SprPtr>& sprs, const s2::Color& color);  \
+		SetSprite##name##ColorAOP(const SprPtr& spr, const pt2::Color& color);                \
+		SetSprite##name##ColorAOP(const std::vector<SprPtr>& sprs, const pt2::Color& color);  \
 	                                                                                         \
 		virtual void Undo() override;                                                                 \
 		virtual void Redo() override;                                                                 \
@@ -23,9 +23,9 @@ namespace ee
 	                                                                                         \
 	private:                                                                                 \
 		std::vector<SprPtr> m_sprs;                                                          \
-		std::vector<s2::Color> m_old_color;                                                  \
+		std::vector<pt2::Color> m_old_color;                                                  \
 	                                                                                         \
-		s2::Color m_new_color;                                                               \
+		pt2::Color m_new_color;                                                               \
 	};                                                                                       \
 
 SET_SPRITE_COLOR_AOP_DEC(Mul)

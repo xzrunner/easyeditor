@@ -39,12 +39,12 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const std::string& name, 
 	else if (name == "Color.Multi")
 	{
 		wxColour col = wxANY_AS(value, wxColour);
-		m_impl->SetColorMul(s2::Color(col.Red(), col.Green(), col.Blue()));
+		m_impl->SetColorMul(pt2::Color(col.Red(), col.Green(), col.Blue()));
 	}
 	else if (name == "Color.Add")
 	{
 		wxColour col = wxANY_AS(value, wxColour);
-		m_impl->SetColorAdd(s2::Color(col.Red(), col.Green(), col.Blue()));
+		m_impl->SetColorAdd(pt2::Color(col.Red(), col.Green(), col.Blue()));
 	}
 	else if (name == "Color.Alpha")
 	{
@@ -138,8 +138,8 @@ void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty(wxT("Tag"))->SetValue(m_impl->GetTag());
 
-	s2::Color mul_col = m_impl->GetMultiColor();
-	s2::Color add_col = m_impl->GetAddColor();
+	pt2::Color mul_col = m_impl->GetMultiColor();
+	pt2::Color add_col = m_impl->GetAddColor();
 	wxColour wx_mul_col = wxColour(mul_col.r, mul_col.g, mul_col.b, mul_col.a);
 	wxColour wx_add_col = wxColour(add_col.r, add_col.g, add_col.b, add_col.a);
 	pg->SetPropertyValueString(wxT("Color.Multi"), wx_mul_col.GetAsString());
@@ -188,8 +188,8 @@ void MultiSpritesPropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, m_impl->GetTag()));
 
 	wxPGProperty* col_prop = pg->Append(new wxStringProperty(wxT("Color"), wxPG_LABEL, wxT("<composed>")));
-	s2::Color mul_col = m_impl->GetMultiColor();
-	s2::Color add_col = m_impl->GetAddColor();
+	pt2::Color mul_col = m_impl->GetMultiColor();
+	pt2::Color add_col = m_impl->GetAddColor();
 	wxColour wx_mul_col = wxColour(mul_col.r, mul_col.g, mul_col.b, mul_col.a);
 	wxColour wx_add_col = wxColour(add_col.r, add_col.g, add_col.b, add_col.a);
 	col_prop->SetExpanded(false);

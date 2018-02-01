@@ -57,7 +57,7 @@ void DrawPolygonCMPT::UpdateControlValue()
 		if (poly) {
 			const ColorMaterial* cm = dynamic_cast<const ColorMaterial*>(poly->GetMaterial());
 			if (cm) {
-				const s2::Color& col = cm->GetColor();
+				const pt2::Color& col = cm->GetColor();
 				m_color.Set(col.r, col.g, col.b);
 				FillingButton();
 			}
@@ -117,8 +117,8 @@ void DrawPolygonCMPT::OnSetColor(wxCommandEvent& event)
 	case 0:
 		if (ee::Config::Instance()->GetSettings().color_setting_dlg_type == ee::CSDT_HSL)
 		{
- 			// todo params between wxColor and s2::Color
- 			s2::Color col;
+ 			// todo params between wxColor and pt2::Color
+ 			pt2::Color col;
  			col.r = m_color.Red();
  			col.g = m_color.Green();
  			col.b = m_color.Blue();
@@ -130,8 +130,8 @@ void DrawPolygonCMPT::OnSetColor(wxCommandEvent& event)
 		}
 		else
 		{
-			// todo params between wxColor and s2::Color
-			s2::Color col;
+			// todo params between wxColor and pt2::Color
+			pt2::Color col;
 			col.r = m_color.Red();
 			col.g = m_color.Green();
 			col.b = m_color.Blue();
@@ -172,7 +172,7 @@ void DrawPolygonCMPT::OnTriggerFillingColor(wxCommandEvent& event)
 		switch (m_filling_type_choice->GetSelection()) 
 		{
 		case 0:
-			poly->SetMaterialColor(s2::Color(m_color.Red(), m_color.Green(), m_color.Blue()));
+			poly->SetMaterialColor(pt2::Color(m_color.Red(), m_color.Green(), m_color.Blue()));
 			break;
 		case 1:
 			poly->SetMaterialTexture(std::dynamic_pointer_cast<ee::ImageSymbol>(ee::SymbolMgr::Instance()->FetchSymbol(m_filepath)));

@@ -51,7 +51,7 @@ public:
 	virtual const CU_VEC<sm::vec2>& GetVertices() const override { return m_vertices; }
 	virtual bool IsClosed() const override { return true; }
 
-	void SetMaterialColor(const s2::Color& color);
+	void SetMaterialColor(const pt2::Color& color);
 	void SetMaterialTexture(const std::shared_ptr<ee::ImageSymbol>& image);
 
 	Json::Value StoreMaterial(const std::string& dirpath) const;

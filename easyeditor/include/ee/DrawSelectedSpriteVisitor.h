@@ -4,7 +4,7 @@
 #include "Visitor.h"
 #include "Sprite.h"
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 namespace ee
 {
@@ -12,12 +12,12 @@ namespace ee
 class DrawSelectedSpriteVisitor : public RefVisitor<Sprite>
 {
 public:
-	DrawSelectedSpriteVisitor(const s2::Color& color);
+	DrawSelectedSpriteVisitor(const pt2::Color& color);
 
 	virtual void Visit(const SprPtr& spr, bool& next) override;
 
 private:
-	s2::Color m_color;
+	pt2::Color m_color;
 
 }; // DrawSelectedSpriteVisitor
 

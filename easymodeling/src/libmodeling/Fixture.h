@@ -19,8 +19,8 @@ public:
 	bool IsContain(const sm::vec2& pos) const;
 	bool IsIntersect(const sm::rect& rect) const;
 
-	void Draw(const S2_MAT& mt, const s2::Color& cFace, 
-		const s2::Color& cEdge) const;
+	void Draw(const S2_MAT& mt, const pt2::Color& cFace, 
+		const pt2::Color& cEdge) const;
 
 private:
 	void TransLocalToWorld(const std::vector<sm::vec2>& local, std::vector<sm::vec2>& world) const;

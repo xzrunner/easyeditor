@@ -5,7 +5,7 @@
 #include "FetchAllVisitor.h"
 
 #include <sprite2/RVG.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 namespace ee
 {
@@ -222,7 +222,7 @@ void AutoAlign::Draw() const
 {
 	if (m_open)
 	{
-		s2::RVG::SetColor(s2::Color(0, 0, 0));
+		s2::RVG::SetColor(pt2::Color(0, 0, 0));
 		if (m_hor[0] != m_hor[1]) {
 			s2::RVG::DashLine(nullptr, m_hor[0], m_hor[1]);
 		}

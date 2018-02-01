@@ -7,7 +7,7 @@ namespace emodeling
 
 void DrawUtils::DrawBody(Body* body, DrawType dType)
 {
-	s2::Color cFace, cEdge;
+	pt2::Color cFace, cEdge;
 	GetBodyColor(body->m_type, dType, cFace, cEdge);
 
 	body->Draw(body->m_spr->GetLocalMat(), cFace, cEdge);
@@ -16,7 +16,7 @@ void DrawUtils::DrawBody(Body* body, DrawType dType)
 void DrawUtils::DrawFixture(Fixture* fixture, 
 							DrawType dType, bool onlyFixture)
 {
-	s2::Color cFace, cEdge;
+	pt2::Color cFace, cEdge;
 	if (onlyFixture)
 		GetFixtureColor(dType, cFace, cEdge);
 	else
@@ -26,7 +26,7 @@ void DrawUtils::DrawFixture(Fixture* fixture,
 }
 
 void DrawUtils::GetBodyColor(Body::Type type, DrawType dType,
-							 s2::Color& cFace, s2::Color& cEdge)
+							 pt2::Color& cFace, pt2::Color& cEdge)
 {
 	switch (type)
 	{
@@ -55,7 +55,7 @@ void DrawUtils::GetBodyColor(Body::Type type, DrawType dType,
 		break;
 	case e_selected:
 		{
-			s2::Color c = cFace;
+			pt2::Color c = cFace;
 			c.r *= rScale;
 			c.g *= gScale;
 			c.b *= bScale;
@@ -67,7 +67,7 @@ void DrawUtils::GetBodyColor(Body::Type type, DrawType dType,
 	cEdge = ColorEnlarge(cFace, 1.05f);
 }
 
-void DrawUtils::GetFixtureColor(DrawType type, s2::Color& cFace, s2::Color& cEdge)
+void DrawUtils::GetFixtureColor(DrawType type, pt2::Color& cFace, pt2::Color& cEdge)
 {
 	cFace.FromFloat(0.6f, 0.35f, 0.6f, 0.5f);
 	switch (type)
@@ -83,9 +83,9 @@ void DrawUtils::GetFixtureColor(DrawType type, s2::Color& cFace, s2::Color& cEdg
 	cEdge = ColorEnlarge(cFace, 1.1f);
 }
 
-s2::Color DrawUtils::ColorEnlarge(const s2::Color& color, float factor)
+pt2::Color DrawUtils::ColorEnlarge(const pt2::Color& color, float factor)
 {
-	s2::Color ret = color;
+	pt2::Color ret = color;
 	ret.r = std::min(color.r * factor, 1.0f);
 	ret.g = std::min(color.g * factor, 1.0f);
 	ret.b = std::min(color.b * factor, 1.0f);

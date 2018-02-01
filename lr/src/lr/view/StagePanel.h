@@ -8,7 +8,7 @@
 #include <ee/MultiSpritesImpl.h>
 #include <ee/MultiShapesImpl.h>
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 namespace ee { class PropertySettingPanel; class LibraryPanel; }
 
@@ -62,8 +62,8 @@ public:
 
 	ee::LibraryPanel* GetLibrary() { return m_library; }
 
-	s2::Color& GetScreenMultiColor();
-	s2::Color& GetScreenAddColor();
+	pt2::Color& GetScreenMultiColor();
+	pt2::Color& GetScreenAddColor();
 	void EnableColorGrading(bool enable);
 
 	void SetResDir(const std::string& res_dir) { m_res_dir = res_dir; }

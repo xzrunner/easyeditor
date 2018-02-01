@@ -4,7 +4,7 @@
 #include "PackNode.h"
 
 #include <sprite2/MaskSymbol.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <s2loader/ShapeType.h>
 #include <cu/cu_stl.h>
 
@@ -40,7 +40,7 @@ public:
 private:
 	s2loader::ShapeType m_type;
 
-	s2::Color m_color;
+	pt2::Color m_color;
 	const PackNode* m_texture;
 
 	CU_VEC<sm::vec2> m_vertices;

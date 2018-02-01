@@ -10,7 +10,7 @@
 //{
 //public:
 //	MultiColorMaterial(const CU_VEC<sm::vec2>& vertices,
-//		const s2::Color& color);
+//		const pt2::Color& color);
 //
 //	virtual Json::Value Store(const std::string& dirpath) const override;
 //
@@ -24,7 +24,7 @@
 //		const CU_VEC<sm::vec2>& segments) override;
 //
 //private:
-//	CU_VEC<s2::Color> m_colors;
+//	CU_VEC<pt2::Color> m_colors;
 //
 //}; // MultiColorMaterial
 //

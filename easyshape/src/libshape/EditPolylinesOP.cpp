@@ -72,11 +72,11 @@ bool EditPolylinesOP::OnDraw() const
 	if (ee::SelectShapesOP::OnDraw()) return true;
 
 	s2::RenderParams rp;
-	rp.color.SetMul(s2::Color(0.8f, 0.8f, 0.2f));
+	rp.color.SetMul(pt2::Color(0.8f, 0.8f, 0.2f));
 
 	for (auto& item : m_simplify_buffer) {
 		item.second->Draw(nullptr, rp);
-		s2::RVG::SetColor(s2::Color(51, 51, 204));
+		s2::RVG::SetColor(pt2::Color(51, 51, 204));
 		s2::RVG::Circles(nullptr, item.second->GetVertices(), ee::SettingData::ctl_pos_sz, true);
 	}
 

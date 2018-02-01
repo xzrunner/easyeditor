@@ -76,7 +76,7 @@ void EditSprMsg::SetScale(const Sprite* spr, const sm::vec2& pos, const sm::vec2
 	Socket::Instance()->Send(val.toStyledString().c_str());
 }
 
-void EditSprMsg::SetColMul(const Sprite* spr, const s2::Color& mul)
+void EditSprMsg::SetColMul(const Sprite* spr, const pt2::Color& mul)
 {
 	if (!spr) {
 		return;
@@ -94,7 +94,7 @@ void EditSprMsg::SetColMul(const Sprite* spr, const s2::Color& mul)
 	Socket::Instance()->Send(val.toStyledString().c_str());
 }
 
-void EditSprMsg::SetColAdd(const Sprite* spr, const s2::Color& add)
+void EditSprMsg::SetColAdd(const Sprite* spr, const pt2::Color& add)
 {
 	if (!spr) {
 		return;

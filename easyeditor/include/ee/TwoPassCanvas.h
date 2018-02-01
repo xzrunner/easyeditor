@@ -18,7 +18,7 @@ public:
 public:
 	struct ScreenStyle
 	{
-		s2::Color multi_col, add_col;
+		pt2::Color multi_col, add_col;
 		bool col_grading;
 
 		ScreenStyle() : multi_col(255, 255, 255, 255), add_col(0, 0, 0, 0), col_grading(false) {}

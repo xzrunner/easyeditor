@@ -149,7 +149,7 @@ void PolygonShape::SetVertices(const CU_VEC<sm::vec2>& vertices)
 	}
 }
 
-void PolygonShape::SetMaterialColor(const s2::Color& color)
+void PolygonShape::SetMaterialColor(const pt2::Color& color)
 {
 	m_poly = std::make_unique<ColorMaterial>(color);
 	m_poly->SetOutline(m_vertices);
@@ -182,7 +182,7 @@ void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& v
 
 	std::string type = val["type"].asString();
 	if (type == "color") {
-		s2::Color col;
+		pt2::Color col;
 		col.FromRGBA(val["color"].asUInt());
 		m_poly = std::make_unique<ColorMaterial>(col);
 		m_poly->SetOutline(m_vertices);

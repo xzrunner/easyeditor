@@ -13,7 +13,7 @@ RGBColorPanel::RGBColorPanel(wxWindow* parent, wxSize size)
 	m_canvas = std::make_shared<Canvas>(this);
 }
 
-void RGBColorPanel::SetColor(const s2::Color& begin, const s2::Color& end)
+void RGBColorPanel::SetColor(const pt2::Color& begin, const pt2::Color& end)
 {
 	m_canvas->SetColor(begin, end);
 }
@@ -34,7 +34,7 @@ Canvas(wxWindow* parent)
 }
 
 void RGBColorPanel::Canvas::
-SetColor(const s2::Color& begin, const s2::Color& end)
+SetColor(const pt2::Color& begin, const pt2::Color& end)
 {
 	m_col_begin = begin;
 	m_col_end = end;

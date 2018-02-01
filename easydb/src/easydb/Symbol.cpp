@@ -53,7 +53,7 @@ s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderP
 
 	const S2_MAT& mt = spr->GetLocalMat();
 
-	s2::RVG::SetColor(s2::Color(127, 127, 0, 255));
+	s2::RVG::SetColor(pt2::Color(127, 127, 0, 255));
 	DrawBG(mt);
 
 	const LeafNode* leaf = static_cast<const LeafNode*>(node);
@@ -63,7 +63,7 @@ s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderP
 	bool out = !db_spr->IsClosed(false);
 
 	s2::RVG::LineWidth(3);
-	s2::RVG::SetColor(s2::Color(127, 0, 0, 255));
+	s2::RVG::SetColor(pt2::Color(127, 0, 0, 255));
 	DrawBtn(mt, sm::vec2(-WIDTH * 0.5f + BTN_RADIUS, 0), !in);
 	DrawBtn(mt, sm::vec2(WIDTH * 0.5f - BTN_RADIUS, 0), !out);
 

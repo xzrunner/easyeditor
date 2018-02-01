@@ -223,13 +223,13 @@ void StagePanel::BuildGrids(int w, int h)
 	}
 }
 
-s2::Color& StagePanel::GetScreenMultiColor()
+pt2::Color& StagePanel::GetScreenMultiColor()
 {
 	auto canvas = std::dynamic_pointer_cast<StageCanvas>(GetCanvas());
 	return canvas->GetMultiColor();
 }
 
-s2::Color& StagePanel::GetScreenAddColor()
+pt2::Color& StagePanel::GetScreenAddColor()
 {
 	auto canvas = std::dynamic_pointer_cast<StageCanvas>(GetCanvas());
 	return canvas->GetAddColor();	

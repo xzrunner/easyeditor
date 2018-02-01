@@ -129,27 +129,27 @@ void SpriteIO::Load(const sns::NodeSprCommon& node_spr)
 	} 
 
 	if (type & sns::NodeSprCommon::COL_MUL_MASK) {
-		s2::Color col;
+		pt2::Color col;
 		col.FromRGBA(data[idx++]);
 		m_col.SetMul(col);
 	} 
 	if (type & sns::NodeSprCommon::COL_ADD_MASK) {
-		s2::Color col;
+		pt2::Color col;
 		col.FromRGBA(data[idx++]);
 		m_col.SetAdd(col);
 	} 
 	if (type & sns::NodeSprCommon::COL_R_MASK) {
-		s2::Color col;
+		pt2::Color col;
 		col.FromRGBA(data[idx++]);
 		m_col.SetRMap(col);
 	} 
 	if (type & sns::NodeSprCommon::COL_G_MASK) {
-		s2::Color col;
+		pt2::Color col;
 		col.FromRGBA(data[idx++]);
 		m_col.SetGMap(col);
 	} 
 	if (type & sns::NodeSprCommon::COL_B_MASK) {
-		s2::Color col;
+		pt2::Color col;
 		col.FromRGBA(data[idx++]);
 		m_col.SetBMap(col);
 	}
@@ -391,7 +391,7 @@ void SpriteIO::StoreColor(const s2::RenderColor& color)
 
 void SpriteIO::LoadColor(const Json::Value& val)
 {
-	m_col.SetMul(s2::Color(255, 255, 255, 255));
+	m_col.SetMul(pt2::Color(255, 255, 255, 255));
 	if (val.isMember("multi color")) {
 		CU_STR str = val["multi color"].asString().c_str();
 		if (!str.empty()) {
@@ -399,7 +399,7 @@ void SpriteIO::LoadColor(const Json::Value& val)
 		}
 	}
 
-	m_col.SetAdd(s2::Color(0, 0, 0, 0));
+	m_col.SetAdd(pt2::Color(0, 0, 0, 0));
 	if (val.isMember("add color")) {
 		CU_STR str = val["add color"].asString().c_str();
 		if (!str.empty()) {
@@ -407,31 +407,31 @@ void SpriteIO::LoadColor(const Json::Value& val)
 		}
 	}
 
-	m_col.SetRMap(s2::Color(255, 0, 0, 0));
+	m_col.SetRMap(pt2::Color(255, 0, 0, 0));
 	if (val.isMember("r trans")) {
 		CU_STR str = val["r trans"].asString().c_str();
 		if (!str.empty()) {
-			s2::Color col(gum::str2color(str, sns::RGBA));
+			pt2::Color col(gum::str2color(str, sns::RGBA));
 			col.a = 0;
 			m_col.SetRMap(col);
 		}
 	}
 
-	m_col.SetGMap(s2::Color(0, 255, 0, 0));
+	m_col.SetGMap(pt2::Color(0, 255, 0, 0));
 	if (val.isMember("g trans")) {
 		CU_STR str = val["g trans"].asString().c_str();
 		if (!str.empty()) {
-			s2::Color col(gum::str2color(str, sns::RGBA));
+			pt2::Color col(gum::str2color(str, sns::RGBA));
 			col.a = 0;
 			m_col.SetGMap(col);
 		}
 	}
 
-	m_col.SetBMap(s2::Color(0, 0, 255, 0));
+	m_col.SetBMap(pt2::Color(0, 0, 255, 0));
 	if (val.isMember("b trans")) {
 		CU_STR str = val["b trans"].asString().c_str();
 		if (!str.empty()) {
-			s2::Color col(gum::str2color(str, sns::RGBA));
+			pt2::Color col(gum::str2color(str, sns::RGBA));
 			col.a = 0;
 			m_col.SetBMap(col);
 		}
@@ -440,10 +440,10 @@ void SpriteIO::LoadColor(const Json::Value& val)
 
 void SpriteIO::StoreColor(Json::Value& val)
 {
-	if (!m_compress || m_col.GetMul() != s2::Color(255, 255, 255, 255)) {
+	if (!m_compress || m_col.GetMul() != pt2::Color(255, 255, 255, 255)) {
 		val["multi color"]	= gum::color2str(m_col.GetMul(), sns::BGRA).c_str();;
 	}
-	if (!m_compress || m_col.GetAdd() != s2::Color(0, 0, 0, 0)) {
+	if (!m_compress || m_col.GetAdd() != pt2::Color(0, 0, 0, 0)) {
 		val["add color"]	= gum::color2str(m_col.GetAdd(), sns::ABGR).c_str();;
 	}
 

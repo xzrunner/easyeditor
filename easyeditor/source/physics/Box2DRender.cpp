@@ -103,9 +103,9 @@ void Box2DRender::TransVertices(const b2Vec2* src, int count, CU_VEC<sm::vec2>& 
 	}
 }
 
-s2::Color Box2DRender::TransColor(const b2Color& col, float alpha) const
+pt2::Color Box2DRender::TransColor(const b2Color& col, float alpha) const
 {
-	return s2::Color((int)(col.r * 255), (int)(col.g * 255), (int)(col.b * 255), (int)(alpha * 255));
+	return pt2::Color((int)(col.r * 255), (int)(col.g * 255), (int)(col.b * 255), (int)(alpha * 255));
 }
 
 }

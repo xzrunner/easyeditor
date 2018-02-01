@@ -48,7 +48,7 @@ void Symbol::DrawBackground(const Sprite* spr, const S2_MAT& mt) const
 		return;
 	}
 
-	s2::RVG::SetColor(s2::Color(179, 179, 0, 179));
+	s2::RVG::SetColor(pt2::Color(179, 179, 0, 179));
 
 	sm::rect r = spr->GetBounding().GetSize();
 	s2::RVG::Rect(nullptr, r, true);

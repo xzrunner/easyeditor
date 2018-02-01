@@ -3,7 +3,7 @@
 #include "s2loader/ArrayLoader.h"
 
 #include <sprite2/ShapeSymbol.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <sprite2/PolygonShape.h>
 #include <sprite2/ColorPolygon.h>
 #include <sprite2/TexturePolygon.h>
@@ -43,7 +43,7 @@ void ShapeSymLoader::LoadJson(const CU_STR& filepath)
 
 void ShapeSymLoader::LoadBin(const simp::NodeShape* node)
 {
-	s2::Color col;
+	pt2::Color col;
 	col.FromRGBA(node->color);
 
 	CU_VEC<sm::vec2> vertices;

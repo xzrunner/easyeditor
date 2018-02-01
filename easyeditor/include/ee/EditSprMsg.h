@@ -2,7 +2,7 @@
 #define _EASYEDITOR_EDIT_SPR_MSG_H_
 
 #include <SM_Vector.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 namespace ee
 {
@@ -18,8 +18,8 @@ public:
 
 	static void SetScale(const Sprite* spr, const sm::vec2& pos, const sm::vec2& scale);
 
-	static void SetColMul(const Sprite* spr, const s2::Color& mul);
-	static void SetColAdd(const Sprite* spr, const s2::Color& add);
+	static void SetColMul(const Sprite* spr, const pt2::Color& mul);
+	static void SetColAdd(const Sprite* spr, const pt2::Color& add);
 
 }; // EditSprMsg
 

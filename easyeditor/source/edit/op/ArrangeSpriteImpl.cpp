@@ -407,7 +407,7 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 					sm::vec2 ctrl_nodes[4];
 					SpriteCtrlNode::GetSpriteCtrlNodesExt(*selected, ctrl_nodes);
 					for (int i = 0; i < 4; ++i) {
-						s2::RVG::SetColor(s2::Color(51, 204, 51));
+						s2::RVG::SetColor(pt2::Color(51, 204, 51));
 						s2::RVG::Circle(nullptr, ctrl_nodes[i], m_ctrl_node_radius, true);
 					}
 				}
@@ -416,11 +416,11 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 					sm::vec2 ctrl_nodes[8];
 					SpriteCtrlNode::GetSpriteCtrlNodes(*selected, ctrl_nodes);
 					for (int i = 0; i < 4; ++i) {
-						s2::RVG::SetColor(s2::Color(51, 204, 51));
+						s2::RVG::SetColor(pt2::Color(51, 204, 51));
 						s2::RVG::Circle(nullptr, ctrl_nodes[i], m_ctrl_node_radius, false);
 					}
 					for (int i = 4; i < 8; ++i) {
-						s2::RVG::SetColor(s2::Color(51, 204, 51));
+						s2::RVG::SetColor(pt2::Color(51, 204, 51));
 						s2::RVG::Circle(nullptr, ctrl_nodes[i], m_ctrl_node_radius, true);
 					}
 				}
@@ -429,7 +429,7 @@ void ArrangeSpriteImpl::OnDraw(float cam_scale) const
 			if (m_cfg.is_offset_open)
 			{
 				sm::vec2 offset = GetSprOffset(selected);
-				s2::RVG::SetColor(s2::Color(204, 51, 51));
+				s2::RVG::SetColor(pt2::Color(204, 51, 51));
 				s2::RVG::Circle(nullptr, offset, m_ctrl_node_radius, true);
 			}
 		}
@@ -709,7 +709,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().GetMul(), pos);
 			if (dlg.ShowModal() == wxID_OK) 
 			{
-				s2::Color col = dlg.GetColor();
+				pt2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) 
 				{
 					s2::RenderColor rc = sprs[i]->GetColor();
@@ -724,7 +724,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().GetMul(), pos);
 			if (dlg.ShowModal() == wxID_OK) 
 			{
-				s2::Color col = dlg.GetColor();
+				pt2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) 
 				{
 					s2::RenderColor rc = sprs[i]->GetColor();
@@ -744,7 +744,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			RGBColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().GetAdd(), pos);
 			if (dlg.ShowModal() == wxID_OK) 
 			{
-				s2::Color col = dlg.GetColor();
+				pt2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) 
 				{
 					s2::RenderColor rc = sprs[i]->GetColor();
@@ -759,7 +759,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			HSLColorSettingDlg dlg(m_wnd, NULL, sprs[0]->GetColor().GetAdd(), pos);
 			if (dlg.ShowModal() == wxID_OK) 
 			{
-				s2::Color col = dlg.GetColor();
+				pt2::Color col = dlg.GetColor();
 				for (int i = 0, n = sprs.size(); i < n; ++i) 
 				{
 					s2::RenderColor rc = sprs[i]->GetColor();
@@ -783,7 +783,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			for (int i = 0, n = sprs.size(); i < n; ++i) 
 			{
 				s2::RenderColor rc = sprs[i]->GetColor();
-				s2::Color mul = rc.GetMul();
+				pt2::Color mul = rc.GetMul();
 				mul.a = alpha;
 				rc.SetMul(mul);
 				sprs[i]->SetColor(rc);
@@ -793,7 +793,7 @@ bool ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 		else if (state == wxID_CANCEL) 
 		{
 			s2::RenderColor rc = sprs[0]->GetColor();
-			s2::Color mul = rc.GetMul();
+			pt2::Color mul = rc.GetMul();
 			mul.a = old_alpha;
 			rc.SetMul(mul);
 			sprs[0]->SetColor(rc);

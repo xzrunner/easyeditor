@@ -205,7 +205,7 @@ void ExportBodymovin::FixFontLayer(const std::string& filepath, const std::strin
 		tb.height = 200;
 		tb.font_type = 0;
 		tb.font_size = 40;
-		tb.font_color = s2::Color(0, 0, 0);
+		tb.font_color = pt2::Color(0, 0, 0);
 		tb.has_edge = false;
 		tb.align_hori = s2::Textbox::HA_LEFT;
 		tb.align_vert = s2::Textbox::VA_CENTER;

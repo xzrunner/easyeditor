@@ -68,7 +68,7 @@
 //			s2::RVG::SetColor(color.mul);
 //			s2::RVG::Polyline(vertices, m_loop);
 //			if (len != 0) {
-//				s2::RVG::SetColor(s2::Color(102, 204, 102));
+//				s2::RVG::SetColor(pt2::Color(102, 204, 102));
 //				s2::RVG::Circles(vertices, len, true);
 //			}
 //		}

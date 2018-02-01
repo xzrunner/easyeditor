@@ -200,7 +200,7 @@ void BodymovinAnimLoader::LoadLayersPrev(const CU_MAP<CU_STR, s2::SprPtr>& map_a
 
 		// fix null spr
 		s2::RenderColor col;
-		col.SetMul(s2::Color(0, 0, 0, 0));
+		col.SetMul(pt2::Color(0, 0, 0, 0));
 		if (start_null) {
 			start_null->SetColor(col);
 			pre_in_null->SetColor(col);
@@ -471,7 +471,7 @@ bool BodymovinAnimLoader::LoadOpacity(CU_VEC<s2::AnimSymbol::FramePtr>& frames,
 			int opacity = static_cast<int>(data.data[0]);
 			auto& spr = frame->sprs[0];
 			s2::RenderColor rc = spr->GetColor();
-			s2::Color col = spr->GetColor().GetMul();
+			pt2::Color col = spr->GetColor().GetMul();
 			col.a = (uint8_t)(255 * opacity / 100.0f);
 			rc.SetMul(col);
 			spr->SetColor(rc);
@@ -489,7 +489,7 @@ bool BodymovinAnimLoader::LoadOpacity(CU_VEC<s2::AnimSymbol::FramePtr>& frames,
 			auto& spr = frame->sprs[0];
 
 			s2::RenderColor rc = spr->GetColor();
-			s2::Color col = spr->GetColor().GetMul();
+			pt2::Color col = spr->GetColor().GetMul();
 			col.a = (uint8_t)(255 * opacity / 100.0f);
 			rc.SetMul(col);
 			spr->SetColor(rc);
@@ -660,7 +660,7 @@ s2::SprPtr BodymovinAnimLoader::CreateSolidSpr(const CU_STR& color, int width, i
 	gum::StringHelper::FromString(color.substr(1, 2), r);
 	gum::StringHelper::FromString(color.substr(3, 2), g);
 	gum::StringHelper::FromString(color.substr(5, 2), b);
-	auto poly = std::make_unique<s2::ColorPolygon>(s2::Color(r, g, b));
+	auto poly = std::make_unique<s2::ColorPolygon>(pt2::Color(r, g, b));
 
 	// region
 	float hw = width * 0.5f,

@@ -12,7 +12,7 @@ class ColorMaterial : public Material, public s2::ColorPolygon
 {
 public:
 	ColorMaterial() {}
-	ColorMaterial(const s2::Color& color);
+	ColorMaterial(const pt2::Color& color);
 
 	virtual Json::Value Store(const std::string& dirpath) const override;
 

@@ -34,7 +34,7 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	s2::RVG::SetColor(s2::Color(204, 204, 204));
+	s2::RVG::SetColor(pt2::Color(204, 204, 204));
 	s2::RVG::LineWidth(2);
 	s2::RVG::Cross(sm::vec2(0, 0), 100, 100);
 }

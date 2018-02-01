@@ -3,7 +3,7 @@
 
 #include <ee/PointerPool.h>
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 #include <vector>
 
@@ -17,7 +17,7 @@ public:
 	~AnimRecorder();
 
 	void AddItem(const std::string& filepath, float x, float y, float angle, 
-		float scale, const s2::Color& mul_col, const s2::Color& add_col);
+		float scale, const pt2::Color& mul_col, const pt2::Color& add_col);
 	void FinishFrame();
 
 	void Clear();
@@ -31,7 +31,7 @@ private:
 		float x, y;
 		float angle;
 		float scale;
-		s2::Color mul_col, add_col;
+		pt2::Color mul_col, add_col;
 	};
 
 	struct Frame

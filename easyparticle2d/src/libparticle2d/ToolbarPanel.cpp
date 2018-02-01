@@ -80,7 +80,7 @@ void ToolbarPanel::Store(Json::Value& val) const
 	}
 }
 
-inline ps_color ColorFromS2(const s2::Color& col)
+inline ps_color ColorFromS2(const pt2::Color& col)
 {
 	ps_color ret;
 	ret.r = col.r;

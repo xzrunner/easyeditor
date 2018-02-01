@@ -42,7 +42,7 @@ std::unique_ptr<s2::Polygon> ShapeLoader::LoadPolyMaterial(const Json::Value& va
 	CU_STR type = val["type"].asString().c_str();
 	if (type == "color")
 	{
-		s2::Color col;
+		pt2::Color col;
 		col.FromRGBA(val["color"].asUInt());
 		poly = std::make_unique<s2::ColorPolygon>(col);
 	}

@@ -146,7 +146,7 @@ s2::RenderReturn Symbol::DrawTree(cooking::DisplayList* dlist, const s2::RenderP
 	if (ee::Config::Instance()->GetSettings().visible_scissor && scissor_sz.x > 0 && scissor_sz.y > 0) {
 		sm::vec2 min(m_scissor.xmin, m_scissor.ymin), 
 				 max(m_scissor.xmax, m_scissor.ymax);
-		s2::RVG::SetColor(s2::Color(0, 204, 0));
+		s2::RVG::SetColor(pt2::Color(0, 204, 0));
 		s2::RVG::Rect(nullptr, rp_child.mt * min, rp_child.mt * max, false);
 	}
 

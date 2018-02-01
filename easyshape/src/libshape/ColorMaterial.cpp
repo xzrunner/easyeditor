@@ -3,7 +3,7 @@
 namespace eshape
 {
 
-ColorMaterial::ColorMaterial(const s2::Color& color)
+ColorMaterial::ColorMaterial(const pt2::Color& color)
 	: s2::ColorPolygon(color)
 {	
 }

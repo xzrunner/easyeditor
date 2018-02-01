@@ -14,7 +14,7 @@ HSLColorPanel::HSLColorPanel(wxWindow* parent, wxSize size)
 	m_canvas = std::make_shared<Canvas>(this);
 }
 
-void HSLColorPanel::SetColor(const s2::Color& begin, const s2::Color& end)
+void HSLColorPanel::SetColor(const pt2::Color& begin, const pt2::Color& end)
 {
 	m_canvas->SetColor(begin, end);
 }
@@ -35,7 +35,7 @@ Canvas(wxWindow* parent)
 }
 
 void HSLColorPanel::Canvas::
-SetColor(const s2::Color& begin, const s2::Color& end)
+SetColor(const pt2::Color& begin, const pt2::Color& end)
 {
 	m_col_begin = begin;
 	m_col_end = end;
@@ -46,7 +46,7 @@ void HSLColorPanel::Canvas::
 OnDraw() const
 {
 	const int COUNT = 100;
-	const s2::Color& begin = m_col_begin, end = m_col_end;
+	const pt2::Color& begin = m_col_begin, end = m_col_end;
 
 	glBegin(GL_QUADS);
 	for (int i = 0; i < COUNT; ++i)

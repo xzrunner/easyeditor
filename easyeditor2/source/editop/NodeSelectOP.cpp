@@ -82,7 +82,7 @@ bool NodeSelectOP::OnDraw() const
 				pos = world_mt * pos;
 			}
 
-			s2::RVG::SetColor(s2::Color(255, 0, 0));
+			s2::RVG::SetColor(pt2::Color(255, 0, 0));
 			s2::RVG::Polyline(nullptr, bound, true);
 
 			return true;

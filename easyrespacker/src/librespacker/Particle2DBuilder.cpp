@@ -131,14 +131,14 @@ void Particle2DBuilder::Load(const std::shared_ptr<const eparticle2d::Symbol>& s
 		comp.scale_start = p_symbol.scale_start;
 		comp.scale_end = p_symbol.scale_end;
 
-		comp.mul_col_begin = s2::Color((int)(p_symbol.mul_col_begin.r * 255), (int)(p_symbol.mul_col_begin.g * 255), 
+		comp.mul_col_begin = pt2::Color((int)(p_symbol.mul_col_begin.r * 255), (int)(p_symbol.mul_col_begin.g * 255), 
 			(int)(p_symbol.mul_col_begin.b * 255), (int)(p_symbol.mul_col_begin.a * 255)).ToABGR();
-		comp.mul_col_end = s2::Color((int)(p_symbol.mul_col_end.r * 255), (int)(p_symbol.mul_col_end.g * 255), 
+		comp.mul_col_end = pt2::Color((int)(p_symbol.mul_col_end.r * 255), (int)(p_symbol.mul_col_end.g * 255), 
 			(int)(p_symbol.mul_col_end.b * 255), (int)(p_symbol.mul_col_end.a * 255)).ToABGR();
 
-		comp.add_col_begin = s2::Color((int)(p_symbol.add_col_begin.r * 255), (int)(p_symbol.add_col_begin.g * 255), 
+		comp.add_col_begin = pt2::Color((int)(p_symbol.add_col_begin.r * 255), (int)(p_symbol.add_col_begin.g * 255), 
 			(int)(p_symbol.add_col_begin.b * 255), (int)(p_symbol.add_col_begin.a * 255)).ToABGR();
-		comp.add_col_end = s2::Color((int)(p_symbol.add_col_end.r * 255), (int)(p_symbol.add_col_end.g * 255), 
+		comp.add_col_end = pt2::Color((int)(p_symbol.add_col_end.r * 255), (int)(p_symbol.add_col_end.g * 255), 
 			(int)(p_symbol.add_col_end.b * 255), (int)(p_symbol.add_col_end.a * 255)).ToABGR();
 
 		auto sym_raw = dynamic_cast<ee::Symbol*>(static_cast<s2::Symbol*>(p_symbol.ud));

@@ -37,8 +37,8 @@ protected:
 	 *  @interface
 	 *    s2::TextboxSymbol
 	 */
-	virtual void DrawText(cooking::DisplayList* dlist, const gtxt_label_style& style, const S2_MAT& mt, const s2::Color& mul,
-		const s2::Color& add, const CU_STR& text, int time, bool richtext) const override;
+	virtual void DrawText(cooking::DisplayList* dlist, const gtxt_label_style& style, const S2_MAT& mt, const pt2::Color& mul,
+		const pt2::Color& add, const CU_STR& text, int time, bool richtext) const override;
 
 private:
 	void DrawBackground(const Sprite* spr, const S2_MAT& mt) const;

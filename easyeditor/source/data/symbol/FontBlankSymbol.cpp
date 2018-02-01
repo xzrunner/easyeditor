@@ -123,7 +123,7 @@ bool FontBlankSymbol::LoadResources()
 
 void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const S2_MAT& mt) const
 {
-	s2::RVG::SetColor(s2::Color(179, 179, 179, 179));
+	s2::RVG::SetColor(pt2::Color(179, 179, 179, 179));
 
 	float hw = width * 0.5f,
 		  hh = height * 0.5f;

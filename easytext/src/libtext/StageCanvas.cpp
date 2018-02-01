@@ -54,7 +54,7 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawSprBound() const
 {
-	s2::RVG::SetColor(s2::Color(204, 102, 102));
+	s2::RVG::SetColor(pt2::Color(204, 102, 102));
 
 	auto font = std::dynamic_pointer_cast<Sprite>(m_edited);
 	const s2::Textbox& tb = font->GetTextbox();

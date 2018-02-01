@@ -4,7 +4,7 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolFile.h>
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <sprite2/SymType.h>
 #include <gum/trans_color.h>
 
@@ -50,7 +50,7 @@ bool FixSpriteColor::FixSprite(const std::string& filepath, Json::Value& sprite_
 		return false;
 	}
 
-	s2::Color col = gum::str2color(str.c_str(), sns::ARGB);
+	pt2::Color col = gum::str2color(str.c_str(), sns::ARGB);
 	sprite_val["add color"] = gum::color2str(col, sns::ABGR).c_str();
 
 	return true;

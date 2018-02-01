@@ -644,9 +644,9 @@ void CocoPacker::resolveSpriteForFrame(const ee::SprConstPtr& spr, int id, bool 
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	const s2::Color& mul = spr->GetColor().GetMul();
-	const s2::Color& add = spr->GetColor().GetAdd();
-	if (mul != s2::Color(255, 255, 255, 255) || add != s2::Color(0,0,0,0))
+	const pt2::Color& mul = spr->GetColor().GetMul();
+	const pt2::Color& add = spr->GetColor().GetAdd();
+	if (mul != pt2::Color(255, 255, 255, 255) || add != pt2::Color(0,0,0,0))
 	{
 		std::string assignColor = lua::assign("color", gum::color2str(mul, sns::BGRA));
 		std::string assignAdd = lua::assign("add", gum::color2str(add, sns::ABGR));
@@ -672,9 +672,9 @@ void CocoPacker::resolveSpriteForFrameImage(const ee::SprConstPtr& spr, int id)
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	const s2::Color& mul = spr->GetColor().GetMul();
-	const s2::Color& add = spr->GetColor().GetAdd();
-	if (mul != s2::Color(1,1,1,1) || add != s2::Color(0,0,0,0))
+	const pt2::Color& mul = spr->GetColor().GetMul();
+	const pt2::Color& add = spr->GetColor().GetAdd();
+	if (mul != pt2::Color(1,1,1,1) || add != pt2::Color(0,0,0,0))
 	{
 		std::string assignColor = lua::assign("color", gum::color2str(mul, sns::BGRA));
 		std::string assignAdd = lua::assign("add", gum::color2str(add, sns::ABGR));
@@ -699,7 +699,7 @@ void CocoPacker::resolveSpriteForFrameFont(const std::shared_ptr<const ee::FontB
 	float mat[6];
 	transToMat(spr, mat, true);
 
-	bool isNullNode = spr->font.empty() && spr->font_color == s2::Color(0, 0, 0, 0);
+	bool isNullNode = spr->font.empty() && spr->font_color == pt2::Color(0, 0, 0, 0);
 	if (!isNullNode)
 	{
 		// flip y

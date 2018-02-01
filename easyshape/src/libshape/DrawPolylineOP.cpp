@@ -4,7 +4,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <sprite2/RVG.h>
 
 namespace eshape
@@ -83,7 +83,7 @@ bool DrawPolylineOP::OnDraw() const
 
 	if (!m_polyline.empty())
 	{
-		s2::RVG::SetColor(s2::Color(0, 0, 0));
+		s2::RVG::SetColor(pt2::Color(0, 0, 0));
 		if (m_curr_pos.IsValid())
 		{
 			m_polyline.push_back(m_curr_pos);

@@ -109,7 +109,7 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 bool TransOldAnchorFile::IsAnchor(const ee::SprConstPtr& spr) const
 {	
 	if (auto font = std::dynamic_pointer_cast<const ee::FontBlankSprite>(spr)) {
-		return font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
+		return font->font.empty() && font->font_color == pt2::Color(0, 0, 0, 0);
 	} else if (auto complex = std::dynamic_pointer_cast<const ecomplex::Sprite>(spr)) {
 		auto& children = std::dynamic_pointer_cast<s2::ComplexSymbol>(complex->GetSymbol())->GetAllChildren();
 		if (children.size() == 1) {

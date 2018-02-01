@@ -5,7 +5,7 @@
 
 #include <ee/Sprite.h>
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 namespace edb
 {
@@ -36,7 +36,7 @@ private:
 	struct Trans
 	{
 		int type;
-		s2::Color col_r, col_g, col_b;
+		pt2::Color col_r, col_g, col_b;
 		std::string ext;
 	};
 

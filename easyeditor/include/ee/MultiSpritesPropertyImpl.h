@@ -4,7 +4,7 @@
 #include "Sprite.h"
 
 #include <SM_Vector.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 #include <wx/chartype.h>
 
@@ -28,11 +28,11 @@ public:
 public:
 	std::string GetTag() const;
 	sm::vec2 GetPosition() const;
-	s2::Color GetMultiColor() const;
-	s2::Color GetAddColor() const;
-	s2::Color GetTransColorR() const;
-	s2::Color GetTransColorG() const;
-	s2::Color GetTransColorB() const;
+	pt2::Color GetMultiColor() const;
+	pt2::Color GetAddColor() const;
+	pt2::Color GetTransColorR() const;
+	pt2::Color GetTransColorG() const;
+	pt2::Color GetTransColorB() const;
 	float GetAngle() const;
 	sm::vec2 GetScale() const;
 	sm::bvec2 GetMirror() const;
@@ -41,8 +41,8 @@ public:
 
 	void SetTag(const std::string& tag);
 	void SetPos(float x, float y);
-	void SetColorMul(const s2::Color& col);
-	void SetColorAdd(const s2::Color& col);
+	void SetColorMul(const pt2::Color& col);
+	void SetColorAdd(const pt2::Color& col);
 	void SetColorAlpha(int alpha);
 	void SetAngle(bool overall, float angle);
 	void SetScale(bool overall, float sx, float sy);void SetMirrorX(bool overall, bool mirror);

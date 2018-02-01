@@ -34,7 +34,7 @@ bool SysColorProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& value 
 	{
 		*m_color_data = dlg.GetColourData();
 		const wxColor& col = dlg.GetColourData().GetColour();
-		m_lsn->OnColorChanged(s2::Color(col.Red(), col.Green(), col.Blue()));
+		m_lsn->OnColorChanged(pt2::Color(col.Red(), col.Green(), col.Blue()));
 	}
 
 	return false;

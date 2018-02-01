@@ -15,7 +15,7 @@ PreviewCanvas::PreviewCanvas(PreviewPanel* editPanel)
 	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), s2::CAM_ORTHO2D)
 	, m_stage_panel(editPanel)
 {
-	SetBgColor(s2::Color(0, 0, 0));
+	SetBgColor(pt2::Color(0, 0, 0));
 }
 
 PreviewCanvas::~PreviewCanvas()
@@ -34,15 +34,15 @@ void PreviewCanvas::OnDrawSprites() const
  
  		if (op->m_curr_pos.IsValid())
  		{
-			s2::RVG::SetColor(s2::Color(255, 255, 255));
+			s2::RVG::SetColor(pt2::Color(255, 255, 255));
 			s2::RVG::LineWidth(1);
  			s2::RVG::Line(first, op->m_curr_pos);
 			s2::RVG::LineWidth(2);
 
-			s2::RVG::SetColor(s2::Color(0, 255, 0));
+			s2::RVG::SetColor(pt2::Color(0, 255, 0));
  			s2::RVG::Circle(op->m_curr_pos, 2, true);
  		}
-		s2::RVG::SetColor(s2::Color(0, 255, 0));
+		s2::RVG::SetColor(pt2::Color(0, 255, 0));
  		s2::RVG::Circle(first, 2, true);
  	}
 }

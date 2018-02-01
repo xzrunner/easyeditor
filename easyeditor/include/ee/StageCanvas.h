@@ -3,7 +3,7 @@
 
 #include "Observer.h"
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <cu/CU_RefCountObj.h>
 
 #include <wx/glcanvas.h>
@@ -29,7 +29,7 @@ public:
 
 	virtual void SetCurrentCanvas();
 
-	void SetBgColor(const s2::Color& color);
+	void SetBgColor(const pt2::Color& color);
 
 	bool IsDirty() const { return m_dirty; }
 	void SetDirty() { m_dirty = true; }
@@ -74,7 +74,7 @@ private:
 protected:
 	EditPanelImpl* m_stage;
 
-	s2::Color m_bg_color;
+	pt2::Color m_bg_color;
 
 	int m_width, m_height;
 

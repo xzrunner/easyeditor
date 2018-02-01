@@ -3,7 +3,7 @@
 
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <cu/CU_RefCountObj.h>
 
 #include <sprite2/pre_defined.h>
@@ -31,10 +31,10 @@ public:
 
 	const sm::rect& GetRegion() const { return m_region; }
 
-	const s2::Color& GetInnerColor() const { return m_inner_color; }
-	const s2::Color& GetOuterColor() const { return m_outer_color; }
-	void SetInnerColer(const s2::Color& col);
-	void SetOuterColer(const s2::Color& col);
+	const pt2::Color& GetInnerColor() const { return m_inner_color; }
+	const pt2::Color& GetOuterColor() const { return m_outer_color; }
+	void SetInnerColer(const pt2::Color& col);
+	void SetOuterColer(const pt2::Color& col);
 
 	void SetRadius(float r) { m_radius = r; }
 
@@ -52,10 +52,10 @@ private:
 	std::vector<sm::vec2> m_inner_loop;
 	std::vector<sm::vec2> m_outer_loop;
 
-	s2::Color m_inner_color, m_outer_color;
+	pt2::Color m_inner_color, m_outer_color;
 
 	std::vector<sm::vec2> m_tris;	
-	std::vector<s2::Color> m_colors;	
+	std::vector<pt2::Color> m_colors;	
 
 	sm::rect m_region;
 

@@ -101,7 +101,7 @@ bool Fixture::IsIntersect(const sm::rect& rect) const
 		return false;
 }
 
-void Fixture::Draw(const S2_MAT& mt, const s2::Color& cFace, const s2::Color& cEdge) const
+void Fixture::Draw(const S2_MAT& mt, const pt2::Color& cFace, const pt2::Color& cEdge) const
 {
 	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{

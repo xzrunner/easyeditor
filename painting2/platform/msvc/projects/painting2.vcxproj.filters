@@ -34,6 +34,9 @@
     <ClInclude Include="..\..\..\include\painting2\OBB.h">
       <Filter>bb</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\Color.h">
+      <Filter>color</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="transform">
@@ -41,6 +44,9 @@
     </Filter>
     <Filter Include="bb">
       <UniqueIdentifier>{cc3e2316-5942-4d83-bfa5-e8212a5edd0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="color">
+      <UniqueIdentifier>{61410980-78e7-4dc7-9e99-cfa4e4c1b396}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +58,9 @@
     </None>
     <None Include="..\..\..\include\painting2\OBB.inl">
       <Filter>bb</Filter>
+    </None>
+    <None Include="..\..\..\include\painting2\Color.inl">
+      <Filter>color</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -96,7 +96,7 @@ std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct T
 			token[ptr] == "b") 
 		{
 			set_color = true;
-			s2::Color* col;
+			pt2::Color* col;
 			if (token[ptr] == "r") {
 				col = &t.col_r;
 				t.type |= CC_R;
@@ -135,17 +135,17 @@ void AnimToComplexWithColor::TransSpr(const Trans& t, const ee::SprPtr& spr)
 	if (t.type & CC_R) {
 		float r, g, b;
 		ee::hsl2rgb(t.col_r.r / 255.0f, t.col_r.g / 255.0f, t.col_r.b / 255.0f, r, g, b);
-		rc.SetRMap(s2::Color(r, g, b));
+		rc.SetRMap(pt2::Color(r, g, b));
 	}
 	if (t.type & CC_G) {
 		float r, g, b;
 		ee::hsl2rgb(t.col_g.r / 255.0f, t.col_g.g / 255.0f, t.col_g.b / 255.0f, r, g, b);
-		rc.SetGMap(s2::Color(r, g, b));
+		rc.SetGMap(pt2::Color(r, g, b));
 	}
 	if (t.type & CC_B) {
 		float r, g, b;
 		ee::hsl2rgb(t.col_b.r / 255.0f, t.col_b.g / 255.0f, t.col_b.b / 255.0f, r, g, b);
-		rc.SetBMap(s2::Color(r, g, b));
+		rc.SetBMap(pt2::Color(r, g, b));
 	}
 	spr->SetColor(rc);
 }

@@ -15,7 +15,7 @@ SprPropColMonitor::SprPropColMonitor(const SprPtr& spr, ColType type)
 {
 }
 
-s2::Color SprPropColMonitor::GetColor() const
+pt2::Color SprPropColMonitor::GetColor() const
 {
 	switch (m_type)
 	{
@@ -30,7 +30,7 @@ s2::Color SprPropColMonitor::GetColor() const
 	case CT_BMAP:
 		return m_spr->GetColor().GetBMap();
 	default:
-		return s2::Color();
+		return pt2::Color();
 	}
 }
 
@@ -39,7 +39,7 @@ void SprPropColMonitor::OnColorChanged()
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void SprPropColMonitor::OnColorChanged(const s2::Color& col)
+void SprPropColMonitor::OnColorChanged(const pt2::Color& col)
 {
 	s2::RenderColor rc = m_spr->GetColor();
 	switch (m_type)

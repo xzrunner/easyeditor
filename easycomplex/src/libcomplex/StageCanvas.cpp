@@ -60,7 +60,7 @@ void StageCanvas::OnDrawSprites() const
 
 	ee::ScreenCache::Instance()->Draw(ee::CameraMgr::Instance()->GetCamera());
 
-	s2::RVG::SetColor(s2::Color(0, 0.8f, 0));
+	s2::RVG::SetColor(pt2::Color(0, 0.8f, 0));
 	const sm::rect& r = m_stage->GetSymbol()->GetScissor();
 	s2::RVG::Rect(sm::vec2(r.xmin, r.ymin), sm::vec2(r.xmax, r.ymax), m_clipboxStyle.filling);
 
@@ -93,7 +93,7 @@ void StageCanvas::OnDrawSprites() const
 	const sm::rect& clipbox = std::dynamic_pointer_cast<Symbol>(m_stage->GetSymbol())->GetScissor();
 	sm::vec2 sz = clipbox.Size();
 	if (sz.x > 0 && sz.y > 0) {
-		s2::RVG::SetColor(s2::Color(0, 204, 0));
+		s2::RVG::SetColor(pt2::Color(0, 204, 0));
 		s2::RVG::LineWidth(2);
 		s2::RVG::Rect(nullptr, sm::vec2(clipbox.xmin, clipbox.ymin), sm::vec2(clipbox.xmax, clipbox.ymax), false);
 	}
@@ -127,7 +127,7 @@ void StageCanvas::DrawBackground() const
 	}
 
 	if (Settings::bVisibleBGRect) {
-		s2::RVG::SetColor(s2::Color(204, 204, 204));
+		s2::RVG::SetColor(pt2::Color(204, 204, 204));
 		s2::RVG::LineWidth(2);
 		s2::RVG::Rect(nullptr, sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 	}

@@ -6,7 +6,7 @@
 #include <shaderlab/ShaderMgr.h>
 #include <shaderlab/Shader.h>
 #include <sprite2/RVG.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/Sprite.h>
 
@@ -21,12 +21,12 @@ Joint::Joint(const s2::SprPtr& spr, const s2::JointPose& joint_pose)
 void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 {
 	if (selected) {
-		s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
+		s2::RVG::SetColor(pt2::Color(204, 51, 51, 128));
 		s2::RVG::Circle(nullptr, params.mt * m_world_pose.trans, RADIUS, true);
 	} else {
-		s2::RVG::SetColor(s2::Color(51, 204, 51, 128));
+		s2::RVG::SetColor(pt2::Color(51, 204, 51, 128));
 		s2::RVG::Circle(nullptr, params.mt * m_world_pose.trans, RADIUS, true);
-		s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
+		s2::RVG::SetColor(pt2::Color(204, 51, 51, 128));
 		s2::RVG::Circle(nullptr, params.mt * m_world_pose.trans, RADIUS, false);
 	}
 
@@ -41,7 +41,7 @@ void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 		sm::vec2 right = mid + sm::rotate_vector_right_angle(s - mid, true);
 
 		if (!selected) {
-			s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
+			s2::RVG::SetColor(pt2::Color(204, 51, 51, 128));
 			s2::RVG::Line(nullptr, s, left);
 			s2::RVG::Line(nullptr, left, e);
 			s2::RVG::Line(nullptr, e, right);
@@ -49,9 +49,9 @@ void Joint::DrawSkeleton(const s2::RenderParams& params, bool selected) const
 		}
 
 		if (selected) {
-			s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
+			s2::RVG::SetColor(pt2::Color(204, 51, 51, 128));
 		} else {
-			s2::RVG::SetColor(s2::Color(204, 204, 51, 128));
+			s2::RVG::SetColor(pt2::Color(204, 204, 51, 128));
 		}
 		CU_VEC<sm::vec2> face;
 		face.push_back(s);

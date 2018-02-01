@@ -9,17 +9,17 @@ namespace ee
 class PropColMonitor : public ColorMonitor
 {
 public:
-	PropColMonitor(s2::Color* col);
+	PropColMonitor(pt2::Color* col);
 
 	//
 	// interface ColorMonitor
 	//
-	virtual s2::Color GetColor() const override;
+	virtual pt2::Color GetColor() const override;
 	virtual void OnColorChanged() override;
-	virtual void OnColorChanged(const s2::Color& col) override;
+	virtual void OnColorChanged(const pt2::Color& col) override;
 
 private:
-	s2::Color* m_col;
+	pt2::Color* m_col;
 
 }; // PropColMonitor
 

@@ -64,7 +64,7 @@ sm::vec2 MultiSpritesPropertyImpl::GetPosition() const
 	return p;
 }
 
-s2::Color MultiSpritesPropertyImpl::GetMultiColor() const
+pt2::Color MultiSpritesPropertyImpl::GetMultiColor() const
 {
 	if (m_sprs.empty()) {
 		return WHITE;
@@ -79,7 +79,7 @@ s2::Color MultiSpritesPropertyImpl::GetMultiColor() const
 	return rc.GetMul();
 }
 
-s2::Color MultiSpritesPropertyImpl::GetAddColor() const
+pt2::Color MultiSpritesPropertyImpl::GetAddColor() const
 {
 	if (m_sprs.empty()) {
 		return BLACK;
@@ -94,7 +94,7 @@ s2::Color MultiSpritesPropertyImpl::GetAddColor() const
 	return rc.GetAdd();
 }
 
-s2::Color MultiSpritesPropertyImpl::GetTransColorR() const
+pt2::Color MultiSpritesPropertyImpl::GetTransColorR() const
 {
 	if (m_sprs.empty()) {
 		return RED;
@@ -109,7 +109,7 @@ s2::Color MultiSpritesPropertyImpl::GetTransColorR() const
 	return rc.GetRMap();
 }
 
-s2::Color MultiSpritesPropertyImpl::GetTransColorG() const
+pt2::Color MultiSpritesPropertyImpl::GetTransColorG() const
 {
 	if (m_sprs.empty()) {
 		return GREEN;
@@ -124,7 +124,7 @@ s2::Color MultiSpritesPropertyImpl::GetTransColorG() const
 	return rc.GetGMap();
 }
 
-s2::Color MultiSpritesPropertyImpl::GetTransColorB() const
+pt2::Color MultiSpritesPropertyImpl::GetTransColorB() const
 {
 	if (m_sprs.empty()) {
 		return BLUE;
@@ -245,7 +245,7 @@ void MultiSpritesPropertyImpl::SetPos(float x, float y)
 	}
 }
 
-void MultiSpritesPropertyImpl::SetColorMul(const s2::Color& col)
+void MultiSpritesPropertyImpl::SetColorMul(const pt2::Color& col)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 
@@ -253,7 +253,7 @@ void MultiSpritesPropertyImpl::SetColorMul(const s2::Color& col)
 	{
 		s2::RenderColor rc = m_sprs[i]->GetColor();
 
-		s2::Color mul = col;
+		pt2::Color mul = col;
 		mul.a = rc.GetMul().a;
 		rc.SetMul(mul);
 
@@ -261,7 +261,7 @@ void MultiSpritesPropertyImpl::SetColorMul(const s2::Color& col)
 	}
 }
 
-void MultiSpritesPropertyImpl::SetColorAdd(const s2::Color& col)
+void MultiSpritesPropertyImpl::SetColorAdd(const pt2::Color& col)
 {
 	SetWndDirtySJ::Instance()->SetDirty();
 
@@ -269,7 +269,7 @@ void MultiSpritesPropertyImpl::SetColorAdd(const s2::Color& col)
 	{
 		s2::RenderColor rc = m_sprs[i]->GetColor();
 
-		s2::Color add = col;
+		pt2::Color add = col;
 		add.a = rc.GetAdd().a;
 		rc.SetAdd(add);
 
@@ -285,7 +285,7 @@ void MultiSpritesPropertyImpl::SetColorAlpha(int alpha)
 	{
 		s2::RenderColor rc = m_sprs[i]->GetColor();
 
-		s2::Color mul = rc.GetMul();
+		pt2::Color mul = rc.GetMul();
 		mul.a = alpha;
 		rc.SetMul(mul);
 

@@ -35,9 +35,9 @@ void DistanceJoint::Draw(DrawType type) const
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		s2::RVG::SetColor(s2::Color(102, 204, 102));
+		s2::RVG::SetColor(pt2::Color(102, 204, 102));
 		s2::RVG::DashLine(anchorA, m_body_a->m_spr->GetPosition());
-		s2::RVG::SetColor(s2::Color(102, 102, 204));
+		s2::RVG::SetColor(pt2::Color(102, 102, 204));
 		s2::RVG::DashLine(anchorB, m_body_b->m_spr->GetPosition());
 
 		DrawBodyFlag();
@@ -71,7 +71,7 @@ void DistanceJoint::SetLocalAnchorB(const sm::vec2& world)
 
 void DistanceJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const
 {
-	s2::Color color;
+	pt2::Color color;
 	switch (type)
 	{
 	case e_default:
@@ -93,7 +93,7 @@ void DistanceJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const
 void DistanceJoint::DrawConnection(const sm::vec2& worldAnchorA, 
 								   const sm::vec2& worldAnchorB, DrawType type) const
 {
-	s2::Color color;
+	pt2::Color color;
 	switch (type)
 	{
 	case e_default:

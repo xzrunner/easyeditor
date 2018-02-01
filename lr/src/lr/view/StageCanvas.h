@@ -15,8 +15,8 @@ class StageCanvas : public ee::CameraCanvas
 public:
 	StageCanvas(StagePanel* stage);
 
-	s2::Color& GetMultiColor() { return m_scr_style.multi_col; }
-	s2::Color& GetAddColor() { return m_scr_style.add_col; }
+	pt2::Color& GetMultiColor() { return m_scr_style.multi_col; }
+	pt2::Color& GetAddColor() { return m_scr_style.add_col; }
 
 	void EnableColGrading(bool enable) { m_scr_style.col_grading = enable; }
 

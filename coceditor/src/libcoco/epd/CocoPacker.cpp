@@ -1585,7 +1585,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::SprConstPtr& spr, std::vecto
 		if (isFont)
 		{
 			auto font = std::dynamic_pointer_cast<const ee::FontBlankSprite>(spr);
-			bool is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
+			bool is_mount_node = font && font->font.empty() && font->font_color == pt2::Color(0, 0, 0, 0);
 			if (is_mount_node)
 			{
 				std::string aName = lua::assign("name", "\""+name+"\"");
@@ -1619,7 +1619,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::SprConstPtr& spr, std::vecto
 				auto comp_sym = std::dynamic_pointer_cast<const ecomplex::Symbol>(ecomplex->GetSymbol());
 				if (comp_sym->GetAllChildren().size() == 1) {
 					auto font = std::dynamic_pointer_cast<const ee::FontBlankSprite>(comp_sym->GetAllChildren()[0]);
-					is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
+					is_mount_node = font && font->font.empty() && font->font_color == pt2::Color(0, 0, 0, 0);
 				}
 			}
 			if (is_mount_node) {
@@ -1658,7 +1658,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::SprConstPtr& spr, std::vecto
 				if (comp_sym->GetAllChildren().size() == 1) {
 					auto child = std::dynamic_pointer_cast<ee::Sprite>(comp_sym->GetAllChildren()[0]);				
 					auto font = std::dynamic_pointer_cast<const ee::FontBlankSprite>(child);
-					is_mount_node = font && font->font.empty() && font->font_color == s2::Color(0, 0, 0, 0);
+					is_mount_node = font && font->font.empty() && font->font_color == pt2::Color(0, 0, 0, 0);
 				}
 			}
 			if (is_mount_node) {
@@ -1821,7 +1821,7 @@ void CocoPacker::ParserFontForFrame(const std::shared_ptr<const ee::FontBlankSpr
 	float mat[6];
 	TransToMat(spr, mat, true);
 
-	bool isNullNode = spr->font.empty() && spr->font_color == s2::Color(0, 0, 0, 0);
+	bool isNullNode = spr->font.empty() && spr->font_color == pt2::Color(0, 0, 0, 0);
 	if (!isNullNode)
 	{
 		// move to left-top
@@ -1905,9 +1905,9 @@ void CocoPacker::TransToMat(const ee::SprConstPtr& spr, float mat[6], bool force
 
 void CocoPacker::GetColorAssignParams(const ee::SprConstPtr& spr, std::vector<std::string>& params) const
 {
-	const s2::Color& mul = spr->GetColor().GetMul();
-	const s2::Color& add = spr->GetColor().GetAdd();
-	if (mul != s2::Color(1,1,1,1) || add != s2::Color(0,0,0,0)) 
+	const pt2::Color& mul = spr->GetColor().GetMul();
+	const pt2::Color& add = spr->GetColor().GetAdd();
+	if (mul != pt2::Color(1,1,1,1) || add != pt2::Color(0,0,0,0)) 
 	{
 		std::string str_multi = lua::assign("color", gum::color2int(mul, sns::BGRA));
 		params.push_back(str_multi);
@@ -1915,10 +1915,10 @@ void CocoPacker::GetColorAssignParams(const ee::SprConstPtr& spr, std::vector<st
 		params.push_back(str_add);
 	}
 
-	s2::Color rmap = spr->GetColor().GetRMap();
-	s2::Color gmap = spr->GetColor().GetGMap();
-	s2::Color bmap = spr->GetColor().GetBMap();
-	if (rmap != s2::Color(255, 0, 0, 255) || gmap != s2::Color(0, 255, 0, 255) || bmap != s2::Color(0, 0, 255, 255))
+	pt2::Color rmap = spr->GetColor().GetRMap();
+	pt2::Color gmap = spr->GetColor().GetGMap();
+	pt2::Color bmap = spr->GetColor().GetBMap();
+	if (rmap != pt2::Color(255, 0, 0, 255) || gmap != pt2::Color(0, 255, 0, 255) || bmap != pt2::Color(0, 0, 255, 255))
 	{
 		std::string str_r = lua::assign("r_map", gum::color2str(rmap, sns::RGBA));
 		params.push_back(str_r);

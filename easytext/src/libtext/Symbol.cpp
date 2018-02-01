@@ -68,8 +68,8 @@ bool Symbol::LoadResources()
 	return true;
 }
 
-void Symbol::DrawText(cooking::DisplayList* dlist, const gtxt_label_style& style, const S2_MAT& mt, const s2::Color& mul,
-	                  const s2::Color& add, const CU_STR& text, int time, bool richtext) const
+void Symbol::DrawText(cooking::DisplayList* dlist, const gtxt_label_style& style, const S2_MAT& mt, const pt2::Color& mul,
+	                  const pt2::Color& add, const CU_STR& text, int time, bool richtext) const
 {
 	std::string t_text = ee::StringHelper::ToUtf8(text.c_str());
 	gum::GTxt::Instance()->Draw(dlist, style, mt, mul, add, t_text.c_str(), time, richtext);
@@ -81,7 +81,7 @@ void Symbol::DrawBackground(const Sprite* spr, const S2_MAT& mt) const
 		return;
 	}
 
-	s2::RVG::SetColor(s2::Color(179, 179, 179, 179));
+	s2::RVG::SetColor(pt2::Color(179, 179, 179, 179));
 
 	const s2::Textbox& tb = spr->GetTextbox();
 	float hw = tb.width * 0.5f,

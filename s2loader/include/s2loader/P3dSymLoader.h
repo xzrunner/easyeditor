@@ -3,7 +3,7 @@
 
 #include <cu/uncopyable.h>
 #include <cu/cu_stl.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <sprite2/typedef.h>
 
 #include <json/json.h>
@@ -47,7 +47,7 @@ public:
 
 		float angle, angle_var;
 
-		s2::Color mul_col_begin, mul_col_end,
+		pt2::Color mul_col_begin, mul_col_end,
 			      add_col_begin, add_col_end;
 
 		float alpha_start, alpha_end;

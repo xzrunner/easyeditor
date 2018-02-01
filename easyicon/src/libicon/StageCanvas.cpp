@@ -55,7 +55,7 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->GetSymbol()->DrawTree(nullptr, s2::RenderParams(), &spr);
 
-	s2::RVG::SetColor(s2::Color(255, 0, 0));
+	s2::RVG::SetColor(pt2::Color(255, 0, 0));
 	s2::RVG::Cross(nullptr, sm::vec2(0, 0), 100, 100);
 
 	m_stage->DrawEditOP();

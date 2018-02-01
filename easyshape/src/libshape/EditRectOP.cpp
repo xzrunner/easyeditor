@@ -211,10 +211,10 @@ bool EditRectOP::OnDraw() const
 			if (auto rect = std::dynamic_pointer_cast<RectShape>(m_captured.shape))
 			{
 				sm::vec2 pos = rect->GetRect().Center();
-				s2::RVG::SetColor(s2::Color(102, 255, 102));
+				s2::RVG::SetColor(pt2::Color(102, 255, 102));
 				s2::RVG::Circle(nullptr, pos, tolerance, true);
 				if (m_captured.pos.IsValid()) {
-					s2::RVG::SetColor(s2::Color(255, 102, 102));
+					s2::RVG::SetColor(pt2::Color(255, 102, 102));
 					s2::RVG::Circle(nullptr, m_captured.pos, tolerance, true);
 				}
 			}

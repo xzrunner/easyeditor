@@ -4,7 +4,7 @@
 namespace ee
 {
 
-RGBColorSettingDlg::RGBColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, const s2::Color& col, const wxPoint& pos)
+RGBColorSettingDlg::RGBColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, const pt2::Color& col, const wxPoint& pos)
 	: wxDialog(parent, wxID_ANY, "RGB Color Setting", pos, wxSize(450, 300))
 	, m_lsn(lsn)
 	, m_r(NULL)
@@ -15,9 +15,9 @@ RGBColorSettingDlg::RGBColorSettingDlg(wxWindow* parent, ColorMonitor* lsn, cons
 	SetColor(col);
 }
 
-s2::Color RGBColorSettingDlg::GetColor() const
+pt2::Color RGBColorSettingDlg::GetColor() const
 {
-	s2::Color col;
+	pt2::Color col;
 	col.r = m_r->GetColorValue();
 	col.g = m_g->GetColorValue();
 	col.b = m_b->GetColorValue();
@@ -29,9 +29,9 @@ void RGBColorSettingDlg::OnColorChanged()
 	int r = m_r->GetColorValue();
 	int g = m_g->GetColorValue();
 	int b = m_b->GetColorValue();
-	m_r->SetColorRegion(s2::Color(0, g, b), s2::Color(1, g, b));
-	m_g->SetColorRegion(s2::Color(r, 0, b), s2::Color(r, 1, b));
-	m_b->SetColorRegion(s2::Color(r, g, 0), s2::Color(r, g, 1));
+	m_r->SetColorRegion(pt2::Color(0, g, b), pt2::Color(1, g, b));
+	m_g->SetColorRegion(pt2::Color(r, 0, b), pt2::Color(r, 1, b));
+	m_b->SetColorRegion(pt2::Color(r, g, 0), pt2::Color(r, g, 1));
 
 	m_color_bg->SetBackgroundColour(wxColour(m_r->GetColorValue(), 
 		m_g->GetColorValue(), m_b->GetColorValue()));
@@ -42,7 +42,7 @@ void RGBColorSettingDlg::OnColorChanged()
 	}
 }
 
-void RGBColorSettingDlg::OnColorChanged(const s2::Color& col)
+void RGBColorSettingDlg::OnColorChanged(const pt2::Color& col)
 {
 	OnColorChanged();
 }
@@ -83,7 +83,7 @@ void RGBColorSettingDlg::InitLayout()
 	top_sizer->Fit(this);
 }
 
-void RGBColorSettingDlg::SetColor(const s2::Color& col)
+void RGBColorSettingDlg::SetColor(const pt2::Color& col)
 {
 	m_r->SetColorValue(col.r);
 	m_g->SetColorValue(col.g);

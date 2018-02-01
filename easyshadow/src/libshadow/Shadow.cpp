@@ -126,14 +126,14 @@ void Shadow::BuildInnerLine(const std::vector<sm::vec2>& loop)
 	BuildOutterLine();
 }
 
-void Shadow::SetInnerColer(const s2::Color& col) 
+void Shadow::SetInnerColer(const pt2::Color& col) 
 { 
 	m_inner_color.r = col.r;
 	m_inner_color.g = col.g;
 	m_inner_color.b = col.b;
 }
 
-void Shadow::SetOuterColer(const s2::Color& col) 
+void Shadow::SetOuterColer(const pt2::Color& col) 
 { 
 	m_outer_color.r = col.r; 
 	m_outer_color.g = col.g; 

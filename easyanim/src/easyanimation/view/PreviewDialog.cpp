@@ -22,7 +22,7 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx, s2::AnimSymbo
 
 	InitLayout(glctx);
 
-	const s2::Color& col = ee::Config::Instance()->GetSettings().bg_color;
+	const pt2::Color& col = ee::Config::Instance()->GetSettings().bg_color;
 	m_stage->GetCanvas()->SetBgColor(col);
 }
 

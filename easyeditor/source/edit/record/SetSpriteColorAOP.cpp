@@ -12,14 +12,14 @@ namespace ee
 
 #define SET_SPRITE_COLOR_AOP_DEF(name, var)                                                                       \
 	                                                                                                              \
-	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const SprPtr& spr, const s2::Color& color)               \
+	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const SprPtr& spr, const pt2::Color& color)               \
 		: m_new_color(color)                                                                                      \
 	{                                                                                                             \
 		m_sprs.push_back(spr);                                                                                    \
 		m_old_color.push_back(spr->GetColor().Get##var##());                                                      \
 	}                                                                                                             \
 	                                                                                                              \
-	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const std::vector<SprPtr>& sprs, const s2::Color& color) \
+	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const std::vector<SprPtr>& sprs, const pt2::Color& color) \
 		: m_new_color(color)                                                                                      \
 		, m_sprs(sprs)                                                                                            \
 	{                                                                                                             \

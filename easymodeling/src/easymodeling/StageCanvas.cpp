@@ -56,7 +56,7 @@ void StageCanvas::DrawCrossLine() const
 	vertices[1].x = halfEdge;
 	vertices[2].y = -halfEdge;
 	vertices[3].y = halfEdge;
-	s2::RVG::SetColor(s2::Color(0.7f, 0.9f, 0.7f));
+	s2::RVG::SetColor(pt2::Color(0.7f, 0.9f, 0.7f));
 	s2::RVG::LineWidth(1);
 	s2::RVG::Lines(vertices);
 	s2::RVG::LineWidth(2);
@@ -80,7 +80,7 @@ void StageCanvas::DrawLines() const
 			vertices.push_back(sm::vec2(-halfEdge, y));
 			vertices.push_back(sm::vec2(halfEdge, y));
 		}
-		s2::RVG::SetColor(s2::Color(0.7f, 0.9f, 0.7f));
+		s2::RVG::SetColor(pt2::Color(0.7f, 0.9f, 0.7f));
 		s2::RVG::LineWidth(1);
 		s2::RVG::Lines(vertices);
 		s2::RVG::LineWidth(2);
@@ -100,7 +100,7 @@ void StageCanvas::DrawLines() const
 			vertices.push_back(sm::vec2(-halfEdge, y));
 			vertices.push_back(sm::vec2(halfEdge, y));
 		}
-		s2::RVG::SetColor(s2::Color(0.9f, 0.7f, 0.7f));
+		s2::RVG::SetColor(pt2::Color(0.9f, 0.7f, 0.7f));
 		s2::RVG::LineWidth(1);
 		s2::RVG::Lines(vertices);
 		s2::RVG::LineWidth(2);

@@ -17,9 +17,9 @@ AlphaSettingDlg::AlphaSettingDlg(wxWindow* parent, const SprPtr& spr, const wxPo
 	SetColor(spr->GetColor().GetMul());
 }
 
-s2::Color AlphaSettingDlg::GetColor() const
+pt2::Color AlphaSettingDlg::GetColor() const
 {
-	s2::Color color;
+	pt2::Color color;
 	color.a = m_alpha->GetColorValue();
 	return color;
 }
@@ -27,14 +27,14 @@ s2::Color AlphaSettingDlg::GetColor() const
 void AlphaSettingDlg::OnColorChanged()
 {
 	s2::RenderColor rc = m_spr->GetColor();
-	s2::Color mul = rc.GetMul();
+	pt2::Color mul = rc.GetMul();
 	mul.a = m_alpha->GetColorValue();
 	rc.SetMul(mul);
 	m_spr->SetColor(rc);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void AlphaSettingDlg::OnColorChanged(const s2::Color& color)
+void AlphaSettingDlg::OnColorChanged(const pt2::Color& color)
 {
 	OnColorChanged();
 }
@@ -53,7 +53,7 @@ void AlphaSettingDlg::InitLayout()
 	top_sizer->Fit(this);
 }
 
-void AlphaSettingDlg::SetColor(const s2::Color& color)
+void AlphaSettingDlg::SetColor(const pt2::Color& color)
 {
 	m_alpha->SetColorValue(color.a);
 	OnColorChanged(color);

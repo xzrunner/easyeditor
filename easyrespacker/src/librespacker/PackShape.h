@@ -5,7 +5,7 @@
 
 #include <cu/cu_stl.h>
 #include <SM_Vector.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 namespace erespacker
 {
@@ -26,7 +26,7 @@ class PackShape : public IPackNode
 public:
 	ShapeType type;
 
-	s2::Color color;
+	pt2::Color color;
 
 	CU_VEC<sm::vec2> vertices;
 

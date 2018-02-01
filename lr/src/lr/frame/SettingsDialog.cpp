@@ -226,7 +226,7 @@ void SettingDialog::OnChangeSpecialLayerFlag(wxCommandEvent& event)
 
 void SettingDialog::OnChangeScreenMultiColor(wxCommandEvent& event)
 {
-	s2::Color& col = m_stage->GetScreenMultiColor();
+	pt2::Color& col = m_stage->GetScreenMultiColor();
 	ee::HSLColorSettingDlg dlg(this, NULL, col);
 	if (dlg.ShowModal() == wxID_OK) {
 		col = dlg.GetColor();
@@ -236,7 +236,7 @@ void SettingDialog::OnChangeScreenMultiColor(wxCommandEvent& event)
 
 void SettingDialog::OnChangeScreenAddColor(wxCommandEvent& event)
 {
-	s2::Color& col = m_stage->GetScreenAddColor();
+	pt2::Color& col = m_stage->GetScreenAddColor();
 	ee::HSLColorSettingDlg dlg(this, NULL, col);
 	if (dlg.ShowModal() == wxID_OK) {
 		col = dlg.GetColor();

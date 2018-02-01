@@ -60,14 +60,14 @@ void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny&
 		tb.font_size = wxANY_AS(value, int);
 	} else if (name == "FontColor") {
 		wxColour col = wxANY_AS(value, wxColour);
-		tb.font_color = s2::Color(col.Red(), col.Green(), col.Blue(), col.Alpha());
+		tb.font_color = pt2::Color(col.Red(), col.Green(), col.Blue(), col.Alpha());
 	} else if (name == "Edge") {
 		tb.has_edge = wxANY_AS(value, bool);
 	} else if (name == "EdgeSize") {
 		tb.edge_size = wxANY_AS(value, float);
 	} else if (name == "EdgeColor") {
 		wxColour col = wxANY_AS(value, wxColour);
-		tb.edge_color = s2::Color(col.Red(), col.Green(), col.Blue(), col.Alpha());
+		tb.edge_color = pt2::Color(col.Red(), col.Green(), col.Blue(), col.Alpha());
 	} else if (name == "Align.Hori") {
 		tb.align_hori = s2::Textbox::HoriAlign(wxANY_AS(value, int));
 	} else if (name == "Align.Vert") {
@@ -115,12 +115,12 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 		pg->GetProperty("Font")->SetValue(choices[tb.font_type]);
 	}
 	pg->GetProperty("FontSize")->SetValue(tb.font_size);
-	const s2::Color& font_col = tb.font_color;
+	const pt2::Color& font_col = tb.font_color;
 	pg->SetPropertyValueString("FontColor", wxColour(font_col.r, font_col.g, font_col.b, font_col.a).GetAsString());
 
 	pg->GetProperty("Edge")->SetValue(tb.has_edge);
 	pg->GetProperty("EdgeSize")->SetValue(tb.edge_size);
-	const s2::Color& edge_col = tb.edge_color;
+	const pt2::Color& edge_col = tb.edge_color;
 	pg->SetPropertyValueString("EdgeColor", wxColour(edge_col.r, edge_col.g, edge_col.b, edge_col.a).GetAsString());	
 
 	pg->GetProperty("Align.Hori")->SetValue(HORI_ALIGN_LABELS[tb.align_hori]);
@@ -161,20 +161,20 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxEnumProperty("Font", wxPG_LABEL, choices));
 	pg->Append(new wxIntProperty("FontSize", wxPG_LABEL, tb.font_size));
 
-//	const s2::Color& font_col = spr->GetFontColor();
+//	const pt2::Color& font_col = spr->GetFontColor();
 // 	pg->Append(new wxColourProperty("FontColor", wxPG_LABEL, wxColour(font_col.r, font_col.g, font_col.b, font_col.a)));
 // 	pg->SetPropertyAttribute("FontColor", "HasAlpha", false);
 
 	ee::SysColorProperty* col_prop = new ee::SysColorProperty("FontColor");
 	col_prop->SetParent(m_parent);
 	col_prop->SetColorData(ColorConfig::Instance()->GetColorData());
-	col_prop->SetListener(new ee::PropColMonitor(const_cast<s2::Color*>(&tb.font_color)));
+	col_prop->SetListener(new ee::PropColMonitor(const_cast<pt2::Color*>(&tb.font_color)));
 	pg->Append(col_prop);
 
 	pg->Append(new wxBoolProperty("Edge", wxPG_LABEL, tb.has_edge));
 	pg->SetPropertyAttribute("Edge", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	pg->Append(new wxFloatProperty("EdgeSize", wxPG_LABEL, tb.edge_size));
-	const s2::Color& edge_col = tb.edge_color;
+	const pt2::Color& edge_col = tb.edge_color;
 	pg->Append(new wxColourProperty("EdgeColor", wxPG_LABEL, wxColour(edge_col.r, edge_col.g, edge_col.b, edge_col.a)));
 	pg->SetPropertyAttribute("EdgeColor", "HasAlpha", false);
 

@@ -74,7 +74,7 @@ void Frame::OnSettings(wxCommandEvent& event)
 	SettingsDialog dlg(this);
 	dlg.ShowModal();
 
-	const s2::Color& col = ee::Config::Instance()->GetSettings().bg_color;
+	const pt2::Color& col = ee::Config::Instance()->GetSettings().bg_color;
 	const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas()->SetBgColor(col);
 }
 

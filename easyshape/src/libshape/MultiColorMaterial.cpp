@@ -4,7 +4,7 @@
 //{
 //
 //MultiColorMaterial::MultiColorMaterial(const CU_VEC<sm::vec2>& vertices, 
-//							 const s2::Color& color)
+//							 const pt2::Color& color)
 //{
 //	Build(vertices);
 //}

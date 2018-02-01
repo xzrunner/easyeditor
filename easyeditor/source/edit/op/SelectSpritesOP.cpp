@@ -244,7 +244,7 @@ bool SelectSpritesOP::OnDraw() const
 		return true;
 	}
 
-	m_selection->Traverse(DrawSelectedSpriteVisitor(s2::Color(255, 0, 0)));
+	m_selection->Traverse(DrawSelectedSpriteVisitor(pt2::Color(255, 0, 0)));
 
 	return false;
 }

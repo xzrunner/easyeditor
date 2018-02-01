@@ -1,7 +1,7 @@
 #include "BruteForce.h"
 
 #include <SM_Vector.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <shaderlab/ShaderMgr.h>
 #include <shaderlab/Shape3Shader.h>
 
@@ -24,19 +24,19 @@ void BruteForce::Draw() const
 	for (int y = 0; y < m_data.size - 1; ++y)
 	{
 		int size = (m_data.size - 1) * 2;
-		std::vector<s2::Color> colors;
+		std::vector<pt2::Color> colors;
 		colors.reserve(size);
 		std::vector<sm::vec3> vertices;
 		vertices.reserve(size);
 		for (int x = 0; x < m_data.size - 1; ++x)
 		{
 			col = GetTrueHeightAtPoint(x, y);
-			colors.push_back(s2::Color(col, col, col));
+			colors.push_back(pt2::Color(col, col, col));
 			height = GetScaledHeightAtPoint(x, y);
 			vertices.push_back(sm::vec3(scale*x, scale*y, height));
 
 			col = GetTrueHeightAtPoint(x, y+1);
-			colors.push_back(s2::Color(col, col, col));
+			colors.push_back(pt2::Color(col, col, col));
 			height = GetScaledHeightAtPoint(x, y+1);
 			vertices.push_back(sm::vec3(scale*x, scale*(y+1), height));
 		}

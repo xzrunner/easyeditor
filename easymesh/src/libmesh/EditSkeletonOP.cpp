@@ -118,7 +118,7 @@ bool EditSkeletonOP::OnDraw() const
 // 		skeleton.Draw(s2::RenderParams());
 		
 // 		if (m_selected) {
-// 			s2::RVG::SetColor(s2::Color(204, 51, 51, 128));
+// 			s2::RVG::SetColor(pt2::Color(204, 51, 51, 128));
 // 			s2::RVG::Circle(m_selected->GetWorldPose().trans, s2::MeshJoint::RADIUS, true);
 // 		}
 	}

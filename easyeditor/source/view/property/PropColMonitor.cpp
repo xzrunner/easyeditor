@@ -6,12 +6,12 @@
 namespace ee
 {
 
-PropColMonitor::PropColMonitor(s2::Color* col)
+PropColMonitor::PropColMonitor(pt2::Color* col)
 	: m_col(col)
 {
 }
 
-s2::Color PropColMonitor::GetColor() const
+pt2::Color PropColMonitor::GetColor() const
 {
 	return *m_col;	
 }
@@ -21,7 +21,7 @@ void PropColMonitor::OnColorChanged()
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void PropColMonitor::OnColorChanged(const s2::Color& col)
+void PropColMonitor::OnColorChanged(const pt2::Color& col)
 {
 	*m_col = col;
 	OnColorChanged();

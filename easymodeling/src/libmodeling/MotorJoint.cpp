@@ -37,9 +37,9 @@ void MotorJoint::Draw(DrawType type) const
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		s2::RVG::SetColor(s2::Color(102, 204, 102));
+		s2::RVG::SetColor(pt2::Color(102, 204, 102));
 		s2::RVG::DashLine(center, m_body_a->m_spr->GetPosition());
-		s2::RVG::SetColor(s2::Color(102, 102, 204));
+		s2::RVG::SetColor(pt2::Color(102, 102, 204));
 		s2::RVG::DashLine(center, m_body_b->m_spr->GetPosition());
 
 		DrawBodyFlag();
@@ -50,7 +50,7 @@ void MotorJoint::Draw(DrawType type) const
 
 void MotorJoint::DrawAnchor(const sm::vec2& pos, DrawType type) const
 {
-	s2::Color color;
+	pt2::Color color;
 	switch (type)
 	{
 	case e_default:

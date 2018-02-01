@@ -39,9 +39,9 @@ void WheelJoint::Draw(DrawType type) const
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		s2::RVG::SetColor(s2::Color(102, 204, 102));
+		s2::RVG::SetColor(pt2::Color(102, 204, 102));
 		s2::RVG::DashLine(anchorA, m_body_a->m_spr->GetPosition());
-		s2::RVG::SetColor(s2::Color(102, 102, 204));
+		s2::RVG::SetColor(pt2::Color(102, 102, 204));
 		s2::RVG::DashLine(anchorB, m_body_b->m_spr->GetPosition());
 
 		DrawAxisALine(anchorA);
@@ -81,7 +81,7 @@ void WheelJoint::DrawAxisALine(const sm::vec2& worldAnchorA) const
 	const sm::vec2 start = worldAnchorA + unit * 150,
 		end = worldAnchorA - unit * 150;
 
-	s2::RVG::SetColor(s2::Color(0.4f, 0.6f, 0.4f));
+	s2::RVG::SetColor(pt2::Color(0.4f, 0.6f, 0.4f));
 	s2::RVG::LineWidth(1);
 	s2::RVG::DotDashLine(start, end);
 	s2::RVG::LineWidth(2);	
@@ -94,7 +94,7 @@ void WheelJoint::DrawFootBLine(const sm::vec2& worldAnchorA, const sm::vec2& wor
 	sm::vec2 foot;
 	sm::get_foot_of_perpendicular(worldAnchorA, otherA, worldAnchorB, &foot);
 
-	s2::RVG::SetColor(s2::Color(255, 0, 0));
+	s2::RVG::SetColor(pt2::Color(255, 0, 0));
 	s2::RVG::LineWidth(1);
 	s2::RVG::DashLine(worldAnchorB, foot);
 	s2::RVG::LineWidth(2);	
@@ -104,7 +104,7 @@ void WheelJoint::DrawFootBLine(const sm::vec2& worldAnchorA, const sm::vec2& wor
 
 void WheelJoint::DrawAnchorA(const sm::vec2& pos, DrawType type) const
 {
-	s2::Color color;
+	pt2::Color color;
 	switch (type)
 	{
 	case e_default:
@@ -125,7 +125,7 @@ void WheelJoint::DrawAnchorA(const sm::vec2& pos, DrawType type) const
 
 void WheelJoint::DrawAnchorB(const sm::vec2& pos, DrawType type) const
 {
-	s2::Color color;
+	pt2::Color color;
 	switch (type)
 	{
 	case e_default:

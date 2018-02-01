@@ -122,11 +122,11 @@ void OceanMesh::Draw(const s2::RenderParams& params, bool draw_tris) const
 	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
 	shader->SetColorMap(0x000000ff, 0x0000ff00, 0x00ff0000);
 	if (m_blend_open && m_image1) {
-		shader->SetColor(s2::Color(255, 255, 255, (int)(m_blend_base * 255 + 0.5f)).ToABGR(), 0);
+		shader->SetColor(pt2::Color(255, 255, 255, (int)(m_blend_base * 255 + 0.5f)).ToABGR(), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			s2::DrawMesh::DrawOnlyMesh(m_grids[i], params.mt, m_image0->GetTexID());
 		}
-		shader->SetColor(s2::Color(255, 255, 255, (int)((1 - m_blend_base) * 255 + 0.5f)).ToABGR(), 0);
+		shader->SetColor(pt2::Color(255, 255, 255, (int)((1 - m_blend_base) * 255 + 0.5f)).ToABGR(), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			s2::DrawMesh::DrawOnlyMesh(m_grids[i], params.mt, m_image1->GetTexID());
 		}

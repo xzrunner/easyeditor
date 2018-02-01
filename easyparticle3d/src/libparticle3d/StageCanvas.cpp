@@ -59,7 +59,7 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	s2::RVG::SetColor(s2::Color(204, 204, 204));
+	s2::RVG::SetColor(pt2::Color(204, 204, 204));
 	s2::RVG::LineWidth(2);
 	s2::RVG::Rect(nullptr, sm::vec2(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 }

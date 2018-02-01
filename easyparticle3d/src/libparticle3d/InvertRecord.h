@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_INVERT_RECORDER_H_
 #define _EASYPARTICLE3D_INVERT_RECORDER_H_
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 #include <json/json.h>
 
@@ -45,7 +45,7 @@ private:
 
 		std::string sym;
 		float scale_start, scale_end; 
-		s2::Color mul_col_begin, mul_col_end, 
+		pt2::Color mul_col_begin, mul_col_end, 
 			      add_col_begin, add_col_end;
 
 	}; // Item

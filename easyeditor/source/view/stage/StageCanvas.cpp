@@ -128,7 +128,7 @@ void StageCanvas::SetCurrentCanvas()
 	}
 }
 
-void StageCanvas::SetBgColor(const s2::Color& color)
+void StageCanvas::SetBgColor(const pt2::Color& color)
 {
 	m_bg_color = color;
 }

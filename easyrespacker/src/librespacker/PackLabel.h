@@ -3,7 +3,7 @@
 
 #include "IPackNode.h"
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 namespace erespacker
 {
@@ -16,11 +16,11 @@ public:
 
 	int font;
 	int font_size;
-	s2::Color font_color;
+	pt2::Color font_color;
 
 	bool edge;
 	float edge_size;
-	s2::Color edge_color;
+	pt2::Color edge_color;
 
 	int align_hori;
 	int align_vert;

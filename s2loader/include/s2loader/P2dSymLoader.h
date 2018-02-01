@@ -3,7 +3,7 @@
 
 #include <cu/uncopyable.h>
 #include <SM_Vector.h>
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 #include <sprite2/typedef.h>
 #include <cu/cu_stl.h>
 
@@ -43,8 +43,8 @@ public:
 
 		float scale_start, scale_end;
 
-		s2::Color mul_col_begin, mul_col_end;
-		s2::Color add_col_begin, add_col_end;
+		pt2::Color mul_col_begin, mul_col_end;
+		pt2::Color add_col_begin, add_col_end;
 
 		float alpha_start, alpha_end;
 

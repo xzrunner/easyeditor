@@ -3,7 +3,7 @@
 
 #include "ComponentPanel.h"
 
-#include <sprite2/Color.h>
+#include <painting2/Color.h>
 
 class wxButton;
 
