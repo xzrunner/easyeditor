@@ -80,7 +80,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -94,7 +94,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

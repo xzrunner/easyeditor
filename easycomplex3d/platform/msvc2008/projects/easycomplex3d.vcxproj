@@ -57,7 +57,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor3\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor3\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -83,7 +83,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor3\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor3\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easycomplex3d\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

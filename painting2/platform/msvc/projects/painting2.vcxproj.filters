@@ -6,6 +6,15 @@
     <ClCompile Include="..\..\..\source\GeoTransform.cpp">
       <Filter>transform</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\AABB.cpp">
+      <Filter>bb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\BoundingBox.cpp">
+      <Filter>bb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\OBB.cpp">
+      <Filter>bb</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\painting2\Texture.h" />
@@ -16,15 +25,33 @@
     <ClInclude Include="..\..\..\include\painting2\SRT.h">
       <Filter>transform</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\AABB.h">
+      <Filter>bb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\BoundingBox.h">
+      <Filter>bb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\OBB.h">
+      <Filter>bb</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="transform">
       <UniqueIdentifier>{f3abf220-4dc0-40e9-8919-76a6aa86425d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="bb">
+      <UniqueIdentifier>{cc3e2316-5942-4d83-bfa5-e8212a5edd0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\include\painting2\GeoTransform.inl">
       <Filter>transform</Filter>
+    </None>
+    <None Include="..\..\..\include\painting2\AABB.inl">
+      <Filter>bb</Filter>
+    </None>
+    <None Include="..\..\..\include\painting2\OBB.inl">
+      <Filter>bb</Filter>
     </None>
   </ItemGroup>
 </Project>

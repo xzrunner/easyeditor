@@ -11,18 +11,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\source\AABB.cpp" />
+    <ClCompile Include="..\..\..\source\BoundingBox.cpp" />
     <ClCompile Include="..\..\..\source\GeoTransform.cpp" />
+    <ClCompile Include="..\..\..\source\OBB.cpp" />
     <ClCompile Include="..\..\..\source\RenderSystem.cpp" />
     <ClCompile Include="..\..\..\source\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\painting2\AABB.h" />
+    <ClInclude Include="..\..\..\include\painting2\BoundingBox.h" />
     <ClInclude Include="..\..\..\include\painting2\GeoTransform.h" />
+    <ClInclude Include="..\..\..\include\painting2\OBB.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderSystem.h" />
     <ClInclude Include="..\..\..\include\painting2\SRT.h" />
     <ClInclude Include="..\..\..\include\painting2\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\include\painting2\AABB.inl" />
     <None Include="..\..\..\include\painting2\GeoTransform.inl" />
+    <None Include="..\..\..\include\painting2\OBB.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>3.painting2</ProjectName>
