@@ -1,7 +1,5 @@
 #pragma once
 
-#include <SM_Calc.h>
-
 namespace pt2
 {
 
@@ -10,7 +8,7 @@ void GeoTransform::SetPosition(const sm::vec2& pos)
 {
 	if (pos != m_srt.position) {
 		m_srt.position = pos;
-		UpdateCenter();
+		UpdateSrt();
 		UpdateMatrix();
 	}
 }
@@ -20,7 +18,7 @@ void GeoTransform::SetAngle(float angle)
 {
 	if (angle != m_srt.angle) {
 		m_srt.angle = angle;
-		UpdateCenter();
+		UpdateSrt();
 		UpdateMatrix();
 	}
 }
@@ -48,7 +46,7 @@ void GeoTransform::SetOffset(const sm::vec2& offset)
 { 
 	if (offset != m_srt.offset) {
 		m_srt.offset = offset;
-		UpdateCenter();
+		UpdateSrt();
 		UpdateMatrix();
 	}
 }
@@ -61,9 +59,9 @@ void GeoTransform::SetSRT(const SRT& srt)
 }
 
 inline
-void GeoTransform::UpdateCenter()
+void GeoTransform::UpdateSrt()
 {
-	m_srt.center = m_srt.position + sm::rotate_vector(-m_srt.offset, m_srt.angle) + m_srt.offset;
+	m_srt.Update();
 }
 
 inline

@@ -16,7 +16,6 @@
 
 #include <sprite2/TextboxSymbol.h>
 #include <sprite2/ComplexSymbol.h>
-#include <sprite2/SprSRT.h>
 #include <gum/FilepathHelper.h>
 #include <s2loader/BodymovinAnimLoader.h>
 #include <s2loader/BodymovinParser.h>

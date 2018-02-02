@@ -14,21 +14,22 @@ public:
 	sm::vec2 shear;
 
 	sm::vec2 offset;
-	sm::vec2 center;
+	mutable sm::vec2 center;
 
-	SRT() {
-		Reset();
-	}
+public:
+	SRT();
 
-	void Reset() {
-		position.Set(0, 0);
-		angle = 0;
-		scale.Set(1, 1);
-		shear.Set(0, 0);
-		offset.Set(0, 0);
-		center.Set(0, 0);
-	}
+	SRT operator + (const SRT& srt) const;
+	SRT operator - (const SRT& srt) const;
+	SRT operator * (float f) const;
+	SRT operator / (float f) const;
+
+	void Reset();
+
+	void Update() const;
 
 }; // SRT
 
 }
+
+#include "painting2/SRT.inl"

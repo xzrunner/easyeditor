@@ -34,7 +34,7 @@ public:
 	void SetSRT(const SRT& srt);
 
 private:
-	void UpdateCenter();
+	void UpdateSrt();
 	void UpdateMatrix();
 
 private:

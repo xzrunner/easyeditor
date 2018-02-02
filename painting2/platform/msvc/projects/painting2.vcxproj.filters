@@ -169,5 +169,8 @@
     <None Include="..\..\..\include\painting2\Color.inl">
       <Filter>color</Filter>
     </None>
+    <None Include="..\..\..\include\painting2\SRT.inl">
+      <Filter>transform</Filter>
+    </None>
   </ItemGroup>
 </Project>

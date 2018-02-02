@@ -63,6 +63,7 @@
     <None Include="..\..\..\include\painting2\Color.inl" />
     <None Include="..\..\..\include\painting2\GeoTransform.inl" />
     <None Include="..\..\..\include\painting2\OBB.inl" />
+    <None Include="..\..\..\include\painting2\SRT.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>3.painting2</ProjectName>
