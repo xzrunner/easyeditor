@@ -3,11 +3,11 @@
 
 #include <SM_Vector.h>
 #include <cu/cu_stl.h>
-#include <sprite2/RenderCamera.h>
 #include <painting2/RenderColorCommon.h>
 #include <painting2/RenderColorMap.h>
 #include <painting2/FastBlendMode.h>
 #include <painting2/BlendMode.h>
+#include <painting2/RenderCamera.h>
 
 #include <string>
 
@@ -56,7 +56,7 @@ private:
 	pt2::FastBlendMode	   m_fast_blend;
 	s2::RenderFilter*	   m_filter;
 	float                  m_downsample;
-	s2::RenderCamera	   m_camera;
+	pt2::RenderCamera	   m_camera;
 	// other
 	bool                   m_need_actor;
 	bool                   m_integrate;

@@ -15,6 +15,7 @@
     <ClCompile Include="..\..\..\source\BoundingBox.cpp" />
     <ClCompile Include="..\..\..\source\GeoTransform.cpp" />
     <ClCompile Include="..\..\..\source\OBB.cpp" />
+    <ClCompile Include="..\..\..\source\RenderCamera.cpp" />
     <ClCompile Include="..\..\..\source\RenderColorCommon.cpp" />
     <ClCompile Include="..\..\..\source\RenderColorMap.cpp" />
     <ClCompile Include="..\..\..\source\RenderSystem.cpp" />
@@ -30,6 +31,7 @@
     <ClInclude Include="..\..\..\include\painting2\FilterMode.h" />
     <ClInclude Include="..\..\..\include\painting2\GeoTransform.h" />
     <ClInclude Include="..\..\..\include\painting2\OBB.h" />
+    <ClInclude Include="..\..\..\include\painting2\RenderCamera.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderColorCommon.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderColorMap.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderSystem.h" />

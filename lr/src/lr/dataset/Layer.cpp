@@ -22,10 +22,10 @@
 #include <easycomplex.h>
 
 #include <sprite2/SymType.h>
-#include <sprite2/RenderCamera.h>
 #include <sprite2/RenderParams.h>
 #include <sprite2/Sprite.h>
 #include <sprite2/UpdateParams.h>
+#include <painting2/RenderCamera.h>
 
 namespace lr
 {
@@ -74,7 +74,7 @@ bool Layer::InsertSprite(const ee::SprPtr& spr, int idx)
 
 	if (spr->GetCamera().GetMode() != m_cam_mode)
 	{
-		s2::RenderCamera rc = spr->GetCamera();
+		pt2::RenderCamera rc = spr->GetCamera();
 		rc.SetMode(m_cam_mode);
 		spr->SetCamera(rc);
 	}
@@ -329,7 +329,7 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir, const st
 
 		if (spr->GetCamera().GetMode() != m_cam_mode)
 		{
-			s2::RenderCamera rc = spr->GetCamera();
+			pt2::RenderCamera rc = spr->GetCamera();
 			rc.SetMode(m_cam_mode);
 			spr->SetCamera(rc);
 		}

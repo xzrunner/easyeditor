@@ -14,13 +14,13 @@
 #include <sprite2/RFOuterGlow.h>
 #include <sprite2/RFHeatHaze.h>
 #include <sprite2/RenderShader.h>
-#include <sprite2/RenderCamera.h>
 #include <sprite2/StatImages.h>
 #include <bs/FixedPointNum.h>
 #include <gum/FilepathHelper.h>
 #include <gum/trans_color.h>
 #include <gum/Image.h>
 #include <gum/ImagePool.h>
+#include <painting2/RenderCamera.h>
 
 namespace s2loader
 {
@@ -668,12 +668,12 @@ void SpriteIO::StoreShader(Json::Value& val, const CU_STR& dir)
 
 void SpriteIO::LoadCamera(const s2::SprPtr& spr)
 {
-	s2::RenderCamera rc = spr->GetCamera();
+	pt2::RenderCamera rc = spr->GetCamera();
 	rc.SetMode(m_camera);
 	spr->SetCamera(rc);
 }
 
-void SpriteIO::StoreCamera(const s2::RenderCamera& rc)
+void SpriteIO::StoreCamera(const pt2::RenderCamera& rc)
 {
 	m_camera = rc.GetMode();
 }

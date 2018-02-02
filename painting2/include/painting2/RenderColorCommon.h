@@ -8,11 +8,11 @@ namespace pt2
 class RenderColorCommon
 {
 public:
-	pt2::Color mul, add;
+	Color mul, add;
 
 public:
 	RenderColorCommon();
-	RenderColorCommon(const pt2::Color& mul, const pt2::Color& add);
+	RenderColorCommon(const Color& mul, const Color& add);
 
 	RenderColorCommon operator * (const RenderColorCommon& rc) const;
 

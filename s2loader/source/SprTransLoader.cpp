@@ -4,9 +4,9 @@
 #include <sns/NodeSprCommon.h>
 #include <sprite2/Sprite.h>
 #include <sprite2/RenderShader.h>
-#include <sprite2/RenderCamera.h>
 #include <sprite2/Symbol.h>
 #include <simp/NodeTrans.h>
+#include <painting2/RenderCamera.h>
 
 namespace s2loader
 {
@@ -97,7 +97,7 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const simp::NodeTrans* trans)
 	spr->SetShader(rs);
 
 	if (trans->type & simp::NodeTrans::CAMERA_MASK) {
-		s2::RenderCamera rc;
+		pt2::RenderCamera rc;
 		rc.SetMode(pt2::CameraMode(trans->data[idx++]));
 		spr->SetCamera(rc);
 	}
@@ -200,7 +200,7 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const sns::NodeSprCommon& commo
 	//spr->SetShader(rs);
 
 	//if (type & simp::NodeTrans::CAMERA_MASK) {
-	//	s2::RenderCamera rc;
+	//	pt2::RenderCamera rc;
 	//	rc.SetMode(pt2::CameraMode(data[idx++]));
 	//	spr->SetCamera(rc);
 	//}

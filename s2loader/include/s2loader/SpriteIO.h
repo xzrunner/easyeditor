@@ -15,7 +15,8 @@
 
 #include <json/json.h>
 
-namespace s2 { class Sprite; class RenderShader; class RenderCamera; }
+namespace s2 { class Sprite; class RenderShader; }
+namespace pt2 { class RenderCamera; }
 
 namespace s2loader
 {
@@ -71,7 +72,7 @@ private:
 	void StoreShader(Json::Value& val, const CU_STR& dir);
 
 	void LoadCamera(const s2::SprPtr& spr);
-	void StoreCamera(const s2::RenderCamera& camera);	
+	void StoreCamera(const pt2::RenderCamera& camera);	
 	void LoadCamera(const Json::Value& val);
 	void StoreCamera(Json::Value& val);
 

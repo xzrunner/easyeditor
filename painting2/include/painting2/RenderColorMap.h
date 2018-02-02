@@ -9,11 +9,11 @@ namespace pt2
 class RenderColorMap
 {
 public:
-	pt2::Color rmap, gmap, bmap;
+	Color rmap, gmap, bmap;
 
 public:
 	RenderColorMap();
-	RenderColorMap(const pt2::Color& rmap, const pt2::Color& gmap, const pt2::Color& bmap);
+	RenderColorMap(const Color& rmap, const Color& gmap, const Color& bmap);
 
 	RenderColorMap operator * (const RenderColorMap& rc) const;
 

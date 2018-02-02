@@ -21,6 +21,9 @@
     <ClCompile Include="..\..\..\source\RenderColorMap.cpp">
       <Filter>render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\RenderCamera.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\painting2\Texture.h" />
@@ -60,6 +63,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\painting2\FilterMode.h">
       <Filter>render\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RenderCamera.h">
+      <Filter>render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

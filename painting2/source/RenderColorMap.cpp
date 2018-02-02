@@ -15,7 +15,7 @@ RenderColorMap::RenderColorMap()
 {
 }
 
-RenderColorMap::RenderColorMap(const pt2::Color& rmap, const pt2::Color& gmap, const pt2::Color& bmap)
+RenderColorMap::RenderColorMap(const Color& rmap, const Color& gmap, const Color& bmap)
 	: rmap(rmap)
 	, gmap(gmap)
 	, bmap(bmap)

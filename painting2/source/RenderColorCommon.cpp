@@ -13,7 +13,7 @@ RenderColorCommon::RenderColorCommon()
 {
 }
 
-RenderColorCommon::RenderColorCommon(const pt2::Color& mul, const pt2::Color& add)
+RenderColorCommon::RenderColorCommon(const Color& mul, const Color& add)
 	: mul(mul)
 	, add(add)
 {
