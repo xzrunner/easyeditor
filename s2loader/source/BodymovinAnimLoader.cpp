@@ -9,11 +9,11 @@
 #include <sprite2/ShapeSymbol.h>
 #include <sprite2/ColorPolygon.h>
 #include <sprite2/PolygonShape.h>
-#include <sprite2/BlendMode.h>
 #include <sprite2/RenderShader.h>
 #include <sprite2/LerpWiggle.h>
 #include <sprite2/LerpEase.h>
 #include <gum/StringHelper.h>
+#include <painting2/BlendMode.h>
 
 #include <cmath>
 
@@ -686,56 +686,56 @@ void BodymovinAnimLoader::LoadBlendMode(CU_VEC<s2::AnimSymbol::FramePtr>& frames
 		return;
 	}
 
-	s2::BlendMode bm = s2::BM_NULL;
+	pt2::BlendMode bm = pt2::BM_NULL;
 	switch (body_bm)
 	{
 	case 0:
-		bm = s2::BM_NULL;
+		bm = pt2::BM_NULL;
 		break;
 	case 1:
-		bm = s2::BM_MULTIPLY;
+		bm = pt2::BM_MULTIPLY;
 		break;
 	case 2:
-		bm = s2::BM_SCREEN;
+		bm = pt2::BM_SCREEN;
 		break;
 	case 3:
-		bm = s2::BM_OVERLAY;
+		bm = pt2::BM_OVERLAY;
 		break;
 	case 4:
-		bm = s2::BM_DARKEN;
+		bm = pt2::BM_DARKEN;
 		break;
 	case 5:
-		bm = s2::BM_LIGHTEN;
+		bm = pt2::BM_LIGHTEN;
 		break;
 	case 6:
-		bm = s2::BM_COLOR_DODGE;
+		bm = pt2::BM_COLOR_DODGE;
 		break;
 	case 7:
-		bm = s2::BM_COLOR_BURN;
+		bm = pt2::BM_COLOR_BURN;
 		break;
 	case 8:
-		bm = s2::BM_HARD_LIGHT;
+		bm = pt2::BM_HARD_LIGHT;
 		break;
 	case 9:
-		bm = s2::BM_SOFT_LIGHT;
+		bm = pt2::BM_SOFT_LIGHT;
 		break;
 	case 10:
-		bm = s2::BM_DIFFERENCE;
+		bm = pt2::BM_DIFFERENCE;
 		break;
 	case 11:
-		bm = s2::BM_EXCLUSION;
+		bm = pt2::BM_EXCLUSION;
 		break;
 	case 12:
-		bm = s2::BM_HUE;
+		bm = pt2::BM_HUE;
 		break;
 	case 13:
-		bm = s2::BM_SATURATION;
+		bm = pt2::BM_SATURATION;
 		break;
 	case 14:
-		bm = s2::BM_COLOR;
+		bm = pt2::BM_COLOR;
 		break;
 	case 15:
-		bm = s2::BM_LUMINOSITY;
+		bm = pt2::BM_LUMINOSITY;
 		break;
 	default:
 		LOGW("Unknown blend type %d", bm);

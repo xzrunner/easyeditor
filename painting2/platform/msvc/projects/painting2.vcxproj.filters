@@ -49,6 +49,18 @@
     <ClInclude Include="..\..\..\include\painting2\RenderColorCommon.h">
       <Filter>render</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\FastBlendMode.h">
+      <Filter>render\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\CameraMode.h">
+      <Filter>render\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\BlendMode.h">
+      <Filter>render\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\FilterMode.h">
+      <Filter>render\data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="transform">
@@ -62,6 +74,9 @@
     </Filter>
     <Filter Include="render">
       <UniqueIdentifier>{427ce5ba-3b6e-4013-ac49-3327c7c3b567}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\data">
+      <UniqueIdentifier>{45eb0105-bd25-479a-8abd-1bbee8187cc0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

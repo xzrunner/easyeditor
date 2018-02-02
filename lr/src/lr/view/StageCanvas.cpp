@@ -137,7 +137,7 @@ void StageCanvas::DrawSprite(const ee::SprPtr& spr, bool draw_edge, int name_vis
 
 	int filter_mode_idx = 0;
 	if (draw_edge) {
-		filter_mode_idx = gum::FilterModes::Instance()->QueryShaderIdx(s2::FilterMode::FM_EDGE_DETECTION);
+		filter_mode_idx = gum::FilterModes::Instance()->QueryShaderIdx(pt2::FilterMode::FM_EDGE_DETECTION);
 	}
 //	ee::ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 

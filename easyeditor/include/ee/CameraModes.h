@@ -3,7 +3,7 @@
 
 #include <cu/cu_macro.h>
 
-#include <sprite2/CameraMode.h>
+#include <painting2/CameraMode.h>
 
 #include <string>
 #include <vector>
@@ -14,18 +14,18 @@ namespace ee
 class CameraModes
 {
 public:
-	s2::CameraMode ID2Mode(int idx) const;
-	int Mode2ID(s2::CameraMode mode) const;
+	pt2::CameraMode ID2Mode(int idx) const;
+	int Mode2ID(pt2::CameraMode mode) const;
 
 	void GetAllNameCN(std::vector<std::string>& names) const;
 
 private:
 	struct Item
 	{
-		Item(s2::CameraMode mode, const std::string& name)
+		Item(pt2::CameraMode mode, const std::string& name)
 			: mode(mode), name(name) {}
 
-		s2::CameraMode mode;
+		pt2::CameraMode mode;
 		std::string name;
 	};
 

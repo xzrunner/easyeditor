@@ -20,7 +20,7 @@ class LibraryPage : public ee::LibraryPage
 {
 public:
 	LibraryPage(LibraryPanel* library, const std::string& name, 
-		LayerType type, int id, s2::CameraMode cam);
+		LayerType type, int id, pt2::CameraMode cam);
 	virtual ~LibraryPage();
 
 	//
@@ -37,7 +37,7 @@ public:
 	std::shared_ptr<ee::EditOP> GetNextEditOP();
 
 	LayerType GetLayerType() const { return m_layer_type; }
-	s2::CameraMode GetLayerCameraMode() const { return m_cam_mode; }
+	pt2::CameraMode GetLayerCameraMode() const { return m_cam_mode; }
 
 protected:
 	virtual void InitLayoutExtend(wxSizer* sizer) override;
@@ -56,7 +56,7 @@ private:
 
 private:
 	LayerType m_layer_type;
-	s2::CameraMode m_cam_mode;
+	pt2::CameraMode m_cam_mode;
 
 	Layer* m_layer;
 

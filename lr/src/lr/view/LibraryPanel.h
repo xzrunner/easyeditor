@@ -48,7 +48,7 @@ public:
 	Layer* GetCollisionLayer();
 
 	LayerType GetLayerType(int idx) const;
-	s2::CameraMode GetLayerCameraMode(int idx) const;
+	pt2::CameraMode GetLayerCameraMode(int idx) const;
 
 	Layer* GetLayer(int idx);
 

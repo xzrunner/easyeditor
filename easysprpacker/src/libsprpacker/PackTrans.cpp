@@ -74,17 +74,17 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 	}
 
 	m_blend = spr.GetShader().GetBlend();
-	if (m_blend != s2::BM_NULL) {
+	if (m_blend != pt2::BM_NULL) {
 		m_type |= simp::NodeTrans::BLEND_MASK;
 	}
 
 	m_fast_blend = spr.GetShader().GetFastBlend();
-	if (m_fast_blend != s2::FBM_NULL) {
+	if (m_fast_blend != pt2::FBM_NULL) {
 		m_type |= simp::NodeTrans::FAST_BLEND_MASK;
 	}
 
 	m_filter = spr.GetShader().GetFilter().get();
-	if (m_filter && m_filter->GetMode() != s2::FM_NULL) {
+	if (m_filter && m_filter->GetMode() != pt2::FM_NULL) {
 		m_type |= simp::NodeTrans::FILTER_MASK;
 	}
 
@@ -94,7 +94,7 @@ PackTrans::PackTrans(const s2::Sprite& spr, bool force_name)
 	}
 
 	m_camera = spr.GetCamera();
-	if (m_camera.GetMode() != s2::CM_ORTHO) {
+	if (m_camera.GetMode() != pt2::CM_ORTHO) {
 		m_type |= simp::NodeTrans::CAMERA_MASK;
 	}
 

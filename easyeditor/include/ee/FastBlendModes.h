@@ -3,7 +3,7 @@
 
 #include <cu/cu_macro.h>
 
-#include <sprite2/FastBlendMode.h>
+#include <painting2/FastBlendMode.h>
 
 #include <vector>
 
@@ -13,18 +13,18 @@ namespace ee
 class FastBlendModes
 {
 public:
-	s2::FastBlendMode ID2Mode(int id) const;
-	int Mode2ID(s2::FastBlendMode mode) const;
+	pt2::FastBlendMode ID2Mode(int id) const;
+	int Mode2ID(pt2::FastBlendMode mode) const;
 
 	void GetAllNameCN(std::vector<std::string>& names) const;
 
 private:
 	 struct Item
 	 {
-		Item(s2::FastBlendMode mode, const std::string& name)
+		Item(pt2::FastBlendMode mode, const std::string& name)
 			: mode(mode), name(name) {}
 
-	 	s2::FastBlendMode mode;
+	 	pt2::FastBlendMode mode;
 	 	std::string name;
 	 };
 

@@ -14,7 +14,7 @@ class LibraryPanel;
 class LayerFactory
 {
 public:
-	static Layer* Create(int id, LibraryPanel* library, LayerType type, s2::CameraMode cam);
+	static Layer* Create(int id, LibraryPanel* library, LayerType type, pt2::CameraMode cam);
 
 }; // LayerFactory
 

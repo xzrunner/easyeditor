@@ -178,7 +178,7 @@ void PackAnimation::LoadSprTrans(const ee::SprConstPtr& spr, SpriteTrans& trans,
 	if (spr->GetShader().GetFilter()) {
 		trans.filter = static_cast<int>(spr->GetShader().GetFilter()->GetMode());
 	} else {
-		trans.filter = s2::FM_NULL;
+		trans.filter = pt2::FM_NULL;
 	}
 	trans.camera = static_cast<int>(spr->GetCamera().GetMode());
 }

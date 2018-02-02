@@ -81,13 +81,13 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const simp::NodeTrans* trans)
 
 	s2::RenderShader rs;
 	if (trans->type & simp::NodeTrans::BLEND_MASK) {
-		rs.SetBlend(s2::BlendMode(trans->data[idx++]));
+		rs.SetBlend(pt2::BlendMode(trans->data[idx++]));
 	}
 	if (trans->type & simp::NodeTrans::FAST_BLEND_MASK) {
-		rs.SetFastBlend(s2::FastBlendMode(trans->data[idx++]));
+		rs.SetFastBlend(pt2::FastBlendMode(trans->data[idx++]));
 	}
 	if (trans->type & simp::NodeTrans::FILTER_MASK) {
-		s2::FilterMode mode = s2::FilterMode(trans->data[idx++]);
+		pt2::FilterMode mode = pt2::FilterMode(trans->data[idx++]);
 		rs.SetFilter(mode);
 	}
 	if (trans->type & simp::NodeTrans::DOWNSMAPLE_MASK) {
@@ -98,7 +98,7 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const simp::NodeTrans* trans)
 
 	if (trans->type & simp::NodeTrans::CAMERA_MASK) {
 		s2::RenderCamera rc;
-		rc.SetMode(s2::CameraMode(trans->data[idx++]));
+		rc.SetMode(pt2::CameraMode(trans->data[idx++]));
 		spr->SetCamera(rc);
 	}
 
@@ -184,13 +184,13 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const sns::NodeSprCommon& commo
 	// todo
 	//s2::RenderShader rs;
 	//if (type & simp::NodeTrans::BLEND_MASK) {
-	//	rs.SetBlend(s2::BlendMode(data[idx++]));
+	//	rs.SetBlend(pt2::BlendMode(data[idx++]));
 	//}
 	//if (type & simp::NodeTrans::FAST_BLEND_MASK) {
-	//	rs.SetFastBlend(s2::FastBlendMode(data[idx++]));
+	//	rs.SetFastBlend(pt2::FastBlendMode(data[idx++]));
 	//}
 	//if (type & simp::NodeTrans::FILTER_MASK) {
-	//	s2::FilterMode mode = s2::FilterMode(data[idx++]);
+	//	pt2::FilterMode mode = pt2::FilterMode(data[idx++]);
 	//	rs.SetFilter(mode);
 	//}
 	//if (type & simp::NodeTrans::DOWNSMAPLE_MASK) {
@@ -201,7 +201,7 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const sns::NodeSprCommon& commo
 
 	//if (type & simp::NodeTrans::CAMERA_MASK) {
 	//	s2::RenderCamera rc;
-	//	rc.SetMode(s2::CameraMode(data[idx++]));
+	//	rc.SetMode(pt2::CameraMode(data[idx++]));
 	//	spr->SetCamera(rc);
 	//}
 

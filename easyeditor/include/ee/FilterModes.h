@@ -3,7 +3,7 @@
 
 #include <cu/cu_macro.h>
 
-#include <sprite2/FilterMode.h>
+#include <painting2/FilterMode.h>
 
 #include <map>
 #include <vector>
@@ -15,23 +15,23 @@ namespace ee
 class FilterModes
 {
 public:
-	s2::FilterMode ID2Mode(int idx) const;
-	int Mode2ID(s2::FilterMode mode) const;
+	pt2::FilterMode ID2Mode(int idx) const;
+	int Mode2ID(pt2::FilterMode mode) const;
 
 	void GetAllNameCN(std::vector<std::string>& names) const;
 
 private:
 	struct Item
 	{
-		Item(s2::FilterMode id, const std::string& name)
+		Item(pt2::FilterMode id, const std::string& name)
 			: id(id), name(name) {}
 
-		s2::FilterMode id;
+		pt2::FilterMode id;
 		std::string name;
 	};
 
 private:
-	std::map<s2::FilterMode, int> m_map2idx;
+	std::map<pt2::FilterMode, int> m_map2idx;
 
 	std::vector<Item> m_modes;
 

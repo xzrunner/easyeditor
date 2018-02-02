@@ -26,7 +26,7 @@ class LibraryPanel;
 class Layer : public cu::RefCountObj
 {
 public:
-	Layer(int id, LibraryPanel* library, s2::CameraMode cam);
+	Layer(int id, LibraryPanel* library, pt2::CameraMode cam);
 	
 	virtual void TraverseSprite(ee::RefVisitor<ee::Sprite>& visitor, bool order = true) const;
 	virtual void TraverseSprite(ee::RefVisitor<ee::Sprite>& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
@@ -107,7 +107,7 @@ protected:
 private:
 	int m_id;
 
-	s2::CameraMode m_cam_mode;
+	pt2::CameraMode m_cam_mode;
 
 	std::string m_name;
 

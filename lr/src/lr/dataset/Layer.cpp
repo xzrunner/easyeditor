@@ -30,7 +30,7 @@
 namespace lr
 {
 
-Layer::Layer(int id, LibraryPanel* library, s2::CameraMode cam)
+Layer::Layer(int id, LibraryPanel* library, pt2::CameraMode cam)
 	: m_id(id)
 	, m_library(library)
 	, m_cam_mode(cam)

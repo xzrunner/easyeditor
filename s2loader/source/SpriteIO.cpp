@@ -29,7 +29,7 @@ SpriteIO::SpriteIO(bool m_compress, bool render_open)
 #ifdef S2_FILTER_FULL
 	: m_filter(nullptr, s2::RenderFilter::Deleter)
 #else
-	: m_filter(s2::FM_NULL)
+	: m_filter(pt2::FM_NULL)
 #endif // S2_FILTER_FULL
 	, m_compress(m_compress)
 	, m_render_open(render_open)
@@ -41,9 +41,9 @@ SpriteIO::SpriteIO(bool m_compress, bool render_open)
 //	m_offset.MakeInvalid();
 	m_offset        = sm::vec2(0, 0);
 
-	m_blend			= s2::BM_NULL;
-	m_fast_blend	= s2::FBM_NULL;
-	m_camera		= s2::CM_ORTHO;
+	m_blend			= pt2::BM_NULL;
+	m_fast_blend	= pt2::FBM_NULL;
+	m_camera		= pt2::CM_ORTHO;
 	m_downsample    = 1;
 
 	m_need_actor    = false;
@@ -492,14 +492,14 @@ void SpriteIO::StoreShader(const s2::RenderShader& shader)
 
 void SpriteIO::LoadShader(const Json::Value& val, const CU_STR& dir)
 {
-	m_blend = s2::BM_NULL;
-	m_fast_blend = s2::FBM_NULL;
+	m_blend = pt2::BM_NULL;
+	m_fast_blend = pt2::FBM_NULL;
 #ifdef S2_FILTER_FULL
 	if (m_filter) {
 		m_filter.reset();
 	}
 #else
-	m_filter = s2::FM_NULL;
+	m_filter = pt2::FM_NULL;
 #endif // S2_FILTER_FULL
 	m_downsample = 1;
 
@@ -523,39 +523,39 @@ void SpriteIO::LoadShader(const Json::Value& val, const CU_STR& dir)
 		if (val["filter"].isString()) 
 		{
 			CU_STR disc = val["filter"].asString().c_str();
-			s2::FilterMode mode = FilterModes::Instance()->Name2Mode(disc);
+			pt2::FilterMode mode = FilterModes::Instance()->Name2Mode(disc);
 			m_filter = s2::FilterFactory::Instance()->Create(mode);
 		} 
 		else 
 		{
 			const Json::Value& fval = val["filter"];
 			CU_STR disc = fval["mode"].asString().c_str();
-			s2::FilterMode mode = FilterModes::Instance()->Name2Mode(disc);
+			pt2::FilterMode mode = FilterModes::Instance()->Name2Mode(disc);
 			m_filter = s2::FilterFactory::Instance()->Create(mode);
 			switch (mode)
 			{
-			case s2::FM_EDGE_DETECTION:
+			case pt2::FM_EDGE_DETECTION:
 				{
 					float blend = (float)(fval["blend"].asDouble());
 					auto filter = static_cast<s2::RFEdgeDetection*>(m_filter.get());
 					filter->SetBlend(blend);
 				}
 				break;
-			case s2::FM_GAUSSIAN_BLUR:
+			case pt2::FM_GAUSSIAN_BLUR:
 				{
 					int iterations = fval["iterations"].asInt();
 					auto filter = static_cast<s2::RFGaussianBlur*>(m_filter.get());
 					filter->SetIterations(iterations);
 				}
 				break;
-			case s2::FM_OUTER_GLOW:
+			case pt2::FM_OUTER_GLOW:
 				{
 					int iterations = fval["iterations"].asInt();
 					auto filter = static_cast<s2::RFOuterGlow*>(m_filter.get());
 					filter->SetIterations(iterations);
 				}
 				break;
-			case s2::FM_HEAT_HAZE:
+			case pt2::FM_HEAT_HAZE:
 				{
 					auto filter = static_cast<s2::RFHeatHaze*>(m_filter.get());
 					float distortion = 0.02f, rise = 0.2f;
@@ -592,7 +592,7 @@ void SpriteIO::LoadShader(const Json::Value& val, const CU_STR& dir)
 	}
 	else
 	{
-		m_filter = s2::FilterFactory::Instance()->Create(s2::FM_NULL);
+		m_filter = s2::FilterFactory::Instance()->Create(pt2::FM_NULL);
 	}
 #endif // S2_FILTER_FULL
 
@@ -607,44 +607,44 @@ void SpriteIO::StoreShader(Json::Value& val, const CU_STR& dir)
 		return;
 	}
 
-	if (m_blend != s2::BM_NULL) {
+	if (m_blend != pt2::BM_NULL) {
 		val["blend"] = BlendModes::Instance()->ModeToName(m_blend).c_str();;
 	}
 
-	if (m_fast_blend != s2::FBM_NULL) {
+	if (m_fast_blend != pt2::FBM_NULL) {
 		val["fast_blend"] = FastBlendModes::Instance()->Mode2Name(m_fast_blend).c_str();;
 	}
 
-	s2::FilterMode mode = s2::FM_NULL;
+	pt2::FilterMode mode = pt2::FM_NULL;
 #ifdef S2_FILTER_FULL
 	if (m_filter) {
 		mode = m_filter->GetMode();
 	}
-	if (mode != s2::FM_NULL)
+	if (mode != pt2::FM_NULL)
 	{
 		Json::Value fval;
 		fval["mode"] = FilterModes::Instance()->Mode2Name(mode).c_str();;
 		switch (mode)
 		{
-		case s2::FM_EDGE_DETECTION:
+		case pt2::FM_EDGE_DETECTION:
 			{
 				auto filter = static_cast<s2::RFEdgeDetection*>(m_filter.get());
 				fval["blend"] = filter->GetBlend();
 			}
 			break;
-		case s2::FM_GAUSSIAN_BLUR:
+		case pt2::FM_GAUSSIAN_BLUR:
 			{
 				auto filter = static_cast<s2::RFGaussianBlur*>(m_filter.get());
 				fval["iterations"] = filter->GetIterations();
 			}
 			break;
-		case s2::FM_OUTER_GLOW:
+		case pt2::FM_OUTER_GLOW:
 			{
 				auto filter = static_cast<s2::RFOuterGlow*>(m_filter.get());
 				fval["iterations"] = filter->GetIterations();
 			}
 			break;
-		case s2::FM_HEAT_HAZE:
+		case pt2::FM_HEAT_HAZE:
 			{
 				auto filter = static_cast<s2::RFHeatHaze*>(m_filter.get());
 				fval["filepath"] = gum::FilepathHelper::Relative(dir, filter->GetFilepath()).c_str();;
@@ -684,13 +684,13 @@ void SpriteIO::LoadCamera(const Json::Value& val)
 		CU_STR disc = val["camera"].asString().c_str();
 		m_camera = CameraModes::Instance()->Name2Mode(disc);
 	} else {
-		m_camera = s2::CM_ORTHO;
+		m_camera = pt2::CM_ORTHO;
 	}
 }
 
 void SpriteIO::StoreCamera(Json::Value& val)
 {
-	if (m_camera != s2::CM_ORTHO) {
+	if (m_camera != pt2::CM_ORTHO) {
 		val["camera"] = CameraModes::Instance()->Mode2Name(m_camera).c_str();;
 	}
 }

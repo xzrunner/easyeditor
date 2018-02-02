@@ -22,8 +22,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\painting2\AABB.h" />
+    <ClInclude Include="..\..\..\include\painting2\BlendMode.h" />
     <ClInclude Include="..\..\..\include\painting2\BoundingBox.h" />
+    <ClInclude Include="..\..\..\include\painting2\CameraMode.h" />
     <ClInclude Include="..\..\..\include\painting2\Color.h" />
+    <ClInclude Include="..\..\..\include\painting2\FastBlendMode.h" />
+    <ClInclude Include="..\..\..\include\painting2\FilterMode.h" />
     <ClInclude Include="..\..\..\include\painting2\GeoTransform.h" />
     <ClInclude Include="..\..\..\include\painting2\OBB.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderColorCommon.h" />

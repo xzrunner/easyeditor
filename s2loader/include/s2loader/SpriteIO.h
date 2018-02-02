@@ -2,16 +2,16 @@
 #define _S2LOADER_SPRITE_IO_H_
 
 #include <SM_Vector.h>
-#include <sprite2/BlendMode.h>
-#include <sprite2/FastBlendMode.h>
 #include <sprite2/RenderFilter.h>
-#include <sprite2/CameraMode.h>
 #include <sprite2/typedef.h>
 #include <sprite2/config.h>
 #include <cu/cu_stl.h>
 #include <sns/NodeSprCommon.h>
 #include <painting2/RenderColorCommon.h>
 #include <painting2/RenderColorMap.h>
+#include <painting2/CameraMode.h>
+#include <painting2/FastBlendMode.h>
+#include <painting2/BlendMode.h>
 
 #include <json/json.h>
 
@@ -86,15 +86,15 @@ public:
 	// shader
 	pt2::RenderColorCommon m_col_common;
 	pt2::RenderColorMap    m_col_map;
-	s2::BlendMode		   m_blend;
-	s2::FastBlendMode	   m_fast_blend;
+	pt2::BlendMode		   m_blend;
+	pt2::FastBlendMode	   m_fast_blend;
 #ifdef S2_FILTER_FULL
 	s2::RenderFilterPtr    m_filter;
 #else
-	s2::FilterMode         m_filter;
+	pt2::FilterMode         m_filter;
 #endif // S2_FILTER_FULL
 	float                  m_downsample;
-	s2::CameraMode		   m_camera;
+	pt2::CameraMode		   m_camera;
 	
 	// info
 	CU_STR			       m_name;

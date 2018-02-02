@@ -36,7 +36,7 @@ void SprFilterProperty::InitPS(const Sprite& spr, wxPropertyGrid* pg)
 	std::vector<std::string> names;
 	FilterModes::Instance()->GetAllNameCN(names);
 	wxEnumProperty* filter_prop = new wxEnumProperty("Filter", wxPG_LABEL, WXHelper::ToWXStringArray(names));
-	s2::FilterMode filter = s2::FM_NULL;
+	pt2::FilterMode filter = pt2::FM_NULL;
 	auto& rf = spr.GetShader().GetFilter();
 	if (rf) {
 		filter = rf->GetMode();
@@ -57,7 +57,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 	if (name == "Filter")
 	{
 		int idx = wxANY_AS(value, int);
-		s2::FilterMode filter = FilterModes::Instance()->ID2Mode(idx);
+		pt2::FilterMode filter = FilterModes::Instance()->ID2Mode(idx);
 		s2::RenderShader rs = spr.GetShader();
 		rs.SetFilter(filter);
 		spr.SetShader(rs);
@@ -67,7 +67,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 	{
 		switch (spr.GetShader().GetFilter()->GetMode())
 		{
-		case s2::FM_EDGE_DETECTION:
+		case pt2::FM_EDGE_DETECTION:
 			if (name == "Filter.Blend")
 			{
 				float blend = wxANY_AS(value, float);
@@ -76,7 +76,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 				ret = true;
 			}
 			break;
-		case s2::FM_GAUSSIAN_BLUR:
+		case pt2::FM_GAUSSIAN_BLUR:
 			if (name == "Filter.Iterations")
 			{
 				int iterations = wxANY_AS(value, int);
@@ -85,7 +85,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 				ret = true;
 			}
 			break;
-		case s2::FM_OUTER_GLOW:
+		case pt2::FM_OUTER_GLOW:
 			if (name == "Filter.Iterations")
 			{
 				int iterations = wxANY_AS(value, int);
@@ -94,7 +94,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 				ret = true;
 			}
 			break;
-		case s2::FM_HEAT_HAZE:
+		case pt2::FM_HEAT_HAZE:
 			{
 				sl::HeatHazeProg* prog = NULL;
 				sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
@@ -137,7 +137,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 				}
 			}
 			break;
-		case s2::FM_COL_GRADING:
+		case pt2::FM_COL_GRADING:
 			{
 				sl::ColGradingProg* prog = NULL;
 				sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
@@ -164,7 +164,7 @@ void SprFilterProperty::ToPS(const Sprite& spr, wxPropertyGrid* pg)
 {
 	wxPGProperty* filter_prop = pg->GetProperty("Filter");
 	
-	s2::FilterMode filter = s2::FM_NULL;
+	pt2::FilterMode filter = pt2::FM_NULL;
 	auto& rf = spr.GetShader().GetFilter();
 	if (rf) {
 		filter = rf->GetMode();
@@ -219,31 +219,31 @@ static void set_filepath_cb(const std::string& filepath, void* ud)
 
 void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const s2::RenderFilter& filter)
 {
-	s2::FilterMode mode = filter.GetMode();
+	pt2::FilterMode mode = filter.GetMode();
 	switch (mode)
 	{
-	case s2::FM_EDGE_DETECTION:
+	case pt2::FM_EDGE_DETECTION:
 		{
 			const s2::RFEdgeDetection* ed = static_cast<const s2::RFEdgeDetection*>(&filter);
 			wxPGProperty* prop = new wxFloatProperty("Blend", wxPG_LABEL, ed->GetBlend());
 			pg->AppendIn(parent, prop);
 		}
 		break;
-	case s2::FM_GAUSSIAN_BLUR:
+	case pt2::FM_GAUSSIAN_BLUR:
 		{
 			const s2::RFGaussianBlur* gb = static_cast<const s2::RFGaussianBlur*>(&filter);
 			wxPGProperty* prop = new wxIntProperty("Iterations", wxPG_LABEL, gb->GetIterations());
 			pg->AppendIn(parent, prop);
 		}
 		break;
-	case s2::FM_OUTER_GLOW:
+	case pt2::FM_OUTER_GLOW:
 		{
 			const s2::RFOuterGlow* og = static_cast<const s2::RFOuterGlow*>(&filter);
 			wxPGProperty* prop = new wxIntProperty("Iterations", wxPG_LABEL, og->GetIterations());
 			pg->AppendIn(parent, prop);
 		}
 		break;
-	case s2::FM_HEAT_HAZE:
+	case pt2::FM_HEAT_HAZE:
 		{
 			const s2::RFHeatHaze* hh = static_cast<const s2::RFHeatHaze*>(&filter);
 
@@ -259,7 +259,7 @@ void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, co
 			pg->AppendIn(parent, rise_prop);
 		}
 		break;
-	case s2::FM_COL_GRADING:
+	case pt2::FM_COL_GRADING:
 		{
 			const s2::RFColGrading* cg = static_cast<const s2::RFColGrading*>(&filter);
 			FilepathProperty* file_prop = new FilepathProperty("Filepath", wxPG_LABEL, cg->GetFilepath().c_str());

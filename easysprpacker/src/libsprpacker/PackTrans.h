@@ -3,11 +3,11 @@
 
 #include <SM_Vector.h>
 #include <cu/cu_stl.h>
-#include <sprite2/BlendMode.h>
-#include <sprite2/FastBlendMode.h>
 #include <sprite2/RenderCamera.h>
 #include <painting2/RenderColorCommon.h>
 #include <painting2/RenderColorMap.h>
+#include <painting2/FastBlendMode.h>
+#include <painting2/BlendMode.h>
 
 #include <string>
 
@@ -52,8 +52,8 @@ private:
 	// shader
 	pt2::RenderColorCommon m_col_common;
 	pt2::RenderColorMap    m_col_map;
-	s2::BlendMode		   m_blend;
-	s2::FastBlendMode	   m_fast_blend;
+	pt2::BlendMode		   m_blend;
+	pt2::FastBlendMode	   m_fast_blend;
 	s2::RenderFilter*	   m_filter;
 	float                  m_downsample;
 	s2::RenderCamera	   m_camera;

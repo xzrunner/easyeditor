@@ -7,15 +7,15 @@ CU_SINGLETON_DEFINITION(CameraModes);
 
 CameraModes::CameraModes()
 {
-	m_modes.push_back(Item(s2::CM_ORTHO, "ortho"));
-	m_modes.push_back(Item(s2::CM_PERSPECTIVE_NO_HEIGHT, "perspective no height"));
-	m_modes.push_back(Item(s2::CM_PERSPECTIVE_AUTO_HEIGHT, "perspective auto height"));
+	m_modes.push_back(Item(pt2::CM_ORTHO, "ortho"));
+	m_modes.push_back(Item(pt2::CM_PERSPECTIVE_NO_HEIGHT, "perspective no height"));
+	m_modes.push_back(Item(pt2::CM_PERSPECTIVE_AUTO_HEIGHT, "perspective auto height"));
 }
 
-s2::CameraMode CameraModes::Name2Mode(const CU_STR& name) const
+pt2::CameraMode CameraModes::Name2Mode(const CU_STR& name) const
 {
 	if (name.empty()) {
-		return s2::CM_ORTHO;
+		return pt2::CM_ORTHO;
 	}
 
 	for (int i = 0, n = m_modes.size(); i < n; ++i) {
@@ -24,10 +24,10 @@ s2::CameraMode CameraModes::Name2Mode(const CU_STR& name) const
 			return item.mode;
 		}
 	}
-	return s2::CM_ORTHO;
+	return pt2::CM_ORTHO;
 }
 
-CU_STR CameraModes::Mode2Name(s2::CameraMode mode) const
+CU_STR CameraModes::Mode2Name(pt2::CameraMode mode) const
 {
 	for (int i = 0, n = m_modes.size(); i < n; ++i) {
 		const Item& item = m_modes[i];
