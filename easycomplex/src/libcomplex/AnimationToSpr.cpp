@@ -5,7 +5,7 @@
 
 #include <ee/BlendModes.h>
 
-#include <sprite2/RenderShader.h>
+#include <painting2/RenderShader.h>
 #include <gum/trans_color.h>
 
 #include <easyanim.h>
@@ -74,7 +74,7 @@ void AnimationToSpr::TransSprite(const ee::SprPtr& spr, const erespacker::PackAn
 	}
 	TransSpriteCol(spr, t);
 
-	s2::RenderShader rs = spr->GetShader();
+	pt2::RenderShader rs = spr->GetShader();
 	rs.SetBlend(ee::BlendModes::Instance()->ID2Mode(t.blend));
 	spr->SetShader(rs);
 }

@@ -11,8 +11,9 @@
 
 #include <string>
 
-namespace s2 { class Sprite; class RenderFilter; }
-namespace ebuilder { class CodeGenerator; }
+namespace s2 { class Sprite; }
+namespace ebuilder { class CodeGenerator; class RenderFilter;  }
+namespace pt2 { class RenderFilter; }
 
 namespace esprpacker
 {
@@ -54,7 +55,7 @@ private:
 	pt2::RenderColorMap    m_col_map;
 	pt2::BlendMode		   m_blend;
 	pt2::FastBlendMode	   m_fast_blend;
-	s2::RenderFilter*	   m_filter;
+	pt2::RenderFilter*	   m_filter;
 	float                  m_downsample;
 	pt2::RenderCamera	   m_camera;
 	// other

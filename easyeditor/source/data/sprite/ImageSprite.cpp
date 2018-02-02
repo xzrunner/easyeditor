@@ -4,9 +4,7 @@
 #include "SymbolFile.h"
 #include "Math2D.h"
 
-#include <sprite2/RenderShader.h>
 #include <sprite2/ImageSprite.h>
-#include <sprite2/RenderFilter.h>
 #include <painting2/OBB.h>
 #include <painting2/FilterMode.h>
 

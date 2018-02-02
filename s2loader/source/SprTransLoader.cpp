@@ -3,10 +3,10 @@
 #include <sns/ColorParser.h>
 #include <sns/NodeSprCommon.h>
 #include <sprite2/Sprite.h>
-#include <sprite2/RenderShader.h>
 #include <sprite2/Symbol.h>
 #include <simp/NodeTrans.h>
 #include <painting2/RenderCamera.h>
+#include <painting2/RenderShader.h>
 
 namespace s2loader
 {
@@ -79,7 +79,7 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const simp::NodeTrans* trans)
 		spr->SetColorMap(pt2::RenderColorMap(col_map.rmap, col_map.gmap, bmap));
 	}
 
-	s2::RenderShader rs;
+	pt2::RenderShader rs;
 	if (trans->type & simp::NodeTrans::BLEND_MASK) {
 		rs.SetBlend(pt2::BlendMode(trans->data[idx++]));
 	}
@@ -182,7 +182,7 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const sns::NodeSprCommon& commo
 	}
 
 	// todo
-	//s2::RenderShader rs;
+	//pt2::RenderShader rs;
 	//if (type & simp::NodeTrans::BLEND_MASK) {
 	//	rs.SetBlend(pt2::BlendMode(data[idx++]));
 	//}

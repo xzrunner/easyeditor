@@ -9,11 +9,11 @@
 #include <sprite2/ShapeSymbol.h>
 #include <sprite2/ColorPolygon.h>
 #include <sprite2/PolygonShape.h>
-#include <sprite2/RenderShader.h>
 #include <sprite2/LerpWiggle.h>
 #include <sprite2/LerpEase.h>
 #include <gum/StringHelper.h>
 #include <painting2/BlendMode.h>
+#include <painting2/RenderShader.h>
 
 #include <cmath>
 
@@ -748,7 +748,7 @@ void BodymovinAnimLoader::LoadBlendMode(CU_VEC<s2::AnimSymbol::FramePtr>& frames
 		for (int j = 0, m = f->sprs.size(); j < m; ++j) 
 		{
 			auto& spr = f->sprs[j];
-			s2::RenderShader rs = spr->GetShader();
+			pt2::RenderShader rs = spr->GetShader();
 			rs.SetBlend(bm);
 			spr->SetShader(rs);
 		}

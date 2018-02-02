@@ -5,9 +5,8 @@
 namespace lua = ebuilder::lua;
 
 #include <sprite2/Sprite.h>
-#include <sprite2/RenderFilter.h>
-#include <sprite2/RenderShader.h>
 #include <simp/NodeTrans.h>
+#include <painting2/RenderShader.h>
 
 namespace esprpacker
 {

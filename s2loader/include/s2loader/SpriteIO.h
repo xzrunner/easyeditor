@@ -2,7 +2,6 @@
 #define _S2LOADER_SPRITE_IO_H_
 
 #include <SM_Vector.h>
-#include <sprite2/RenderFilter.h>
 #include <sprite2/typedef.h>
 #include <sprite2/config.h>
 #include <cu/cu_stl.h>
@@ -12,11 +11,12 @@
 #include <painting2/CameraMode.h>
 #include <painting2/FastBlendMode.h>
 #include <painting2/BlendMode.h>
+#include <painting2/RenderFilter.h>
 
 #include <json/json.h>
 
-namespace s2 { class Sprite; class RenderShader; }
-namespace pt2 { class RenderCamera; }
+namespace s2 { class Sprite; }
+namespace pt2 { class RenderCamera; class RenderShader; }
 
 namespace s2loader
 {
@@ -67,7 +67,7 @@ private:
 	void StoreColor(Json::Value& val);
 
 	void LoadShader(const s2::SprPtr& spr);
-	void StoreShader(const s2::RenderShader& shader);
+	void StoreShader(const pt2::RenderShader& shader);
 	void LoadShader(const Json::Value& val, const CU_STR& dir);
 	void StoreShader(Json::Value& val, const CU_STR& dir);
 
@@ -90,9 +90,9 @@ public:
 	pt2::BlendMode		   m_blend;
 	pt2::FastBlendMode	   m_fast_blend;
 #ifdef S2_FILTER_FULL
-	s2::RenderFilterPtr    m_filter;
+	pt2::RenderFilterPtr   m_filter;
 #else
-	pt2::FilterMode         m_filter;
+	pt2::FilterMode        m_filter;
 #endif // S2_FILTER_FULL
 	float                  m_downsample;
 	pt2::CameraMode		   m_camera;

@@ -17,10 +17,10 @@
 #include <ee/SymbolFile.h>
 
 #include <sprite2/SymType.h>
-#include <sprite2/RenderShader.h>
-#include <sprite2/RenderFilter.h>
 #include <gum/trans_color.h>
 #include <painting2/RenderCamera.h>
+#include <painting2/RenderFilter.h>
+#include <painting2/RenderShader.h>
 
 namespace erespacker
 {

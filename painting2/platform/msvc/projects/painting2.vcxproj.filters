@@ -16,13 +16,22 @@
       <Filter>bb</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\RenderColorCommon.cpp">
-      <Filter>render</Filter>
+      <Filter>render\color</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\RenderColorMap.cpp">
-      <Filter>render</Filter>
+      <Filter>render\color</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\RenderCamera.cpp">
-      <Filter>render</Filter>
+      <Filter>render\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\FilterFactory.cpp">
+      <Filter>render\filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\RenderFilter.cpp">
+      <Filter>render\filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\RenderShader.cpp">
+      <Filter>render\shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,27 +55,74 @@
     <ClInclude Include="..\..\..\include\painting2\Color.h">
       <Filter>color</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\painting2\RenderColorMap.h">
-      <Filter>render</Filter>
+    <ClInclude Include="..\..\..\include\painting2\FilterMode.h">
+      <Filter>render\filter</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\painting2\RenderColorCommon.h">
-      <Filter>render</Filter>
+      <Filter>render\color</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\painting2\FastBlendMode.h">
-      <Filter>render\data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\painting2\CameraMode.h">
-      <Filter>render\data</Filter>
+    <ClInclude Include="..\..\..\include\painting2\RenderColorMap.h">
+      <Filter>render\color</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\painting2\BlendMode.h">
-      <Filter>render\data</Filter>
+      <Filter>render\blend</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\painting2\FilterMode.h">
-      <Filter>render\data</Filter>
+    <ClInclude Include="..\..\..\include\painting2\FastBlendMode.h">
+      <Filter>render\blend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\CameraMode.h">
+      <Filter>render\camera</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\painting2\RenderCamera.h">
-      <Filter>render</Filter>
+      <Filter>render\camera</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFSwirl.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFShockWave.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFRelief.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFOutline.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFOuterGlow.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFHeatHaze.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFGray.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFGaussianBlur.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFEdgeDetection.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFColGrading.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFBurningMap.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RFBlur.h">
+      <Filter>render\filter\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\FilterFactory.h">
+      <Filter>render\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RenderFilter.h">
+      <Filter>render\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\RenderShader.h">
+      <Filter>render\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\painting2\typedef.h" />
+    <ClInclude Include="..\..\..\include\painting2\config.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="transform">
@@ -81,8 +137,23 @@
     <Filter Include="render">
       <UniqueIdentifier>{427ce5ba-3b6e-4013-ac49-3327c7c3b567}</UniqueIdentifier>
     </Filter>
-    <Filter Include="render\data">
+    <Filter Include="render\color">
+      <UniqueIdentifier>{de807c61-524a-4650-8a3e-aef86c4459c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\blend">
+      <UniqueIdentifier>{1600d3b7-11a1-4632-8c81-4a5ff1abf879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\camera">
+      <UniqueIdentifier>{ec1cdb89-50cb-491d-9d52-3d2f3c38a3fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\filter">
       <UniqueIdentifier>{45eb0105-bd25-479a-8abd-1bbee8187cc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\filter\items">
+      <UniqueIdentifier>{d69ca23c-a76f-44f8-846b-8848304bde6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\shader">
+      <UniqueIdentifier>{7662e652-6749-42a6-b9d7-b46995f40e0e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

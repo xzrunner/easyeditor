@@ -13,11 +13,14 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\source\AABB.cpp" />
     <ClCompile Include="..\..\..\source\BoundingBox.cpp" />
+    <ClCompile Include="..\..\..\source\FilterFactory.cpp" />
     <ClCompile Include="..\..\..\source\GeoTransform.cpp" />
     <ClCompile Include="..\..\..\source\OBB.cpp" />
     <ClCompile Include="..\..\..\source\RenderCamera.cpp" />
     <ClCompile Include="..\..\..\source\RenderColorCommon.cpp" />
     <ClCompile Include="..\..\..\source\RenderColorMap.cpp" />
+    <ClCompile Include="..\..\..\source\RenderFilter.cpp" />
+    <ClCompile Include="..\..\..\source\RenderShader.cpp" />
     <ClCompile Include="..\..\..\source\RenderSystem.cpp" />
     <ClCompile Include="..\..\..\source\Texture.cpp" />
   </ItemGroup>
@@ -27,16 +30,33 @@
     <ClInclude Include="..\..\..\include\painting2\BoundingBox.h" />
     <ClInclude Include="..\..\..\include\painting2\CameraMode.h" />
     <ClInclude Include="..\..\..\include\painting2\Color.h" />
+    <ClInclude Include="..\..\..\include\painting2\config.h" />
     <ClInclude Include="..\..\..\include\painting2\FastBlendMode.h" />
+    <ClInclude Include="..\..\..\include\painting2\FilterFactory.h" />
     <ClInclude Include="..\..\..\include\painting2\FilterMode.h" />
     <ClInclude Include="..\..\..\include\painting2\GeoTransform.h" />
     <ClInclude Include="..\..\..\include\painting2\OBB.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderCamera.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderColorCommon.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderColorMap.h" />
+    <ClInclude Include="..\..\..\include\painting2\RenderFilter.h" />
+    <ClInclude Include="..\..\..\include\painting2\RenderShader.h" />
     <ClInclude Include="..\..\..\include\painting2\RenderSystem.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFBlur.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFBurningMap.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFColGrading.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFEdgeDetection.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFGaussianBlur.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFGray.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFHeatHaze.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFOuterGlow.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFOutline.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFRelief.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFShockWave.h" />
+    <ClInclude Include="..\..\..\include\painting2\RFSwirl.h" />
     <ClInclude Include="..\..\..\include\painting2\SRT.h" />
     <ClInclude Include="..\..\..\include\painting2\Texture.h" />
+    <ClInclude Include="..\..\..\include\painting2\typedef.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\include\painting2\AABB.inl" />

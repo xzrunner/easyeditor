@@ -31,7 +31,7 @@
 #include "SetSpriteColGMapAOP.h"
 #include "SetSpriteColBMapAOP.h"
 
-#include <sprite2/RenderShader.h>
+#include <painting2/RenderShader.h>
 
 #include <wx/propgrid/advprops.h>
 
@@ -131,21 +131,21 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 // 	}
 	else if (name == "Blend")
 	{
-		s2::RenderShader rs = spr->GetShader();
+		pt2::RenderShader rs = spr->GetShader();
 		int idx = wxANY_AS(value, int);
 		rs.SetBlend(BlendModes::Instance()->ID2Mode(idx));
 		spr->SetShader(rs);
 	}
 	else if (name == "FastBlend") 
 	{
-		s2::RenderShader rs = spr->GetShader();
+		pt2::RenderShader rs = spr->GetShader();
 		int idx = wxANY_AS(value, int);
 		rs.SetFastBlend(FastBlendModes::Instance()->ID2Mode(idx));
 		spr->SetShader(rs);
 	}
 	else if (name == "Downsample")
 	{
-		s2::RenderShader rs = spr->GetShader();
+		pt2::RenderShader rs = spr->GetShader();
 		rs.SetDownsample(wxANY_AS(value, float));
 		spr->SetShader(rs);
 	}

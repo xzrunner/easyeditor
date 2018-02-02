@@ -12,14 +12,13 @@
 #include <shaderlab/HeatHazeProg.h>
 #include <shaderlab/FilterShader.h>
 #include <shaderlab/ColGradingProg.h>
-#include <sprite2/RenderShader.h>
-#include <sprite2/RenderFilter.h>
-#include <sprite2/FilterFactory.h>
-#include <sprite2/RFEdgeDetection.h>
-#include <sprite2/RFGaussianBlur.h>
-#include <sprite2/RFOuterGlow.h>
-#include <sprite2/RFHeatHaze.h>
-#include <sprite2/RFColGrading.h>
+#include <painting2/RenderShader.h>
+#include <painting2/FilterFactory.h>
+#include <painting2/RFEdgeDetection.h>
+#include <painting2/RFGaussianBlur.h>
+#include <painting2/RFOuterGlow.h>
+#include <painting2/RFHeatHaze.h>
+#include <painting2/RFColGrading.h>
 
 #include <vector>
 
@@ -58,7 +57,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 	{
 		int idx = wxANY_AS(value, int);
 		pt2::FilterMode filter = FilterModes::Instance()->ID2Mode(idx);
-		s2::RenderShader rs = spr.GetShader();
+		pt2::RenderShader rs = spr.GetShader();
 		rs.SetFilter(filter);
 		spr.SetShader(rs);
 		ret = true;
@@ -71,7 +70,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 			if (name == "Filter.Blend")
 			{
 				float blend = wxANY_AS(value, float);
-				s2::RFEdgeDetection* filter = static_cast<s2::RFEdgeDetection*>(rf.get());
+				pt2::RFEdgeDetection* filter = static_cast<pt2::RFEdgeDetection*>(rf.get());
 				filter->SetBlend(blend);
 				ret = true;
 			}
@@ -80,7 +79,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 			if (name == "Filter.Iterations")
 			{
 				int iterations = wxANY_AS(value, int);
-				s2::RFGaussianBlur* filter = static_cast<s2::RFGaussianBlur*>(rf.get());
+				pt2::RFGaussianBlur* filter = static_cast<pt2::RFGaussianBlur*>(rf.get());
 				filter->SetIterations(iterations);
 				ret = true;
 			}
@@ -89,7 +88,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 			if (name == "Filter.Iterations")
 			{
 				int iterations = wxANY_AS(value, int);
-				s2::RFOuterGlow* filter = static_cast<s2::RFOuterGlow*>(rf.get());
+				pt2::RFOuterGlow* filter = static_cast<pt2::RFOuterGlow*>(rf.get());
 				filter->SetIterations(iterations);
 				ret = true;
 			}
@@ -102,7 +101,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 				if (shader) {
 					prog = static_cast<sl::HeatHazeProg*>(shader->GetProgram(sl::FM_HEAT_HAZE));
 				}
-				s2::RFHeatHaze* filter = static_cast<s2::RFHeatHaze*>(rf.get());
+				pt2::RFHeatHaze* filter = static_cast<pt2::RFHeatHaze*>(rf.get());
 
 				if (name == "Filter.Filepath")
 				{
@@ -145,7 +144,7 @@ bool SprFilterProperty::FromPS(const std::string& name, const wxAny& value, Spri
 				if (shader) {
 					prog = static_cast<sl::ColGradingProg*>(shader->GetProgram(sl::FM_COL_GRADING));
 				}
-				s2::RFColGrading* filter = static_cast<s2::RFColGrading*>(rf.get());
+				pt2::RFColGrading* filter = static_cast<pt2::RFColGrading*>(rf.get());
 				std::string filepath = wxANY_AS(value, wxString);
 				filter->SetFilepath(filepath.c_str());
 				if (prog) {
@@ -180,8 +179,8 @@ void SprFilterProperty::ToPS(const Sprite& spr, wxPropertyGrid* pg)
 
 static void set_filepath_cb(const std::string& filepath, void* ud)
 {
-	s2::RenderFilter* filter = static_cast<s2::RenderFilter*>(ud);
-	if (s2::RFHeatHaze* hh = dynamic_cast<s2::RFHeatHaze*>(filter)) 
+	pt2::RenderFilter* filter = static_cast<pt2::RenderFilter*>(ud);
+	if (pt2::RFHeatHaze* hh = dynamic_cast<pt2::RFHeatHaze*>(filter)) 
 	{
 		hh->SetFilepath(filepath.c_str());
 
@@ -198,7 +197,7 @@ static void set_filepath_cb(const std::string& filepath, void* ud)
 			}
 		}
 	} 
-	else if (s2::RFColGrading* cg = dynamic_cast<s2::RFColGrading*>(filter))
+	else if (pt2::RFColGrading* cg = dynamic_cast<pt2::RFColGrading*>(filter))
 	{
 		cg->SetFilepath(filepath.c_str());
 
@@ -217,38 +216,38 @@ static void set_filepath_cb(const std::string& filepath, void* ud)
 	}
 }
 
-void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const s2::RenderFilter& filter)
+void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const pt2::RenderFilter& filter)
 {
 	pt2::FilterMode mode = filter.GetMode();
 	switch (mode)
 	{
 	case pt2::FM_EDGE_DETECTION:
 		{
-			const s2::RFEdgeDetection* ed = static_cast<const s2::RFEdgeDetection*>(&filter);
+			const pt2::RFEdgeDetection* ed = static_cast<const pt2::RFEdgeDetection*>(&filter);
 			wxPGProperty* prop = new wxFloatProperty("Blend", wxPG_LABEL, ed->GetBlend());
 			pg->AppendIn(parent, prop);
 		}
 		break;
 	case pt2::FM_GAUSSIAN_BLUR:
 		{
-			const s2::RFGaussianBlur* gb = static_cast<const s2::RFGaussianBlur*>(&filter);
+			const pt2::RFGaussianBlur* gb = static_cast<const pt2::RFGaussianBlur*>(&filter);
 			wxPGProperty* prop = new wxIntProperty("Iterations", wxPG_LABEL, gb->GetIterations());
 			pg->AppendIn(parent, prop);
 		}
 		break;
 	case pt2::FM_OUTER_GLOW:
 		{
-			const s2::RFOuterGlow* og = static_cast<const s2::RFOuterGlow*>(&filter);
+			const pt2::RFOuterGlow* og = static_cast<const pt2::RFOuterGlow*>(&filter);
 			wxPGProperty* prop = new wxIntProperty("Iterations", wxPG_LABEL, og->GetIterations());
 			pg->AppendIn(parent, prop);
 		}
 		break;
 	case pt2::FM_HEAT_HAZE:
 		{
-			const s2::RFHeatHaze* hh = static_cast<const s2::RFHeatHaze*>(&filter);
+			const pt2::RFHeatHaze* hh = static_cast<const pt2::RFHeatHaze*>(&filter);
 
 			FilepathProperty* file_prop = new FilepathProperty("Filepath", wxPG_LABEL, hh->GetFilepath().c_str());
-			file_prop->SetCallback(set_filepath_cb, const_cast<s2::RenderFilter*>(&filter));
+			file_prop->SetCallback(set_filepath_cb, const_cast<pt2::RenderFilter*>(&filter));
 			pg->AppendIn(parent, file_prop);
 
 			float dist, rise;
@@ -261,9 +260,9 @@ void SprFilterProperty::CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, co
 		break;
 	case pt2::FM_COL_GRADING:
 		{
-			const s2::RFColGrading* cg = static_cast<const s2::RFColGrading*>(&filter);
+			const pt2::RFColGrading* cg = static_cast<const pt2::RFColGrading*>(&filter);
 			FilepathProperty* file_prop = new FilepathProperty("Filepath", wxPG_LABEL, cg->GetFilepath().c_str());
-			file_prop->SetCallback(set_filepath_cb, const_cast<s2::RenderFilter*>(&filter));
+			file_prop->SetCallback(set_filepath_cb, const_cast<pt2::RenderFilter*>(&filter));
 			pg->AppendIn(parent, file_prop);
 		}
 		break;

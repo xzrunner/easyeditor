@@ -3,7 +3,7 @@
 
 #include <wx/propgrid/propgrid.h>
 
-namespace s2 { class RenderFilter; }
+namespace pt2 { class RenderFilter; }
 
 namespace ee
 {
@@ -20,7 +20,7 @@ public:
 	void ToPS(const Sprite& spr, wxPropertyGrid* pg);
 
 private:
-	void CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const s2::RenderFilter& filter);
+	void CreateSubPS(wxPropertyGrid* pg, wxPGProperty* parent, const pt2::RenderFilter& filter);
 
 	int GetTextureID(const std::string& filepath) const;
 

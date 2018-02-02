@@ -8,7 +8,6 @@
 
 #include <sprite2/RenderParams.h>
 #include <sprite2/RVG.h>
-#include <sprite2/RenderFilter.h>
 #include <gum/trans_color.h>
 #include <gum/GTxt.h>
 #include <s2loader/TextboxLoader.h>
