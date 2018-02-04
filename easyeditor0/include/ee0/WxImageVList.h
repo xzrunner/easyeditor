@@ -32,14 +32,17 @@ public:
 
 	std::shared_ptr<WxLibraryItem> GetSelected() const;
 
-	std::shared_ptr<WxLibraryItem> GetItem(int idx = -1) const;
-
 protected:
 	// wxVListBox
 	virtual void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const;
 //		virtual void OnDrawBackground(wxDC& dc, const wxRect& rect, size_t n) const;
 	virtual void OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const;
 	virtual wxCoord OnMeasureItem(size_t n) const;
+
+	virtual void OnKeyDown(wxKeyEvent& event);
+	virtual void OnKeyUp(wxKeyEvent& event);
+	virtual void OnKillFocus(wxFocusEvent& event);
+	virtual void OnMouse(wxMouseEvent& event) {}
 
 private:
 	void OnMouseWrap(wxMouseEvent& event);

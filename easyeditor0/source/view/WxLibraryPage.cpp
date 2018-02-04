@@ -6,9 +6,9 @@ namespace ee0
 
 WxLibraryPage::WxLibraryPage(wxWindow* parent, const std::string& name, bool is_static)
 	: wxWindow(parent, wxID_ANY)
+	, m_list(nullptr)
 	, m_name(name)
 	, m_is_static(is_static)
-	, m_list(nullptr)
 {
 	m_btn_add = m_btn_del = nullptr;
 

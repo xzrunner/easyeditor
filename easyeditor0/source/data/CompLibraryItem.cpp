@@ -5,9 +5,11 @@ namespace ee0
 
 CompLibraryItem* CompLibraryItem::Clone() const
 {
-	CompLibraryItem* ret = new CompLibraryItem;
+//	CompLibraryItem* ret = new CompLibraryItem;
 
-	return ret;
+//	return ret;
+
+	return nullptr;
 }
 
 }

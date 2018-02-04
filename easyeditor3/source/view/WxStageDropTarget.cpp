@@ -5,11 +5,13 @@
 #include <ee0/WxLibraryPanel.h>
 #include <ee0/MessageID.h>
 #include <ee0/VariantSet.h>
+#include <ee0/WxLibraryItem.h>
 
 #include <guard/check.h>
 #include <node0/SceneNode.h>
 #include <node3/CompTransform.h>
 #include <gum/StringHelper.h>
+#include <gum/SymbolPool.h>
 
 namespace ee3
 {
@@ -37,28 +39,29 @@ void WxStageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
-		// todo zz
-		//sm::vec3 pos = m_stage->TransPosScrToProj3d(x, y);
-		//bool handled = OnDropSymbol(item, sm::vec2(pos.x, pos.y));
-		//if (handled) {
-		//	continue;
-		//}
+		auto sym = gum::SymbolPool::Instance()->Fetch(item->GetFilepath().c_str());
 
-		//auto node = NodeFactory::Instance()->Create(sym);
-		//if (!node) {
-		//	continue;
-		//}
+		sm::vec3 pos = m_stage->TransPosScrToProj3d(x, y);
+		bool handled = OnDropSymbol(sym, sm::vec2(pos.x, pos.y));
+		if (handled) {
+			continue;
+		}
 
-		//InsertNode(node);
+		auto node = NodeFactory::Instance()->Create(sym);
+		if (!node) {
+			continue;
+		}
 
-		//// transform
-		//auto& ctrans = node->AddComponent<n3::CompTransform>();
-		//auto parent = node->GetParent();
-		//if (parent) {
-		//	auto p_pos = parent->GetComponent<n3::CompTransform>().GetTransformMat() * sm::vec3(0, 0, 0);
-		//	pos -= p_pos;
-		//}
-		//ctrans.SetPosition(pos);
+		InsertNode(node);
+
+		// transform
+		auto& ctrans = node->AddComponent<n3::CompTransform>();
+		auto parent = node->GetParent();
+		if (parent) {
+			auto p_pos = parent->GetComponent<n3::CompTransform>().GetTransformMat() * sm::vec3(0, 0, 0);
+			pos -= p_pos;
+		}
+		ctrans.SetPosition(pos);
 	}
 
 	m_stage->GetSubjectMgr().NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);

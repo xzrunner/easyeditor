@@ -1,6 +1,7 @@
 #include "ee3/WxLibGeoPage.h"
 
 #include <ee0/WxLibraryList.h>
+#include <ee0/WxLibraryItem.h>
 
 #include <node0/SceneNode.h>
 #include <node3/SurfaceFactory.h>
@@ -36,25 +37,21 @@ void WxLibGeoPage::LoadGeometric(const std::string& name)
 	n3::AABB aabb;
 	auto model = std::make_shared<n3::ModelParametric>(surface, aabb);
 
-	auto node = std::make_shared<n0::SceneNode>();
-
-	auto& cmodel = node->AddComponent<n3::CompModel>();
-	cmodel.SetModel(model);
-
-	auto& caabb = node->AddComponent<n3::CompAABB>();
-	caabb.SetAABB(aabb);
-
 	// todo zz
-//	auto sym = std::make_shared<NodeSymbol>();
-//	sym->SetName(name);
-//	sym->SetNode(node);
-//
-//	std::string filepath = name + ".geo";
-//	//obj_model->SetFilepath(filepath);
-//	sym->SetFilepath(filepath);
-//
-////	sym->RefreshThumbnail(sym->GetFilepath());
-//	m_list->Insert(sym);
+	//auto node = std::make_shared<n0::SceneNode>();
+
+	//auto& cmodel = node->AddComponent<n3::CompModel>();
+	//cmodel.SetModel(model);
+
+	//auto& caabb = node->AddComponent<n3::CompAABB>();
+	//caabb.SetAABB(aabb);
+
+	//auto sym = std::make_shared<NodeSymbol>();
+	//sym->SetName(name);
+	//sym->SetNode(node);
+
+	std::string filepath = name + ".geo";
+	m_list->Insert(std::make_shared<ee0::WxLibraryItem>(filepath));
 }
 
 }

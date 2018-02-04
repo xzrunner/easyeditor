@@ -8,12 +8,15 @@
 #include <ee0/CameraHelper.h>
 #include <ee0/WxDropTarget.h>
 #include <ee0/WxLibraryPanel.h>
+#include <ee0/WxLibraryItem.h>
 
 #include <guard/check.h>
+#include <node0/SceneNode.h>
 #include <node2/CompTransform.h>
 #include <node2/CompBoundingBox.h>
 #include <sprite2/OrthoCamera.h>
 #include <gum/StringHelper.h>
+#include <gum/SymbolPool.h>
 
 namespace ee2
 {
@@ -42,34 +45,35 @@ void WxStageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
-		// todo zz
-		//auto& cam = std::dynamic_pointer_cast<WxStageCanvas>(m_stage->GetCanvas())->GetCamera();
-		//GD_ASSERT(cam, "null cam");
-		//sm::vec2 pos = ee0::CameraHelper::TransPosScreenToProject(*cam, x, y);
-		//bool handled = OnDropSymbol(sym, pos);
-		//if (handled) {
-		//	continue;
-		//}
+		auto sym = gum::SymbolPool::Instance()->Fetch(item->GetFilepath().c_str());
 
-		//auto node = NodeFactory::Instance()->Create(sym);
-		//if (!node) {
-		//	continue;
-		//}
+		auto& cam = std::dynamic_pointer_cast<WxStageCanvas>(m_stage->GetImpl().GetCanvas())->GetCamera();
+		GD_ASSERT(cam, "null cam");
+		sm::vec2 pos = ee0::CameraHelper::TransPosScreenToProject(*cam, x, y);
+		bool handled = OnDropSymbol(sym, pos);
+		if (handled) {
+			continue;
+		}
 
-		//InsertNode(node);
+		auto node = NodeFactory::Instance()->Create(sym);
+		if (!node) {
+			continue;
+		}
 
-		//// transform
-		//auto& ctrans = node->AddComponent<n2::CompTransform>();
-		//auto parent = node->GetParent();
-		//if (parent) {
-		//	auto p_pos = parent->GetComponent<n2::CompTransform>().GetTrans().GetMatrix() * sm::vec2(0, 0);
-		//	pos -= p_pos;
-		//}
-		//ctrans.GetTrans().SetPosition(pos);
+		InsertNode(node);
 
-		//// bounding box
-		//auto& bounding = node->GetComponent<n2::CompBoundingBox>();
-		//bounding.Build(ctrans.GetTrans().GetSRT());
+		// transform
+		auto& ctrans = node->AddComponent<n2::CompTransform>();
+		auto parent = node->GetParent();
+		if (parent) {
+			auto p_pos = parent->GetComponent<n2::CompTransform>().GetTrans().GetMatrix() * sm::vec2(0, 0);
+			pos -= p_pos;
+		}
+		ctrans.GetTrans().SetPosition(pos);
+
+		// bounding box
+		auto& bounding = node->GetComponent<n2::CompBoundingBox>();
+		bounding.Build(ctrans.GetTrans().GetSRT());
 	}
 
 	m_stage->GetSubjectMgr().NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);

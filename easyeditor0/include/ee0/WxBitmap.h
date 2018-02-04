@@ -5,10 +5,6 @@
 #include <string>
 #include <memory>
 
-#include <stdint.h>
-
-namespace s2 { class Symbol; }
-
 namespace ee0
 {
 
@@ -28,8 +24,6 @@ private:
 	static void LoadWXImage(const std::string& filepath, wxImage& image);
 
 private:
-	std::string m_filepath;
-
 	std::unique_ptr<wxBitmap> m_bmp_large = nullptr;
 	std::unique_ptr<wxBitmap> m_bmp_small = nullptr;
 

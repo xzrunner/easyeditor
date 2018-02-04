@@ -27,14 +27,15 @@ private:
 	void InitLayout();
 	void InitButtons(wxSizer* sizer);
 
+protected:
+	WxLibraryList* m_list;
+
 private:
 	std::string m_name;
 
 	bool m_is_static;
 
 	wxButton *m_btn_add, *m_btn_del;
-
-	WxLibraryList* m_list;
 
 }; // WxLibraryPage
 

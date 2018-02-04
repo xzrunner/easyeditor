@@ -28,7 +28,7 @@ void WxLibraryPanel::AddPage(WxLibraryPage* page, const char* name)
 std::shared_ptr<WxLibraryItem> WxLibraryPanel::GetItem(int idx) const
 {
 	if (m_selected) {
-		m_selected->GetItem(idx);
+		return m_selected->GetItem(idx);
 	} else {
 		return nullptr;
 	}

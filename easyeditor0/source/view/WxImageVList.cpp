@@ -16,6 +16,9 @@ static const int COMPACT_SPACE_UP	= 4;
 static const int COMPACT_SPACE_LEFT	= COMPACT_HEIGHT;
 
 BEGIN_EVENT_TABLE(WxImageVList, wxVListBox)
+	EVT_KEY_DOWN(WxImageVList::OnKeyDown)
+	EVT_KEY_UP(WxImageVList::OnKeyUp)
+	EVT_KILL_FOCUS(WxImageVList::OnKillFocus)
 	EVT_MOUSE_EVENTS(WxImageVList::OnMouseWrap)
 END_EVENT_TABLE()
 
@@ -110,17 +113,6 @@ std::shared_ptr<WxLibraryItem> WxImageVList::GetSelected() const
 	}
 }
 
-std::shared_ptr<WxLibraryItem> WxImageVList::GetItem(int idx) const
-{
-	if (idx < 0) {
-		idx = GetSelection();
-	}
-	if (idx < 0 || static_cast<size_t>(idx) >= m_items.size()) {
-		return nullptr;
-	}
-	return m_items[idx];
-}
-
 void WxImageVList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 {
 	bool is_selected;
@@ -206,9 +198,30 @@ wxCoord WxImageVList::OnMeasureItem(size_t n) const
 	}
 }
 
+void WxImageVList::OnKeyDown(wxKeyEvent& event)
+{
+	wxVListBox::OnKeyDown(event);
+
+		//int key_code = event.GetKeyCode();
+		//m_keys_state.OnKeyDown(key_code);
+}
+
+void WxImageVList::OnKeyUp(wxKeyEvent& event)
+{
+	//	wxVListBox::OnKeyUp(event);
+
+	//int key_code = event.GetKeyCode();
+	//m_keys_state.OnKeyUp(key_code);
+}
+
+void WxImageVList::OnKillFocus(wxFocusEvent& event)
+{
+	//m_keys_state.Reset();
+}
+
 void WxImageVList::OnMouseWrap(wxMouseEvent& event)
 {
-//	OnMouse(event);
+	OnMouse(event);
 
 	// The handler of this event should normally call event.Skip() to allow the default processing 
 	// to take place as otherwise the window under mouse wouldn't get the focus.

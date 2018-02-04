@@ -20,7 +20,6 @@ static const float MAX_WIDTH = 150.0f;
 static const float SCALE = 0.5f;
 
 WxBitmap::WxBitmap(const std::string& filepath)
-	: m_filepath(filepath)
 {
 	LoadFromFile(filepath);
 }
@@ -28,8 +27,6 @@ WxBitmap::WxBitmap(const std::string& filepath)
 bool WxBitmap::LoadFromFile(const std::string& filepath)
 {
 	bool ret = false;
-
-	m_filepath = filepath;
 
 	int type = s2loader::SymbolFile::Instance()->Type(filepath.c_str());
 	if (type == s2::SYM_IMAGE)
