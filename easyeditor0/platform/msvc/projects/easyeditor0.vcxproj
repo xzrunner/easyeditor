@@ -12,30 +12,67 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\ee0\CameraHelper.h" />
-    <ClInclude Include="..\..\..\include\ee0\CompEditor.h" />
+    <ClInclude Include="..\..\..\include\ee0\color_config.h" />
+    <ClInclude Include="..\..\..\include\ee0\CompLibraryItem.h" />
+    <ClInclude Include="..\..\..\include\ee0\CompNodeEditor.h" />
+    <ClInclude Include="..\..\..\include\ee0\CompSymEditor.h" />
     <ClInclude Include="..\..\..\include\ee0\EditOP.h" />
     <ClInclude Include="..\..\..\include\ee0\EditOpState.h" />
+    <ClInclude Include="..\..\..\include\ee0\EditPanelImpl.h" />
+    <ClInclude Include="..\..\..\include\ee0\KeysState.h" />
+    <ClInclude Include="..\..\..\include\ee0\SelectionSet.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxDropData.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxDropTarget.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxEditPanel.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxFrame.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxLibraryImagePage.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxLibraryItem.h" />
     <ClInclude Include="..\..\..\include\ee0\MessageID.h" />
-    <ClInclude Include="..\..\..\include\ee0\NodeCompPanel.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxCompPanel.h" />
     <ClInclude Include="..\..\..\include\ee0\NodeSelectOP.h" />
     <ClInclude Include="..\..\..\include\ee0\Observer.h" />
-    <ClInclude Include="..\..\..\include\ee0\StagePage.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxStagePage.h" />
     <ClInclude Include="..\..\..\include\ee0\Subject.h" />
     <ClInclude Include="..\..\..\include\ee0\SubjectMgr.h" />
     <ClInclude Include="..\..\..\include\ee0\typedef.h" />
     <ClInclude Include="..\..\..\include\ee0\Variant.h" />
     <ClInclude Include="..\..\..\include\ee0\VariantSet.h" />
     <ClInclude Include="..\..\..\include\ee0\VariantType.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxImageVList.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxBitmap.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxLibraryList.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxLibraryPage.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxLibraryPanel.h" />
+    <ClInclude Include="..\..\..\include\ee0\WxStageCanvas.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\data\CompEditor.cpp" />
+    <ClCompile Include="..\..\..\source\data\CompLibraryItem.cpp" />
+    <ClCompile Include="..\..\..\source\data\CompNodeEditor.cpp" />
+    <ClCompile Include="..\..\..\source\data\CompSymEditor.cpp" />
+    <ClCompile Include="..\..\..\source\data\WxBitmap.cpp" />
     <ClCompile Include="..\..\..\source\editop\EditOP.cpp" />
     <ClCompile Include="..\..\..\source\editop\NodeSelectOP.cpp" />
     <ClCompile Include="..\..\..\source\msg\Subject.cpp" />
     <ClCompile Include="..\..\..\source\msg\SubjectMgr.cpp" />
     <ClCompile Include="..\..\..\source\tools\CameraHelper.cpp" />
-    <ClCompile Include="..\..\..\source\view\NodeCompPanel.cpp" />
-    <ClCompile Include="..\..\..\source\view\StagePage.cpp" />
+    <ClCompile Include="..\..\..\source\view\EditPanelImpl.cpp" />
+    <ClCompile Include="..\..\..\source\view\KeysState.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxDropData.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxDropTarget.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxEditPanel.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxFrame.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxLibraryImagePage.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxLibraryItem.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxCompPanel.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxStagePage.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxImageVList.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxLibraryList.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxLibraryPage.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxLibraryPanel.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxStageCanvas.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\ee0\SelectionSet.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>4.easyeditor0</ProjectName>
@@ -80,7 +117,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\node2\include;..\..\..\..\node3\include;..\..\..\..\sprite2\include;..\..\..\..\dtex2\include;..\..\..\..\unirender\include;..\..\..\..\shaderlab\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -94,7 +131,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\node2\include;..\..\..\..\node3\include;..\..\..\..\sprite2\include;..\..\..\..\dtex2\include;..\..\..\..\unirender\include;..\..\..\..\shaderlab\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

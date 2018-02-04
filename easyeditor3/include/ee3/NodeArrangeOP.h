@@ -2,8 +2,7 @@
 
 #include "ee3/NodeSelectOP.h"
 
-#include <ee/SelectionSet.h>
-
+#include <ee0/SelectionSet.h>
 #include <ee0/typedef.h>
 
 namespace ee0 { class EditOpState; class SubjectMgr; }
@@ -11,12 +10,12 @@ namespace ee0 { class EditOpState; class SubjectMgr; }
 namespace ee3
 {
 
-class StageCanvas;
+class WxStageCanvas;
 
 class NodeArrangeOP : public NodeSelectOP
 {
 public:
-	NodeArrangeOP(StagePage& stage);
+	NodeArrangeOP(WxStagePage& stage);
 
 	virtual bool OnKeyDown(int keyCode) override;
 	virtual bool OnMouseLeftDown(int x, int y) override;
@@ -33,9 +32,9 @@ private:
 private:
 	ee0::SubjectMgr& m_sub_mgr;
 
-	ee::SelectionSet<n0::SceneNode>& m_node_selection;
+	ee0::SelectionSet<n0::SceneNode>& m_node_selection;
 
-	std::shared_ptr<StageCanvas> m_canvas = nullptr;
+	std::shared_ptr<WxStageCanvas> m_canvas = nullptr;
 
 	ee0::EditOpStatePtr m_op_state = nullptr;
 

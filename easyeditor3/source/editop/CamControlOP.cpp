@@ -1,5 +1,4 @@
 #include "ee3/CamControlOP.h"
-
 #include "ee3/CamRotateState.h"
 #include "ee3/CamTranslateState.h"
 #include "ee3/CamZoomState.h"
@@ -9,27 +8,28 @@
 
 #include <node3/Camera.h>
 
+#include <wx/defs.h>
+
 namespace ee3
 {
 
 static const float MOUSE_SENSITIVITY = 0.3f;
 
-CamControlOP::CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-	                       n3::Camera& cam, const n3::Viewport& vp,
+CamControlOP::CamControlOP(n3::Camera& cam, const n3::Viewport& vp,
 	                       ee0::SubjectMgr& sub_mgr)
-	: ee0::EditOP(wnd, stage)
+	: ee0::EditOP()
 	, m_cam(cam)
 	, m_sub_mgr(sub_mgr)
 {
-	m_rotate_state    = std::make_shared<CamRotateState>(cam);
-	m_translate_state = std::make_shared<CamTranslateState>(cam);
-	m_zoom_state      = std::make_shared<CamZoomState>(cam, vp);
+	m_rotate_state    = std::make_shared<CamRotateState>(cam, sub_mgr);
+	m_translate_state = std::make_shared<CamTranslateState>(cam, sub_mgr);
+	m_zoom_state      = std::make_shared<CamZoomState>(cam, vp, sub_mgr);
 	m_op_state = m_rotate_state;
 }
 
 bool CamControlOP::OnKeyDown(int keyCode)
 {
-	if (ee::EditOP::OnKeyDown(keyCode)) { return true; }
+	if (ee0::EditOP::OnKeyDown(keyCode)) { return true; }
 
 	static const float OFFSET = 0.1f;
 
@@ -62,7 +62,7 @@ bool CamControlOP::OnKeyDown(int keyCode)
 
 bool CamControlOP::OnMouseLeftDown(int x, int y)
 {
-	if (ee::EditOP::OnMouseLeftDown(x, y)) {
+	if (ee0::EditOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
@@ -72,7 +72,7 @@ bool CamControlOP::OnMouseLeftDown(int x, int y)
 
 bool CamControlOP::OnMouseLeftUp(int x, int y)
 {
-	if (ee::EditOP::OnMouseLeftDown(x, y)) {
+	if (ee0::EditOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
@@ -83,7 +83,7 @@ bool CamControlOP::OnMouseLeftUp(int x, int y)
 
 bool CamControlOP::OnMouseRightDown(int x, int y)
 {
-	if (ee::EditOP::OnMouseLeftDown(x, y)) {
+	if (ee0::EditOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
@@ -93,7 +93,7 @@ bool CamControlOP::OnMouseRightDown(int x, int y)
 
 bool CamControlOP::OnMouseRightUp(int x, int y)
 {
-	if (ee::EditOP::OnMouseRightUp(x, y)) {
+	if (ee0::EditOP::OnMouseRightUp(x, y)) {
 		return true;
 	}
 
@@ -104,7 +104,7 @@ bool CamControlOP::OnMouseRightUp(int x, int y)
 
 bool CamControlOP::OnMouseDrag(int x, int y)
 {
-	if (ee::EditOP::OnMouseDrag(x, y)) {
+	if (ee0::EditOP::OnMouseDrag(x, y)) {
 		return true;
 	}
 
@@ -113,7 +113,7 @@ bool CamControlOP::OnMouseDrag(int x, int y)
 
 bool CamControlOP::OnMouseMove(int x, int y)
 {
-	if (ee::EditOP::OnMouseMove(x, y)) {
+	if (ee0::EditOP::OnMouseMove(x, y)) {
 		return true;
 	}
 
@@ -122,7 +122,7 @@ bool CamControlOP::OnMouseMove(int x, int y)
 
 bool CamControlOP::OnMouseWheelRotation(int x, int y, int direction)
 {
-	if (ee::EditOP::OnMouseWheelRotation(x, y, direction)) {
+	if (ee0::EditOP::OnMouseWheelRotation(x, y, direction)) {
 		return true;
 	}
 

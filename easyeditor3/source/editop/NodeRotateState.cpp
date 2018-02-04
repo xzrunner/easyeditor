@@ -2,6 +2,7 @@
 
 #include <ee0/SubjectMgr.h>
 
+#include <node0/SceneNode.h>
 #include <node3/Camera.h>
 #include <node3/Viewport.h>
 #include <node3/CompTransform.h>
@@ -10,7 +11,7 @@ namespace ee3
 {
 
 NodeRotateState::NodeRotateState(const n3::Camera& cam, const n3::Viewport& vp, ee0::SubjectMgr& sub_mgr,
-	                             const ee::SelectionSet<n0::SceneNode>& selection)
+	                             const ee0::SelectionSet<n0::SceneNode>& selection)
 	: m_cam(cam)
 	, m_vp(vp)
 	, m_sub_mgr(sub_mgr)
@@ -45,36 +46,32 @@ bool NodeRotateState::OnMouseDrag(int x, int y)
 
 void NodeRotateState::Rotate(const sm::ivec2& start, const sm::ivec2& end)
 {
-	m_selection.Traverse(Visitor(m_cam, m_vp, start, end));
-}
+	m_selection.Traverse(
+		[&](const n0::SceneNodePtr& node)->bool
+		{
+			auto& ctrans = node->GetComponent<n3::CompTransform>();
 
-//////////////////////////////////////////////////////////////////////////
-// class NodeRotateState::Visitor
-//////////////////////////////////////////////////////////////////////////
+			sm::vec2 center = TransPos3ProjectToScreen(ctrans.GetPosition());
+			sm::vec2 base = TransPos3ProjectToScreen(sm::vec3(0, 0, 0));
 
-void NodeRotateState::Visitor::
-Visit(const n0::SceneNodePtr& node, bool& next)
-{
-	auto& ctrans = node->GetComponent<n3::CompTransform>();
+   			sm::vec3 start3 = m_vp.MapToSphere(
+				base + sm::vec2(static_cast<float>(start.x), static_cast<float>(start.y)) -  center);
+   			sm::vec3 end3   = m_vp.MapToSphere(
+				base + sm::vec2(static_cast<float>(end.x), static_cast<float>(end.y)) - center);
 
-	sm::vec2 center = TransPos3ProjectToScreen(ctrans.GetPosition());
-	sm::vec2 base = TransPos3ProjectToScreen(sm::vec3(0, 0, 0));
-
-   	sm::vec3 start = m_vp.MapToSphere(base + sm::vec2(m_start.x, m_start.y) -  center);
-   	sm::vec3 end   = m_vp.MapToSphere(base + sm::vec2(m_end.x, m_end.y) - center);
-
-	auto cam_mat = m_cam.GetRotateMat().Inverted();
-	start = cam_mat * start;
-	end   = cam_mat * end;
+			auto cam_mat = m_cam.GetRotateMat().Inverted();
+			start3 = cam_mat * start3;
+			end3   = cam_mat * end3;
 		
-   	sm::Quaternion delta = sm::Quaternion::CreateFromVectors(start, end);
-	ctrans.Rotate(-delta);
+   			sm::Quaternion delta = sm::Quaternion::CreateFromVectors(start3, end3);
+			ctrans.Rotate(-delta);
 
-	next = true;
+			return true;
+		}
+	);
 }
 
-sm::vec2 NodeRotateState::Visitor::
-TransPos3ProjectToScreen(const sm::vec3& proj) const
+sm::vec2 NodeRotateState::TransPos3ProjectToScreen(const sm::vec3& proj) const
 {
 	// todo proj mat
 	return m_vp.TransPos3ProjectToScreen(/*m_mat_projection * */m_cam.GetModelViewMat() * proj, m_cam);

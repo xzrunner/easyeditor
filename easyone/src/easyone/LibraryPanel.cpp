@@ -1,20 +1,19 @@
 #include "LibraryPanel.h"
 
-#include <ee/LibraryImagePage.h>
-
-#include <ee3/LibGeoPage.h>
-#include <ee3/LibObjPage.h>
+#include <ee0/WxLibraryImagePage.h>
+#include <ee3/WxLibGeoPage.h>
+#include <ee3/WxLibObjPage.h>
 
 namespace eone
 {
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
-	: ee::LibraryPanel(parent)
+	: ee0::WxLibraryPanel(parent)
 {
 	wxWindow* nb = GetNotebook();
-	AddPage(new ee::LibraryImagePage(nb));
-	AddPage(new ee3::LibGeoPage(nb));
-	AddPage(new ee3::LibObjPage(nb));
+	AddPage(new ee0::WxLibraryImagePage(nb));
+	AddPage(new ee3::WxLibGeoPage(nb));
+	AddPage(new ee3::WxLibObjPage(nb));
 }
 
 }

@@ -4,8 +4,8 @@
 
 #include <SM_Vector.h>
 
-namespace ee { class StageCanvas; }
 namespace n3 { class Camera; }
+namespace ee0 { class SubjectMgr; }
 
 namespace ee3
 {
@@ -13,14 +13,15 @@ namespace ee3
 class CamTranslateState : public ee0::EditOpState
 {
 public:
-	CamTranslateState(n3::Camera& cam);
+	CamTranslateState(n3::Camera& cam, ee0::SubjectMgr& sub_mgr);
 
 	virtual bool OnMousePress(int x, int y) override;
 	virtual bool OnMouseRelease(int x, int y) override;
 	virtual bool OnMouseDrag(int x, int y) override;
 
 private:
-	n3::Camera& m_cam;
+	n3::Camera&      m_cam;
+	ee0::SubjectMgr& m_sub_mgr;
 
 	sm::ivec2 m_last_pos;
 

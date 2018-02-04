@@ -2,11 +2,12 @@
 
 #include <ee0/SubjectMgr.h>
 #include <ee0/VariantSet.h>
-#include <ee0/NodeCompPanel.h>
+#include <ee0/WxCompPanel.h>
 
-#include <ee3/CompTransformPanel.h>
+#include <ee3/WxCompTransformPanel.h>
 
 #include <guard/check.h>
+#include <node0/SceneNode.h>
 
 #include <wx/sizer.h>
 #include <wx/button.h>
@@ -77,7 +78,7 @@ void DetailPanel::InitComponents(const ee0::VariantSet& variants)
 	if (m_node->HasComponent<n3::CompTransform>())
 	{
 		auto& comp = m_node->GetComponent<n3::CompTransform>();
-		auto panel = new ee3::CompTransformPanel(this, comp, *m_sub_mgr);
+		auto panel = new ee3::WxCompTransformPanel(this, comp, *m_sub_mgr);
 		m_comp_sizer->Insert(m_components.size(), panel);
 		m_components.push_back(panel);
 	}

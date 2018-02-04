@@ -1,7 +1,9 @@
 #pragma once
 
 #include <SM_Vector.h>
+#include <SM_Rect.h>
 #include <node0/NodeComponent.h>
+#include <painting2/BoundingBox.h>
 
 #include <memory>
 
@@ -14,6 +16,7 @@ class CompBoundingBox : public n0::NodeComponent
 {
 public:
 	CompBoundingBox(const sm::rect& size) : m_size(size) {}
+	virtual ~CompBoundingBox() = default;
 
 	virtual const char* Type() const override { return TYPE_NAME; }
 

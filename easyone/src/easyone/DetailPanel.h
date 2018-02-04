@@ -2,11 +2,11 @@
 
 #include <ee0/Observer.h>
 
-#include <node0/SceneNode.h>
+#include <node0/typedef.h>
 
 #include <wx/panel.h>
 
-namespace ee0 { class SubjectMgr; class NodeCompPanel; }
+namespace ee0 { class SubjectMgr; class WxCompPanel; }
 
 namespace eone
 {
@@ -32,7 +32,7 @@ private:
 
 	wxSizer* m_comp_sizer;
 
-	std::vector<ee0::NodeCompPanel*> m_components;
+	std::vector<ee0::WxCompPanel*> m_components;
 
 	n0::SceneNodePtr m_node = nullptr;
 

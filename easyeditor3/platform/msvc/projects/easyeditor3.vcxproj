@@ -15,27 +15,23 @@
     <ClInclude Include="..\..\..\include\ee3\CamRotateState.h" />
     <ClInclude Include="..\..\..\include\ee3\CamTranslateState.h" />
     <ClInclude Include="..\..\..\include\ee3\CamZoomState.h" />
-    <ClInclude Include="..\..\..\include\ee3\CompTransformPanel.h" />
+    <ClInclude Include="..\..\..\include\ee3\WxCompTransformPanel.h" />
     <ClInclude Include="..\..\..\include\ee3\EditOpState.h" />
-    <ClInclude Include="..\..\..\include\ee3\LibGeoPage.h" />
-    <ClInclude Include="..\..\..\include\ee3\LibObjPage.h" />
+    <ClInclude Include="..\..\..\include\ee3\WxLibGeoPage.h" />
+    <ClInclude Include="..\..\..\include\ee3\WxLibObjPage.h" />
     <ClInclude Include="..\..\..\include\ee3\NodeArrangeOP.h" />
     <ClInclude Include="..\..\..\include\ee3\NodeFactory.h" />
     <ClInclude Include="..\..\..\include\ee3\NodeRotateState.h" />
     <ClInclude Include="..\..\..\include\ee3\NodeSelectOP.h" />
-    <ClInclude Include="..\..\..\include\ee3\NodeSprite.h" />
-    <ClInclude Include="..\..\..\include\ee3\NodeSymbol.h" />
     <ClInclude Include="..\..\..\include\ee3\NodeTranslateState.h" />
     <ClInclude Include="..\..\..\include\ee3\Serializer.h" />
-    <ClInclude Include="..\..\..\include\ee3\StageCanvas.h" />
-    <ClInclude Include="..\..\..\include\ee3\StageDropTarget.h" />
-    <ClInclude Include="..\..\..\include\ee3\StagePage.h" />
+    <ClInclude Include="..\..\..\include\ee3\WxStageCanvas.h" />
+    <ClInclude Include="..\..\..\include\ee3\WxStageDropTarget.h" />
+    <ClInclude Include="..\..\..\include\ee3\WxStagePage.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\include\ee3\LibObjPage.cpp" />
+    <ClCompile Include="..\..\..\include\ee3\WxLibObjPage.cpp" />
     <ClCompile Include="..\..\..\source\data\NodeFactory.cpp" />
-    <ClCompile Include="..\..\..\source\data\NodeSprite.cpp" />
-    <ClCompile Include="..\..\..\source\data\NodeSymbol.cpp" />
     <ClCompile Include="..\..\..\source\editop\CamControlOP.cpp" />
     <ClCompile Include="..\..\..\source\editop\CamRotateState.cpp" />
     <ClCompile Include="..\..\..\source\editop\CamTranslateState.cpp" />
@@ -45,11 +41,11 @@
     <ClCompile Include="..\..\..\source\editop\NodeSelectOP.cpp" />
     <ClCompile Include="..\..\..\source\editop\NodeTranslateState.cpp" />
     <ClCompile Include="..\..\..\source\tools\Serializer.cpp" />
-    <ClCompile Include="..\..\..\source\view\CompTransformPanel.cpp" />
-    <ClCompile Include="..\..\..\source\view\LibGeoPage.cpp" />
-    <ClCompile Include="..\..\..\source\view\StageCanvas.cpp" />
-    <ClCompile Include="..\..\..\source\view\StageDropTarget.cpp" />
-    <ClCompile Include="..\..\..\source\view\StagePage.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxCompTransformPanel.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxLibGeoPage.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxStageCanvas.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxStageDropTarget.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxStagePage.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>4.easyeditor3</ProjectName>
@@ -94,7 +90,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\guard\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\node0\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor0\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\guard\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\node0\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,7 +104,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\guard\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\node0\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor0\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\guard\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\node0\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

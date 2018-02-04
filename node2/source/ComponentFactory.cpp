@@ -1,6 +1,8 @@
 #include "node2/ComponentFactory.h"
 #include "node2/CompImage.h"
 
+#include <node0/SceneNode.h>
+
 namespace n2
 {
 

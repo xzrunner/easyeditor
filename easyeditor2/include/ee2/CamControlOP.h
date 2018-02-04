@@ -19,8 +19,7 @@ public:
 	static const uint32_t DEFAULT_FLAG     = MOUSE_MOVE_FOCUS | LEFT_TAP;
 
 public:
-	CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-		s2::Camera& cam, ee0::SubjectMgr& sub_mgr, 
+	CamControlOP(s2::Camera& cam, ee0::SubjectMgr& sub_mgr, 
 		uint32_t flag = DEFAULT_FLAG);
 
 	virtual bool OnKeyDown(int keyCode) override;

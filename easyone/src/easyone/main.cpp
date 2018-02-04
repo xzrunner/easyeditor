@@ -1,15 +1,16 @@
 #include "main.h"
 #include "Task.h"
 
-#include <ee/Frame.h>
+#include <ee0/WxFrame.h>
 
 IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit()
 {
-	auto frame = new ee::Frame("EasyOne", "one", wxDefaultSize, true);
+	auto frame = new ee0::WxFrame("EasyOne", true);
 	auto task = new eone::Task(frame);
-	frame->SetTask(task);
+	// todo zz
+//	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

@@ -1,13 +1,12 @@
 #include "ee3/NodeSelectOP.h"
-#include "ee3/StagePage.h"
-#include "ee3/StageCanvas.h"
-
-#include <ee/FetchAllVisitor.h>
-#include <ee/color_config.h>
+#include "ee3/WxStagePage.h"
+#include "ee3/WxStageCanvas.h"
 
 #include <ee0/MessageID.h>
+#include <ee0/color_config.h>
 
 #include <guard/check.h>
+#include <node0/SceneNode.h>
 #include <node3/PrimitiveDraw.h>
 #include <node3/Ray.h>
 #include <node3/Math.h>
@@ -17,7 +16,7 @@
 namespace ee3
 {
 
-NodeSelectOP::NodeSelectOP(StagePage& stage)
+NodeSelectOP::NodeSelectOP(WxStagePage& stage)
 	: ee0::NodeSelectOP(stage)
 {
 }
@@ -31,7 +30,7 @@ bool NodeSelectOP::OnDraw() const
 	m_stage.GetNodeSelection().Traverse(
 		[](const n0::SceneNodePtr& node)->bool
 		{
-			n3::PrimitiveDraw::SetColor(ee::MID_RED.ToABGR());
+			n3::PrimitiveDraw::SetColor(ee0::MID_RED.ToABGR());
 
 			auto& caabb = node->GetComponent<n3::CompAABB>();
 			auto& ctrans = node->GetComponent<n3::CompTransform>();
@@ -57,9 +56,9 @@ bool NodeSelectOP::OnDraw() const
 // AABB not changed, transform ray from Camera and spr's mat
 n0::SceneNodePtr NodeSelectOP::QueryByPos(int screen_x, int screen_y) const
 {
-	auto& nodes = dynamic_cast<StagePage&>(m_stage).GetAllNodes();
+	auto& nodes = dynamic_cast<WxStagePage&>(m_stage).GetAllNodes();
 
-	auto canvas = std::dynamic_pointer_cast<StageCanvas>(m_stage.GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<WxStageCanvas>(m_stage.GetImpl().GetCanvas());
 	auto& vp = canvas->GetViewport();
 	auto& cam = canvas->GetCamera();
 	sm::vec3 ray_dir = vp.TransPos3ScreenToDir(sm::vec2(screen_x, screen_y), cam);

@@ -3,11 +3,6 @@
 namespace ee0
 {
 
-EditOP::EditOP(wxWindow* wnd, ee::EditPanelImpl* stage)
-	: ee::EditOP(wnd, stage)
-{
-}
-
 bool EditOP::OnKeyDown(int keyCode)
 {
 	if (m_prev_op && m_prev_op->OnKeyDown(keyCode)) {

@@ -1,31 +1,30 @@
 #include "ee3/NodeArrangeOP.h"
-#include "ee3/StagePage.h"
-#include "ee3/StageCanvas.h"
+#include "ee3/WxStagePage.h"
+#include "ee3/WxStageCanvas.h"
 #include "ee3/CamTranslateState.h"
 #include "ee3/CamRotateState.h"
 #include "ee3/CamZoomState.h"
 #include "ee3/NodeTranslateState.h"
 #include "ee3/NodeRotateState.h"
 
-#include <ee/FetchAllVisitor.h>
-
+#include <node0/SceneNode.h>
 #include <node3/CompTransform.h>
 
 namespace ee3
 {
 
-NodeArrangeOP::NodeArrangeOP(StagePage& stage)
+NodeArrangeOP::NodeArrangeOP(WxStagePage& stage)
 	: NodeSelectOP(stage)
 	, m_sub_mgr(stage.GetSubjectMgr())
 	, m_node_selection(stage.GetNodeSelection())
-	, m_canvas(std::dynamic_pointer_cast<StageCanvas>(stage.GetCanvas()))
+	, m_canvas(std::dynamic_pointer_cast<WxStageCanvas>(stage.GetImpl().GetCanvas()))
 {
 	auto& cam = m_canvas->GetCamera();
 	auto& vp = m_canvas->GetViewport();
 
-	m_cam_rotate_state    = std::make_shared<CamRotateState>(cam);
-	m_cam_translate_state = std::make_shared<CamTranslateState>(cam);
-	m_cam_zoom_state      = std::make_shared<CamZoomState>(cam, vp);
+	m_cam_rotate_state    = std::make_shared<CamRotateState>(cam, m_sub_mgr);
+	m_cam_translate_state = std::make_shared<CamTranslateState>(cam, m_sub_mgr);
+	m_cam_zoom_state      = std::make_shared<CamZoomState>(cam, vp, m_sub_mgr);
 
 	m_node_rotate_state    = std::make_shared<NodeRotateState>(cam, vp, m_sub_mgr, m_node_selection);
 	m_node_translate_state = std::make_shared<NodeTranslateState>(cam, vp, m_sub_mgr, m_node_selection);

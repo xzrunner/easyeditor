@@ -1,8 +1,7 @@
 #pragma once
 
-#include <ee/Symbol.h>
-
-#include <node0/SceneNode.h>
+#include <sprite2/typedef.h>
+#include <node0/typedef.h>
 
 #include <cu/cu_macro.h>
 
@@ -12,7 +11,7 @@ namespace ee3
 class NodeFactory
 {
 public:
-	n0::SceneNodePtr Create(const ee::SymPtr& sym);
+	n0::SceneNodePtr Create(const s2::SymPtr& sym);
 
 	CU_SINGLETON_DECLARATION(NodeFactory);
 

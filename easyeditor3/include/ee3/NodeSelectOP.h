@@ -5,12 +5,12 @@
 namespace ee3
 {
 
-class StagePage;
+class WxStagePage;
 
 class NodeSelectOP : public ee0::NodeSelectOP
 {
 public:	
-	NodeSelectOP(StagePage& stage);
+	NodeSelectOP(WxStagePage& stage);
 
 	virtual bool OnDraw() const override;
 

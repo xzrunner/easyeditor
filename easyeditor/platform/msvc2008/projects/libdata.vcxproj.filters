@@ -198,9 +198,6 @@
     <ClInclude Include="..\..\..\include\ee\ScriptsSymbol.h">
       <Filter>symbol\type</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\ee\Bitmap.h">
-      <Filter>image</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\ee\Image.h">
       <Filter>image</Filter>
     </ClInclude>
@@ -272,6 +269,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\ee\SpritePool.h">
       <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee\Bitmap.h">
+      <Filter>image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -359,9 +359,6 @@
     <ClCompile Include="..\..\..\source\data\symbol\ScriptsSymbol.cpp">
       <Filter>symbol\type</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\data\common\Bitmap.cpp">
-      <Filter>image</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\data\image\Image.cpp">
       <Filter>image</Filter>
     </ClCompile>
@@ -424,6 +421,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\data\sprite\SpritePool.cpp">
       <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\common\Bitmap.cpp">
+      <Filter>image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

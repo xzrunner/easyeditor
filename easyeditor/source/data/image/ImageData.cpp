@@ -1,8 +1,5 @@
 #include "ImageData.h"
 #include "TextureFactory.h"
-#include "Config.h"
-#include "SettingData.h"
-#include "Exception.h"
 
 #include <gimg_typedef.h>
 

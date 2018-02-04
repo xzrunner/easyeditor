@@ -1,13 +1,11 @@
 #pragma once
 
-#include <ee/Task.h>
-
 #include <wx/aui/framemanager.h>
 
 class wxFrame;
 class wxWindow;
 
-namespace ee { class LibraryPanel; }
+namespace ee0 { class WxLibraryPanel; }
 
 namespace eone
 {
@@ -16,20 +14,10 @@ class StagePanel;
 
 class SceneTreeCtrl;
 
-class Task : public ee::Task
+class Task
 {
 public:
 	Task(wxFrame* frame);
-	virtual ~Task();
-
-	virtual void Load(const char* filepath) override;
-	virtual void Store(const char* filepath) const override;
-
-	virtual bool IsDirty() const override;
-
-	virtual void GetAllSprite(std::vector<ee::SprPtr>& sprs) const override {}
-
-	virtual const ee::EditPanel* GetEditPanel() const override { return nullptr; }
 
 private:
 	void InitLayout();
@@ -45,7 +33,7 @@ private:
 
 	wxAuiManager m_mgr;
 
-	ee::LibraryPanel* m_library;
+	ee0::WxLibraryPanel* m_library;
 
 	StagePanel* m_stage;
 

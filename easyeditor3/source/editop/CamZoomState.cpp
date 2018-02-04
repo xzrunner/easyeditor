@@ -1,6 +1,6 @@
 #include "ee3/CamZoomState.h"
 
-#include <ee/panel_msg.h>
+#include <ee0/SubjectMgr.h>
 
 #include <node3/Camera.h>
 #include <node3/Viewport.h>
@@ -8,9 +8,11 @@
 namespace ee3
 {
 
-CamZoomState::CamZoomState(n3::Camera& cam, const n3::Viewport& vp)
+CamZoomState::CamZoomState(n3::Camera& cam, const n3::Viewport& vp,
+	                       ee0::SubjectMgr& sub_mgr)
 	: m_cam(cam)
 	, m_vp(vp)
+	, m_sub_mgr(sub_mgr)
 {
 }
 
@@ -24,7 +26,7 @@ bool CamZoomState::OnMouseWheelRotation(int x, int y, int direction)
 		m_cam.Move(dir, - m_cam.GetDistance() * OFFSET);
 	}
 
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	m_sub_mgr.NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
 
 	return false;
 }

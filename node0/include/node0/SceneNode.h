@@ -54,8 +54,6 @@ private:
 
 }; // SceneNode
 
-using SceneNodePtr = std::shared_ptr<SceneNode>;
-
 }
 
 #include "node0/SceneNode.inl"

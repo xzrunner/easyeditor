@@ -13,13 +13,13 @@ namespace ee0 { class EditOpState; }
 namespace ee2
 {
 
-class StagePage;
+class WxStagePage;
 class CamControlOP;
 
 class NodeSelectOP : public ee0::NodeSelectOP
 {
 public:
-	NodeSelectOP(StagePage& stage);
+	NodeSelectOP(WxStagePage& stage);
 	virtual ~NodeSelectOP() = default;
 
 	virtual bool OnMouseLeftDown(int x, int y) override;

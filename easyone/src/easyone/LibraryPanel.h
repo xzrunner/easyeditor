@@ -1,11 +1,11 @@
 #pragma once
 
-#include <ee/LibraryPanel.h>
+#include <ee0/WxLibraryPanel.h>
 
 namespace eone
 {
 
-class LibraryPanel : public ee::LibraryPanel
+class LibraryPanel : public ee0::WxLibraryPanel
 {
 public:
 	LibraryPanel(wxWindow* parent);

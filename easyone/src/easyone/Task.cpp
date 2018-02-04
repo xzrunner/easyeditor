@@ -4,15 +4,16 @@
 #include "SceneTreeCtrl.h"
 #include "DetailPanel.h"
 
-#include <ee0/CompEditor.h>
-#include <ee2/StagePage.h>
-#include <ee2/StageCanvas.h>
+#include <ee0/CompNodeEditor.h>
+#include <ee2/WxStagePage.h>
+#include <ee2/WxStageCanvas.h>
 #include <ee2/NodeSelectOP.h>
-#include <ee3/StagePage.h>
-#include <ee3/StageCanvas.h>
+#include <ee3/WxStagePage.h>
+#include <ee3/WxStageCanvas.h>
 #include <ee3/NodeArrangeOP.h>
 #include <ee3/Serializer.h>
 
+#include <node0/SceneNode.h>
 #include <node3/ComponentFactory.h>
 
 namespace eone
@@ -25,27 +26,6 @@ Task::Task(wxFrame* frame)
 
 	InitLayout();
 	InitCallback();
-}
-
-Task::~Task()
-{
-}
-
-void Task::Load(const char* filename)
-{
-//	ee3::Serializer::LoadFroimJson(filename, m_stage);
-
-	m_tree->ExpandAll();
-}
-
-void Task::Store(const char* filename) const
-{
-//	ee3::Serializer::StoreToJson(filename, m_stage);
-}
-
-bool Task::IsDirty() const
-{
-	return false;
 }
 
 void Task::InitLayout()
@@ -73,10 +53,10 @@ void Task::InitLayout()
 
 void Task::InitCallback()
 {
-	n3::ComponentFactory::Instance()->AddCreator(ee0::CompEditor::TYPE_NAME,
+	n3::ComponentFactory::Instance()->AddCreator(ee0::CompNodeEditor::TYPE_NAME,
 		[](n0::SceneNodePtr& node, const rapidjson::Value& val)
 	{
-		auto& comp = node->AddComponent<ee0::CompEditor>();
+		auto& comp = node->AddComponent<ee0::CompNodeEditor>();
 		comp.LoadFromJson(val);
 	});
 }
@@ -92,21 +72,21 @@ wxWindow* Task::CreateStagePanel()
 	m_stage = new StagePanel(m_frame);
 	m_stage->Freeze();
 
-	wxGLContext* gl_ctx = nullptr;
+	std::shared_ptr<wxGLContext> gl_ctx = nullptr;
 	{
-		auto page = new ee2::StagePage(m_frame, m_frame, m_library);
-		auto canvas = std::make_shared<ee2::StageCanvas>(page);
+		auto page = new ee2::WxStagePage(m_frame, m_library);
+		auto canvas = std::make_shared<ee2::WxStageCanvas>(page);
 		gl_ctx = canvas->GetGLContext();
-		page->SetCanvas(canvas);
-		page->SetEditOP(std::make_shared<ee2::NodeSelectOP>(*page));
+		page->GetImpl().SetCanvas(canvas);
+		page->GetImpl().SetEditOP(std::make_shared<ee2::NodeSelectOP>(*page));
 
 		m_stage->AddPage(page, ("New 2d"));
 	}
 	{
-		auto page = new ee3::StagePage(m_frame, m_frame, m_library);
-		auto canvas = std::make_shared<ee3::StageCanvas>(page, gl_ctx);
-		page->SetCanvas(canvas);
-		page->SetEditOP(std::make_shared<ee3::NodeArrangeOP>(*page));
+		auto page = new ee3::WxStagePage(m_frame, m_library);
+		auto canvas = std::make_shared<ee3::WxStageCanvas>(page, gl_ctx);
+		page->GetImpl().SetCanvas(canvas);
+		page->GetImpl().SetEditOP(std::make_shared<ee3::NodeArrangeOP>(*page));
 
 		m_stage->AddPage(page, ("New 3d"));
 	}

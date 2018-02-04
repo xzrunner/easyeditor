@@ -2,9 +2,10 @@
 #include "SceneTreeItem.h"
 
 #include <ee0/SubjectMgr.h>
-#include <ee0/CompEditor.h>
+#include <ee0/CompNodeEditor.h>
 
 #include <guard/check.h>
+#include <node0/SceneNode.h>
 
 #include <queue>
 
@@ -216,7 +217,7 @@ void SceneTreeCtrl::InsertSceneNode(wxTreeItemId parent, const n0::SceneNodePtr&
 	auto pos = pdata->GetChildrenNum();
 	pdata->AddChild(item);
 
-	auto& ceditor = node->GetComponent<ee0::CompEditor>();
+	auto& ceditor = node->GetComponent<ee0::CompNodeEditor>();
 	wxTreeItemId id = InsertItem(parent, pos, ceditor.GetName());
 	SetItemData(id, item);
 

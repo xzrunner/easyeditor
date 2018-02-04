@@ -14,8 +14,7 @@ class Camera;
 class CamControlOP : public ee0::EditOP
 {
 public:
-	CamControlOP(wxWindow* wnd, ee::EditPanelImpl* stage,
-		n3::Camera& cam, const n3::Viewport& vp, ee0::SubjectMgr& sub_mgr);
+	CamControlOP(n3::Camera& cam, const n3::Viewport& vp, ee0::SubjectMgr& sub_mgr);
 
 	virtual bool OnKeyDown(int keyCode) override;
 	virtual bool OnMouseLeftDown(int x, int y) override;

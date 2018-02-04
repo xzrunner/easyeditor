@@ -2,6 +2,7 @@
 #include "node2/CompTransform.h"
 #include "node2/CompImage.h"
 
+#include <node0/SceneNode.h>
 #include <painting2/RenderSystem.h>
 
 namespace n2

@@ -1,7 +1,8 @@
 #include "ee3/Serializer.h"
-#include "ee3/StagePage.h"
-#include "ee3/StageCanvas.h"
+#include "ee3/WxStagePage.h"
+#include "ee3/WxStageCanvas.h"
 
+#include <node0/SceneNode.h>
 #include <node3/SerializeSystem.h>
 #include <node3/Camera.h>
 #include <js/RapidJsonHelper.h>
@@ -10,7 +11,7 @@
 namespace ee3
 {
 
-void Serializer::StoreToJson(const std::string& filepath, const StagePage* stage)
+void Serializer::StoreToJson(const std::string& filepath, const WxStagePage* stage)
 {
 	rapidjson::Document doc;
 	doc.SetObject();
@@ -28,7 +29,7 @@ void Serializer::StoreToJson(const std::string& filepath, const StagePage* stage
 	}
 	doc.AddMember("nodes", val_nodes, alloc);
 
-	auto canvas = std::dynamic_pointer_cast<const StageCanvas>(stage->GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<const WxStageCanvas>(stage->GetImpl().GetCanvas());
 	auto& cam = canvas->GetCamera();
 	rapidjson::Value cam_val = StoreCamera(cam, alloc);
 	doc.AddMember("camera", cam_val, alloc);
@@ -36,7 +37,7 @@ void Serializer::StoreToJson(const std::string& filepath, const StagePage* stage
 	js::RapidJsonHelper::WriteToFile(filepath.c_str(), doc);
 }
 
-void Serializer::LoadFroimJson(const std::string& filepath, StagePage* stage)
+void Serializer::LoadFroimJson(const std::string& filepath, WxStagePage* stage)
 {
 	rapidjson::Document doc;
 	js::RapidJsonHelper::ReadFromFile(filepath.c_str(), doc);
@@ -58,7 +59,7 @@ void Serializer::LoadFroimJson(const std::string& filepath, StagePage* stage)
 		GD_ASSERT(succ, "no MSG_INSERT_SCENE_NODE");
 	}
 
-	auto canvas = std::dynamic_pointer_cast<const StageCanvas>(stage->GetCanvas());
+	auto canvas = std::dynamic_pointer_cast<const WxStageCanvas>(stage->GetImpl().GetCanvas());
 	auto& cam = const_cast<n3::Camera&>(canvas->GetCamera());
 	LoadCamera(doc["camera"], cam);
 }

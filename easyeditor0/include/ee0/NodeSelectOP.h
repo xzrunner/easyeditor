@@ -3,17 +3,19 @@
 #include "ee0/EditOP.h"
 
 #include <SM_Vector.h>
-#include <node0/SceneNode.h>
+#include <node0/typedef.h>
+
+#include <vector>
 
 namespace ee0
 {
 
-class StagePage;
+class WxStagePage;
 
 class NodeSelectOP : public EditOP
 {
 public:	
-	NodeSelectOP(StagePage& stage);
+	NodeSelectOP(WxStagePage& stage);
 
 	virtual bool OnKeyDown(int keyCode) override;
 	virtual bool OnMouseLeftDown(int x, int y) override;
@@ -25,7 +27,7 @@ private:
 		bool contain, std::vector<n0::SceneNodePtr>& result) const = 0;
 
 protected:
-	StagePage& m_stage;
+	WxStagePage& m_stage;
 
 private:
 	sm::ivec2 m_last_pos;

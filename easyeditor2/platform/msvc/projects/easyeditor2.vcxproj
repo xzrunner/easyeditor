@@ -17,9 +17,9 @@
     <ClInclude Include="..\..\..\include\ee2\DrawSelectRectState.h" />
     <ClInclude Include="..\..\..\include\ee2\NodeFactory.h" />
     <ClInclude Include="..\..\..\include\ee2\NodeSelectOP.h" />
-    <ClInclude Include="..\..\..\include\ee2\StageCanvas.h" />
-    <ClInclude Include="..\..\..\include\ee2\StageDropTarget.h" />
-    <ClInclude Include="..\..\..\include\ee2\StagePage.h" />
+    <ClInclude Include="..\..\..\include\ee2\WxStageCanvas.h" />
+    <ClInclude Include="..\..\..\include\ee2\WxStageDropTarget.h" />
+    <ClInclude Include="..\..\..\include\ee2\WxStagePage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\data\NodeFactory.cpp" />
@@ -28,9 +28,9 @@
     <ClCompile Include="..\..\..\source\editop\CamZoomState.cpp" />
     <ClCompile Include="..\..\..\source\editop\DrawSelectRectState.cpp" />
     <ClCompile Include="..\..\..\source\editop\NodeSelectOP.cpp" />
-    <ClCompile Include="..\..\..\source\view\StageCanvas.cpp" />
-    <ClCompile Include="..\..\..\source\view\StageDropTarget.cpp" />
-    <ClCompile Include="..\..\..\source\view\StagePage.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxStageCanvas.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxStageDropTarget.cpp" />
+    <ClCompile Include="..\..\..\source\view\WxStagePage.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>4.easyeditor2</ProjectName>
@@ -75,7 +75,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\painting2\include;..\..\..\..\sprite2\include;..\..\..\..\node0\include;..\..\..\..\node2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor0\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\painting2\include;..\..\..\..\sprite2\include;..\..\..\..\node0\include;..\..\..\..\node2\include;..\..\..\..\node3\include;..\..\..\..\gum\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -89,7 +89,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\painting2\include;..\..\..\..\sprite2\include;..\..\..\..\node0\include;..\..\..\..\node2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\easyeditor0\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;..\..\..\..\painting2\include;..\..\..\..\sprite2\include;..\..\..\..\node0\include;..\..\..\..\node2\include;..\..\..\..\node3\include;..\..\..\..\gum\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

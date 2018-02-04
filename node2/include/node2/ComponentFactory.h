@@ -1,7 +1,9 @@
 #pragma once
 
 #include <cu/cu_macro.h>
-#include <node0/SceneNode.h>
+#include <node0/typedef.h>
+
+#include <rapidjson/document.h>
 
 #include <functional>
 #include <map>

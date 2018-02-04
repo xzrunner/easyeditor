@@ -1,9 +1,8 @@
 #include "ee2/DrawSelectRectState.h"
 
-#include <ee/color_config.h>
-
 #include <ee0/SubjectMgr.h>
 #include <ee0/CameraHelper.h>
+#include <ee0/color_config.h>
 
 #include <sprite2/RVG.h>
 
@@ -55,16 +54,16 @@ bool DrawSelectRectState::OnDraw() const
 	s2::RVG::LineWidth(2);
 	if (m_last_pos.x > m_first_pos.x)
 	{
-		s2::RVG::SetColor(ee::LIGHT_GREEN);
+		s2::RVG::SetColor(ee0::LIGHT_GREEN);
 		s2::RVG::Rect(nullptr, m_first_pos, m_last_pos, true);
-		s2::RVG::SetColor(ee::SELECT_RED);
+		s2::RVG::SetColor(ee0::SELECT_RED);
 		s2::RVG::Rect(nullptr, m_first_pos, m_last_pos, false);
 	}
 	else
 	{
-		s2::RVG::SetColor(ee::LIGHT_BLUE);
+		s2::RVG::SetColor(ee0::LIGHT_BLUE);
 		s2::RVG::Rect(nullptr, m_first_pos, m_last_pos, true);
-		s2::RVG::SetColor(ee::SELECT_RED);
+		s2::RVG::SetColor(ee0::SELECT_RED);
 		s2::RVG::Rect(nullptr, m_first_pos, m_last_pos, false);
 	}
 

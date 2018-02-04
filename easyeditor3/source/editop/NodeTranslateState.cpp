@@ -2,6 +2,7 @@
 
 #include <ee0/SubjectMgr.h>
 
+#include <node0/SceneNode.h>
 #include <node3/Camera.h>
 #include <node3/Viewport.h>
 #include <node3/CompTransform.h>
@@ -10,7 +11,7 @@ namespace ee3
 {
 
 NodeTranslateState::NodeTranslateState(const n3::Camera& cam, const n3::Viewport& vp, 
-	                                   ee0::SubjectMgr& sub_mgr, const ee::SelectionSet<n0::SceneNode>& selection)
+	                                   ee0::SubjectMgr& sub_mgr, const ee0::SelectionSet<n0::SceneNode>& selection)
 	: m_cam(cam)
 	, m_vp(vp)
 	, m_sub_mgr(sub_mgr)
@@ -47,27 +48,22 @@ bool NodeTranslateState::OnMouseDrag(int x, int y)
 
 void NodeTranslateState::Translate(const sm::ivec2& first, const sm::ivec2& curr)
 {
-	m_selection.Traverse(Visitor(m_cam, m_vp, first, curr));
-}
+	m_selection.Traverse(
+		[&](const n0::SceneNodePtr& node)->bool
+		{
+			auto& ctrans = node->GetComponent<n3::CompTransform>();
 
-//////////////////////////////////////////////////////////////////////////
-// class NodeTranslateState::Visitor
-//////////////////////////////////////////////////////////////////////////
+			float dist = m_cam.GetToward().Dot(ctrans.GetPosition() - m_cam.GetPos());
 
-void NodeTranslateState::Visitor::
-Visit(const n0::SceneNodePtr& node, bool& next)
-{
-	auto& ctrans = node->GetComponent<n3::CompTransform>();
+			sm::vec3 last = m_vp.TransPos3ScreenToDir(
+				sm::vec2(static_cast<float>(first.x), static_cast<float>(first.y)), m_cam).Normalized() * dist;
+			sm::vec3 curr = m_vp.TransPos3ScreenToDir(
+				sm::vec2(static_cast<float>(curr.x), static_cast<float>(curr.y)), m_cam).Normalized() * dist;
+			ctrans.Translate(curr - last);
 
-	float dist = m_cam.GetToward().Dot(ctrans.GetPosition() - m_cam.GetPos());
-
-	sm::vec3 last = m_vp.TransPos3ScreenToDir(
-		sm::vec2(m_last.x, m_last.y), m_cam).Normalized() * dist;
-	sm::vec3 curr = m_vp.TransPos3ScreenToDir(
-		sm::vec2(m_curr.x, m_curr.y), m_cam).Normalized() * dist;
-	ctrans.Translate(curr - last);
-
-	next = true;
+			return true;
+		}
+	);
 }
 
 }

@@ -1,14 +1,15 @@
 #include "ee3/CamTranslateState.h"
 
-#include <ee/panel_msg.h>
+#include <ee0/SubjectMgr.h>
 
 #include <node3/Camera.h>
 
 namespace ee3
 {
 
-CamTranslateState::CamTranslateState(n3::Camera& cam)
+CamTranslateState::CamTranslateState(n3::Camera& cam, ee0::SubjectMgr& sub_mgr)
 	: m_cam(cam)
+	, m_sub_mgr(sub_mgr)
 {
 	m_last_pos.MakeInvalid();
 }
@@ -24,7 +25,7 @@ bool CamTranslateState::OnMouseRelease(int x, int y)
 	return false;
 }
 
-bool CamTranslateState::CamTranslateState::OnMouseDrag(int x, int y)
+bool CamTranslateState::OnMouseDrag(int x, int y)
 {
 	int dx = x - m_last_pos.x;
 	int dy = y - m_last_pos.y;
@@ -35,7 +36,7 @@ bool CamTranslateState::CamTranslateState::OnMouseDrag(int x, int y)
 
 	m_last_pos.Set(x, y);
 
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	m_sub_mgr.NotifyObservers(ee0::MSG_SET_CANVAS_DIRTY);
 
 	return false;
 }

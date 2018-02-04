@@ -1,6 +1,8 @@
 #include "StagePanel.h"
 
-#include <ee0/StagePage.h>
+#include <ee0/WxStagePage.h>
+
+#include <guard/check.h>
 
 namespace eone
 {
@@ -16,9 +18,9 @@ StagePanel::StagePanel(wxWindow* parent)
 		wxAuiNotebookEventHandler(StagePanel::OnPageChanged));
 }
 
-ee0::StagePage* StagePanel::GetCurrentStagePage() const
+ee0::WxStagePage* StagePanel::GetCurrentStagePage() const
 {
-	return dynamic_cast<ee0::StagePage*>(GetCurrentPage());
+	return dynamic_cast<ee0::WxStagePage*>(GetCurrentPage());
 }
 
 void StagePanel::OnPageChanging(wxAuiNotebookEvent& event)

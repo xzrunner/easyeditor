@@ -2,7 +2,7 @@
 
 #include <ee0/Observer.h>
 
-#include <node0/SceneNode.h>
+#include <node0/typedef.h>
 
 #include <wx/treectrl.h>
 

@@ -1,25 +1,27 @@
 #include "ee2/NodeSelectOP.h"
-#include "ee2/StagePage.h"
-#include "ee2/StageCanvas.h"
+#include "ee2/WxStagePage.h"
+#include "ee2/WxStageCanvas.h"
 #include "ee2/DrawSelectRectState.h"
 
 #include <ee0/CameraHelper.h>
 
+#include <node0/SceneNode.h>
 #include <node2/CompBoundingBox.h>
 #include <node2/CompTransform.h>
 #include <sprite2/RVG.h>
+#include <guard/check.h>
+#include <painting2/Color.h>
 
 namespace ee2
 {
 
-NodeSelectOP::NodeSelectOP(StagePage& stage)
+NodeSelectOP::NodeSelectOP(WxStagePage& stage)
 	: ee0::NodeSelectOP(stage)
 {
-	auto cam = std::dynamic_pointer_cast<StageCanvas>(m_stage.GetCanvas())->GetCamera();
+	auto cam = std::dynamic_pointer_cast<WxStageCanvas>(m_stage.GetImpl().GetCanvas())->GetCamera();
 	GD_ASSERT(cam, "null cam");
 
-	SetPrevEditOP(std::make_shared<CamControlOP>(
-		&stage, stage.GetStageImpl(), *cam, stage.GetSubjectMgr()));
+	SetPrevEditOP(std::make_shared<CamControlOP>(*cam, stage.GetSubjectMgr()));
 
 	m_draw_state = std::make_unique<DrawSelectRectState>(*cam, stage.GetSubjectMgr());
 }
@@ -96,11 +98,11 @@ bool NodeSelectOP::OnDraw() const
 
 n0::SceneNodePtr NodeSelectOP::QueryByPos(int screen_x, int screen_y) const
 {
-	auto cam = std::dynamic_pointer_cast<StageCanvas>(m_stage.GetCanvas())->GetCamera();
+	auto cam = std::dynamic_pointer_cast<WxStageCanvas>(m_stage.GetImpl().GetCanvas())->GetCamera();
 	GD_ASSERT(cam, "null cam");
 	auto pos = ee0::CameraHelper::TransPosScreenToProject(*cam, screen_x, screen_y);
 
-	auto& nodes = dynamic_cast<StagePage&>(m_stage).GetAllNodes();
+	auto& nodes = dynamic_cast<WxStagePage&>(m_stage).GetAllNodes();
 	for (auto& node : nodes)
 	{
 		auto ret = QueryByPos(node, pos);
@@ -115,13 +117,13 @@ n0::SceneNodePtr NodeSelectOP::QueryByPos(int screen_x, int screen_y) const
 void NodeSelectOP::QueryByRect(const sm::ivec2& p0, const sm::ivec2& p1, bool contain, 
 	                           std::vector<n0::SceneNodePtr>& result) const
 {
-	auto cam = std::dynamic_pointer_cast<StageCanvas>(m_stage.GetCanvas())->GetCamera();
+	auto cam = std::dynamic_pointer_cast<WxStageCanvas>(m_stage.GetImpl().GetCanvas())->GetCamera();
 	GD_ASSERT(cam, "null cam");
 	auto pos0 = ee0::CameraHelper::TransPosScreenToProject(*cam, p0.x, p0.y);
 	auto pos1 = ee0::CameraHelper::TransPosScreenToProject(*cam, p1.x, p1.y);
 	sm::rect rect(pos0, pos1);
 	
-	auto& nodes = dynamic_cast<StagePage&>(m_stage).GetAllNodes();
+	auto& nodes = dynamic_cast<WxStagePage&>(m_stage).GetAllNodes();
 	for (auto& node : nodes) {
 		QueryByRect(node, rect, contain, result);
 	}

@@ -3,6 +3,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\include\node0\NodeComponent.h" />
     <ClInclude Include="..\..\..\include\node0\SceneNode.h" />
+    <ClInclude Include="..\..\..\include\node0\typedef.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\include\node0\SceneNode.inl" />
