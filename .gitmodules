@@ -115,3 +115,30 @@
 [submodule "node3"]
 	path = node3
 	url = git@github.com:xzrunner/node3.git
+[submodule "painting2"]
+	path = painting2
+	url = git@github.com:xzrunner/painting2.git
+[submodule "painting3"]
+	path = painting3
+	url = git@github.com:xzrunner/painting3.git
+[submodule "node0"]
+	path = node0
+	url = git@github.com:xzrunner/node0.git
+[submodule "node2"]
+	path = node2
+	url = git@github.com:xzrunner/node2.git
+[submodule "s2loader"]
+	path = s2loader
+	url = git@github.com:xzrunner/s2loader.git
+[submodule "s2storer"]
+	path = s2storer
+	url = git@github.com:xzrunner/s2storer.git
+[submodule "easyeditor0"]
+	path = easyeditor0
+	url = git@github.com:xzrunner/easyeditor0.git
+[submodule "easyeditor2"]
+	path = easyeditor2
+	url = git@github.com:xzrunner/easyeditor2.git
+[submodule "easyeditor3"]
+	path = easyeditor3
+	url = git@github.com:xzrunner/easyeditor3.git

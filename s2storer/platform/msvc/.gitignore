@@ -1,5 +1,0 @@
-s2storer/
-projects/*
-
-!projects/s2storer.vcxproj
-!projects/s2storer.vcxproj.filters
