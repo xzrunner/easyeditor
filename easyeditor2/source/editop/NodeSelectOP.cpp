@@ -17,6 +17,7 @@ namespace ee2
 
 NodeSelectOP::NodeSelectOP(WxStagePage& stage)
 	: ee0::NodeSelectOP(stage)
+	, m_draw_state_disable(false)
 {
 	auto cam = std::dynamic_pointer_cast<WxStageCanvas>(m_stage.GetImpl().GetCanvas())->GetCamera();
 	GD_ASSERT(cam, "null cam");
@@ -32,7 +33,9 @@ bool NodeSelectOP::OnMouseLeftDown(int x, int y)
 		return true;
 	}
 
-	m_draw_state->OnMousePress(x, y);
+	if (!m_draw_state_disable) {
+		m_draw_state->OnMousePress(x, y);
+	}
 
 	return false;
 }
@@ -43,7 +46,12 @@ bool NodeSelectOP::OnMouseLeftUp(int x, int y)
 		return true;
 	}
 
-	m_draw_state->OnMouseRelease(x, y);
+	if (!m_draw_state_disable) {
+		m_draw_state->OnMouseRelease(x, y);
+	}
+
+	m_draw_state_disable = false;
+	m_draw_state->Clear();
 
 	return false;
 }
@@ -54,7 +62,9 @@ bool NodeSelectOP::OnMouseDrag(int x, int y)
 		return true;
 	}
 
-	m_draw_state->OnMouseDrag(x, y);
+	if (!m_draw_state_disable) {
+		m_draw_state->OnMouseDrag(x, y);
+	}
 
 	return false;
 }
@@ -91,7 +101,9 @@ bool NodeSelectOP::OnDraw() const
 		}
 	);
 
-	m_draw_state->OnDraw();
+	if (!m_draw_state_disable) {
+		m_draw_state->OnDraw();
+	}
 
 	return false;
 }
@@ -107,6 +119,7 @@ n0::SceneNodePtr NodeSelectOP::QueryByPos(int screen_x, int screen_y) const
 	{
 		auto ret = QueryByPos(node, pos);
 		if (ret) {
+			m_draw_state_disable = true;
 			return ret;
 		}
 	}
@@ -166,6 +179,8 @@ void NodeSelectOP::QueryByRect(const n0::SceneNodePtr& node, const sm::rect& rec
 	for (auto& child : children) {
 		QueryByRect(child, rect, contain, result);
 	}
+
+	m_draw_state_disable = !result.empty();
 }
 
 }

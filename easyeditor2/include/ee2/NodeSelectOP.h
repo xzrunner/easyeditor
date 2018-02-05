@@ -39,6 +39,7 @@ private:
 
 private:
 	std::unique_ptr<ee0::EditOpState> m_draw_state = nullptr;
+	mutable bool m_draw_state_disable;
 
 }; // NodeSelectOP
 
