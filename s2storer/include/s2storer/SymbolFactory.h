@@ -1,6 +1,6 @@
 #pragma once
 
-namespace s2saver
+namespace s2storer
 {
 
 class SymbolFactory

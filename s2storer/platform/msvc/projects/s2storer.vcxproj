@@ -11,21 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\s2saver\ComplexSprSaver.h" />
-    <ClInclude Include="..\..\..\include\s2saver\ComplexSymSaver.h" />
-    <ClInclude Include="..\..\..\include\s2saver\SpriteFactory.h" />
-    <ClInclude Include="..\..\..\include\s2saver\SymbolFactory.h" />
+    <ClInclude Include="..\..\..\include\s2storer\ComplexSprStorer.h" />
+    <ClInclude Include="..\..\..\include\s2storer\ComplexSymStorer.h" />
+    <ClInclude Include="..\..\..\include\s2storer\SpriteFactory.h" />
+    <ClInclude Include="..\..\..\include\s2storer\SymbolFactory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\ComplexSprSaver.cpp" />
-    <ClCompile Include="..\..\..\source\ComplexSymSaver.cpp" />
+    <ClCompile Include="..\..\..\source\ComplexSprStorer.cpp" />
+    <ClCompile Include="..\..\..\source\ComplexSymStorer.cpp" />
     <ClCompile Include="..\..\..\source\SpriteFactory.cpp" />
     <ClCompile Include="..\..\..\source\SymbolFactory.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>3.s2saver</ProjectName>
+    <ProjectName>3.s2storer</ProjectName>
     <ProjectGuid>{6032DDF2-FE43-4D51-AFAA-F6B6A6D855AD}</ProjectGuid>
-    <RootNamespace>s2saver</RootNamespace>
+    <RootNamespace>s2storer</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -55,12 +55,12 @@
     <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\s2saver\x86\Debug\</OutDir>
-    <IntDir>..\s2saver\x86\Debug\obj\</IntDir>
+    <OutDir>..\s2storer\x86\Debug\</OutDir>
+    <IntDir>..\s2storer\x86\Debug\obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\s2saver\x86\Release\</OutDir>
-    <IntDir>..\s2saver\x86\Release\obj\</IntDir>
+    <OutDir>..\s2storer\x86\Release\</OutDir>
+    <IntDir>..\s2storer\x86\Release\obj\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

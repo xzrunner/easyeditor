@@ -1,8 +1,8 @@
-#include "s2saver/ComplexSymSaver.h"
+#include "s2storer/ComplexSymStorer.h"
 
 #include <sprite2/ComplexSymbol.h>
 
-namespace s2saver
+namespace s2storer
 {
 
 ComplexSymSaver::ComplexSymSaver(const s2::ComplexSymbol& sym)

@@ -4,7 +4,7 @@
 
 namespace s2 { class Sprite; }
 
-namespace s2saver
+namespace s2storer
 {
 
 class SpriteFactory

@@ -12,24 +12,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\s2saver\ComplexSprSaver.h">
+    <ClInclude Include="..\..\..\include\s2storer\ComplexSprStorer.h">
       <Filter>sprite\06.complex</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\s2saver\ComplexSymSaver.h">
+    <ClInclude Include="..\..\..\include\s2storer\ComplexSymStorer.h">
       <Filter>sprite\06.complex</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\s2saver\SymbolFactory.h">
+    <ClInclude Include="..\..\..\include\s2storer\SymbolFactory.h">
       <Filter>factory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\s2saver\SpriteFactory.h">
+    <ClInclude Include="..\..\..\include\s2storer\SpriteFactory.h">
       <Filter>factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\ComplexSprSaver.cpp">
+    <ClCompile Include="..\..\..\source\ComplexSprStorer.cpp">
       <Filter>sprite\06.complex</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\ComplexSymSaver.cpp">
+    <ClCompile Include="..\..\..\source\ComplexSymStorer.cpp">
       <Filter>sprite\06.complex</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\SymbolFactory.cpp">

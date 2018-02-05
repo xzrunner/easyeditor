@@ -6,7 +6,7 @@
 
 namespace s2 { class ComplexSymbol; }
 
-namespace s2saver
+namespace s2storer
 {
 
 class ComplexSymSaver : private cu::Uncopyable

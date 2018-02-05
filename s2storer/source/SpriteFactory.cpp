@@ -1,8 +1,8 @@
-#include "s2saver/SpriteFactory.h"
+#include "s2storer/SpriteFactory.h"
 
 #include <s2s/NodeSpr.h>
 
-namespace s2saver
+namespace s2storer
 {
 
 s2s::NodeSprPtr SpriteFactory::Create(const s2::Sprite& spr)

@@ -251,9 +251,6 @@
     <ProjectReference Include="..\..\..\..\s2loader\platform\msvc\projects\s2loader.vcxproj">
       <Project>{e5a136ee-7ee1-4682-a1b1-c942cb2110e7}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\s2saver\platform\msvc\projects\s2saver.vcxproj">
-      <Project>{6032ddf2-fe43-4d51-afaa-f6b6a6d855ad}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\s2serializer\platform\msvc2017\projects\s2serializer.vcxproj">
       <Project>{b6939acb-3794-4b2a-95da-f99ecdf79d0f}</Project>
     </ProjectReference>
