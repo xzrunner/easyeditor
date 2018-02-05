@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="view">
+      <UniqueIdentifier>{52c82184-bae4-4dbc-a9d7-c0ac6668047e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{48d48c6b-c169-4d9c-a227-ae13808ef908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{a620297d-ba9d-4458-a45b-f318d66fb9ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop">
+      <UniqueIdentifier>{b254b4ae-06bf-4f2d-bb3b-522aafe857ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\camera">
+      <UniqueIdentifier>{632ee775-9621-4e3b-b1de-3b09d6ffb460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\camera\state">
+      <UniqueIdentifier>{e1c47c7a-aa01-41ac-8dd3-3097eb04ded3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\node">
+      <UniqueIdentifier>{1f4a775d-1f2e-47f3-90e2-1f167a47bade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\node\state">
+      <UniqueIdentifier>{300170f1-c3ff-4b6a-abfc-bce96eec44dd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee2\NodeFactory.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee2\CamControlOP.h">
+      <Filter>editop\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee2\CamZoomState.h">
+      <Filter>editop\camera\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee2\CamTranslateState.h">
+      <Filter>editop\camera\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee2\NodeSelectOP.h">
+      <Filter>editop\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee2\DrawSelectRectState.h">
+      <Filter>editop\node\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee2\WxStageDropTarget.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee2\WxStagePage.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee2\WxStageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\data\NodeFactory.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\CamControlOP.cpp">
+      <Filter>editop\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\CamZoomState.cpp">
+      <Filter>editop\camera\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\CamTranslateState.cpp">
+      <Filter>editop\camera\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\NodeSelectOP.cpp">
+      <Filter>editop\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\DrawSelectRectState.cpp">
+      <Filter>editop\node\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxStageDropTarget.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxStagePage.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxStageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

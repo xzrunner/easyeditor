@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="msg">
+      <UniqueIdentifier>{23ae2509-2c90-4003-8eac-bccc2013592d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="msg\variant">
+      <UniqueIdentifier>{1b1273fc-3987-41b5-b234-f3823b42ae8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop">
+      <UniqueIdentifier>{e508db87-0061-481d-8fcd-b9c4d1de9bd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{a6d5b45d-c8fa-450f-855e-e5dbe1462e92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{798ab8fe-104a-4ee4-bb73-51d7bd2fd31a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{c3023874-474b-4af4-a2ce-d5374fecc933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\symbol">
+      <UniqueIdentifier>{21333446-767b-4539-be83-d06bc648a246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\node">
+      <UniqueIdentifier>{3dc2683f-e8d5-43bc-be2c-bd8c3f541262}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{9bb25c1f-6124-4f08-a7df-8780dc47925f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{6ff59c45-f0c3-443f-b0f0-3182b149523e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\detail">
+      <UniqueIdentifier>{bb0ee85d-1221-4647-a87a-ca6eecf99273}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library\image">
+      <UniqueIdentifier>{9c8a4a1a-6d55-4968-a167-38e323650b0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\frame">
+      <UniqueIdentifier>{9b873942-284d-4f3d-872d-ec8817a38258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\utility">
+      <UniqueIdentifier>{b4b303b7-1bb0-4cae-a8e9-e8ecd3f44c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\utility\drop">
+      <UniqueIdentifier>{1c860714-9b90-4e9e-8c23-64ddf24c5af9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee0\Variant.h">
+      <Filter>msg\variant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\VariantSet.h">
+      <Filter>msg\variant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\VariantType.h">
+      <Filter>msg\variant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\MessageID.h">
+      <Filter>msg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\Observer.h">
+      <Filter>msg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\Subject.h">
+      <Filter>msg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\SubjectMgr.h">
+      <Filter>msg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\EditOpState.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\typedef.h" />
+    <ClInclude Include="..\..\..\include\ee0\CameraHelper.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\NodeSelectOP.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\EditOP.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\CompNodeEditor.h">
+      <Filter>data\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\CompLibraryItem.h">
+      <Filter>data\symbol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\CompSymEditor.h">
+      <Filter>data\symbol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxBitmap.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxLibraryItem.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxImageVList.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxLibraryList.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxLibraryPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxLibraryPanel.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxLibraryImagePage.h">
+      <Filter>view\library\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxEditPanel.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\EditPanelImpl.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxStageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxStagePage.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\SelectionSet.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\KeysState.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxFrame.h">
+      <Filter>view\frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\color_config.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxDropTarget.h">
+      <Filter>view\utility\drop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxDropData.h">
+      <Filter>view\utility\drop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee0\WxCompPanel.h">
+      <Filter>view\detail</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\msg\Subject.cpp">
+      <Filter>msg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\msg\SubjectMgr.cpp">
+      <Filter>msg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\tools\CameraHelper.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\NodeSelectOP.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\EditOP.cpp">
+      <Filter>editop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\CompNodeEditor.cpp">
+      <Filter>data\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\CompLibraryItem.cpp">
+      <Filter>data\symbol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\CompSymEditor.cpp">
+      <Filter>data\symbol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\WxBitmap.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxLibraryItem.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxImageVList.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxLibraryList.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxLibraryPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxLibraryPanel.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxLibraryImagePage.cpp">
+      <Filter>view\library\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxEditPanel.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\EditPanelImpl.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxStageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxStagePage.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\KeysState.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxFrame.cpp">
+      <Filter>view\frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxDropTarget.cpp">
+      <Filter>view\utility\drop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxDropData.cpp">
+      <Filter>view\utility\drop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxCompPanel.cpp">
+      <Filter>view\detail</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\ee0\SelectionSet.inl">
+      <Filter>data</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -2,3 +2,4 @@ s2saver/
 projects/*
 
 !projects/s2saver.vcxproj
+!projects/s2saver.vcxproj.filters

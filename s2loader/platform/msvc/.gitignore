@@ -2,3 +2,4 @@ s2loader/
 projects/*
 
 !projects/s2loader.vcxproj
+!projects/s2loader.vcxproj.filters

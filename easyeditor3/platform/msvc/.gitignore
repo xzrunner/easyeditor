@@ -2,3 +2,4 @@ easyeditor3/
 projects/*
 
 !projects/easyeditor3.vcxproj
+!projects/easyeditor3.vcxproj.filters

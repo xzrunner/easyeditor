@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="editop">
+      <UniqueIdentifier>{71854b5a-3a24-4123-84b3-bde493dbd08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\node">
+      <UniqueIdentifier>{e2eb3a50-15bf-4952-99a9-2094541352af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\node\state">
+      <UniqueIdentifier>{2d7788ec-fce3-48fe-a265-3e780842c96f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\camera">
+      <UniqueIdentifier>{baf10b1e-2ba3-4864-9779-813c75de03da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="editop\camera\state">
+      <UniqueIdentifier>{d2a34a5a-8036-4518-ba23-09af7e805539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{0f0175dc-2b79-4619-be09-e4a08085f41a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{985d60bc-484f-4c31-a6cb-95711b8cd200}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{19b21d25-b091-4c33-a263-cf8835d46566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\library">
+      <UniqueIdentifier>{b92201bb-129c-4515-af1d-a2c85aad7930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{8d1cee1e-867b-4e00-9660-10536525fe11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\detail">
+      <UniqueIdentifier>{1b723a76-dc5a-4b61-a386-ecff073e8718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\detail\comp">
+      <UniqueIdentifier>{99416825-d9bc-44bc-b3f3-ff663287c2c9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee3\NodeRotateState.h">
+      <Filter>editop\node\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\NodeTranslateState.h">
+      <Filter>editop\node\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\NodeArrangeOP.h">
+      <Filter>editop\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\NodeSelectOP.h">
+      <Filter>editop\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\CamControlOP.h">
+      <Filter>editop\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\CamRotateState.h">
+      <Filter>editop\camera\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\CamZoomState.h">
+      <Filter>editop\camera\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\CamTranslateState.h">
+      <Filter>editop\camera\state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\EditOpState.h">
+      <Filter>editop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\NodeFactory.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\Serializer.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\WxCompTransformPanel.h">
+      <Filter>view\detail\comp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\WxLibGeoPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\WxLibObjPage.h">
+      <Filter>view\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\WxStageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\WxStageDropTarget.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ee3\WxStagePage.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\editop\NodeRotateState.cpp">
+      <Filter>editop\node\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\NodeTranslateState.cpp">
+      <Filter>editop\node\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\NodeArrangeOP.cpp">
+      <Filter>editop\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\NodeSelectOP.cpp">
+      <Filter>editop\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\CamControlOP.cpp">
+      <Filter>editop\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\CamZoomState.cpp">
+      <Filter>editop\camera\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\CamTranslateState.cpp">
+      <Filter>editop\camera\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\editop\CamRotateState.cpp">
+      <Filter>editop\camera\state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\data\NodeFactory.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\tools\Serializer.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxCompTransformPanel.cpp">
+      <Filter>view\detail\comp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxLibGeoPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\include\ee3\WxLibObjPage.cpp">
+      <Filter>view\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxStageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxStageDropTarget.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\view\WxStagePage.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
