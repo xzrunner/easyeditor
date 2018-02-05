@@ -1,15 +1,10 @@
 #include "ee3/WxLibObjPage.h"
 
 #include <ee0/WxLibraryList.h>
+#include <ee0/WxLibraryItem.h>
 
 #include <sprite2/ModelSymbol.h>
 #include <sprite2/SymType.h>
-#include <node0/SceneNode.h>
-#include <node3/AssimpHelper.h>
-#include <node3/Model.h>
-#include <node3/AABB.h>
-#include <node3/CompModel.h>
-#include <node3/CompAABB.h>
 
 namespace ee3
 {
@@ -28,29 +23,8 @@ void WxLibObjPage::OnAddPress(wxCommandEvent& event)
 		wxArrayString filenames;
 		dlg.GetPaths(filenames);
 
-		for (size_t i = 0, n = filenames.size(); i < n; ++i)
-		{
-			n3::AABB aabb;
-			auto model = n3::AssimpHelper::Load(filenames[i].ToStdString(), aabb);
-			if (!model) {
-				continue;
-			}
-
-			auto node = std::make_shared<n0::SceneNode>();
-
-			auto& cmodel = node->AddComponent<n3::CompModel>();
-			cmodel.SetModel(model);
-
-			auto& caabb = node->AddComponent<n3::CompAABB>();
-			caabb.SetAABB(aabb);
-
-			// todo zz
-			//auto sym = std::make_shared<NodeSymbol>();
-			//sym->SetNode(node);
-
-			//sym->SetFilepath(filenames[i].ToStdString());
-
-			//AddItem(sym);
+		for (size_t i = 0, n = filenames.size(); i < n; ++i) {
+			m_list->Insert(std::make_shared<ee0::WxLibraryItem>(filenames[i].ToStdString()));
 		}
 	}
 }

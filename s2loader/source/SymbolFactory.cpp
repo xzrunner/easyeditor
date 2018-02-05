@@ -16,6 +16,7 @@
 #include "s2loader/MaskSymLoader.h"
 #include "s2loader/TrailSymLoader.h"
 #include "s2loader/SkeletonSymLoader.h"
+#include "s2loader/ModelSymLoader.h"
 
 #include <logger.h>
 #include <simp/NodeFactory.h>
@@ -44,6 +45,7 @@
 #include <sprite2/MaskSymbol.h>
 #include <sprite2/TrailSymbol.h>
 #include <sprite2/SkeletonSymbol.h>
+#include <sprite2/ModelSymbol.h>
 #include <sprite2/AudioSymbol.h>
 #include <sprite2/SymType.h>
 #include <sprite2/CacheMatVisitor.h>
@@ -227,6 +229,14 @@ s2::SymPtr SymbolFactory::Create(const CU_STR& filepath, int type) const
 			auto sym = CU_MAKE_SHARED<s2::SkeletonSymbol>();
 			SkeletonSymLoader loader(*sym);
 			loader.LoadJson(filepath);
+			ret = sym;
+		}
+		break;
+	case s2::SYM_MODEL:
+		{
+			auto sym = CU_MAKE_SHARED<s2::ModelSymbol>();
+			ModelSymLoader loader(*sym);
+			loader.LoadFromFile(filepath);
 			ret = sym;
 		}
 		break;

@@ -32,25 +32,7 @@ void WxLibGeoPage::LoadDefaultSymbol()
 
 void WxLibGeoPage::LoadGeometric(const std::string& name)
 {
-	n3::Surface* surface = n3::SurfaceFactory::Create(name);
-
-	n3::AABB aabb;
-	auto model = std::make_shared<n3::ModelParametric>(surface, aabb);
-
-	// todo zz
-	//auto node = std::make_shared<n0::SceneNode>();
-
-	//auto& cmodel = node->AddComponent<n3::CompModel>();
-	//cmodel.SetModel(model);
-
-	//auto& caabb = node->AddComponent<n3::CompAABB>();
-	//caabb.SetAABB(aabb);
-
-	//auto sym = std::make_shared<NodeSymbol>();
-	//sym->SetName(name);
-	//sym->SetNode(node);
-
-	std::string filepath = name + ".geo";
+	std::string filepath = name + ".param";
 	m_list->Insert(std::make_shared<ee0::WxLibraryItem>(filepath));
 }
 

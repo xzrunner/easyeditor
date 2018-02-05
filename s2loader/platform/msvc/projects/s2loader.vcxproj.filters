@@ -267,6 +267,9 @@
     <ClCompile Include="..\..\..\source\SymbolFactory.cpp">
       <Filter>factory</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\ModelSymLoader.cpp">
+      <Filter>sprite\15.model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\s2loader\PkgFileParser.h">
@@ -463,6 +466,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\s2loader\SymbolFactory.h">
       <Filter>factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\s2loader\ModelSymLoader.h">
+      <Filter>sprite\15.model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

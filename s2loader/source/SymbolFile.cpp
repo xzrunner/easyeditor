@@ -72,7 +72,7 @@ int SymbolFile::Type(const CU_STR& filepath) const
 	{
 		return s2::SYM_AUDIO;
 	}
-	else if (ext == "x" || ext == "obj")
+	else if (ext == "x" || ext == "obj" || ext == "param")
 	{
 		return s2::SYM_MODEL;
 	}
