@@ -89,7 +89,7 @@ void SpriteIO::Store(Json::Value& val, const CU_STR& dir)
 	StoreEdit(val);
 }
 
-void SpriteIO::Load(const sns::NodeSprCommon& node_spr, const s2::SprPtr& spr)
+void SpriteIO::Load(const s2s::NodeSprCommon& node_spr, const s2::SprPtr& spr)
 {
 	Load(node_spr);
 
@@ -99,7 +99,7 @@ void SpriteIO::Load(const sns::NodeSprCommon& node_spr, const s2::SprPtr& spr)
 	LoadEdit(spr);
 }
 
-void SpriteIO::Load(const sns::NodeSprCommon& node_spr)
+void SpriteIO::Load(const s2s::NodeSprCommon& node_spr)
 {
 	m_name = node_spr.GetName();
 
@@ -108,47 +108,47 @@ void SpriteIO::Load(const sns::NodeSprCommon& node_spr)
 	
 	int idx = 0;
 
-	if (type & sns::NodeSprCommon::SCALE_MASK) {
-		m_scale.x = bs::int2float(data[idx++], sns::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
-		m_scale.y = bs::int2float(data[idx++], sns::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
+	if (type & s2s::NodeSprCommon::SCALE_MASK) {
+		m_scale.x = bs::int2float(data[idx++], s2s::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
+		m_scale.y = bs::int2float(data[idx++], s2s::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
 	}
-	if (type & sns::NodeSprCommon::SHEAR_MASK) {
-		m_shear.x = bs::int2float(data[idx++], sns::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
-		m_shear.y = bs::int2float(data[idx++], sns::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
+	if (type & s2s::NodeSprCommon::SHEAR_MASK) {
+		m_shear.x = bs::int2float(data[idx++], s2s::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
+		m_shear.y = bs::int2float(data[idx++], s2s::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
 	}
-	if (type & sns::NodeSprCommon::OFFSET_MASK) {
-		m_offset.x = bs::int2float(data[idx++], sns::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
-		m_offset.y = bs::int2float(data[idx++], sns::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
+	if (type & s2s::NodeSprCommon::OFFSET_MASK) {
+		m_offset.x = bs::int2float(data[idx++], s2s::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
+		m_offset.y = bs::int2float(data[idx++], s2s::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
 	} 
-	if (type & sns::NodeSprCommon::POSITION_MASK) {
-		m_position.x = bs::int2float(data[idx++], sns::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
-		m_position.y = bs::int2float(data[idx++], sns::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
+	if (type & s2s::NodeSprCommon::POSITION_MASK) {
+		m_position.x = bs::int2float(data[idx++], s2s::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
+		m_position.y = bs::int2float(data[idx++], s2s::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
 	} 
-	if (type & sns::NodeSprCommon::ANGLE_MASK) {
-		m_angle = bs::int2float(data[idx++], sns::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
+	if (type & s2s::NodeSprCommon::ANGLE_MASK) {
+		m_angle = bs::int2float(data[idx++], s2s::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
 	} 
 
-	if (type & sns::NodeSprCommon::COL_MUL_MASK) {
+	if (type & s2s::NodeSprCommon::COL_MUL_MASK) {
 		pt2::Color col;
 		col.FromRGBA(data[idx++]);
 		m_col_common.mul = col;
 	} 
-	if (type & sns::NodeSprCommon::COL_ADD_MASK) {
+	if (type & s2s::NodeSprCommon::COL_ADD_MASK) {
 		pt2::Color col;
 		col.FromRGBA(data[idx++]);
 		m_col_common.add = col;
 	} 
-	if (type & sns::NodeSprCommon::COL_R_MASK) {
+	if (type & s2s::NodeSprCommon::COL_R_MASK) {
 		pt2::Color col;
 		col.FromRGBA(data[idx++]);
 		m_col_map.rmap = col;
 	} 
-	if (type & sns::NodeSprCommon::COL_G_MASK) {
+	if (type & s2s::NodeSprCommon::COL_G_MASK) {
 		pt2::Color col;
 		col.FromRGBA(data[idx++]);
 		m_col_map.gmap = col;
 	} 
-	if (type & sns::NodeSprCommon::COL_B_MASK) {
+	if (type & s2s::NodeSprCommon::COL_B_MASK) {
 		pt2::Color col;
 		col.FromRGBA(data[idx++]);
 		m_col_map.bmap = col;
@@ -397,7 +397,7 @@ void SpriteIO::LoadColor(const Json::Value& val)
 	if (val.isMember("multi color")) {
 		CU_STR str = val["multi color"].asString().c_str();
 		if (!str.empty()) {
-			m_col_common.mul = gum::str2color(str, sns::BGRA);
+			m_col_common.mul = gum::str2color(str, s2s::BGRA);
 		}
 	}
 
@@ -405,7 +405,7 @@ void SpriteIO::LoadColor(const Json::Value& val)
 	if (val.isMember("add color")) {
 		CU_STR str = val["add color"].asString().c_str();
 		if (!str.empty()) {
-			m_col_common.add = gum::str2color(str, sns::ABGR);
+			m_col_common.add = gum::str2color(str, s2s::ABGR);
 		}
 	}
 
@@ -413,7 +413,7 @@ void SpriteIO::LoadColor(const Json::Value& val)
 	if (val.isMember("r trans")) {
 		CU_STR str = val["r trans"].asString().c_str();
 		if (!str.empty()) {
-			pt2::Color col(gum::str2color(str, sns::RGBA));
+			pt2::Color col(gum::str2color(str, s2s::RGBA));
 			col.a = 0;
 			m_col_map.rmap = col;
 		}
@@ -423,7 +423,7 @@ void SpriteIO::LoadColor(const Json::Value& val)
 	if (val.isMember("g trans")) {
 		CU_STR str = val["g trans"].asString().c_str();
 		if (!str.empty()) {
-			pt2::Color col(gum::str2color(str, sns::RGBA));
+			pt2::Color col(gum::str2color(str, s2s::RGBA));
 			col.a = 0;
 			m_col_map.gmap = col;
 		}
@@ -433,7 +433,7 @@ void SpriteIO::LoadColor(const Json::Value& val)
 	if (val.isMember("b trans")) {
 		CU_STR str = val["b trans"].asString().c_str();
 		if (!str.empty()) {
-			pt2::Color col(gum::str2color(str, sns::RGBA));
+			pt2::Color col(gum::str2color(str, s2s::RGBA));
 			col.a = 0;
 			m_col_map.bmap = col;
 		}
@@ -443,20 +443,20 @@ void SpriteIO::LoadColor(const Json::Value& val)
 void SpriteIO::StoreColor(Json::Value& val)
 {
 	if (!m_compress || m_col_common.mul != pt2::Color(255, 255, 255, 255)) {
-		val["multi color"]	= gum::color2str(m_col_common.mul, sns::BGRA).c_str();;
+		val["multi color"]	= gum::color2str(m_col_common.mul, s2s::BGRA).c_str();;
 	}
 	if (!m_compress || m_col_common.add != pt2::Color(0, 0, 0, 0)) {
-		val["add color"]	= gum::color2str(m_col_common.add, sns::ABGR).c_str();;
+		val["add color"]	= gum::color2str(m_col_common.add, s2s::ABGR).c_str();;
 	}
 
 	if (!m_compress || m_col_map.rmap.r != 255 || m_col_map.rmap.g != 0 || m_col_map.rmap.b != 0) {
-		val["r trans"]		= gum::color2str(m_col_map.rmap, sns::RGBA).c_str();;
+		val["r trans"]		= gum::color2str(m_col_map.rmap, s2s::RGBA).c_str();;
 	}
 	if (!m_compress || m_col_map.gmap.r != 0 || m_col_map.gmap.g != 255 || m_col_map.gmap.b != 0) {
-		val["g trans"]		= gum::color2str(m_col_map.gmap, sns::RGBA).c_str();;
+		val["g trans"]		= gum::color2str(m_col_map.gmap, s2s::RGBA).c_str();;
 	}
 	if (!m_compress || m_col_map.bmap.r != 0 || m_col_map.bmap.g != 0 || m_col_map.bmap.b != 255) {
-		val["b trans"]		= gum::color2str(m_col_map.bmap, sns::RGBA).c_str();;
+		val["b trans"]		= gum::color2str(m_col_map.bmap, s2s::RGBA).c_str();;
 	}
 }
 

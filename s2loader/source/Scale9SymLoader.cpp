@@ -8,10 +8,10 @@
 #include <simp/NodeScale9.h>
 #include <sm_const.h>
 #include <memmgr/LinearAllocator.h>
-#include <sns/NodeFactory.h>
-#include <sns/NodeSprCommon.h>
-#include <sns/Scale9Sym.h>
-#include <sns/NodeSpr.h>
+#include <s2s/NodeFactory.h>
+#include <s2s/NodeSprCommon.h>
+#include <s2s/Scale9Sym.h>
+#include <s2s/NodeSpr.h>
 #include <gum/FilepathHelper.h>
 #include <gum/SymbolPool.h>
 
@@ -192,9 +192,9 @@ void Scale9SymLoader::LoadBin(const simp::NodeScale9* node)
 void Scale9SymLoader::LoadSns(const CU_STR& filepath)
 {
 	mm::LinearAllocator alloc;
-	auto sym = sns::NodeFactory::CreateSymFromBin(alloc, filepath.c_str());
+	auto sym = s2s::NodeFactory::CreateSymFromBin(alloc, filepath.c_str());
 	assert(sym);
-	auto s9_sym = dynamic_cast<sns::Scale9Sym*>(sym);
+	auto s9_sym = dynamic_cast<s2s::Scale9Sym*>(sym);
 	assert(s9_sym);
 
 	CU_STR dir = gum::FilepathHelper::Dir(filepath);
@@ -207,43 +207,43 @@ void Scale9SymLoader::LoadSns(const CU_STR& filepath)
 	switch (type)
 	{
 	case s2::S9_9GRID:
-		grids[s2::S9_DOWN_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_DOWN_LEFT)->GetCommon());
-		grids[s2::S9_DOWN_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_DOWN_CENTER)->GetCommon());
-		grids[s2::S9_DOWN_RIGHT]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_DOWN_RIGHT)->GetCommon());
-		grids[s2::S9_MID_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_LEFT)->GetCommon());
-		grids[s2::S9_MID_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_CENTER)->GetCommon());
-		grids[s2::S9_MID_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_RIGHT)->GetCommon());
-		grids[s2::S9_TOP_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_TOP_LEFT)->GetCommon());
-		grids[s2::S9_TOP_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_TOP_CENTER)->GetCommon());
-		grids[s2::S9_TOP_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_TOP_RIGHT)->GetCommon());
+		grids[s2::S9_DOWN_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_DOWN_LEFT)->GetCommon());
+		grids[s2::S9_DOWN_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_DOWN_CENTER)->GetCommon());
+		grids[s2::S9_DOWN_RIGHT]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_DOWN_RIGHT)->GetCommon());
+		grids[s2::S9_MID_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_LEFT)->GetCommon());
+		grids[s2::S9_MID_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_CENTER)->GetCommon());
+		grids[s2::S9_MID_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_RIGHT)->GetCommon());
+		grids[s2::S9_TOP_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_TOP_LEFT)->GetCommon());
+		grids[s2::S9_TOP_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_TOP_CENTER)->GetCommon());
+		grids[s2::S9_TOP_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_TOP_RIGHT)->GetCommon());
 		break;
 	case s2::S9_9GRID_HOLLOW:
-		grids[s2::S9_DOWN_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_DOWN_LEFT)->GetCommon());
-		grids[s2::S9_DOWN_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_DOWN_CENTER)->GetCommon());
-		grids[s2::S9_DOWN_RIGHT]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_DOWN_RIGHT)->GetCommon());
-		grids[s2::S9_MID_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_LEFT)->GetCommon());
-		grids[s2::S9_MID_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_RIGHT)->GetCommon());
-		grids[s2::S9_TOP_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_TOP_LEFT)->GetCommon());
-		grids[s2::S9_TOP_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_TOP_CENTER)->GetCommon());
-		grids[s2::S9_TOP_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_TOP_RIGHT)->GetCommon());
+		grids[s2::S9_DOWN_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_DOWN_LEFT)->GetCommon());
+		grids[s2::S9_DOWN_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_DOWN_CENTER)->GetCommon());
+		grids[s2::S9_DOWN_RIGHT]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_DOWN_RIGHT)->GetCommon());
+		grids[s2::S9_MID_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_LEFT)->GetCommon());
+		grids[s2::S9_MID_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_RIGHT)->GetCommon());
+		grids[s2::S9_TOP_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_TOP_LEFT)->GetCommon());
+		grids[s2::S9_TOP_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_TOP_CENTER)->GetCommon());
+		grids[s2::S9_TOP_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_TOP_RIGHT)->GetCommon());
 		break;
 	case s2::S9_3GRID_HORI:
-		grids[s2::S9_MID_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_LEFT)->GetCommon());
-		grids[s2::S9_MID_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_CENTER)->GetCommon());
-		grids[s2::S9_MID_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_RIGHT)->GetCommon());
+		grids[s2::S9_MID_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_LEFT)->GetCommon());
+		grids[s2::S9_MID_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_CENTER)->GetCommon());
+		grids[s2::S9_MID_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_RIGHT)->GetCommon());
 		break;
 	case s2::S9_3GRID_VERT:
-		grids[s2::S9_DOWN_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_DOWN_CENTER)->GetCommon());
-		grids[s2::S9_MID_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_CENTER)->GetCommon());
-		grids[s2::S9_TOP_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_TOP_CENTER)->GetCommon());
+		grids[s2::S9_DOWN_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_DOWN_CENTER)->GetCommon());
+		grids[s2::S9_MID_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_CENTER)->GetCommon());
+		grids[s2::S9_TOP_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_TOP_CENTER)->GetCommon());
 		break;
 	case s2::S9_6GRID_UPPER:
-		grids[s2::S9_MID_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_LEFT)->GetCommon());
-		grids[s2::S9_MID_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_CENTER)->GetCommon());
-		grids[s2::S9_MID_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_MID_RIGHT)->GetCommon());
-		grids[s2::S9_TOP_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_TOP_LEFT)->GetCommon());
-		grids[s2::S9_TOP_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_TOP_CENTER)->GetCommon());
-		grids[s2::S9_TOP_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(sns::Scale9Sym::S9_TOP_RIGHT)->GetCommon());
+		grids[s2::S9_MID_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_LEFT)->GetCommon());
+		grids[s2::S9_MID_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_CENTER)->GetCommon());
+		grids[s2::S9_MID_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_MID_RIGHT)->GetCommon());
+		grids[s2::S9_TOP_LEFT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_TOP_LEFT)->GetCommon());
+		grids[s2::S9_TOP_CENTER]	= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_TOP_CENTER)->GetCommon());
+		grids[s2::S9_TOP_RIGHT]		= LoadSprite(s9_sym->GetChildByIndex(s2s::Scale9Sym::S9_TOP_RIGHT)->GetCommon());
 		break;
 	default:
 		break;
@@ -281,7 +281,7 @@ s2::SprPtr Scale9SymLoader::LoadSprite(uint32_t sym_id, uint16_t dir, uint16_t m
 	return spr;
 }
 
-s2::SprPtr Scale9SymLoader::LoadSprite(const sns::NodeSprCommon& spr_common)
+s2::SprPtr Scale9SymLoader::LoadSprite(const s2s::NodeSprCommon& spr_common)
 {
 	auto spr = SpriteFactory::Instance()->Create(spr_common.GetFilepath());
 	if (spr) {

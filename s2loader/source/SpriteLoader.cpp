@@ -19,7 +19,7 @@ s2::SprPtr SpriteLoader::Create(const Json::Value& val, const CU_STR& dir) const
 	return SpriteFactory::Instance()->Create(val, dir);
 }
 
-s2::SprPtr SpriteLoader::Create(const sns::NodeSpr* spr, const CU_STR& dir) const
+s2::SprPtr SpriteLoader::Create(const s2s::NodeSpr* spr, const CU_STR& dir) const
 {
 	return SpriteFactory::Instance()->Create(spr, dir);
 }

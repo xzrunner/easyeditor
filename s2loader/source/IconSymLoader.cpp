@@ -10,8 +10,8 @@
 #include <sprite2/ImageSymbol.h>
 #include <simp/NodeIcon.h>
 #include <memmgr/LinearAllocator.h>
-#include <sns/IconSym.h>
-#include <sns/NodeFactory.h>
+#include <s2s/IconSym.h>
+#include <s2s/NodeFactory.h>
 #include <gum/FilepathHelper.h>
 #include <gum/SymbolPool.h>
 
@@ -65,9 +65,9 @@ void IconSymLoader::LoadBin(const simp::NodeIcon* node)
 void IconSymLoader::LoadSns(const CU_STR& filepath)
 {
 	mm::LinearAllocator alloc;
-	auto sym = sns::NodeFactory::CreateSymFromBin(alloc, filepath.c_str());
+	auto sym = s2s::NodeFactory::CreateSymFromBin(alloc, filepath.c_str());
 	assert(sym);
-	auto icon_sym = dynamic_cast<sns::IconSym*>(sym);
+	auto icon_sym = dynamic_cast<s2s::IconSym*>(sym);
 	assert(icon_sym);
 
 	CU_VEC<sm::vec2> vertices;
@@ -76,8 +76,8 @@ void IconSymLoader::LoadSns(const CU_STR& filepath)
 	vertices.reserve(src_vertices_n / 2);
 	int idx = 0;
 	for (int i = 0, n = src_vertices_n / 2; i< n; ++i) {
-		float x = static_cast<float>(src_vertices[idx++]) / sns::IconSym::FIXED_TRANS_PRECISION;
-		float y = static_cast<float>(src_vertices[idx++]) / sns::IconSym::FIXED_TRANS_PRECISION;
+		float x = static_cast<float>(src_vertices[idx++]) / s2s::IconSym::FIXED_TRANS_PRECISION;
+		float y = static_cast<float>(src_vertices[idx++]) / s2s::IconSym::FIXED_TRANS_PRECISION;
 		vertices.push_back(sm::vec2(x, y));
 	}
 	

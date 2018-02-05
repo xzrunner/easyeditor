@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sns/typedef.h>
+#include <s2s/typedef.h>
 
 namespace s2 { class Sprite; }
 
@@ -10,7 +10,7 @@ namespace s2saver
 class SpriteFactory
 {
 public:
-	static sns::NodeSprPtr Create(const s2::Sprite& spr);
+	static s2s::NodeSprPtr Create(const s2::Sprite& spr);
 
 }; // SpriteFactory
 

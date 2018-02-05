@@ -3,7 +3,7 @@
 #include <sprite2/IconSprite.h>
 #include <simp/NodeIconSpr.h>
 #include <bs/FixedPointNum.h>
-#include <sns/IconSpr.h>
+#include <s2s/IconSpr.h>
 
 namespace s2loader
 {
@@ -22,7 +22,7 @@ void IconSprLoader::LoadBin(const simp::NodeIconSpr* node)
 	m_spr.SetProcess(bs::int2float(node->process, 1024));
 }
 
-void IconSprLoader::LoadSns(const sns::IconSpr* spr)
+void IconSprLoader::LoadSns(const s2s::IconSpr* spr)
 {
 	m_spr.SetProcess(spr->GetProcess());
 }

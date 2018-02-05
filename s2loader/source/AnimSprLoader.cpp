@@ -4,7 +4,7 @@
 #include <sprite2/UpdateParams.h>
 #include <simp/NodeAnimationSpr.h>
 #include <bs/FixedPointNum.h>
-#include <sns/AnimSpr.h>
+#include <s2s/AnimSpr.h>
 
 namespace s2loader
 {
@@ -44,9 +44,9 @@ void AnimSprLoader::LoadBin(const simp::NodeAnimationSpr* node)
 	m_spr.SetFPS(node->fps);
 }
 
-void AnimSprLoader::LoadSns(const sns::NodeSpr* spr)
+void AnimSprLoader::LoadSns(const s2s::NodeSpr* spr)
 {
-	auto anim_spr = dynamic_cast<const sns::AnimSpr*>(spr);
+	auto anim_spr = dynamic_cast<const s2s::AnimSpr*>(spr);
 
 	m_spr.SetLoop(anim_spr->IsLoop());
 	m_spr.SetInterval(anim_spr->GetInterval());

@@ -1,7 +1,7 @@
 #include "s2loader/SprTransLoader.h"
 
-#include <sns/ColorParser.h>
-#include <sns/NodeSprCommon.h>
+#include <s2s/ColorParser.h>
+#include <s2s/NodeSprCommon.h>
 #include <sprite2/Sprite.h>
 #include <sprite2/Symbol.h>
 #include <simp/NodeTrans.h>
@@ -110,7 +110,7 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const simp::NodeTrans* trans)
 	}
 }
 
-void SprTransLoader::Load(const s2::SprPtr& spr, const sns::NodeSprCommon& common)
+void SprTransLoader::Load(const s2::SprPtr& spr, const s2s::NodeSprCommon& common)
 {
 	if (!spr) {
 		return;
@@ -119,28 +119,28 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const sns::NodeSprCommon& commo
 	uint32_t type = common.GetType();
 	const uint32_t* data = common.GetData();
 	int idx = 0;
-	if (type & sns::NodeSprCommon::SCALE_MASK) {
-		float x = ToFloat(data[idx++], sns::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION),
-			  y = ToFloat(data[idx++], sns::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
+	if (type & s2s::NodeSprCommon::SCALE_MASK) {
+		float x = ToFloat(data[idx++], s2s::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION),
+			  y = ToFloat(data[idx++], s2s::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
 		spr->SetScale(sm::vec2(x, y));
 	} 
-	if (type & sns::NodeSprCommon::SHEAR_MASK) {
-		float x = ToFloat(data[idx++], sns::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION),
-			  y = ToFloat(data[idx++], sns::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
+	if (type & s2s::NodeSprCommon::SHEAR_MASK) {
+		float x = ToFloat(data[idx++], s2s::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION),
+			  y = ToFloat(data[idx++], s2s::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
 		spr->SetShear(sm::vec2(x, y));
 	} 
-	if (type & sns::NodeSprCommon::OFFSET_MASK) {
-		float x = ToFloat(data[idx++], sns::NodeSprCommon::LOW_FIXED_TRANS_PRECISION),
-			  y = ToFloat(data[idx++], sns::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
+	if (type & s2s::NodeSprCommon::OFFSET_MASK) {
+		float x = ToFloat(data[idx++], s2s::NodeSprCommon::LOW_FIXED_TRANS_PRECISION),
+			  y = ToFloat(data[idx++], s2s::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
 		spr->SetOffset(sm::vec2(x, y));
 	} 
-	if (type & sns::NodeSprCommon::POSITION_MASK) {
-		float x = ToFloat(data[idx++], sns::NodeSprCommon::LOW_FIXED_TRANS_PRECISION),
-			  y = ToFloat(data[idx++], sns::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
+	if (type & s2s::NodeSprCommon::POSITION_MASK) {
+		float x = ToFloat(data[idx++], s2s::NodeSprCommon::LOW_FIXED_TRANS_PRECISION),
+			  y = ToFloat(data[idx++], s2s::NodeSprCommon::LOW_FIXED_TRANS_PRECISION);
 		spr->SetPosition(sm::vec2(x, y));
 	}
-	if (type & sns::NodeSprCommon::ANGLE_MASK) {
-		float angle = ToFloat(data[idx++], sns::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
+	if (type & s2s::NodeSprCommon::ANGLE_MASK) {
+		float angle = ToFloat(data[idx++], s2s::NodeSprCommon::HIGH_FIXED_TRANS_PRECISION);
 		spr->SetAngle(angle);
 	} 
 
@@ -205,8 +205,8 @@ void SprTransLoader::Load(const s2::SprPtr& spr, const sns::NodeSprCommon& commo
 	//	spr->SetCamera(rc);
 	//}
 
-	spr->SetNeedActor((type & sns::NodeSprCommon::ACTOR_MASK) != 0);
-	spr->SetIntegrate((type & sns::NodeSprCommon::INTEGRATE_MASK) != 0);
+	spr->SetNeedActor((type & s2s::NodeSprCommon::ACTOR_MASK) != 0);
+	spr->SetIntegrate((type & s2s::NodeSprCommon::INTEGRATE_MASK) != 0);
 
 	if (common.GetName()) {
 		spr->SetName(common.GetName());

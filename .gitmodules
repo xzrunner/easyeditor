@@ -1,117 +1,117 @@
 [submodule "editor-external"]
 	path = editor-external
-	url = ssh://git@github.com:xzrunner/external.git
+	url = git@github.com:xzrunner/external.git
 [submodule "particle/src"]
 	path = particle/src
-	url = ssh://git@github.com:xzrunner/ps.git
+	url = git@github.com:xzrunner/ps.git
 [submodule "dtex/src"]
 	path = dtex/src
-	url = ssh://git@github.com:xzrunner/dtex.git
+	url = git@github.com:xzrunner/dtex.git
 [submodule "gtxt/src/gtxt"]
 	path = gtxt/src/gtxt
-	url = ssh://git@github.com:xzrunner/gtxt.git
+	url = git@github.com:xzrunner/gtxt.git
 [submodule "rapidvg/src/rapidvg"]
 	path = rapidvg/src/rapidvg
-	url = ssh://git@github.com:xzrunner/RapidVG.git
+	url = git@github.com:xzrunner/RapidVG.git
 [submodule "ds/src/ds"]
 	path = ds/src/ds
-	url = ssh://git@github.com:xzrunner/ds.git
+	url = git@github.com:xzrunner/ds.git
 [submodule "sm/src/sm"]
 	path = sm/src/sm
-	url = ssh://git@github.com:xzrunner/sm.git
+	url = git@github.com:xzrunner/sm.git
 [submodule "camera25/src/camera25"]
 	path = camera25/src/camera25
-	url = ssh://git@github.com:xzrunner/camera25.git
+	url = git@github.com:xzrunner/camera25.git
 [submodule "fs/src/fs"]
 	path = fs/src/fs
-	url = ssh://git@github.com:xzrunner/fs.git
+	url = git@github.com:xzrunner/fs.git
 [submodule "logger/src/logger"]
 	path = logger/src/logger
-	url = ssh://git@github.com:xzrunner/logger.git
+	url = git@github.com:xzrunner/logger.git
 [submodule "mtrail/src/mtrail"]
 	path = mtrail/src/mtrail
-	url = ssh://git@github.com:xzrunner/mtrail.git
+	url = git@github.com:xzrunner/mtrail.git
 [submodule "cu/src/cu"]
 	path = cu/src/cu
-	url = ssh://git@github.com:xzrunner/cu.git
+	url = git@github.com:xzrunner/cu.git
 [submodule "sprite2"]
 	path = sprite2
-	url = ssh://git@github.com:xzrunner/sprite2.git
+	url = git@github.com:xzrunner/sprite2.git
 [submodule "simp"]
 	path = simp
-	url = ssh://git@github.com:xzrunner/simp.git
+	url = git@github.com:xzrunner/simp.git
 [submodule "gum"]
 	path = gum
-	url = ssh://git@github.com:xzrunner/gum.git
+	url = git@github.com:xzrunner/gum.git
 [submodule "gimg/src/gimg"]
 	path = gimg/src/gimg
-	url = ssh://git@github.com:xzrunner/gimg.git
+	url = git@github.com:xzrunner/gimg.git
 [submodule "rigging/src/rigging"]
 	path = rigging/src/rigging
-	url = ssh://git@github.com:xzrunner/rigging.git
+	url = git@github.com:xzrunner/rigging.git
 [submodule "bimp"]
 	path = bimp
-	url = ssh://git@github.com:xzrunner/bimp.git
+	url = git@github.com:xzrunner/bimp.git
 [submodule "timp"]
 	path = timp
-	url = ssh://git@github.com:xzrunner/timp.git
+	url = git@github.com:xzrunner/timp.git
 [submodule "dtex2"]
 	path = dtex2
-	url = ssh://git@github.com:xzrunner/dtex2.git
+	url = git@github.com:xzrunner/dtex2.git
 [submodule "texpack/src/texpack"]
 	path = texpack/src/texpack
-	url = ssh://git@github.com:xzrunner/texpack.git
+	url = git@github.com:xzrunner/texpack.git
 [submodule "unirender"]
 	path = unirender
-	url = ssh://git@github.com:xzrunner/unirender.git
+	url = git@github.com:xzrunner/unirender.git
 [submodule "shaderlab"]
 	path = shaderlab
-	url = ssh://git@github.com:xzrunner/ShaderLab.git
+	url = git@github.com:xzrunner/ShaderLab.git
 [submodule "tasks/src/tasks"]
 	path = tasks/src/tasks
-	url = ssh://git@github.com:xzrunner/tasks.git
+	url = git@github.com:xzrunner/tasks.git
 [submodule "pimg"]
 	path = pimg
-	url = ssh://git@github.com:xzrunner/pimg.git
+	url = git@github.com:xzrunner/pimg.git
 [submodule "polymesh"]
 	path = polymesh
-	url = ssh://git@github.com:xzrunner/polymesh.git
+	url = git@github.com:xzrunner/polymesh.git
 [submodule "glp/src/glp"]
 	path = glp/src/glp
-	url = ssh://git@github.com:xzrunner/glp.git
+	url = git@github.com:xzrunner/glp.git
 [submodule "uniaudio"]
 	path = uniaudio
-	url = ssh://git@github.com:xzrunner/uniaudio.git
+	url = git@github.com:xzrunner/uniaudio.git
 [submodule "multitask"]
 	path = multitask
-	url = ssh://git@github.com:xzrunner/multitask.git
+	url = git@github.com:xzrunner/multitask.git
 [submodule "clib/flatten"]
 	path = clib/flatten
-	url = ssh://git@github.com:xzrunner/flatten.git
+	url = git@github.com:xzrunner/flatten.git
 [submodule "flatten"]
 	path = flatten
-	url = ssh://git@github.com:xzrunner/flatten.git
+	url = git@github.com:xzrunner/flatten.git
 [submodule "cooking"]
 	path = cooking
-	url = ssh://git@github.com:xzrunner/cooking.git
+	url = git@github.com:xzrunner/cooking.git
 [submodule "memmgr"]
 	path = memmgr
-	url = ssh://git@github.com:xzrunner/memmgr.git
+	url = git@github.com:xzrunner/memmgr.git
 [submodule "playdb"]
 	path = playdb
-	url = ssh://git@github.com:xzrunner/playdb.git
+	url = git@github.com:xzrunner/playdb.git
 [submodule "bs"]
 	path = bs
-	url = ssh://git@github.com:xzrunner/bs.git
+	url = git@github.com:xzrunner/bs.git
 [submodule "guard"]
 	path = guard
-	url = ssh://git@github.com:xzrunner/guard.git
+	url = git@github.com:xzrunner/guard.git
 [submodule "sns"]
-	path = sns
-	url = ssh://git@github.com:xzrunner/sns.git
+	path = s2serializer
+	url = git@github.com:xzrunner/sns.git
 [submodule "js"]
 	path = js
-	url = ssh://git@github.com:xzrunner/js.git
+	url = git@github.com:xzrunner/js.git
 [submodule "node3"]
 	path = node3
-	url = ssh://git@github.com:xzrunner/node3.git
+	url = git@github.com:xzrunner/node3.git

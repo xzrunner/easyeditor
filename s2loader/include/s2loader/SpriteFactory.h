@@ -9,7 +9,7 @@
 
 #include <stdint.h>
 
-namespace sns { class NodeSpr; }
+namespace s2s { class NodeSpr; }
 
 namespace s2loader
 {

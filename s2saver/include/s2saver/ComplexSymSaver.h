@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cu/uncopyable.h>
-#include <sns/ComplexSym.h>
+#include <s2s/ComplexSym.h>
 #include <memmgr/LinearAllocator.h>
 
 namespace s2 { class ComplexSymbol; }
@@ -24,7 +24,7 @@ private:
 private:
 	mm::LinearAllocator m_alloc;
 
-	sns::ComplexSym m_sym;
+	s2s::ComplexSym m_sym;
 
 }; // ComplexSymSaver
 

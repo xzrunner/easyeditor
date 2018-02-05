@@ -57,7 +57,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\sns\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\easyeditor\include;..\..\..\src\easyscale9;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\s2serializer\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\easyeditor\include;..\..\..\src\easyscale9;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -83,7 +83,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\sns\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\easyeditor\include;..\..\..\src\easyscale9;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\bs\include;..\..\..\..\js\include;..\..\..\..\s2serializer\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\easyeditor\include;..\..\..\src\easyscale9;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -267,7 +267,7 @@
     <ProjectReference Include="..\..\..\..\sm\platform\msvc2008\projects\sm.vcxproj">
       <Project>{81630e0d-e1ef-4837-a0ee-30435ed4fe59}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\sns\platform\msvc2017\projects\sns.vcxproj">
+    <ProjectReference Include="..\..\..\..\s2serializer\platform\msvc2017\projects\s2serializer.vcxproj">
       <Project>{b6939acb-3794-4b2a-95da-f99ecdf79d0f}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\sprite2\platform\msvc2008\projects\sprite2.vcxproj">

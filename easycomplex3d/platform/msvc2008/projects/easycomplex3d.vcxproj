@@ -282,7 +282,7 @@
     <ProjectReference Include="..\..\..\..\sm\platform\msvc2008\projects\sm.vcxproj">
       <Project>{81630e0d-e1ef-4837-a0ee-30435ed4fe59}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\sns\platform\msvc2017\projects\sns.vcxproj">
+    <ProjectReference Include="..\..\..\..\s2serializer\platform\msvc2017\projects\s2serializer.vcxproj">
       <Project>{b6939acb-3794-4b2a-95da-f99ecdf79d0f}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\sprite2\platform\msvc2008\projects\sprite2.vcxproj">

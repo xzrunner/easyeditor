@@ -5,8 +5,8 @@
 #include "s2loader/BodymovinAnimLoader.h"
 
 #include <sprite2/AnimSymbol.h>
-#include <sns/NodeFactory.h>
-#include <sns/AnimSym.h>
+#include <s2s/NodeFactory.h>
+#include <s2s/AnimSym.h>
 #include <memmgr/LinearAllocator.h>
 #include <gum/FilepathHelper.h>
 
@@ -79,13 +79,13 @@ void AnimSymLoader::LoadBin(const simp::NodeAnimation* node)
 void AnimSymLoader::LoadSns(const CU_STR& filepath)
 {
 	mm::LinearAllocator alloc;
-	auto sym = sns::NodeFactory::CreateSymFromBin(alloc, filepath.c_str());
+	auto sym = s2s::NodeFactory::CreateSymFromBin(alloc, filepath.c_str());
 	assert(sym);
 
 	CU_STR dir = gum::FilepathHelper::Dir(filepath);
 
 	EasyAnimLoader loader(m_sym, m_spr_loader);
-	loader.LoadSns(dynamic_cast<sns::AnimSym*>(sym), dir);
+	loader.LoadSns(dynamic_cast<s2s::AnimSym*>(sym), dir);
 
 	m_sym.LoadCopy();
 	m_sym.BuildCurr();

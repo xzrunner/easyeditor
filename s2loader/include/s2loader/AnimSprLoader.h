@@ -8,7 +8,7 @@
 
 namespace s2 { class AnimSprite; }
 namespace simp { class NodeAnimationSpr; }
-namespace sns { class NodeSpr; }
+namespace s2s { class NodeSpr; }
 
 namespace s2loader
 {
@@ -20,7 +20,7 @@ public:
 
 	void LoadJson(const Json::Value& val, const CU_STR& dir);
 	void LoadBin(const simp::NodeAnimationSpr* node);
-	void LoadSns(const sns::NodeSpr* spr);
+	void LoadSns(const s2s::NodeSpr* spr);
 
 private:
 	s2::AnimSprite& m_spr;

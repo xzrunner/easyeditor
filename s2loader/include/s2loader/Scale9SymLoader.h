@@ -12,7 +12,7 @@
 
 namespace s2 { class Scale9Symbol; class Sprite; }
 namespace simp { class NodeScale9; }
-namespace sns { class NodeSprCommon; }
+namespace s2s { class NodeSprCommon; }
 
 namespace s2loader
 {
@@ -31,7 +31,7 @@ public:
 
 private:
 	std::shared_ptr<s2::Sprite> LoadSprite(uint32_t sym_id, uint16_t dir, uint16_t mirror);
-	std::shared_ptr<s2::Sprite> LoadSprite(const sns::NodeSprCommon& spr_common);
+	std::shared_ptr<s2::Sprite> LoadSprite(const s2s::NodeSprCommon& spr_common);
 
 private:
 	s2::Scale9Symbol& m_sym;

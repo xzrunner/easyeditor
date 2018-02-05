@@ -5,7 +5,7 @@
 #include <sprite2/typedef.h>
 #include <sprite2/config.h>
 #include <cu/cu_stl.h>
-#include <sns/NodeSprCommon.h>
+#include <s2s/NodeSprCommon.h>
 #include <painting2/RenderColorCommon.h>
 #include <painting2/RenderColorMap.h>
 #include <painting2/CameraMode.h>
@@ -32,8 +32,8 @@ public:
 	void Load(const Json::Value& val, const CU_STR& dir);
 	void Store(Json::Value& val, const CU_STR& dir);
 
-	void Load(const sns::NodeSprCommon& node_spr, const s2::SprPtr& spr);
-	void Load(const sns::NodeSprCommon& node_spr);
+	void Load(const s2s::NodeSprCommon& node_spr, const s2::SprPtr& spr);
+	void Load(const s2s::NodeSprCommon& node_spr);
 
 protected:
 	// geometry

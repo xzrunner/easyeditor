@@ -10,7 +10,7 @@
 #include <sprite2/LerpEase.h>
 #include <sprite2/AnimLerp.h>
 #include <bs/FixedPointNum.h>
-#include <sns/NodeSpr.h>
+#include <s2s/NodeSpr.h>
 
 #include <assert.h>
 
@@ -57,7 +57,7 @@ void EasyAnimLoader::LoadBin(const simp::NodeAnimation* node)
 	}
 }
 
-void EasyAnimLoader::LoadSns(const sns::AnimSym* sym, const CU_STR& dir)
+void EasyAnimLoader::LoadSns(const s2s::AnimSym* sym, const CU_STR& dir)
 {
 	for (int layer = 0; layer < sym->m_layers_n; ++layer)
 	{
@@ -217,7 +217,7 @@ void EasyAnimLoader::LoadLerps(const simp::NodeAnimation::Frame* src, s2::AnimSy
 	}
 }
 
-void EasyAnimLoader::LoadActors(const sns::AnimSym::Frame& src, s2::AnimSymbol::Frame& dst, const CU_STR& dir)
+void EasyAnimLoader::LoadActors(const s2s::AnimSym::Frame& src, s2::AnimSymbol::Frame& dst, const CU_STR& dir)
 {
 	dst.sprs.reserve(src.actors_n);
 	for (int i = 0; i < src.actors_n; ++i)
@@ -228,7 +228,7 @@ void EasyAnimLoader::LoadActors(const sns::AnimSym::Frame& src, s2::AnimSymbol::
 	}
 }
 
-void EasyAnimLoader::LoadLerps(const sns::AnimSym::Frame& src, s2::AnimSymbol::Frame& dst)
+void EasyAnimLoader::LoadLerps(const s2s::AnimSym::Frame& src, s2::AnimSymbol::Frame& dst)
 {
 	dst.lerps.reserve(src.lerps_n);
 	for (int i = 0; i < src.lerps_n; ++i)

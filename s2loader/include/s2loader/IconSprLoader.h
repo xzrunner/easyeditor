@@ -8,7 +8,7 @@
 
 namespace s2 { class IconSprite; }
 namespace simp { class NodeIconSpr; }
-namespace sns { class IconSpr; }
+namespace s2s { class IconSpr; }
 
 namespace s2loader
 {
@@ -20,7 +20,7 @@ public:
 
 	void LoadJson(const Json::Value& val, const CU_STR& dir);
 	void LoadBin(const simp::NodeIconSpr* node);
-	void LoadSns(const sns::IconSpr* spr);
+	void LoadSns(const s2s::IconSpr* spr);
 
 private:
 	s2::IconSprite& m_spr;
