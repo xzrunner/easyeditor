@@ -10,6 +10,21 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\Camera.cpp" />
+    <ClCompile Include="..\..\..\source\PrimitiveDraw.cpp" />
+    <ClCompile Include="..\..\..\source\Viewport.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\painting3\AABB.h" />
+    <ClInclude Include="..\..\..\include\painting3\Camera.h" />
+    <ClInclude Include="..\..\..\include\painting3\PrimitiveDraw.h" />
+    <ClInclude Include="..\..\..\include\painting3\Ray.h" />
+    <ClInclude Include="..\..\..\include\painting3\Viewport.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\painting3\AABB.inl" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>3.painting3</ProjectName>
     <ProjectGuid>{0BA2F6EF-159C-4330-8A7B-74C931CFF5F9}</ProjectGuid>
@@ -53,7 +68,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\guard\include;..\..\..\..\memmgr\include;..\..\..\..\shaderlab\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__STDC_LIMIT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -67,7 +82,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\sm\src\sm;..\..\..\..\guard\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\guard\include;..\..\..\..\memmgr\include;..\..\..\..\shaderlab\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__STDC_LIMIT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

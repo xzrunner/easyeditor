@@ -1,8 +1,8 @@
 #include "s2loader/ModelSymLoader.h"
 
+#include <painting3/AABB.h>
 #include <sprite2/ModelSymbol.h>
 #include <node3/SurfaceFactory.h>
-#include <node3/AABB.h>
 #include <node3/ModelParametric.h>
 #include <node3/AssimpHelper.h>
 
@@ -26,7 +26,7 @@ void ModelSymLoader::LoadFromFile(const CU_STR& filepath)
 		
 		n3::Surface* surface = n3::SurfaceFactory::Create(name.string());
 
-		n3::AABB aabb;
+		pt3::AABB aabb;
 		auto model = std::make_shared<n3::ModelParametric>(surface, aabb);
 
 		m_sym.SetModel(model);
@@ -34,7 +34,7 @@ void ModelSymLoader::LoadFromFile(const CU_STR& filepath)
 	}
 	else
 	{
-		n3::AABB aabb;
+		pt3::AABB aabb;
 		auto model = n3::AssimpHelper::Load(filepath.c_str(), aabb);
 
 		m_sym.SetModel(model);

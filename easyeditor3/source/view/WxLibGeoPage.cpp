@@ -3,10 +3,10 @@
 #include <ee0/WxLibraryList.h>
 #include <ee0/WxLibraryItem.h>
 
+#include <painting3/AABB.h>
 #include <node0/SceneNode.h>
 #include <node3/SurfaceFactory.h>
 #include <node3/ModelParametric.h>
-#include <node3/AABB.h>
 #include <node3/ParametricEquations.h>
 #include <node3/CompModel.h>
 #include <node3/CompAABB.h>

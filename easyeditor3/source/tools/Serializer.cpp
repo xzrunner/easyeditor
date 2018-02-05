@@ -2,9 +2,9 @@
 #include "ee3/WxStagePage.h"
 #include "ee3/WxStageCanvas.h"
 
+#include <painting3/Camera.h>
 #include <node0/SceneNode.h>
 #include <node3/SerializeSystem.h>
-#include <node3/Camera.h>
 #include <js/RapidJsonHelper.h>
 #include <guard/check.h>
 
@@ -60,11 +60,11 @@ void Serializer::LoadFroimJson(const std::string& filepath, WxStagePage* stage)
 	}
 
 	auto canvas = std::dynamic_pointer_cast<const WxStageCanvas>(stage->GetImpl().GetCanvas());
-	auto& cam = const_cast<n3::Camera&>(canvas->GetCamera());
+	auto& cam = const_cast<pt3::Camera&>(canvas->GetCamera());
 	LoadCamera(doc["camera"], cam);
 }
 
-rapidjson::Value Serializer::StoreCamera(const n3::Camera& cam, rapidjson::MemoryPoolAllocator<>& alloc)
+rapidjson::Value Serializer::StoreCamera(const pt3::Camera& cam, rapidjson::MemoryPoolAllocator<>& alloc)
 {
 	rapidjson::Value val;
 	val.SetObject();
@@ -96,7 +96,7 @@ rapidjson::Value Serializer::StoreCamera(const n3::Camera& cam, rapidjson::Memor
 	return val;
 }
 
-void Serializer::LoadCamera(const rapidjson::Value& val, n3::Camera& cam)
+void Serializer::LoadCamera(const rapidjson::Value& val, pt3::Camera& cam)
 {
 	sm::vec3 pos;
 	auto& pos_val = val["pos"];

@@ -57,7 +57,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\src\easyone;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor2\include;..\..\..\..\easyeditor3\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\js\include;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\node2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easyone\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src\easyone;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor2\include;..\..\..\..\easyeditor3\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\painting3\include;..\..\..\..\js\include;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\node2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easyone\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -83,7 +83,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\src\easyone;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor2\include;..\..\..\..\easyeditor3\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\js\include;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\node2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easyone\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src\easyone;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor2\include;..\..\..\..\easyeditor3\include;..\..\..\..\cu\src;..\..\..\..\ds\src\ds;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\painting3\include;..\..\..\..\js\include;..\..\..\..\guard\include;..\..\..\..\node0\include;..\..\..\..\node2\include;..\..\..\..\node3\include;..\..\..\..\memmgr\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easyone\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -226,6 +226,9 @@
     <ProjectReference Include="..\..\..\..\painting2\platform\msvc\projects\painting2.vcxproj">
       <Project>{18829913-b301-424c-8cd8-d95773038029}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\painting3\platform\msvc\projects\painting3.vcxproj">
+      <Project>{0ba2f6ef-159c-4330-8a7b-74c931cff5f9}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\particle\platform\msvc2008\projects\particle.vcxproj">
       <Project>{ee2229a3-ad5f-46e7-afab-729f8aa18036}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -247,6 +250,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\s2loader\platform\msvc\projects\s2loader.vcxproj">
       <Project>{e5a136ee-7ee1-4682-a1b1-c942cb2110e7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\s2saver\platform\msvc\projects\s2saver.vcxproj">
+      <Project>{6032ddf2-fe43-4d51-afaa-f6b6a6d855ad}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\shaderlab\platform\msvc2008\projects\shaderlab.vcxproj">
       <Project>{5c357759-ca95-42e1-b907-dfb87a995f6c}</Project>

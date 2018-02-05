@@ -4,10 +4,10 @@
 #include <ee0/color_config.h>
 #include <ee0/EditOP.h>
 
-#include <node3/PrimitiveDraw.h>
+#include <painting3/PrimitiveDraw.h>
+#include <sprite2/RenderCtxStack.h>
 #include <node3/RenderCtxStack.h>
 #include <node3/DrawNode.h>
-#include <sprite2/RenderCtxStack.h>
 
 namespace ee3
 {
@@ -88,19 +88,19 @@ void WxStageCanvas::OnDrawSprites() const
 
 void WxStageCanvas::DrawBackground() const
 {
-	n3::PrimitiveDraw::SetColor(0xff000088);
-	n3::PrimitiveDraw::Cross(sm::vec3(0, 0, 0), sm::vec3(100, 100, 100));
+	pt3::PrimitiveDraw::SetColor(0xff000088);
+	pt3::PrimitiveDraw::Cross(sm::vec3(0, 0, 0), sm::vec3(100, 100, 100));
 
 	static const int TOT_LEN = 100;
 	static const int GRID_EDGE = 5;
 	for (int z = -TOT_LEN; z < TOT_LEN; z += GRID_EDGE) {
 		for (int x = -TOT_LEN; x < TOT_LEN; x += GRID_EDGE) {
 			if ((x + z) % (GRID_EDGE * 2) == 0) {
-				n3::PrimitiveDraw::SetColor(0xff444444);
+				pt3::PrimitiveDraw::SetColor(0xff444444);
 			} else {
-				n3::PrimitiveDraw::SetColor(0xff888888);
+				pt3::PrimitiveDraw::SetColor(0xff888888);
 			}
-			n3::PrimitiveDraw::Rect(
+			pt3::PrimitiveDraw::Rect(
 				sm::vec3(x, 0, z),
 				sm::vec3(x + GRID_EDGE, 0, z + GRID_EDGE));
 		}

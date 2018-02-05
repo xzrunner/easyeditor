@@ -2,15 +2,15 @@
 
 #include <ee0/SubjectMgr.h>
 
+#include <painting3/Camera.h>
+#include <painting3/Viewport.h>
 #include <node0/SceneNode.h>
-#include <node3/Camera.h>
-#include <node3/Viewport.h>
 #include <node3/CompTransform.h>
 
 namespace ee3
 {
 
-NodeRotateState::NodeRotateState(const n3::Camera& cam, const n3::Viewport& vp, ee0::SubjectMgr& sub_mgr,
+NodeRotateState::NodeRotateState(const pt3::Camera& cam, const pt3::Viewport& vp, ee0::SubjectMgr& sub_mgr,
 	                             const ee0::SelectionSet<n0::SceneNode>& selection)
 	: m_cam(cam)
 	, m_vp(vp)

@@ -6,7 +6,7 @@
 #include <ee0/MessageID.h>
 #include <ee0/SubjectMgr.h>
 
-#include <node3/Camera.h>
+#include <painting3/Camera.h>
 
 #include <wx/defs.h>
 
@@ -15,7 +15,7 @@ namespace ee3
 
 static const float MOUSE_SENSITIVITY = 0.3f;
 
-CamControlOP::CamControlOP(n3::Camera& cam, const n3::Viewport& vp,
+CamControlOP::CamControlOP(pt3::Camera& cam, const pt3::Viewport& vp,
 	                       ee0::SubjectMgr& sub_mgr)
 	: ee0::EditOP()
 	, m_cam(cam)

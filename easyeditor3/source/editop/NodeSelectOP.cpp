@@ -6,9 +6,9 @@
 #include <ee0/color_config.h>
 
 #include <guard/check.h>
+#include <painting3/Ray.h>
+#include <painting3/PrimitiveDraw.h>
 #include <node0/SceneNode.h>
-#include <node3/PrimitiveDraw.h>
-#include <node3/Ray.h>
 #include <node3/Math.h>
 #include <node3/CompAABB.h>
 #include <node3/CompTransform.h>
@@ -30,7 +30,7 @@ bool NodeSelectOP::OnDraw() const
 	m_stage.GetNodeSelection().Traverse(
 		[](const n0::SceneNodePtr& node)->bool
 		{
-			n3::PrimitiveDraw::SetColor(ee0::MID_RED.ToABGR());
+			pt3::PrimitiveDraw::SetColor(ee0::MID_RED.ToABGR());
 
 			auto& caabb = node->GetComponent<n3::CompAABB>();
 			auto& ctrans = node->GetComponent<n3::CompTransform>();
@@ -44,7 +44,7 @@ bool NodeSelectOP::OnDraw() const
 				parent = parent->GetParent();
 			}
 
-			n3::PrimitiveDraw::Cube(prev_mt * ctrans.GetTransformMat(), caabb.GetAABB());
+			pt3::PrimitiveDraw::Cube(prev_mt * ctrans.GetTransformMat(), caabb.GetAABB());
 
 			return true;
 		}
@@ -62,7 +62,7 @@ n0::SceneNodePtr NodeSelectOP::QueryByPos(int screen_x, int screen_y) const
 	auto& vp = canvas->GetViewport();
 	auto& cam = canvas->GetCamera();
 	sm::vec3 ray_dir = vp.TransPos3ScreenToDir(sm::vec2(screen_x, screen_y), cam);
-	n3::Ray ray(cam.GetPos(), ray_dir);
+	pt3::Ray ray(cam.GetPos(), ray_dir);
 	for (auto& node : nodes)
 	{
 		auto& caabb = node->GetComponent<n3::CompAABB>();
