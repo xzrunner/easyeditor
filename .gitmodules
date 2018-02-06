@@ -1,5 +1,5 @@
 [submodule "editor-external"]
-	path = editor-external
+	path = external
 	url = git@github.com:xzrunner/external.git
 [submodule "particle/src"]
 	path = particle/src

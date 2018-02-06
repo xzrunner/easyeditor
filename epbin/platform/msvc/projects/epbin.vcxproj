@@ -53,7 +53,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\c99;..\..\..\..\gimg\src\gimg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\external\libpng\include;..\..\..\..\external\lua\include;..\..\..\..\external\c99;..\..\..\..\gimg\src\gimg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -64,7 +64,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>libpng16d.lib;luad.lib;zlibd.lib;lzmad.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\zlib\lib;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\intel;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\external\lua\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\zlib\lib;..\..\..\..\external\lzma\lib;..\..\..\..\external\intel;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
@@ -73,7 +73,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\c99;..\..\..\..\gimg\src\gimg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\external\libpng\include;..\..\..\..\external\lua\include;..\..\..\..\external\c99;..\..\..\..\gimg\src\gimg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -83,16 +83,16 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>libpng16.lib;lua.lib;zlib.lib;lzma.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\zlib\lib;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\intel;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\external\lua\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\zlib\lib;..\..\..\..\external\lzma\lib;..\..\..\..\external\intel;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    <ResourceCompile Include="..\..\..\..\external\wx\include\wx\msw\wx.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>

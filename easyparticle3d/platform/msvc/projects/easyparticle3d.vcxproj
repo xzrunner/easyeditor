@@ -55,7 +55,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\ds\src\ds;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easytrail\src;..\..\..\..\easymask\src;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\particle\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\ds\src\ds;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easytrail\src;..\..\..\..\easymask\src;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\particle\src;..\..\..\..\external\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -69,7 +69,7 @@
     <Link>
       <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_stc.lib;wxmsw31ud_core.lib;wxbase31ud_net.lib;wxbase31ud.lib;wxscintillad.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;comctl32.lib;rpcrt4.lib;jsond.lib;freetype281d.lib;luad.lib;libpng16d.lib;glew32s.lib;lzmad.lib;cjsond.lib;pthreadVC2.lib;wsock32.lib;OpenAL32.lib;libmpg123d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\easyparticle3d\x86\Debug\easyparticle3d.exe</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\boost\lib;..\..\..\..\editor-external\mpg123\lib;..\..\..\..\editor-external\openal32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\external\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\pthread\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\boost\lib;..\..\..\..\external\mpg123\lib;..\..\..\..\external\openal32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\easyparticle3d\x86\Debug\easyparticle3d.pdb</ProgramDatabaseFile>
@@ -81,7 +81,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\ds\src\ds;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easytrail\src;..\..\..\..\easymask\src;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\particle\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\ds\src\ds;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easytrail\src;..\..\..\..\easymask\src;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\particle\src;..\..\..\..\external\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -94,7 +94,7 @@
     <Link>
       <AdditionalDependencies>wxmsw31u_gl.lib;wxmsw31u_propgrid.lib;wxmsw31u_adv.lib;wxmsw31u_stc.lib;wxmsw31u_core.lib;wxbase31u_net.lib;wxbase31u.lib;wxscintilla.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;json.lib;freetype281.lib;lua.lib;libpng16.lib;lzma.lib;cjson.lib;pthreadVC2.lib;wsock32.lib;OpenAL32.lib;libmpg123.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\easyparticle3d\x86\Release\easyparticle3d.exe</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\boost\lib;..\..\..\..\editor-external\mpg123\lib;..\..\..\..\editor-external\openal32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\external\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\pthread\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\boost\lib;..\..\..\..\external\mpg123\lib;..\..\..\..\external\openal32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\easyparticle3d\x86\Release\easyparticle3d.pdb</ProgramDatabaseFile>
@@ -115,9 +115,9 @@
     <ClInclude Include="..\..\..\src\easyparticle3d\Task.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    <ResourceCompile Include="..\..\..\..\external\wx\include\wx\msw\wx.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>

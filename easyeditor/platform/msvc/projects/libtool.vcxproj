@@ -53,7 +53,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\simp\include;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\editor-external\stackwalker;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libjpeg\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\simp\include;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\external\stackwalker;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\c99;..\..\..\..\external\libjpeg\include;..\..\..\..\external\libpng\include;..\..\..\..\external\wx\include;..\..\..\..\external\lua\include;..\..\..\..\external\gl\include;..\..\..\..\external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -70,7 +70,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\simp\include;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\editor-external\stackwalker;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\libjpeg\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\simp\include;..\..\..\..\memmgr\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\external\stackwalker;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\c99;..\..\..\..\external\libjpeg\include;..\..\..\..\external\libpng\include;..\..\..\..\external\wx\include;..\..\..\..\external\lua\include;..\..\..\..\external\gl\include;..\..\..\..\external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -82,7 +82,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\editor-external\stackwalker\StackWalker.cpp" />
+    <ClCompile Include="..\..\..\..\external\stackwalker\StackWalker.cpp" />
     <ClCompile Include="..\..\..\source\tool\ConsoleProgressBar.cpp" />
     <ClCompile Include="..\..\..\source\tool\CrossGuides.cpp" />
     <ClCompile Include="..\..\..\source\tool\EditedFileStack.cpp" />
@@ -100,7 +100,7 @@
     <ClCompile Include="..\..\..\source\tool\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\editor-external\stackwalker\StackWalker.h" />
+    <ClInclude Include="..\..\..\..\external\stackwalker\StackWalker.h" />
     <ClInclude Include="..\..\..\include\ee\ConsoleProgressBar.h" />
     <ClInclude Include="..\..\..\include\ee\CrossGuides.h" />
     <ClInclude Include="..\..\..\include\ee\EditedFileStack.h" />

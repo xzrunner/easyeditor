@@ -53,7 +53,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\sm\src\sm;..\..\..\..\memmgr\include;..\..\..\..\editor-external\clipper;..\..\..\..\editor-external\triangle\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\sm\src\sm;..\..\..\..\memmgr\include;..\..\..\..\external\clipper;..\..\..\..\external\triangle\include;..\..\..\..\external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -70,7 +70,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\sm\src\sm;..\..\..\..\memmgr\include;..\..\..\..\editor-external\clipper;..\..\..\..\editor-external\triangle\include;..\..\..\..\editor-external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\sm\src\sm;..\..\..\..\memmgr\include;..\..\..\..\external\clipper;..\..\..\..\external\triangle\include;..\..\..\..\external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -82,7 +82,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\editor-external\clipper\clipper.cpp" />
+    <ClCompile Include="..\..\..\..\external\clipper\clipper.cpp" />
     <ClCompile Include="..\..\..\source\math\alg\DelaunayTriangulation.cpp" />
     <ClCompile Include="..\..\..\source\math\alg\MinBoundingBox.cpp" />
     <ClCompile Include="..\..\..\source\math\alg\PolygonClipper.cpp" />
@@ -91,7 +91,7 @@
     <ClCompile Include="..\..\..\source\math\Math2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\editor-external\clipper\clipper.hpp" />
+    <ClInclude Include="..\..\..\..\external\clipper\clipper.hpp" />
     <ClInclude Include="..\..\..\include\ee\DelaunayTriangulation.h" />
     <ClInclude Include="..\..\..\include\ee\Math2D.h" />
     <ClInclude Include="..\..\..\include\ee\math_common.h" />

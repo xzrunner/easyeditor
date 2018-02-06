@@ -53,7 +53,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\pvrtextool\include;..\..\..\..\editor-external\rg_etc1;..\..\..\..\editor-external\etcpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\external\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;..\..\..\..\external\libpng\include;..\..\..\..\external\gl\include;..\..\..\..\external\pvrtextool\include;..\..\..\..\external\rg_etc1;..\..\..\..\external\etcpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -67,7 +67,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\pvrtextool\include;..\..\..\..\editor-external\rg_etc1;..\..\..\..\editor-external\etcpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\external\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;..\..\..\..\external\libpng\include;..\..\..\..\external\gl\include;..\..\..\..\external\pvrtextool\include;..\..\..\..\external\rg_etc1;..\..\..\..\external\etcpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -77,12 +77,12 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\editor-external\etcpack\c_wrap_etcpack.cpp" />
-    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcdec.cxx" />
-    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcimage.cxx" />
-    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcpack.cxx" />
-    <ClCompile Include="..\..\..\..\editor-external\rg_etc1\rg_etc1.cpp" />
-    <ClCompile Include="..\..\..\..\editor-external\rg_etc1\rg_etc1_for_c.cpp" />
+    <ClCompile Include="..\..\..\..\external\etcpack\c_wrap_etcpack.cpp" />
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcdec.cxx" />
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcimage.cxx" />
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcpack.cxx" />
+    <ClCompile Include="..\..\..\..\external\rg_etc1\rg_etc1.cpp" />
+    <ClCompile Include="..\..\..\..\external\rg_etc1\rg_etc1_for_c.cpp" />
     <ClCompile Include="..\..\..\src\libimage\BlockCompress.cpp" />
     <ClCompile Include="..\..\..\src\libimage\ExtractOutlineFine.cpp" />
     <ClCompile Include="..\..\..\src\libimage\ExtractOutlineRaw.cpp" />
@@ -103,11 +103,11 @@
     <ClCompile Include="..\..\..\src\libimage\TransToPVR.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\editor-external\etcpack\c_wrap_etcpack.h" />
-    <ClInclude Include="..\..\..\..\editor-external\etcpack\etcpack_lib.h" />
-    <ClInclude Include="..\..\..\..\editor-external\etcpack\source\etcimage.h" />
-    <ClInclude Include="..\..\..\..\editor-external\rg_etc1\rg_etc1.h" />
-    <ClInclude Include="..\..\..\..\editor-external\rg_etc1\rg_etc1_for_c.h" />
+    <ClInclude Include="..\..\..\..\external\etcpack\c_wrap_etcpack.h" />
+    <ClInclude Include="..\..\..\..\external\etcpack\etcpack_lib.h" />
+    <ClInclude Include="..\..\..\..\external\etcpack\source\etcimage.h" />
+    <ClInclude Include="..\..\..\..\external\rg_etc1\rg_etc1.h" />
+    <ClInclude Include="..\..\..\..\external\rg_etc1\rg_etc1_for_c.h" />
     <ClInclude Include="..\..\..\src\easyimage.h" />
     <ClInclude Include="..\..\..\src\libimage\BlockCompress.h" />
     <ClInclude Include="..\..\..\src\libimage\config.h" />
