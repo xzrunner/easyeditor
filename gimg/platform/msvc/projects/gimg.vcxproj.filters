@@ -7,6 +7,12 @@
     <Filter Include="io">
       <UniqueIdentifier>{ed054920-4bf0-4a93-8ec4-afd0542d6336}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{7d5c229e-c659-4592-920a-15c9e2e1d444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\etcpack">
+      <UniqueIdentifier>{e7431537-ccfc-48b4-a7c9-01ac0b604510}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\gimg\gimg_bmp.c">
@@ -37,6 +43,27 @@
       <Filter>io</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\gimg\gimg_utility.c" />
+    <ClCompile Include="..\..\..\..\external\etcpack\etcpackwrap.cpp">
+      <Filter>external\etcpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\external\etcpack\c_wrap_etcpack.cpp">
+      <Filter>external\etcpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\external\etcpack\etcdecwrap.cpp">
+      <Filter>external\etcpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\external\etcpack\etcimagewrap.cpp">
+      <Filter>external\etcpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcdec.cxx">
+      <Filter>external\etcpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcimage.cxx">
+      <Filter>external\etcpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcpack.cxx">
+      <Filter>external\etcpack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\gimg\gimg_bmp.h">
@@ -71,5 +98,14 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\gimg\gimg_typedef.h" />
     <ClInclude Include="..\..\..\src\gimg\gimg_utility.h" />
+    <ClInclude Include="..\..\..\..\external\etcpack\c_wrap_etcpack.h">
+      <Filter>external\etcpack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\external\etcpack\etcpack_lib.h">
+      <Filter>external\etcpack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\external\etcpack\source\etcimage.h">
+      <Filter>external\etcpack</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

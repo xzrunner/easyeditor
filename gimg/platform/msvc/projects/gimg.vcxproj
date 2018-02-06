@@ -15,7 +15,7 @@
     <ProjectGuid>{D1ACC0BE-3A2B-450F-A708-F3E84DF5E5AD}</ProjectGuid>
     <RootNamespace>gimg</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -77,6 +77,13 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\external\etcpack\c_wrap_etcpack.cpp" />
+    <ClCompile Include="..\..\..\..\external\etcpack\etcdecwrap.cpp" />
+    <ClCompile Include="..\..\..\..\external\etcpack\etcimagewrap.cpp" />
+    <ClCompile Include="..\..\..\..\external\etcpack\etcpackwrap.cpp" />
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcdec.cxx" />
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcimage.cxx" />
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcpack.cxx" />
     <ClCompile Include="..\..\..\src\gimg\gimg_bmp.c" />
     <ClCompile Include="..\..\..\src\gimg\gimg_etc1.c" />
     <ClCompile Include="..\..\..\src\gimg\gimg_etc2.c" />
@@ -89,6 +96,9 @@
     <ClCompile Include="..\..\..\src\gimg\gimg_utility.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\external\etcpack\c_wrap_etcpack.h" />
+    <ClInclude Include="..\..\..\..\external\etcpack\etcpack_lib.h" />
+    <ClInclude Include="..\..\..\..\external\etcpack\source\etcimage.h" />
     <ClInclude Include="..\..\..\src\gimg\gimg_bmp.h" />
     <ClInclude Include="..\..\..\src\gimg\gimg_etc1.h" />
     <ClInclude Include="..\..\..\src\gimg\gimg_etc2.h" />
