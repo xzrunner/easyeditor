@@ -18,7 +18,7 @@ namespace eterrain3d
 class DemoOcean : public IDemo
 {
 public:
-	DemoOcean(n3::Camera& cam);
+	DemoOcean(pt3::Camera& cam);
 
 	virtual void Load() override;
 	virtual void Draw() const override;
@@ -36,7 +36,7 @@ private:
 	};
 
 private:
-	n3::Camera& m_cam;
+	pt3::Camera& m_cam;
 
 	std::shared_ptr<ee::Image> m_image;
 

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>6.easytexpacker</ProjectName>
+    <ProjectGuid>{A9FB8F26-50DE-43E1-B6E9-4264EA4A9A8F}</ProjectGuid>
+    <RootNamespace>easytexpacker</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\easytexpacker\x86\Debug\</OutDir>
+    <IntDir>..\easytexpacker\x86\Debug\obj\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\easytexpacker\x86\Release\</OutDir>
+    <IntDir>..\easytexpacker\x86\Release\obj\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\gimg\src\gimg;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\src\easytexpacker;..\..\..\external\RectangleBinPack;..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\box2d\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\easytexpacker\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\easytexpacker\x86\Debug\easytexpacker.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_stc.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxscintillad.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;jsond.lib;freetype281d.lib;luad.lib;box2d.lib;libpng16d.lib;cjsond.lib;pthreadVC2.lib;lzmad.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\easytexpacker\x86\Debug\easytexpacker.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\box2d\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\easytexpacker\x86\Debug\easytexpacker.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\gimg\src\gimg;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\src\easytexpacker;..\..\..\external\RectangleBinPack;..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\box2d\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\easytexpacker\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\easytexpacker\x86\Release\easytexpacker.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw31u_gl.lib;wxmsw31u_propgrid.lib;wxmsw31u_adv.lib;wxmsw31u_stc.lib;wxmsw31u_core.lib;wxbase31u.lib;wxscintilla.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;json.lib;freetype281.lib;lua.lib;box2d.lib;libpng16.lib;cjson.lib;pthreadVC2.lib;lzma.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\easytexpacker\x86\Release\easytexpacker.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\box2d\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\easytexpacker\x86\Release\easytexpacker.pdb</ProgramDatabaseFile>
+      <StripPrivateSymbols />
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easytexpacker\ArrangeSpriteImpl.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\ArrangeSpriteOP.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\BaseStrategy.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\BinaryTreeArrange.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\BinaryTreeNewArrange.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\Context.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\DirectlyArrange.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\FileAdapter.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\FileIO.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\Frame.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\ImageToolbarPage.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\Love2dCode.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\main.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\MaxRectsBinaryArrange.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\MeshToolbarPage.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\RectBinArrange.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\RegularToolbarPage.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\Task.cpp" />
+    <ClCompile Include="..\..\..\src\easytexpacker\ToolbarPanel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easytexpacker\ArrangeSpriteImpl.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\ArrangeSpriteOP.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\BaseStrategy.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\BinaryTreeArrange.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\BinaryTreeNewArrange.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\config.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\const.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\Context.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\DirectlyArrange.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\FileAdapter.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\FileIO.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\Frame.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\ImageToolbarPage.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\Love2dCode.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\main.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\MaxRectsBinaryArrange.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\MeshToolbarPage.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\RectBinArrange.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\RegularToolbarPage.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\Task.h" />
+    <ClInclude Include="..\..\..\src\easytexpacker\ToolBarPanel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\easybuilder\platform\msvc\projects\libbuilder.vcxproj">
+      <Project>{11082ade-13ca-49c7-9f6d-c82f69333ad7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libdata.vcxproj">
+      <Project>{77e15c91-f70b-4141-a0fc-4e82d1c43bd2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libedit.vcxproj">
+      <Project>{8d18eb4e-fddf-484a-9784-3ac9dcbcc2a1}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libgui.vcxproj">
+      <Project>{fa0a46ec-e1ab-4830-8898-c953eebdf7a5}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libmath.vcxproj">
+      <Project>{8cd2d282-45ee-46b4-a8d8-291e8e445be7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libmsg.vcxproj">
+      <Project>{d4baa61e-9918-4f72-b772-88afd4ee76bc}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libphysics.vcxproj">
+      <Project>{126f1aa2-182e-4f85-b77e-aab86c6e2fb6}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\librender.vcxproj">
+      <Project>{6216b0f5-5b88-4ba8-88f3-02585c4158b4}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libtool.vcxproj">
+      <Project>{e1843ab3-962e-4f9c-b471-74ec36dc94b0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libview.vcxproj">
+      <Project>{26a3bb4b-6ac6-4280-92e3-666056aec52a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyimage\platform\msvc\projects\libimage.vcxproj">
+      <Project>{d41c0b3e-f0a0-4a1f-a568-0100c839406c}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyshape\platform\msvc\projects\libshape.vcxproj">
+      <Project>{c1a2e85c-cf62-46a9-b46c-dfa12ec725e7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\particle\platform\msvc\projects\particle.vcxproj">
+      <Project>{ee2229a3-ad5f-46e7-afab-729f8aa18036}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="libtexpacker.vcxproj">
+      <Project>{e66ecf2b-05f4-42cc-91b2-b6f8604ca1a8}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

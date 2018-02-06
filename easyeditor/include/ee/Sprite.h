@@ -10,7 +10,7 @@
 #include <json/json.h>
 #include <rapidjson/document.h>
 
-namespace sns { class NodeSpr; }
+namespace s2s { class NodeSpr; }
 
 namespace ee
 {
@@ -51,8 +51,8 @@ public:
 	virtual void Load(const Json::Value& val, const std::string& dir = "");
 	virtual void Store(Json::Value& val, const std::string& dir = "") const;
 	// new
-	virtual void Load(const sns::NodeSpr*);
-	virtual void Store(sns::NodeSpr*, rapidjson::Value& val, const std::string& dir = "") const;
+	virtual void Load(const s2s::NodeSpr*);
+	virtual void Store(s2s::NodeSpr*, rapidjson::Value& val, const std::string& dir = "") const;
 
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 

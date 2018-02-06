@@ -1,7 +1,7 @@
 #include "RectIcon.h"
 
 #include <gum/JsonSerializer.h>
-#include <sns/IconSym.h>
+#include <s2s/IconSym.h>
 #include <bs/FixedPointNum.h>
 
 namespace eicon
@@ -23,15 +23,15 @@ void RectIcon::StoreToFile(Json::Value& value) const
 	value["ymax"] = m_max.y;
 }
 
-void RectIcon::LoadFromFile(const sns::IconSym& sym)
+void RectIcon::LoadFromFile(const s2s::IconSym& sym)
 {
 	auto vertices = sym.GetVertices();
 
 	size_t idx = 0;
-	m_min.x = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
-	m_min.y = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
-	m_max.x = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
-	m_max.y = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
+	m_min.x = bs::int2float(vertices[idx++], s2s::IconSym::FIXED_TRANS_PRECISION);
+	m_min.y = bs::int2float(vertices[idx++], s2s::IconSym::FIXED_TRANS_PRECISION);
+	m_max.x = bs::int2float(vertices[idx++], s2s::IconSym::FIXED_TRANS_PRECISION);
+	m_max.y = bs::int2float(vertices[idx++], s2s::IconSym::FIXED_TRANS_PRECISION);
 }
 
 }

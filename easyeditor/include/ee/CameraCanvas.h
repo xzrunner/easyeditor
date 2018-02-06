@@ -8,7 +8,7 @@
 #include <memory>
 
 namespace s2 { enum CameraType; class Camera; }
-namespace n3 { class Camera; }
+namespace pt3 { class Camera; }
 
 namespace ee
 {
@@ -37,7 +37,7 @@ private:
 protected:
 	std::shared_ptr<s2::Camera> m_cam2d = nullptr;
 
-	std::shared_ptr<n3::Camera> m_cam3d = nullptr;
+	std::shared_ptr<pt3::Camera> m_cam3d = nullptr;
 
 }; // CameraCanvas
 

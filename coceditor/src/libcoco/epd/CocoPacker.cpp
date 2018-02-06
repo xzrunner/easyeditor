@@ -1595,7 +1595,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::SprConstPtr& spr, std::vecto
 			{
 				std::string aName = lua::assign("name", "\""+name+"\"");
 				std::string aFont = lua::assign("font", "\""+font->font+"\"");
-				std::string aColor = lua::assign("color", gum::color2str(font->font_color, sns::ARGB));
+				std::string aColor = lua::assign("color", gum::color2str(font->font_color, s2s::ARGB));
 
 //				std::string aAlign = lua::assign("align", ee::StringHelper::ToString(font->align));
 				int align_hori = font->align_hori;
@@ -1908,22 +1908,22 @@ void CocoPacker::GetColorAssignParams(const ee::SprConstPtr& spr, std::vector<st
 	auto& col_common = spr->GetColorCommon();
 	if (col_common.mul != pt2::Color(1,1,1,1) || col_common.add != pt2::Color(0,0,0,0))
 	{
-		std::string str_multi = lua::assign("color", gum::color2int(col_common.mul, sns::BGRA));
+		std::string str_multi = lua::assign("color", gum::color2int(col_common.mul, s2s::BGRA));
 		params.push_back(str_multi);
-		std::string str_add = lua::assign("add", gum::color2int(col_common.add, sns::ABGR));
+		std::string str_add = lua::assign("add", gum::color2int(col_common.add, s2s::ABGR));
 		params.push_back(str_add);
 	}
 
 	auto& col_map = spr->GetColorMap();
 	if (col_map.rmap != pt2::Color(255, 0, 0, 255) || col_map.gmap != pt2::Color(0, 255, 0, 255) || col_map.bmap != pt2::Color(0, 0, 255, 255))
 	{
-		std::string str_r = lua::assign("r_map", gum::color2str(col_map.rmap, sns::RGBA));
+		std::string str_r = lua::assign("r_map", gum::color2str(col_map.rmap, s2s::RGBA));
 		params.push_back(str_r);
 
-		std::string str_g = lua::assign("g_map", gum::color2str(col_map.gmap, sns::RGBA));
+		std::string str_g = lua::assign("g_map", gum::color2str(col_map.gmap, s2s::RGBA));
 		params.push_back(str_g);
 
-		std::string str_b = lua::assign("b_map", gum::color2str(col_map.bmap, sns::RGBA));
+		std::string str_b = lua::assign("b_map", gum::color2str(col_map.bmap, s2s::RGBA));
 		params.push_back(str_b);
 	}
 }

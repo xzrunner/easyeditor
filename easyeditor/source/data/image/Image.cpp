@@ -26,7 +26,7 @@ namespace ee
 Image::Image()
 {
 	m_tex = std::make_shared<TextureImgData>();
-	m_s2_tex = std::make_shared<pt2::Texture>(0, 0, 0);
+	m_s2_tex = std::make_shared<pt2::Texture>(0, 0, 0, 0);
 }
 
 Image::Image(const uint8_t* pixels, int w, int h, int fmt)
@@ -40,13 +40,15 @@ Image::Image(const uint8_t* pixels, int w, int h, int fmt)
 	m_clipped_region.xmax = m_ori_sz.x;
 	m_clipped_region.ymax = m_ori_sz.y;
 
-	m_s2_tex = std::make_shared<pt2::Texture>(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
+	m_s2_tex = std::make_shared<pt2::Texture>(
+		m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID(), m_tex->GetFormat());
 }
 
 Image::Image(const std::shared_ptr<const s2::RenderTarget>& rt)
 {
 	m_tex = std::make_shared<TextureRT>(rt);
-	m_s2_tex = std::make_shared<pt2::Texture>(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
+	m_s2_tex = std::make_shared<pt2::Texture>(
+		m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID(), m_tex->GetFormat());
 
 	m_ori_sz.x = m_tex->GetWidth();
 	m_ori_sz.y = m_tex->GetHeight();
@@ -76,7 +78,7 @@ bool Image::LoadFromFile(const std::string& filepath)
 		m_tex->LoadFromMemory(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight(), img_data->GetFormat());
 
 		TextureFactory::Instance()->Load(filepath, m_ori_sz, m_clipped_region);
-		m_s2_tex->Init(m_clipped_region.Width(), m_clipped_region.Height(), 0);
+		m_s2_tex->Init(m_clipped_region.Width(), m_clipped_region.Height(), 0, GPF_RGBA8);
 		m_s2_tex->InitOri(m_ori_sz.x, m_ori_sz.y);
 
 		return true;
@@ -99,7 +101,7 @@ bool Image::LoadFromFile(const std::string& filepath)
 		m_clipped_region.ymax = m_ori_sz.y;
 	}
 
-	m_s2_tex->Init(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID());
+	m_s2_tex->Init(m_tex->GetWidth(), m_tex->GetHeight(), m_tex->GetTexID(), m_tex->GetFormat());
 	m_s2_tex->InitOri(m_ori_sz.x, m_ori_sz.y);
 
 	if (m_tex->GetWidth() == 0 || m_tex->GetHeight() == 0) {

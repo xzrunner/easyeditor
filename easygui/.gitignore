@@ -1,2 +1,2 @@
-platform/msvc2008/libeasygui
-platform/msvc2008/testeasygui
+platform/msvc/libeasygui
+platform/msvc/testeasygui

@@ -10,7 +10,7 @@
 #include "SpritePool.h"
 
 #include <sprite2/Sprite.h>
-#include <sns/NodeSpr.h>
+#include <s2s/NodeSpr.h>
 
 #ifdef OPEN_SCREEN_CACHE
 #include "render/SpriteRenderer.h"
@@ -157,13 +157,13 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	spr_io.Store(val, shared_from_this(), dir.c_str());
 }
 
-void Sprite::Load(const sns::NodeSpr* spr)
+void Sprite::Load(const s2s::NodeSpr* spr)
 {
 	ee::SpriteIO spr_io;
 	spr_io.Load(spr->GetCommon(), shared_from_this());
 }
 
-void Sprite::Store(sns::NodeSpr* spr, rapidjson::Value& val, const std::string& dir) const
+void Sprite::Store(s2s::NodeSpr* spr, rapidjson::Value& val, const std::string& dir) const
 {
 	//ee::SpriteIO spr_io;
 	//spr_io.Store(spr->GetCommon(), shared_from_this());

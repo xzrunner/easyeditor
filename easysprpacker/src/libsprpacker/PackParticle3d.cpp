@@ -309,10 +309,10 @@ Component(const p3d_symbol& sym)
 	m_angle				= sym.angle;
 	m_angle_var			= sym.angle_var;
 
-	m_mul_col_begin		= gum::color2int(sym.mul_col_begin.rgba, sns::RGBA);
-	m_mul_col_end		= gum::color2int(sym.mul_col_end.rgba, sns::RGBA);
-	m_add_col_begin		= gum::color2int(sym.add_col_begin.rgba, sns::RGBA);
-	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, sns::RGBA);
+	m_mul_col_begin		= gum::color2int(sym.mul_col_begin.rgba, s2s::RGBA);
+	m_mul_col_end		= gum::color2int(sym.mul_col_end.rgba, s2s::RGBA);
+	m_add_col_begin		= gum::color2int(sym.add_col_begin.rgba, s2s::RGBA);
+	m_add_col_end		= gum::color2int(sym.add_col_end.rgba, s2s::RGBA);
 
 	s2::Symbol* s2_sym = static_cast<s2::Symbol*>(sym.ud);
 	auto ee_sym = ee::SymbolMgr::Instance()->FetchSymbol(dynamic_cast<ee::Symbol*>(s2_sym)->GetFilepath());

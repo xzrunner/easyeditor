@@ -8,9 +8,9 @@
 #include <ee/SymbolMgr.h>
 
 #include <memmgr/LinearAllocator.h>
-#include <sns/NodeFactory.h>
-#include <sns/IconSym.h>
-#include <sns/NodeSpr.h>
+#include <s2s/NodeFactory.h>
+#include <s2s/IconSym.h>
+#include <s2s/NodeSpr.h>
 
 #include <json/json.h>
 
@@ -78,8 +78,8 @@ std::unique_ptr<s2::Icon> FileIO::LoadFromBinFile(const char* filename)
 {
 	mm::LinearAllocator alloc;
 
-	auto sym = sns::NodeFactory::CreateSymFromBin(alloc, filename);
-	auto sym_src = dynamic_cast<sns::IconSym*>(sym);
+	auto sym = s2s::NodeFactory::CreateSymFromBin(alloc, filename);
+	auto sym_src = dynamic_cast<s2s::IconSym*>(sym);
 
 	std::string dir = ee::FileHelper::GetFileDir(filename);
 	std::string bsae_path = ee::FileHelper::GetAbsolutePath(dir, sym_src->GetBaseSymPath());

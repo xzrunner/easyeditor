@@ -3,47 +3,47 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.rapidvg", "..\rapidvg\platform\msvc2008\projects\rapidvg.vcxproj", "{66207E9A-031C-402B-9E3E-FA5599A1C89B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.rapidvg", "..\rapidvg\platform\msvc\projects\rapidvg.vcxproj", "{66207E9A-031C-402B-9E3E-FA5599A1C89B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.shaderlab", "..\shaderlab\platform\msvc2008\projects\shaderlab.vcxproj", "{5C357759-CA95-42E1-B907-DFB87A995F6C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.shaderlab", "..\shaderlab\platform\msvc\projects\shaderlab.vcxproj", "{5C357759-CA95-42E1-B907-DFB87A995F6C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.sm", "..\sm\platform\msvc2008\projects\sm.vcxproj", "{81630E0D-E1EF-4837-A0EE-30435ED4FE59}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.sm", "..\sm\platform\msvc\projects\sm.vcxproj", "{81630E0D-E1EF-4837-A0EE-30435ED4FE59}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.logger", "..\logger\platform\msvc2008\projects\logger.vcxproj", "{4031B66E-39A3-401E-918A-E1424A4AF944}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.logger", "..\logger\platform\msvc\projects\logger.vcxproj", "{4031B66E-39A3-401E-918A-E1424A4AF944}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.fs", "..\fs\platform\msvc2008\projects\fs.vcxproj", "{09C39B9E-27F5-4B39-9829-2815FD1C5469}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.fs", "..\fs\platform\msvc\projects\fs.vcxproj", "{09C39B9E-27F5-4B39-9829-2815FD1C5469}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.cu", "..\cu\platform\msvc2008\projects\cu.vcxproj", "{6055092D-EE59-4159-B923-A375401AA099}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.cu", "..\cu\platform\msvc\projects\cu.vcxproj", "{6055092D-EE59-4159-B923-A375401AA099}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.gimg", "..\gimg\platform\msvc2008\projects\gimg.vcxproj", "{D1ACC0BE-3A2B-450F-A708-F3E84DF5E5AD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.gimg", "..\gimg\platform\msvc\projects\gimg.vcxproj", "{D1ACC0BE-3A2B-450F-A708-F3E84DF5E5AD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.unirender", "..\unirender\platform\msvc2008\projects\unirender.vcxproj", "{637A0E9C-1867-459D-8611-65A064E3B2C2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.unirender", "..\unirender\platform\msvc\projects\unirender.vcxproj", "{637A0E9C-1867-459D-8611-65A064E3B2C2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.pimg", "..\pimg\platform\msvc2008\projects\pimg.vcxproj", "{5AE91E72-1C23-4913-BEA9-1FE795C570F5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.pimg", "..\pimg\platform\msvc\projects\pimg.vcxproj", "{5AE91E72-1C23-4913-BEA9-1FE795C570F5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.glp", "..\glp\platform\msvc2008\projects\glp.vcxproj", "{CA120FA2-89A7-4957-A4A5-4746972AA39F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.glp", "..\glp\platform\msvc\projects\glp.vcxproj", "{CA120FA2-89A7-4957-A4A5-4746972AA39F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.multitask", "..\multitask\platform\msvc2008\projects\multitask.vcxproj", "{6728BB94-9882-4804-87D3-CE9CEB62FDAB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.multitask", "..\multitask\platform\msvc\projects\multitask.vcxproj", "{6728BB94-9882-4804-87D3-CE9CEB62FDAB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.memmgr", "..\memmgr\platform\msvc2008\projects\memmgr.vcxproj", "{5FFA0DE4-1489-4267-8A79-52DECC2D0351}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.memmgr", "..\memmgr\platform\msvc\projects\memmgr.vcxproj", "{5FFA0DE4-1489-4267-8A79-52DECC2D0351}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.playdb", "..\playdb\platform\msvc2017\projects\playdb.vcxproj", "{E421CC5F-0909-4F8D-8E9A-BCB52E0E8350}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.playdb", "..\playdb\platform\msvc\projects\playdb.vcxproj", "{E421CC5F-0909-4F8D-8E9A-BCB52E0E8350}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.bs", "..\bs\platform\msvc2017\projects\bs.vcxproj", "{F5E6AE49-23DC-421B-AD33-C422E8590520}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.bs", "..\bs\platform\msvc\projects\bs.vcxproj", "{F5E6AE49-23DC-421B-AD33-C422E8590520}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.guard", "..\guard\platform\msvc2017\projects\guard.vcxproj", "{CC45AE0E-8C51-4759-9614-8BC321C565A0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.guard", "..\guard\platform\msvc\projects\guard.vcxproj", "{CC45AE0E-8C51-4759-9614-8BC321C565A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.tools", "0.tools", "{3E445281-8F17-4763-9112-39A38C12FE16}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.js", "..\js\platform\msvc2017\projects\js.vcxproj", "{68C18DA9-79BB-43A5-9E0C-79740AEA954B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.js", "..\js\platform\msvc\projects\js.vcxproj", "{68C18DA9-79BB-43A5-9E0C-79740AEA954B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.node3", "..\node3\platform\msvc2017\projects\node3.vcxproj", "{6030CF6B-1A8B-421B-92CE-4EB965751636}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.node3", "..\node3\platform\msvc\projects\node3.vcxproj", "{6030CF6B-1A8B-421B-92CE-4EB965751636}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.parts", "1.parts", "{55D85D01-599C-4F78-A116-BDBAEAF0D939}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.ds", "..\ds\platform\msvc2008\projects\ds.vcxproj", "{E6044D31-8304-4854-99AC-CBEF18B9E7D3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.ds", "..\ds\platform\msvc\projects\ds.vcxproj", "{E6044D31-8304-4854-99AC-CBEF18B9E7D3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.ps", "..\particle\platform\msvc2008\projects\particle.vcxproj", "{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.ps", "..\particle\platform\msvc\projects\particle.vcxproj", "{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9.editor", "9.editor", "{41A08A2D-64C4-40E6-9194-A9C29BB61F33}"
 EndProject
@@ -75,11 +75,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.s2loader", "..\s2loader\p
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.gum", "4.gum", "{ABB353A2-7879-4D9F-AF21-31A83E1B9D14}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.dtex2", "..\dtex2\platform\msvc2008\projects\dtex2.vcxproj", "{A502C49C-7014-4D77-8BD9-B3F917AD34B0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.dtex2", "..\dtex2\platform\msvc\projects\dtex2.vcxproj", "{A502C49C-7014-4D77-8BD9-B3F917AD34B0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.cooking", "..\cooking\platform\msvc2008\projects\cooking.vcxproj", "{4EEE80E8-662F-4EC2-A19B-68B1D7F8C46F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.cooking", "..\cooking\platform\msvc\projects\cooking.vcxproj", "{4EEE80E8-662F-4EC2-A19B-68B1D7F8C46F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.s2serializer", "..\s2serializer\platform\msvc2017\projects\s2serializer.vcxproj", "{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.s2serializer", "..\s2serializer\platform\msvc\projects\s2serializer.vcxproj", "{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.s2storer", "..\s2storer\platform\msvc\projects\s2storer.vcxproj", "{6032DDF2-FE43-4D51-AFAA-F6B6A6D855AD}"
 EndProject

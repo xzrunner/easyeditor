@@ -130,13 +130,13 @@ void AnimationToSpr::TransSpriteMat(const ee::SprPtr& spr, const erespacker::Pac
 void AnimationToSpr::TransSpriteCol(const ee::SprPtr& spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
 	spr->SetColorCommon(pt2::RenderColorCommon(
-		gum::int2color(t.color, sns::RGBA),
-		gum::int2color(t.additive, sns::RGBA)));
+		gum::int2color(t.color, s2s::RGBA),
+		gum::int2color(t.additive, s2s::RGBA)));
 
 	spr->SetColorMap(pt2::RenderColorMap(
-		gum::int2color(t.rmap, sns::RGBA),
-		gum::int2color(t.gmap, sns::RGBA),
-		gum::int2color(t.bmap, sns::RGBA)));
+		gum::int2color(t.rmap, s2s::RGBA),
+		gum::int2color(t.gmap, s2s::RGBA),
+		gum::int2color(t.bmap, s2s::RGBA)));
 }
 
 

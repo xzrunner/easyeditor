@@ -2,8 +2,8 @@
 #include "StoreToJson.h"
 #include "Symbol.h"
 
-#include <sns/NodeFactory.h>
-#include <sns/NodeSym.h>
+#include <s2s/NodeFactory.h>
+#include <s2s/NodeSym.h>
 #include <memmgr/LinearAllocator.h>
 
 #include <json/value.h>
@@ -22,7 +22,7 @@ void StoreToBin::Store(const std::string& filepath, const Symbol& sym, const std
 
 	// load sns from json
 	mm::LinearAllocator alloc;
-	sns::NodeSym* sns_sym = sns::NodeFactory::CreateSymFromJson(alloc, dir, doc, sns::NODE_COMPLEX);
+	s2s::NodeSym* sns_sym = s2s::NodeFactory::CreateSymFromJson(alloc, dir, doc, s2s::NODE_COMPLEX);
 
 	// store sns to bin
 	uint8_t* data = nullptr;

@@ -1,2 +1,2 @@
-platform/msvc2008/easybuilder
-platform/msvc2008/libbuilder
+platform/msvc/easybuilder
+platform/msvc/libbuilder

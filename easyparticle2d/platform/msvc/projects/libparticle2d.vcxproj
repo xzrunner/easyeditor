@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5.libparticle2d</ProjectName>
+    <ProjectGuid>{54C54BE5-7708-41F3-9375-8BA4B9AA983C}</ProjectGuid>
+    <RootNamespace>libparticle2d</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\libparticle2d\x86\Debug\</OutDir>
+    <IntDir>..\libparticle2d\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\libparticle2d\x86\Release\</OutDir>
+    <IntDir>..\libparticle2d\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\dtex2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\shaderlab\include\;..\..\..\..\particle\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libparticle2d\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libparticle2d\x86\Debug\libparticle2d.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\dtex2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\memmgr\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\ds\src\ds;..\..\..\..\shaderlab\include\;..\..\..\..\particle\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_CRT_NO_VA_START_VALIDATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\libparticle2d\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\libparticle2d\x86\Release\libparticle2d.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\libparticle2d\CocoPacker.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\ComponentPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\CosSliderCtrl.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\EditOP.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\FileIO.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\LibraryPage.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\LibraryPanel.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\ParticleSystem.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\PropertySetting.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\PSConfigMgr.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\Sprite.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\Symbol.cpp" />
+    <ClCompile Include="..\..\..\src\libparticle2d\ToolbarPanel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\libparticle2d\CocoPacker.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\ComponentPanel.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\CosSliderCtrl.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\EditOP.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\FileIO.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\item_string.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\language.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\LibraryPage.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\LibraryPanel.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\ParticleSystem.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\PropertySetting.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\PSConfigMgr.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\ps_config.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\Sprite.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\Symbol.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\ToolbarPanel.h" />
+    <ClInclude Include="..\..\..\src\libparticle2d\ValueRegion.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\easybuilder\platform\msvc\projects\libbuilder.vcxproj">
+      <Project>{11082ade-13ca-49c7-9f6d-c82f69333ad7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -50,8 +50,8 @@ bool FixSpriteColor::FixSprite(const std::string& filepath, Json::Value& sprite_
 		return false;
 	}
 
-	pt2::Color col = gum::str2color(str.c_str(), sns::ARGB);
-	sprite_val["add color"] = gum::color2str(col, sns::ABGR).c_str();
+	pt2::Color col = gum::str2color(str.c_str(), s2s::ARGB);
+	sprite_val["add color"] = gum::color2str(col, s2s::ABGR).c_str();
 
 	return true;
 }

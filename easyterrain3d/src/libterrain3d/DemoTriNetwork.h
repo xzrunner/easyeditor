@@ -17,7 +17,7 @@ typedef unsigned int GLuint;
 class DemoTriNetwork : public IDemo
 {
 public:
-	DemoTriNetwork(n3::Camera& cam);
+	DemoTriNetwork(pt3::Camera& cam);
 	
 	virtual void Load() override;
 	virtual void Draw() const override;
@@ -31,7 +31,7 @@ private:
 	float GetRandHeight(const sm::vec3& v1, const sm::vec3& v2, int level) const;
 
 private:
-	n3::Camera& m_cam;
+	pt3::Camera& m_cam;
 
 	GLuint m_tex;
 

@@ -3,7 +3,7 @@
 #include <ee/ImageSymbol.h>
 
 #include <gum/JsonSerializer.h>
-#include <sns/IconSym.h>
+#include <s2s/IconSym.h>
 #include <bs/FixedPointNum.h>
 
 namespace eicon
@@ -37,16 +37,16 @@ void QuadIcon::StoreToFile(Json::Value& value) const
 	}
 }
 
-void QuadIcon::LoadFromFile(const sns::IconSym& sym)
+void QuadIcon::LoadFromFile(const s2s::IconSym& sym)
 {
 	auto vertices = sym.GetVertices();
 
 	size_t idx = 0;
 	for (int i = 0; i < 4; ++i) {
-		m_src[i].x = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
-		m_src[i].y = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
-		m_screen[i].x = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
-		m_screen[i].y = bs::int2float(vertices[idx++], sns::IconSym::FIXED_TRANS_PRECISION);
+		m_src[i].x = bs::int2float(vertices[idx++], s2s::IconSym::FIXED_TRANS_PRECISION);
+		m_src[i].y = bs::int2float(vertices[idx++], s2s::IconSym::FIXED_TRANS_PRECISION);
+		m_screen[i].x = bs::int2float(vertices[idx++], s2s::IconSym::FIXED_TRANS_PRECISION);
+		m_screen[i].y = bs::int2float(vertices[idx++], s2s::IconSym::FIXED_TRANS_PRECISION);
 	}
 }
 

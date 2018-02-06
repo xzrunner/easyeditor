@@ -5,7 +5,7 @@
 namespace eterrain3d
 {
 
-DemoBruteForceTex::DemoBruteForceTex(n3::Camera& cam)
+DemoBruteForceTex::DemoBruteForceTex(pt3::Camera& cam)
 	: m_cam(cam)
 {
 }

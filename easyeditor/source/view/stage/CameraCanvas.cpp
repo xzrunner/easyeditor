@@ -5,7 +5,7 @@
 #include <sprite2/Pseudo3DCamera.h>
 #include <sprite2/Blackboard.h>
 #include <node3/RenderCtxStack.h>
-#include <node3/Camera.h>
+#include <painting3/Camera.h>
 
 namespace ee
 {
@@ -23,7 +23,7 @@ CameraCanvas::CameraCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, s2::Camera
 	}
 
 	if (has_3d) {
-		m_cam3d = std::make_shared<n3::Camera>(sm::vec3(0, 0, 2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0));
+		m_cam3d = std::make_shared<pt3::Camera>(sm::vec3(0, 0, 2), sm::vec3(0, 0, 0), sm::vec3(0, 1, 0));
 	}
 }
 

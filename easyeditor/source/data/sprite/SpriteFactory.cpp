@@ -20,7 +20,7 @@
 #include <sprite2/SprVisitorParams.h>
 #include <sprite2/UpdateParams.h>
 #include <s2loader/SymbolFile.h>
-#include <sns/NodeSpr.h>
+#include <s2s/NodeSpr.h>
 
 namespace ee
 {
@@ -105,7 +105,7 @@ SprPtr SpriteFactory::Create(const Json::Value& val, const std::string& dir, con
 	return spr;
 }
 
-SprPtr SpriteFactory::Create(const sns::NodeSpr* node_spr, const std::string& dir)
+SprPtr SpriteFactory::Create(const s2s::NodeSpr* node_spr, const std::string& dir)
 {
 	std::string filepath = ee::FileHelper::GetAbsolutePath(
 		dir, node_spr->GetCommon().GetFilepath());

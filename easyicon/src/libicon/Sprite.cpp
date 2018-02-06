@@ -2,7 +2,7 @@
 #include "Symbol.h"
 #include "SpritePropertySetting.h"
 
-#include <sns/IconSpr.h>
+#include <s2s/IconSpr.h>
 
 namespace eicon
 {
@@ -41,11 +41,11 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	val["process"] = m_process;
 }
 
-void Sprite::Load(const sns::NodeSpr* spr)
+void Sprite::Load(const s2s::NodeSpr* spr)
 {
 	ee::Sprite::Load(spr);
 
-	auto icon_spr = dynamic_cast<const sns::IconSpr*>(spr);
+	auto icon_spr = dynamic_cast<const s2s::IconSpr*>(spr);
 	SetProcess(icon_spr->GetProcess());
 }
 

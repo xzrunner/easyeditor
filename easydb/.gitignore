@@ -1,5 +1,5 @@
-platform/msvc2008/libdb
-platform/msvc2008/easydb
-platform/msvc2008/easydb_cl
-platform/msvc2008/glfw
+platform/msvc/libdb
+platform/msvc/easydb
+platform/msvc/easydb_cl
+platform/msvc/glfw
 src/glfw/glfw.lib

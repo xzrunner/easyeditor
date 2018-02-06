@@ -13,13 +13,13 @@ namespace eterrain3d
 class DemoBruteForce : public IDemo
 {
 public:
-	DemoBruteForce(n3::Camera& cam);
+	DemoBruteForce(pt3::Camera& cam);
 
 	virtual void Load() override;
 	virtual void Draw() const override;
 
 private:
-	n3::Camera& m_cam;
+	pt3::Camera& m_cam;
 
 	BruteForce m_bf;
 

@@ -3,9 +3,9 @@
 
 #include <ee/FileHelper.h>
 
-#include <sns/NodeFactory.h>
-#include <sns/NodeSym.h>
-#include <sns/TexturePacker.h>
+#include <s2s/NodeFactory.h>
+#include <s2s/NodeSym.h>
+#include <s2s/TexturePacker.h>
 #include <memmgr/LinearAllocator.h>
 
 #include <wx/arrstr.h>
@@ -47,7 +47,7 @@ void PackSceneNode::Pack(const std::string& src_dir, const std::string& dst_dir,
 {
 	ee::FileHelper::MkDir(dst_dir, false);
 
-	sns::TexturePacker tp(tp_src_dir);
+	s2s::TexturePacker tp(tp_src_dir);
 	int idx = 1;
 	while (true) {
 		auto json_path = tp_filepath + std::to_string(idx) + ".json";
@@ -70,7 +70,7 @@ void PackSceneNode::Pack(const std::string& src_dir, const std::string& dst_dir,
 		}
 
 		mm::LinearAllocator alloc;
-		sns::NodeSym* sym = sns::NodeFactory::CreateSymFromJson(alloc, filepath);
+		s2s::NodeSym* sym = s2s::NodeFactory::CreateSymFromJson(alloc, filepath);
 		if (!sym) {
 			continue;
 		}

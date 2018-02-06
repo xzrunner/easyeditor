@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>4.librender</ProjectName>
+    <ProjectGuid>{6216B0F5-5B88-4BA8-88F3-02585C4158B4}</ProjectGuid>
+    <RootNamespace>librender</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\librender\x86\Debug\</OutDir>
+    <IntDir>..\librender\x86\Debug\obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\librender\x86\Release\</OutDir>
+    <IntDir>..\librender\x86\Release\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;..\..\..\..\particle\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\gtxt\src\gtxt;..\..\..\..\memmgr\include;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\sp\src\sp;..\..\..\..\shaderlab\include;..\..\..\..\painting2\include;..\..\..\..\dtex2\include;..\..\..\..\sm\src\sm;..\..\..\..\camera25\src\camera25;..\..\..\..\ds\src\ds;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\unirender\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\librender\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\librender\x86\Debug\librender.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include\ee;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include;..\..\..\..\particle\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\gtxt\src\gtxt;..\..\..\..\memmgr\include;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\sp\src\sp;..\..\..\..\shaderlab\include;..\..\..\..\painting2\include;..\..\..\..\dtex2\include;..\..\..\..\sm\src\sm;..\..\..\..\camera25\src\camera25;..\..\..\..\ds\src\ds;..\..\..\..\sprite2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\flatten\include;..\..\..\..\cooking\include;..\..\..\..\unirender\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\librender\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\librender\x86\Release\librender.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\render\BlendModes.cpp" />
+    <ClCompile Include="..\..\..\source\render\CameraModes.cpp" />
+    <ClCompile Include="..\..\..\source\render\DrawSelectedShapeVisitor.cpp" />
+    <ClCompile Include="..\..\..\source\render\DrawSelectedSpriteVisitor.cpp" />
+    <ClCompile Include="..\..\..\source\render\DrawShapesVisitor.cpp" />
+    <ClCompile Include="..\..\..\source\render\DrawSpritesVisitor.cpp" />
+    <ClCompile Include="..\..\..\source\render\EE_DTex.cpp" />
+    <ClCompile Include="..\..\..\source\render\EE_GTxt.cpp" />
+    <ClCompile Include="..\..\..\source\render\EE_SP.cpp" />
+    <ClCompile Include="..\..\..\source\render\FastBlendModes.cpp" />
+    <ClCompile Include="..\..\..\source\render\FilterModes.cpp" />
+    <ClCompile Include="..\..\..\source\render\FPS.cpp" />
+    <ClCompile Include="..\..\..\source\render\render_utility.cpp" />
+    <ClCompile Include="..\..\..\source\render\SpriteRenderer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ee\BlendModes.h" />
+    <ClInclude Include="..\..\..\include\ee\CameraModes.h" />
+    <ClInclude Include="..\..\..\include\ee\DrawSelectedShapeVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\DrawSelectedSpriteVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\DrawShapesVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\DrawSpritesVisitor.h" />
+    <ClInclude Include="..\..\..\include\ee\EE_DTex.h" />
+    <ClInclude Include="..\..\..\include\ee\EE_GTxt.h" />
+    <ClInclude Include="..\..\..\include\ee\EE_SP.h" />
+    <ClInclude Include="..\..\..\include\ee\FastBlendModes.h" />
+    <ClInclude Include="..\..\..\include\ee\FilterModes.h" />
+    <ClInclude Include="..\..\..\include\ee\FPS.h" />
+    <ClInclude Include="..\..\..\include\ee\render_utility.h" />
+    <ClInclude Include="..\..\..\include\ee\SpriteRenderer.h" />
+    <ClInclude Include="..\..\..\include\ee\style_config.h" />
+    <ClInclude Include="..\..\..\include\ee\texture_format.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\particle\platform\msvc\projects\particle.vcxproj">
+      <Project>{ee2229a3-ad5f-46e7-afab-729f8aa18036}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

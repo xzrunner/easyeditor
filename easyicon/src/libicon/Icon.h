@@ -5,7 +5,7 @@
 
 #include <json/json.h>
 
-namespace sns { class IconSym; }
+namespace s2s { class IconSym; }
 
 namespace eicon
 {
@@ -17,7 +17,7 @@ public:
 
 	virtual void LoadFromFile(const Json::Value& value) = 0;
 	virtual void StoreToFile(Json::Value& value) const = 0;
-	virtual void LoadFromFile(const sns::IconSym& sym) = 0;
+	virtual void LoadFromFile(const s2s::IconSym& sym) = 0;
 
 }; // Icon
 

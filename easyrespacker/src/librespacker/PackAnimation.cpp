@@ -227,8 +227,8 @@ void PackAnimation::LoadSprMat(const ee::SprConstPtr& spr, SpriteTrans& trans, b
 void PackAnimation::LoadSprColor(const ee::SprConstPtr& spr, SpriteTrans& trans)
 {
 	auto& col_common = spr->GetColorCommon();
-	trans.color    = gum::color2int(col_common.mul, sns::ARGB);
-	trans.additive = gum::color2int(col_common.add, sns::ARGB);
+	trans.color    = gum::color2int(col_common.mul, s2s::ARGB);
+	trans.additive = gum::color2int(col_common.add, s2s::ARGB);
 
 	auto& col_map = spr->GetColorMap();
 	trans.rmap = col_map.rmap.ToRGBA();

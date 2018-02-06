@@ -2,7 +2,7 @@
 
 #include <ee/color_config.h>
 
-#include <node3/PrimitiveDraw.h>
+#include <painting3/PrimitiveDraw.h>
 
 namespace ecomplex3d
 {

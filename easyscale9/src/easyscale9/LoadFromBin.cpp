@@ -7,9 +7,9 @@
 #include <ee/FileHelper.h>
 #include <ee/sprite_msg.h>
 
-#include <sns/NodeFactory.h>
-#include <sns/Scale9Sym.h>
-#include <sns/NodeSpr.h>
+#include <s2s/NodeFactory.h>
+#include <s2s/Scale9Sym.h>
+#include <s2s/NodeSpr.h>
 #include <memmgr/LinearAllocator.h>
 #include <bs/ImportStream.h>
 
@@ -20,8 +20,8 @@ void LoadFromBin::Load(const std::string& filepath)
 {
 	mm::LinearAllocator alloc;
 
-	auto sym = sns::NodeFactory::CreateSymFromBin(alloc, filepath);
-	auto sym_src = dynamic_cast<sns::Scale9Sym*>(sym);
+	auto sym = s2s::NodeFactory::CreateSymFromBin(alloc, filepath);
+	auto sym_src = dynamic_cast<s2s::Scale9Sym*>(sym);
 
 	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;

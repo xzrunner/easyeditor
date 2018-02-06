@@ -9,8 +9,8 @@
 #include <unirender/RenderContext.h>
 #include <gum/RenderContext.h>
 
-#include <node3/PrimitiveDraw.h>
-#include <node3/Camera.h>
+#include <painting3/PrimitiveDraw.h>
+#include <painting3/Camera.h>
 
 namespace eterrain3d
 {
@@ -19,7 +19,7 @@ static const float EDGE = 10;
 
 static const int MAX_LEVEL = 10;
 
-DemoTriNetwork::DemoTriNetwork(n3::Camera& cam)
+DemoTriNetwork::DemoTriNetwork(pt3::Camera& cam)
 	: m_cam(cam)
 	, m_tex(0)
 {

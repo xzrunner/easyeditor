@@ -25,7 +25,7 @@ public:
 	virtual s2::SprPtr Create(const s2::SymPtr& sym) const override;
 	virtual s2::SprPtr Create(const CU_STR& filepath) const override;
 	virtual s2::SprPtr Create(const Json::Value& val, const CU_STR& dir) const override;
-	virtual s2::SprPtr Create(const sns::NodeSpr* node, const CU_STR& dir) const override;
+	virtual s2::SprPtr Create(const s2s::NodeSpr* node, const CU_STR& dir) const override;
 
 protected:
 	virtual std::string GetSymbolPath(const std::string& dir, const Json::Value& val) const;

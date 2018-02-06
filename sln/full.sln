@@ -3,225 +3,221 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanim", "..\easyanim\platform\msvc2008\projects\libanim.vcxproj", "{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanim", "..\easyanim\platform\msvc\projects\libanim.vcxproj", "{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libbuilder", "..\easybuilder\platform\msvc2008\projects\libbuilder.vcxproj", "{11082ADE-13CA-49C7-9F6D-C82F69333AD7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libbuilder", "..\easybuilder\platform\msvc\projects\libbuilder.vcxproj", "{11082ADE-13CA-49C7-9F6D-C82F69333AD7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easycomplex", "..\easycomplex\platform\msvc2008\projects\easycomplex.vcxproj", "{A166A4B0-7A3C-47DE-87DA-9FD986751525}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easycomplex", "..\easycomplex\platform\msvc\projects\easycomplex.vcxproj", "{A166A4B0-7A3C-47DE-87DA-9FD986751525}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libcomplex", "..\easycomplex\platform\msvc2008\projects\libcomplex.vcxproj", "{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libcomplex", "..\easycomplex\platform\msvc\projects\libcomplex.vcxproj", "{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libshape", "..\easyshape\platform\msvc2008\projects\libshape.vcxproj", "{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libshape", "..\easyshape\platform\msvc\projects\libshape.vcxproj", "{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libmesh", "..\easymesh\platform\msvc2008\projects\libmesh.vcxproj", "{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libmesh", "..\easymesh\platform\msvc\projects\libmesh.vcxproj", "{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libparticle3d", "..\easyparticle3d\platform\msvc2008\projects\libparticle3d.vcxproj", "{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libparticle3d", "..\easyparticle3d\platform\msvc\projects\libparticle3d.vcxproj", "{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libscale9", "..\easyscale9\platform\msvc2008\projects\libscale9.vcxproj", "{E5B2631F-C25D-4253-A9CB-A57EF357B004}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libscale9", "..\easyscale9\platform\msvc\projects\libscale9.vcxproj", "{E5B2631F-C25D-4253-A9CB-A57EF357B004}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libimage", "..\easyimage\platform\msvc2008\projects\libimage.vcxproj", "{D41C0B3E-F0A0-4A1F-A568-0100C839406C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libimage", "..\easyimage\platform\msvc\projects\libimage.vcxproj", "{D41C0B3E-F0A0-4A1F-A568-0100C839406C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libcoco", "..\coceditor\platform\msvc2008\projects\libcoco.vcxproj", "{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libcoco", "..\coceditor\platform\msvc\projects\libcoco.vcxproj", "{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyparticle3d", "..\easyparticle3d\platform\msvc2008\projects\easyparticle3d.vcxproj", "{9BEDF205-2842-42B4-9B95-7C0C4D5A34D7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyparticle3d", "..\easyparticle3d\platform\msvc\projects\easyparticle3d.vcxproj", "{9BEDF205-2842-42B4-9B95-7C0C4D5A34D7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyparticle2d", "..\easyparticle2d\platform\msvc2008\projects\easyparticle2d.vcxproj", "{6815C211-C2CF-40A8-B032-CE25E11F6221}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyparticle2d", "..\easyparticle2d\platform\msvc\projects\easyparticle2d.vcxproj", "{6815C211-C2CF-40A8-B032-CE25E11F6221}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libparticle2d", "..\easyparticle2d\platform\msvc2008\projects\libparticle2d.vcxproj", "{54C54BE5-7708-41F3-9375-8BA4B9AA983C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libparticle2d", "..\easyparticle2d\platform\msvc\projects\libparticle2d.vcxproj", "{54C54BE5-7708-41F3-9375-8BA4B9AA983C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyanimation", "..\easyanim\platform\msvc2008\projects\easyanimation.vcxproj", "{BBF6F009-A0EB-4F62-9579-5FC05DECCBE7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyanimation", "..\easyanim\platform\msvc\projects\easyanimation.vcxproj", "{BBF6F009-A0EB-4F62-9579-5FC05DECCBE7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8.easydb_cl", "..\easydb\platform\msvc2008\projects\easydb_cl.vcxproj", "{F05FF76F-096A-4AA7-86B1-4D0101C55699}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8.easydb_cl", "..\easydb\platform\msvc\projects\easydb_cl.vcxproj", "{F05FF76F-096A-4AA7-86B1-4D0101C55699}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easymesh", "..\easymesh\platform\msvc2008\projects\easymesh.vcxproj", "{EAD5B5DF-3249-4935-8351-D4A69C4F1B51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easymesh", "..\easymesh\platform\msvc\projects\easymesh.vcxproj", "{EAD5B5DF-3249-4935-8351-D4A69C4F1B51}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyimage", "..\easyimage\platform\msvc2008\projects\easyimage.vcxproj", "{34069E21-CE51-4420-A745-579D3EF0406E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyimage", "..\easyimage\platform\msvc\projects\easyimage.vcxproj", "{34069E21-CE51-4420-A745-579D3EF0406E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libmodeling", "..\easymodeling\platform\msvc2008\projects\libmodeling.vcxproj", "{2E27AFD7-BDC5-464C-A0A8-15D3665FD13D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libmodeling", "..\easymodeling\platform\msvc\projects\libmodeling.vcxproj", "{2E27AFD7-BDC5-464C-A0A8-15D3665FD13D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easymodeling", "..\easymodeling\platform\msvc2008\projects\easymodeling.vcxproj", "{753CFBD6-4C2A-43F9-9453-B1BE89FE1EEF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easymodeling", "..\easymodeling\platform\msvc\projects\easymodeling.vcxproj", "{753CFBD6-4C2A-43F9-9453-B1BE89FE1EEF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyshape", "..\easyshape\platform\msvc2008\projects\easyshape.vcxproj", "{D6627E9A-314A-4554-AB5C-C8BF6151148D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyshape", "..\easyshape\platform\msvc\projects\easyshape.vcxproj", "{D6627E9A-314A-4554-AB5C-C8BF6151148D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easytexpacker", "..\easytexpacker\platform\msvc2008\projects\easytexpacker.vcxproj", "{A9FB8F26-50DE-43E1-B6E9-4264EA4A9A8F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easytexpacker", "..\easytexpacker\platform\msvc\projects\easytexpacker.vcxproj", "{A9FB8F26-50DE-43E1-B6E9-4264EA4A9A8F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtexpacker", "..\easytexpacker\platform\msvc2008\projects\libtexpacker.vcxproj", "{E66ECF2B-05F4-42CC-91B2-B6F8604CA1A8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtexpacker", "..\easytexpacker\platform\msvc\projects\libtexpacker.vcxproj", "{E66ECF2B-05F4-42CC-91B2-B6F8604CA1A8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8.cocpackage", "..\coceditor\platform\msvc2008\projects\cocpackage.vcxproj", "{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8.cocpackage", "..\coceditor\platform\msvc\projects\cocpackage.vcxproj", "{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libepbin", "..\epbin\platform\msvc2008\projects\libepbin.vcxproj", "{AAD82BAC-510C-4571-A420-5AE5EE7E29D6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libepbin", "..\epbin\platform\msvc\projects\libepbin.vcxproj", "{AAD82BAC-510C-4571-A420-5AE5EE7E29D6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8.epbin", "..\epbin\platform\msvc2008\projects\epbin.vcxproj", "{75D71727-132D-4BA3-A770-30F6EF459C76}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8.epbin", "..\epbin\platform\msvc\projects\epbin.vcxproj", "{75D71727-132D-4BA3-A770-30F6EF459C76}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyterrain2d", "..\easyterrain2d\platform\msvc2008\projects\easyterrain2d.vcxproj", "{97438907-CD84-4E01-BF7F-3614A6F0C231}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyterrain2d", "..\easyterrain2d\platform\msvc\projects\easyterrain2d.vcxproj", "{97438907-CD84-4E01-BF7F-3614A6F0C231}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libterrain2d", "..\easyterrain2d\platform\msvc2008\projects\libterrain2d.vcxproj", "{716758A5-F6CF-4294-88B2-29C9950304AF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libterrain2d", "..\easyterrain2d\platform\msvc\projects\libterrain2d.vcxproj", "{716758A5-F6CF-4294-88B2-29C9950304AF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easytemplate", "..\template\platform\msvc2008\projects\easytemplate.vcxproj", "{E487FD3F-ABE4-43FB-8A59-03768C700CFD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easytemplate", "..\template\platform\msvc\projects\easytemplate.vcxproj", "{E487FD3F-ABE4-43FB-8A59-03768C700CFD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtemplate", "..\template\platform\msvc2008\projects\libtemplate.vcxproj", "{02A5FE18-62B6-4471-953C-1650CBD6C34C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtemplate", "..\template\platform\msvc\projects\libtemplate.vcxproj", "{02A5FE18-62B6-4471-953C-1650CBD6C34C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easytexture", "..\easytexture\platform\msvc2008\projects\easytexture.vcxproj", "{9AB30F49-3193-41E3-90AA-FF2B66B70B5F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easytexture", "..\easytexture\platform\msvc\projects\easytexture.vcxproj", "{9AB30F49-3193-41E3-90AA-FF2B66B70B5F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtexture", "..\easytexture\platform\msvc2008\projects\libtexture.vcxproj", "{4937E011-9C27-4E8E-87F8-1924F41E0649}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtexture", "..\easytexture\platform\msvc\projects\libtexture.vcxproj", "{4937E011-9C27-4E8E-87F8-1924F41E0649}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyscale9", "..\easyscale9\platform\msvc2008\projects\easyscale9.vcxproj", "{908B8FCC-3F78-4F8B-9663-0A45623442F4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyscale9", "..\easyscale9\platform\msvc\projects\easyscale9.vcxproj", "{908B8FCC-3F78-4F8B-9663-0A45623442F4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "9.lr", "..\lr\platform\msvc2008\projects\lr.vcxproj", "{DB004C38-2923-41EA-9ACE-A0191AB01F54}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "9.lr", "..\lr\platform\msvc\projects\lr.vcxproj", "{DB004C38-2923-41EA-9ACE-A0191AB01F54}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "9.sg", "..\sg\platform\msvc2008\projects\sg.vcxproj", "{B7D5BC21-1A62-43E0-A09D-587B1BE97656}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "9.sg", "..\sg\platform\msvc\projects\sg.vcxproj", "{B7D5BC21-1A62-43E0-A09D-587B1BE97656}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyui", "..\easyui\platform\msvc2008\projects\easyui.vcxproj", "{056D3AB3-A0B2-454A-AF31-DA98BAB867BA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyui", "..\easyui\platform\msvc\projects\easyui.vcxproj", "{056D3AB3-A0B2-454A-AF31-DA98BAB867BA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8.easydb", "..\easydb\platform\msvc2008\projects\easydb.vcxproj", "{0DF38385-58AA-44CA-BFAA-0FA03B490DA0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8.easydb", "..\easydb\platform\msvc\projects\easydb.vcxproj", "{0DF38385-58AA-44CA-BFAA-0FA03B490DA0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libicon", "..\easyicon\platform\msvc2008\projects\libicon.vcxproj", "{BF76851E-B6B9-4CC0-8C4B-D7FB383B2642}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libicon", "..\easyicon\platform\msvc\projects\libicon.vcxproj", "{BF76851E-B6B9-4CC0-8C4B-D7FB383B2642}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyicon", "..\easyicon\platform\msvc2008\projects\easyicon.vcxproj", "{9A0DFD2A-E637-4D0E-9A60-79E4EBEE51AC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyicon", "..\easyicon\platform\msvc\projects\easyicon.vcxproj", "{9A0DFD2A-E637-4D0E-9A60-79E4EBEE51AC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyshadow", "..\easyshadow\platform\msvc2008\projects\easyshadow.vcxproj", "{DE91BD5B-A60A-4FBB-BE97-3B0E9DE7835A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyshadow", "..\easyshadow\platform\msvc\projects\easyshadow.vcxproj", "{DE91BD5B-A60A-4FBB-BE97-3B0E9DE7835A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libshadow", "..\easyshadow\platform\msvc2008\projects\libshadow.vcxproj", "{C839A952-9F01-48D5-9649-BCAE9AA758F8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libshadow", "..\easyshadow\platform\msvc\projects\libshadow.vcxproj", "{C839A952-9F01-48D5-9649-BCAE9AA758F8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyp3dinv", "..\easyp3dinv\platform\msvc2008\projects\easyp3dinv.vcxproj", "{842597BE-1418-44CF-91EE-819E94B96D08}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyp3dinv", "..\easyp3dinv\platform\msvc\projects\easyp3dinv.vcxproj", "{842597BE-1418-44CF-91EE-819E94B96D08}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libp3dinv", "..\easyp3dinv\platform\msvc2008\projects\libp3dinv.vcxproj", "{B80A41C3-5168-43A8-AC9D-C110C6140C86}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libp3dinv", "..\easyp3dinv\platform\msvc\projects\libp3dinv.vcxproj", "{B80A41C3-5168-43A8-AC9D-C110C6140C86}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanis", "..\easyanim\platform\msvc2008\projects\libanis.vcxproj", "{4CD9986A-A4F8-4DD2-B9AD-FE18B70423B8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanis", "..\easyanim\platform\msvc\projects\libanis.vcxproj", "{4CD9986A-A4F8-4DD2-B9AD-FE18B70423B8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyanimation3d", "..\easyanim3d\platform\msvc2008\projects\easyanim3d.vcxproj", "{0963327C-D73A-45EF-914A-563F4EF4F94B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyanimation3d", "..\easyanim3d\platform\msvc\projects\easyanim3d.vcxproj", "{0963327C-D73A-45EF-914A-563F4EF4F94B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanim3d", "..\easyanim3d\platform\msvc2008\projects\libanim3d.vcxproj", "{ED9E2268-BF41-46D7-8FE4-7C5EBCC525D5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanim3d", "..\easyanim3d\platform\msvc\projects\libanim3d.vcxproj", "{ED9E2268-BF41-46D7-8FE4-7C5EBCC525D5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easypseudo3d", "..\easypseudo3d\platform\msvc2008\projects\easypseudo3d.vcxproj", "{42650DAA-2F0F-40B9-BCF8-BBA4839C712C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easypseudo3d", "..\easypseudo3d\platform\msvc\projects\easypseudo3d.vcxproj", "{42650DAA-2F0F-40B9-BCF8-BBA4839C712C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libpseudo3d", "..\easypseudo3d\platform\msvc2008\projects\libpseudo3d.vcxproj", "{A984288F-7FF0-4BFB-BB8F-AC632F48A3E5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libpseudo3d", "..\easypseudo3d\platform\msvc\projects\libpseudo3d.vcxproj", "{A984288F-7FF0-4BFB-BB8F-AC632F48A3E5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyshader", "..\easyshader\platform\msvc2008\projects\easyshader.vcxproj", "{DA5638BA-C581-4E52-95ED-3BF6DEEF9B12}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyshader", "..\easyshader\platform\msvc\projects\easyshader.vcxproj", "{DA5638BA-C581-4E52-95ED-3BF6DEEF9B12}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libshader", "..\easyshader\platform\msvc2008\projects\libshader.vcxproj", "{3156C188-65B6-4785-943C-03CDDE86B53A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libshader", "..\easyshader\platform\msvc\projects\libshader.vcxproj", "{3156C188-65B6-4785-943C-03CDDE86B53A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyterrain3d", "..\easyterrain3d\platform\msvc2008\projects\easyterrain3d.vcxproj", "{619CD067-29C4-4A20-AA84-346E69BED088}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyterrain3d", "..\easyterrain3d\platform\msvc\projects\easyterrain3d.vcxproj", "{619CD067-29C4-4A20-AA84-346E69BED088}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libterrain3d", "..\easyterrain3d\platform\msvc2008\projects\libterrain3d.vcxproj", "{69347FE7-98F6-4E63-A22F-EFEA9FE82C9E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libterrain3d", "..\easyterrain3d\platform\msvc\projects\libterrain3d.vcxproj", "{69347FE7-98F6-4E63-A22F-EFEA9FE82C9E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.ps", "..\particle\platform\msvc2008\projects\particle.vcxproj", "{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.ps", "..\particle\platform\msvc\projects\particle.vcxproj", "{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.librespacker", "..\easyrespacker\platform\msvc2008\projects\librespacker.vcxproj", "{E5C07F5D-F889-4FC2-8DA8-194023914BBE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.librespacker", "..\easyrespacker\platform\msvc\projects\librespacker.vcxproj", "{E5C07F5D-F889-4FC2-8DA8-194023914BBE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.gtxt", "..\gtxt\platform\msvc2008\projects\gtxt.vcxproj", "{EB4F1EE0-CB3B-4B2E-9655-A8E22F948575}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.gtxt", "..\gtxt\platform\msvc\projects\gtxt.vcxproj", "{EB4F1EE0-CB3B-4B2E-9655-A8E22F948575}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtext", "..\easytext\platform\msvc2008\projects\libtext.vcxproj", "{FC9B43D6-8D2B-4D57-A976-9379F87A366C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtext", "..\easytext\platform\msvc\projects\libtext.vcxproj", "{FC9B43D6-8D2B-4D57-A976-9379F87A366C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.sp", "..\sp\platform\msvc2008\projects\sp.vcxproj", "{8D96874E-F6B7-4F8B-A8B3-8F06707E9D7B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.sp", "..\sp\platform\msvc\projects\sp.vcxproj", "{8D96874E-F6B7-4F8B-A8B3-8F06707E9D7B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.rapidvg", "..\rapidvg\platform\msvc2008\projects\rapidvg.vcxproj", "{66207E9A-031C-402B-9E3E-FA5599A1C89B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.rapidvg", "..\rapidvg\platform\msvc\projects\rapidvg.vcxproj", "{66207E9A-031C-402B-9E3E-FA5599A1C89B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.shaderlab", "..\shaderlab\platform\msvc2008\projects\shaderlab.vcxproj", "{5C357759-CA95-42E1-B907-DFB87A995F6C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.shaderlab", "..\shaderlab\platform\msvc\projects\shaderlab.vcxproj", "{5C357759-CA95-42E1-B907-DFB87A995F6C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libedit", "..\easyeditor\platform\msvc2008\projects\libedit.vcxproj", "{8D18EB4E-FDDF-484A-9784-3AC9DCBCC2A1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libedit", "..\easyeditor\platform\msvc\projects\libedit.vcxproj", "{8D18EB4E-FDDF-484A-9784-3AC9DCBCC2A1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libview", "..\easyeditor\platform\msvc2008\projects\libview.vcxproj", "{26A3BB4B-6AC6-4280-92E3-666056AEC52A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libview", "..\easyeditor\platform\msvc\projects\libview.vcxproj", "{26A3BB4B-6AC6-4280-92E3-666056AEC52A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libdata", "..\easyeditor\platform\msvc2008\projects\libdata.vcxproj", "{77E15C91-F70B-4141-A0FC-4E82D1C43BD2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libdata", "..\easyeditor\platform\msvc\projects\libdata.vcxproj", "{77E15C91-F70B-4141-A0FC-4E82D1C43BD2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libmath", "..\easyeditor\platform\msvc2008\projects\libmath.vcxproj", "{8CD2D282-45EE-46B4-A8D8-291E8E445BE7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libmath", "..\easyeditor\platform\msvc\projects\libmath.vcxproj", "{8CD2D282-45EE-46B4-A8D8-291E8E445BE7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libtool", "..\easyeditor\platform\msvc2008\projects\libtool.vcxproj", "{E1843AB3-962E-4F9C-B471-74EC36DC94B0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libtool", "..\easyeditor\platform\msvc\projects\libtool.vcxproj", "{E1843AB3-962E-4F9C-B471-74EC36DC94B0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.librender", "..\easyeditor\platform\msvc2008\projects\librender.vcxproj", "{6216B0F5-5B88-4BA8-88F3-02585C4158B4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.librender", "..\easyeditor\platform\msvc\projects\librender.vcxproj", "{6216B0F5-5B88-4BA8-88F3-02585C4158B4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libgui", "..\easyeditor\platform\msvc2008\projects\libgui.vcxproj", "{FA0A46EC-E1AB-4830-8898-C953EEBDF7A5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libgui", "..\easyeditor\platform\msvc\projects\libgui.vcxproj", "{FA0A46EC-E1AB-4830-8898-C953EEBDF7A5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libmsg", "..\easyeditor\platform\msvc2008\projects\libmsg.vcxproj", "{D4BAA61E-9918-4F72-B772-88AFD4EE76BC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libmsg", "..\easyeditor\platform\msvc\projects\libmsg.vcxproj", "{D4BAA61E-9918-4F72-B772-88AFD4EE76BC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libphysics", "..\easyeditor\platform\msvc2008\projects\libphysics.vcxproj", "{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.libphysics", "..\easyeditor\platform\msvc\projects\libphysics.vcxproj", "{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.ds", "..\ds\platform\msvc2008\projects\ds.vcxproj", "{E6044D31-8304-4854-99AC-CBEF18B9E7D3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.ds", "..\ds\platform\msvc\projects\ds.vcxproj", "{E6044D31-8304-4854-99AC-CBEF18B9E7D3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.sm", "..\sm\platform\msvc2008\projects\sm.vcxproj", "{81630E0D-E1EF-4837-A0EE-30435ED4FE59}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.sm", "..\sm\platform\msvc\projects\sm.vcxproj", "{81630E0D-E1EF-4837-A0EE-30435ED4FE59}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.camera25", "..\camera25\platform\msvc2008\projects\camera25.vcxproj", "{510EAACB-B026-43F3-A68D-3EC421E46DD0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.camera25", "..\camera25\platform\msvc\projects\camera25.vcxproj", "{510EAACB-B026-43F3-A68D-3EC421E46DD0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easynavmesh", "..\easynavmesh\platform\msvc2008\projects\easynavmesh.vcxproj", "{CB6FA53D-C366-4718-906A-A52F6A47436E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easynavmesh", "..\easynavmesh\platform\msvc\projects\easynavmesh.vcxproj", "{CB6FA53D-C366-4718-906A-A52F6A47436E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libmask", "..\easymask\platform\msvc2008\projects\libmask.vcxproj", "{EDEF7503-BBAD-494A-A9E9-2A0CB5747E85}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libmask", "..\easymask\platform\msvc\projects\libmask.vcxproj", "{EDEF7503-BBAD-494A-A9E9-2A0CB5747E85}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easymask", "..\easymask\platform\msvc2008\projects\easymask.vcxproj", "{204005A5-720F-4EDA-A262-FBCB3C765A0B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easymask", "..\easymask\platform\msvc\projects\easymask.vcxproj", "{204005A5-720F-4EDA-A262-FBCB3C765A0B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.logger", "..\logger\platform\msvc2008\projects\logger.vcxproj", "{4031B66E-39A3-401E-918A-E1424A4AF944}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.logger", "..\logger\platform\msvc\projects\logger.vcxproj", "{4031B66E-39A3-401E-918A-E1424A4AF944}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.fs", "..\fs\platform\msvc2008\projects\fs.vcxproj", "{09C39B9E-27F5-4B39-9829-2815FD1C5469}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.fs", "..\fs\platform\msvc\projects\fs.vcxproj", "{09C39B9E-27F5-4B39-9829-2815FD1C5469}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libui", "..\easyui\platform\msvc2008\projects\libui.vcxproj", "{CE164EA1-E9BD-4BEB-88F0-41A2BA6DAB2F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libui", "..\easyui\platform\msvc\projects\libui.vcxproj", "{CE164EA1-E9BD-4BEB-88F0-41A2BA6DAB2F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.mtrail", "..\mtrail\platform\msvc2008\projects\mtrail.vcxproj", "{A9854FD8-F2E4-4B5A-8C15-D3C661DD4DEF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.mtrail", "..\mtrail\platform\msvc\projects\mtrail.vcxproj", "{A9854FD8-F2E4-4B5A-8C15-D3C661DD4DEF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easytrail", "..\easytrail\platform\msvc2008\projects\easytrail.vcxproj", "{105EEFDC-A8AF-435C-A0CB-A2636850CCB0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easytrail", "..\easytrail\platform\msvc\projects\easytrail.vcxproj", "{105EEFDC-A8AF-435C-A0CB-A2636850CCB0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtrail", "..\easytrail\platform\msvc2008\projects\libtrail.vcxproj", "{29109610-3D3C-4040-A8E6-D9EEC78470E0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtrail", "..\easytrail\platform\msvc\projects\libtrail.vcxproj", "{29109610-3D3C-4040-A8E6-D9EEC78470E0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.cu", "..\cu\platform\msvc2008\projects\cu.vcxproj", "{6055092D-EE59-4159-B923-A375401AA099}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.cu", "..\cu\platform\msvc\projects\cu.vcxproj", "{6055092D-EE59-4159-B923-A375401AA099}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libsprpacker", "..\easysprpacker\platform\msvc2008\projects\libsprpacker.vcxproj", "{0ADAEF1C-2094-4A6F-84E9-3CA0684B7824}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libsprpacker", "..\easysprpacker\platform\msvc\projects\libsprpacker.vcxproj", "{0ADAEF1C-2094-4A6F-84E9-3CA0684B7824}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.simp", "..\simp\platform\msvc2008\projects\simp.vcxproj", "{D19B530F-A257-4465-A92C-381E91B47746}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.simp", "..\simp\platform\msvc\projects\simp.vcxproj", "{D19B530F-A257-4465-A92C-381E91B47746}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.gum", "..\gum\platform\msvc2008\projects\gum.vcxproj", "{70C5478D-6D53-4F75-99D4-F06373175C83}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.gimg", "..\gimg\platform\msvc\projects\gimg.vcxproj", "{D1ACC0BE-3A2B-450F-A708-F3E84DF5E5AD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.gimg", "..\gimg\platform\msvc2008\projects\gimg.vcxproj", "{D1ACC0BE-3A2B-450F-A708-F3E84DF5E5AD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyskeleton", "..\easyskeleton\platform\msvc\projects\easyskeleton.vcxproj", "{263EF43F-42E5-4DAC-8221-108A8AF48C0B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easyskeleton", "..\easyskeleton\platform\msvc2008\projects\easyskeleton.vcxproj", "{263EF43F-42E5-4DAC-8221-108A8AF48C0B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libskeleton", "..\easyskeleton\platform\msvc\projects\libskeleton.vcxproj", "{0A0F323F-D04E-44A6-9784-C1947AC38DA8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libskeleton", "..\easyskeleton\platform\msvc2008\projects\libskeleton.vcxproj", "{0A0F323F-D04E-44A6-9784-C1947AC38DA8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.rigging", "..\rigging\platform\msvc\projects\rigging.vcxproj", "{DBE6D3F5-4E3D-4DF8-B520-A27BCE5A5D21}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.rigging", "..\rigging\platform\msvc2008\projects\rigging.vcxproj", "{DBE6D3F5-4E3D-4DF8-B520-A27BCE5A5D21}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanim2", "..\easyanim2\platform\msvc\projects\libanim2.vcxproj", "{DD070D7B-9149-4DBC-9660-5223F6D34B61}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libanim2", "..\easyanim2\platform\msvc2008\projects\libanim2.vcxproj", "{DD070D7B-9149-4DBC-9660-5223F6D34B61}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.texpack", "..\texpack\platform\msvc\projects\texpack.vcxproj", "{A7737C76-5221-47A5-86B7-84BD56C47730}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.texpack", "..\texpack\platform\msvc2008\projects\texpack.vcxproj", "{A7737C76-5221-47A5-86B7-84BD56C47730}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.bimp", "..\bimp\platform\msvc\projects\bimp.vcxproj", "{F22A86E7-B73F-4F6A-9EA8-E4AE9CC9D885}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.bimp", "..\bimp\platform\msvc2008\projects\bimp.vcxproj", "{F22A86E7-B73F-4F6A-9EA8-E4AE9CC9D885}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.timp", "..\timp\platform\msvc\projects\timp.vcxproj", "{27824966-6C3C-4874-ABFF-499DDDDB4D48}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.timp", "..\timp\platform\msvc2008\projects\timp.vcxproj", "{27824966-6C3C-4874-ABFF-499DDDDB4D48}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.dtex2", "..\dtex2\platform\msvc\projects\dtex2.vcxproj", "{A502C49C-7014-4D77-8BD9-B3F917AD34B0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.dtex2", "..\dtex2\platform\msvc2008\projects\dtex2.vcxproj", "{A502C49C-7014-4D77-8BD9-B3F917AD34B0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.unirender", "..\unirender\platform\msvc\projects\unirender.vcxproj", "{637A0E9C-1867-459D-8611-65A064E3B2C2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.unirender", "..\unirender\platform\msvc2008\projects\unirender.vcxproj", "{637A0E9C-1867-459D-8611-65A064E3B2C2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.drect", "..\drect\platform\msvc\projects\drect.vcxproj", "{01DD105B-A599-4BC3-9EF8-C54C8800979F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.drect", "..\drect\platform\msvc2008\projects\drect.vcxproj", "{01DD105B-A599-4BC3-9EF8-C54C8800979F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.tasks", "..\tasks\platform\msvc\projects\tasks.vcxproj", "{B67AD009-9CB7-4B49-B660-3A44716D6E2E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.tasks", "..\tasks\platform\msvc2008\projects\tasks.vcxproj", "{B67AD009-9CB7-4B49-B660-3A44716D6E2E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.pimg", "..\pimg\platform\msvc\projects\pimg.vcxproj", "{5AE91E72-1C23-4913-BEA9-1FE795C570F5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.pimg", "..\pimg\platform\msvc2008\projects\pimg.vcxproj", "{5AE91E72-1C23-4913-BEA9-1FE795C570F5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.polymesh", "..\polymesh\platform\msvc\projects\polymesh.vcxproj", "{748F2E41-4C8F-4C0F-A90A-26ECA6741A34}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.polymesh", "..\polymesh\platform\msvc2008\projects\polymesh.vcxproj", "{748F2E41-4C8F-4C0F-A90A-26ECA6741A34}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.glp", "..\glp\platform\msvc\projects\glp.vcxproj", "{CA120FA2-89A7-4957-A4A5-4746972AA39F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.sprite2", "..\sprite2\platform\msvc2008\projects\sprite2.vcxproj", "{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7.libdb", "..\easydb\platform\msvc\projects\libdb.vcxproj", "{BD2BB983-EF88-4B07-9564-0C5D1871FB87}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.glp", "..\glp\platform\msvc2008\projects\glp.vcxproj", "{CA120FA2-89A7-4957-A4A5-4746972AA39F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.uniaudio", "..\uniaudio\platform\msvc\projects\uniaudio.vcxproj", "{FDB8A0EB-D438-43B4-B65F-FF1B80A9D45B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7.libdb", "..\easydb\platform\msvc2008\projects\libdb.vcxproj", "{BD2BB983-EF88-4B07-9564-0C5D1871FB87}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libaudio", "..\easyaudio\platform\msvc\projects\libaudio.vcxproj", "{63E1CA82-F674-4E86-A0DC-EEEF3EDD6324}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.uniaudio", "..\uniaudio\platform\msvc2008\projects\uniaudio.vcxproj", "{FDB8A0EB-D438-43B4-B65F-FF1B80A9D45B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.multitask", "..\multitask\platform\msvc\projects\multitask.vcxproj", "{6728BB94-9882-4804-87D3-CE9CEB62FDAB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libaudio", "..\easyaudio\platform\msvc2008\projects\libaudio.vcxproj", "{63E1CA82-F674-4E86-A0DC-EEEF3EDD6324}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.flatten", "..\flatten\platform\msvc\projects\flatten.vcxproj", "{26016761-3F64-45E4-AA37-DDD8714FB159}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.multitask", "..\multitask\platform\msvc2008\projects\multitask.vcxproj", "{6728BB94-9882-4804-87D3-CE9CEB62FDAB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.cooking", "..\cooking\platform\msvc\projects\cooking.vcxproj", "{4EEE80E8-662F-4EC2-A19B-68B1D7F8C46F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.flatten", "..\flatten\platform\msvc2008\projects\flatten.vcxproj", "{26016761-3F64-45E4-AA37-DDD8714FB159}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.memmgr", "..\memmgr\platform\msvc\projects\memmgr.vcxproj", "{5FFA0DE4-1489-4267-8A79-52DECC2D0351}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.cooking", "..\cooking\platform\msvc2008\projects\cooking.vcxproj", "{4EEE80E8-662F-4EC2-A19B-68B1D7F8C46F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.playdb", "..\playdb\platform\msvc\projects\playdb.vcxproj", "{E421CC5F-0909-4F8D-8E9A-BCB52E0E8350}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.memmgr", "..\memmgr\platform\msvc2008\projects\memmgr.vcxproj", "{5FFA0DE4-1489-4267-8A79-52DECC2D0351}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.bs", "..\bs\platform\msvc\projects\bs.vcxproj", "{F5E6AE49-23DC-421B-AD33-C422E8590520}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.playdb", "..\playdb\platform\msvc2017\projects\playdb.vcxproj", "{E421CC5F-0909-4F8D-8E9A-BCB52E0E8350}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.guard", "..\guard\platform\msvc\projects\guard.vcxproj", "{CC45AE0E-8C51-4759-9614-8BC321C565A0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.bs", "..\bs\platform\msvc2017\projects\bs.vcxproj", "{F5E6AE49-23DC-421B-AD33-C422E8590520}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.guard", "..\guard\platform\msvc2017\projects\guard.vcxproj", "{CC45AE0E-8C51-4759-9614-8BC321C565A0}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.serializer", "7.serializer", "{FD4A873E-B658-44F9-B04A-B0FF7C8F780D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.serializer", "6.serializer", "{FD4A873E-B658-44F9-B04A-B0FF7C8F780D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.utilities", "0.utilities", "{FA49F3AE-1FBB-489F-92E2-4D2F812C3BAC}"
 EndProject
@@ -265,15 +261,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.exe", "5.exe", "{AC252D13
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.level", "7.level", "{94BEFC1A-9624-4C39-9B36-473F17199226}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.js", "..\js\platform\msvc2017\projects\js.vcxproj", "{68C18DA9-79BB-43A5-9E0C-79740AEA954B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.js", "..\js\platform\msvc\projects\js.vcxproj", "{68C18DA9-79BB-43A5-9E0C-79740AEA954B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.sns", "..\sns\platform\msvc2017\projects\sns.vcxproj", "{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libcomplex3d", "..\easycomplex3d\platform\msvc\projects\libcomplex3d.vcxproj", "{BE6E26CD-31F6-483F-91D4-79EAF3A6B3F8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libcomplex3d", "..\easycomplex3d\platform\msvc2008\projects\libcomplex3d.vcxproj", "{BE6E26CD-31F6-483F-91D4-79EAF3A6B3F8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easycomplex3d", "..\easycomplex3d\platform\msvc\projects\easycomplex3d.vcxproj", "{FF2D4A3A-86BA-47C0-AF4E-3264619B2F46}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easycomplex3d", "..\easycomplex3d\platform\msvc2008\projects\easycomplex3d.vcxproj", "{FF2D4A3A-86BA-47C0-AF4E-3264619B2F46}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.node3", "..\node3\platform\msvc2017\projects\node3.vcxproj", "{6030CF6B-1A8B-421B-92CE-4EB965751636}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.node3", "..\node3\platform\msvc\projects\node3.vcxproj", "{6030CF6B-1A8B-421B-92CE-4EB965751636}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.painting2", "..\painting2\platform\msvc\projects\painting2.vcxproj", "{18829913-B301-424C-8CD8-D95773038029}"
 EndProject
@@ -297,11 +291,19 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.easyeditor3", "..\easyedi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.s2loader", "..\s2loader\platform\msvc\projects\s2loader.vcxproj", "{E5A136EE-7EE1-4682-A1B1-C942CB2110E7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.s2saver", "..\s2saver\platform\msvc\projects\s2saver.vcxproj", "{6032DDF2-FE43-4D51-AFAA-F6B6A6D855AD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.parts", "3.parts", "{E7FACB3E-962B-4320-A9BD-90D081711A86}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9.packer", "9.packer", "{356A1411-DFA6-41A2-9087-7778D1AB51FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "8.wrapper", "8.wrapper", "{5C12D5C5-2E3B-4230-86C5-2709ACF8A397}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.gum", "..\gum\platform\msvc\projects\gum.vcxproj", "{70C5478D-6D53-4F75-99D4-F06373175C83}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.s2serializer", "..\s2serializer\platform\msvc\projects\s2serializer.vcxproj", "{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.s2storer", "..\s2storer\platform\msvc\projects\s2storer.vcxproj", "{6032DDF2-FE43-4D51-AFAA-F6B6A6D855AD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.sprite2", "..\sprite2\platform\msvc\projects\sprite2.vcxproj", "{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -637,10 +639,6 @@ Global
 		{D19B530F-A257-4465-A92C-381E91B47746}.Debug|Win32.Build.0 = Debug|Win32
 		{D19B530F-A257-4465-A92C-381E91B47746}.Release|Win32.ActiveCfg = Release|Win32
 		{D19B530F-A257-4465-A92C-381E91B47746}.Release|Win32.Build.0 = Release|Win32
-		{70C5478D-6D53-4F75-99D4-F06373175C83}.Debug|Win32.ActiveCfg = Debug|Win32
-		{70C5478D-6D53-4F75-99D4-F06373175C83}.Debug|Win32.Build.0 = Debug|Win32
-		{70C5478D-6D53-4F75-99D4-F06373175C83}.Release|Win32.ActiveCfg = Release|Win32
-		{70C5478D-6D53-4F75-99D4-F06373175C83}.Release|Win32.Build.0 = Release|Win32
 		{D1ACC0BE-3A2B-450F-A708-F3E84DF5E5AD}.Debug|Win32.ActiveCfg = Debug|Win32
 		{D1ACC0BE-3A2B-450F-A708-F3E84DF5E5AD}.Debug|Win32.Build.0 = Debug|Win32
 		{D1ACC0BE-3A2B-450F-A708-F3E84DF5E5AD}.Release|Win32.ActiveCfg = Release|Win32
@@ -697,10 +695,6 @@ Global
 		{748F2E41-4C8F-4C0F-A90A-26ECA6741A34}.Debug|Win32.Build.0 = Debug|Win32
 		{748F2E41-4C8F-4C0F-A90A-26ECA6741A34}.Release|Win32.ActiveCfg = Release|Win32
 		{748F2E41-4C8F-4C0F-A90A-26ECA6741A34}.Release|Win32.Build.0 = Release|Win32
-		{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4}.Debug|Win32.ActiveCfg = Debug|Win32
-		{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4}.Debug|Win32.Build.0 = Debug|Win32
-		{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4}.Release|Win32.ActiveCfg = Release|Win32
-		{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4}.Release|Win32.Build.0 = Release|Win32
 		{CA120FA2-89A7-4957-A4A5-4746972AA39F}.Debug|Win32.ActiveCfg = Debug|Win32
 		{CA120FA2-89A7-4957-A4A5-4746972AA39F}.Debug|Win32.Build.0 = Debug|Win32
 		{CA120FA2-89A7-4957-A4A5-4746972AA39F}.Release|Win32.ActiveCfg = Release|Win32
@@ -749,10 +743,6 @@ Global
 		{68C18DA9-79BB-43A5-9E0C-79740AEA954B}.Debug|Win32.Build.0 = Debug|Win32
 		{68C18DA9-79BB-43A5-9E0C-79740AEA954B}.Release|Win32.ActiveCfg = Release|Win32
 		{68C18DA9-79BB-43A5-9E0C-79740AEA954B}.Release|Win32.Build.0 = Release|Win32
-		{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}.Debug|Win32.ActiveCfg = Debug|Win32
-		{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}.Debug|Win32.Build.0 = Debug|Win32
-		{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}.Release|Win32.ActiveCfg = Release|Win32
-		{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}.Release|Win32.Build.0 = Release|Win32
 		{BE6E26CD-31F6-483F-91D4-79EAF3A6B3F8}.Debug|Win32.ActiveCfg = Debug|Win32
 		{BE6E26CD-31F6-483F-91D4-79EAF3A6B3F8}.Debug|Win32.Build.0 = Debug|Win32
 		{BE6E26CD-31F6-483F-91D4-79EAF3A6B3F8}.Release|Win32.ActiveCfg = Release|Win32
@@ -801,10 +791,22 @@ Global
 		{E5A136EE-7EE1-4682-A1B1-C942CB2110E7}.Debug|Win32.Build.0 = Debug|Win32
 		{E5A136EE-7EE1-4682-A1B1-C942CB2110E7}.Release|Win32.ActiveCfg = Release|Win32
 		{E5A136EE-7EE1-4682-A1B1-C942CB2110E7}.Release|Win32.Build.0 = Release|Win32
+		{70C5478D-6D53-4F75-99D4-F06373175C83}.Debug|Win32.ActiveCfg = Debug|Win32
+		{70C5478D-6D53-4F75-99D4-F06373175C83}.Debug|Win32.Build.0 = Debug|Win32
+		{70C5478D-6D53-4F75-99D4-F06373175C83}.Release|Win32.ActiveCfg = Release|Win32
+		{70C5478D-6D53-4F75-99D4-F06373175C83}.Release|Win32.Build.0 = Release|Win32
+		{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}.Debug|Win32.Build.0 = Debug|Win32
+		{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}.Release|Win32.ActiveCfg = Release|Win32
+		{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F}.Release|Win32.Build.0 = Release|Win32
 		{6032DDF2-FE43-4D51-AFAA-F6B6A6D855AD}.Debug|Win32.ActiveCfg = Debug|Win32
 		{6032DDF2-FE43-4D51-AFAA-F6B6A6D855AD}.Debug|Win32.Build.0 = Debug|Win32
 		{6032DDF2-FE43-4D51-AFAA-F6B6A6D855AD}.Release|Win32.ActiveCfg = Release|Win32
 		{6032DDF2-FE43-4D51-AFAA-F6B6A6D855AD}.Release|Win32.Build.0 = Release|Win32
+		{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4}.Debug|Win32.Build.0 = Debug|Win32
+		{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4}.Release|Win32.ActiveCfg = Release|Win32
+		{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -867,7 +869,7 @@ Global
 		{FC9B43D6-8D2B-4D57-A976-9379F87A366C} = {67E9A611-D121-4925-BC49-4F79052AB416}
 		{8D96874E-F6B7-4F8B-A8B3-8F06707E9D7B} = {C2C971D9-43B1-488E-9A8E-C274F33CB8CB}
 		{66207E9A-031C-402B-9E3E-FA5599A1C89B} = {57F21586-7751-4E2C-B752-B8C9713D192F}
-		{5C357759-CA95-42E1-B907-DFB87A995F6C} = {E7FACB3E-962B-4320-A9BD-90D081711A86}
+		{5C357759-CA95-42E1-B907-DFB87A995F6C} = {0002B3F9-26D0-42F6-AF40-7E4D73332755}
 		{8D18EB4E-FDDF-484A-9784-3AC9DCBCC2A1} = {3F0B9C7C-49F9-4B55-8550-D4D95C236AEC}
 		{26A3BB4B-6AC6-4280-92E3-666056AEC52A} = {3F0B9C7C-49F9-4B55-8550-D4D95C236AEC}
 		{77E15C91-F70B-4141-A0FC-4E82D1C43BD2} = {3F0B9C7C-49F9-4B55-8550-D4D95C236AEC}
@@ -892,7 +894,6 @@ Global
 		{6055092D-EE59-4159-B923-A375401AA099} = {FA49F3AE-1FBB-489F-92E2-4D2F812C3BAC}
 		{0ADAEF1C-2094-4A6F-84E9-3CA0684B7824} = {356A1411-DFA6-41A2-9087-7778D1AB51FB}
 		{D19B530F-A257-4465-A92C-381E91B47746} = {D22C11EC-C6D0-416D-9E22-3C16A1AC52BF}
-		{70C5478D-6D53-4F75-99D4-F06373175C83} = {3E445281-8F17-4763-9112-39A38C12FE16}
 		{D1ACC0BE-3A2B-450F-A708-F3E84DF5E5AD} = {3E445281-8F17-4763-9112-39A38C12FE16}
 		{263EF43F-42E5-4DAC-8221-108A8AF48C0B} = {AC252D13-3E77-4464-8C2F-841FC48B6D25}
 		{0A0F323F-D04E-44A6-9784-C1947AC38DA8} = {67E9A611-D121-4925-BC49-4F79052AB416}
@@ -907,7 +908,6 @@ Global
 		{B67AD009-9CB7-4B49-B660-3A44716D6E2E} = {39467125-E1FE-4361-AE53-326A4E47A77F}
 		{5AE91E72-1C23-4913-BEA9-1FE795C570F5} = {3E445281-8F17-4763-9112-39A38C12FE16}
 		{748F2E41-4C8F-4C0F-A90A-26ECA6741A34} = {1A570CF5-334E-48AD-8805-C06A94E7BCD8}
-		{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4} = {E3CAB0FE-5803-4275-BE6F-CB4395CD1DB7}
 		{CA120FA2-89A7-4957-A4A5-4746972AA39F} = {3E445281-8F17-4763-9112-39A38C12FE16}
 		{BD2BB983-EF88-4B07-9564-0C5D1871FB87} = {356A1411-DFA6-41A2-9087-7778D1AB51FB}
 		{FDB8A0EB-D438-43B4-B65F-FF1B80A9D45B} = {5211D80C-7098-4441-8E61-7C7B11C7461B}
@@ -934,7 +934,6 @@ Global
 		{AC252D13-3E77-4464-8C2F-841FC48B6D25} = {DCD53373-2D4D-4A9D-AC8F-F1E917DBEE6C}
 		{94BEFC1A-9624-4C39-9B36-473F17199226} = {DCD53373-2D4D-4A9D-AC8F-F1E917DBEE6C}
 		{68C18DA9-79BB-43A5-9E0C-79740AEA954B} = {3EFBD837-EE32-41C1-BD3A-F5FCB4878367}
-		{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F} = {3EFBD837-EE32-41C1-BD3A-F5FCB4878367}
 		{BE6E26CD-31F6-483F-91D4-79EAF3A6B3F8} = {67E9A611-D121-4925-BC49-4F79052AB416}
 		{FF2D4A3A-86BA-47C0-AF4E-3264619B2F46} = {AC252D13-3E77-4464-8C2F-841FC48B6D25}
 		{6030CF6B-1A8B-421B-92CE-4EB965751636} = {E3CAB0FE-5803-4275-BE6F-CB4395CD1DB7}
@@ -949,7 +948,10 @@ Global
 		{58699389-F675-489E-A912-C9110D8D6E3D} = {2EAD0DFD-BE31-4C3B-87A9-14F9ED0636F8}
 		{CEEBD91E-9297-47EA-ADED-68D791BA6FD4} = {2EAD0DFD-BE31-4C3B-87A9-14F9ED0636F8}
 		{E5A136EE-7EE1-4682-A1B1-C942CB2110E7} = {FD4A873E-B658-44F9-B04A-B0FF7C8F780D}
+		{70C5478D-6D53-4F75-99D4-F06373175C83} = {5C12D5C5-2E3B-4230-86C5-2709ACF8A397}
+		{B6939ACB-3794-4B2A-95DA-F99ECDF79D0F} = {3EFBD837-EE32-41C1-BD3A-F5FCB4878367}
 		{6032DDF2-FE43-4D51-AFAA-F6B6A6D855AD} = {FD4A873E-B658-44F9-B04A-B0FF7C8F780D}
+		{CCDD6DC3-9DA2-4215-BAC6-6031699FB7E4} = {E3CAB0FE-5803-4275-BE6F-CB4395CD1DB7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D54C01A-3C82-4351-A325-2853C3E81322}

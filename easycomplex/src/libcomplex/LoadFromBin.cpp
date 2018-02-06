@@ -5,10 +5,10 @@
 #include <ee/SpriteFactory.h>
 #include <ee/FileHelper.h>
 
-#include <sns/NodeFactory.h>
-#include <sns/NodeSym.h>
-#include <sns/NodeSpr.h>
-#include <sns/ComplexSym.h>
+#include <s2s/NodeFactory.h>
+#include <s2s/NodeSym.h>
+#include <s2s/NodeSpr.h>
+#include <s2s/ComplexSym.h>
 #include <memmgr/LinearAllocator.h>
 #include <bs/ImportStream.h>
 
@@ -22,8 +22,8 @@ void LoadFromBin::Load(const std::string& filepath, Symbol& complex)
 {
 	mm::LinearAllocator alloc;
 
-	auto sym = sns::NodeFactory::CreateSymFromBin(alloc, filepath);
-	auto sym_src = dynamic_cast<sns::ComplexSym*>(sym);
+	auto sym = s2s::NodeFactory::CreateSymFromBin(alloc, filepath);
+	auto sym_src = dynamic_cast<s2s::ComplexSym*>(sym);
 
 	sm::rect scissor;
 	scissor.xmin = sym_src->scissor[0];

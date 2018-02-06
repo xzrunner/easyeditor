@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sns/AnimSym.h>
+#include <s2s/AnimSym.h>
 
 #include <string>
 #include <memory>
@@ -16,9 +16,9 @@ public:
 	static void Load(const std::string& filepath);
 
 private:
-	static void LoadFrame(const sns::AnimSym::Frame& src, KeyFrame* dst, const std::string& dir);
+	static void LoadFrame(const s2s::AnimSym::Frame& src, KeyFrame* dst, const std::string& dir);
 
-	static void LoadLerp(const sns::AnimSym::Lerp& src, KeyFrame* dst_frame);
+	static void LoadLerp(const s2s::AnimSym::Lerp& src, KeyFrame* dst_frame);
 
 }; // LoadFromBin
 

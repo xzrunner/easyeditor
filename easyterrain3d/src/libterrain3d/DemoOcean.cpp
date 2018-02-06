@@ -2,12 +2,11 @@
 
 #include <ee/Image.h>
 
-#include <node3/Camera.h>
-
 #include <glp_loop.h>
 #include <SM_Calc.h>
-#include <node3/AABB.h>
-#include <node3/PrimitiveDraw.h>
+#include <painting3/AABB.h>
+#include <painting3/PrimitiveDraw.h>
+#include <painting3/Camera.h>
 #include <shaderlab/ShaderMgr.h>
 #include <shaderlab/Model3Shader.h>
 
@@ -19,7 +18,7 @@ static const float EDGE = 10;
 static const int ROW = 20;
 static const int COL = 20;
 
-DemoOcean::DemoOcean(n3::Camera& cam)
+DemoOcean::DemoOcean(pt3::Camera& cam)
 	: m_cam(cam)
 	, m_image(NULL)
 {

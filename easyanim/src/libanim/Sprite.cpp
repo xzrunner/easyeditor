@@ -67,7 +67,7 @@ void Sprite::Store(Json::Value& val, const std::string& dir) const
 	val["animation"] = anim_val;
 }
 
-void Sprite::Load(const sns::NodeSpr* spr)
+void Sprite::Load(const s2s::NodeSpr* spr)
 {
 	ee::Sprite::Load(spr);
 

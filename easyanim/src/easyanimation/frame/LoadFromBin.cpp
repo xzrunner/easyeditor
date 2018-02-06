@@ -11,9 +11,9 @@
 #include <ee/SpriteFactory.h>
 
 #include <memmgr/LinearAllocator.h>
-#include <sns/NodeFactory.h>
-#include <sns/AnimSym.h>
-#include <sns/NodeSpr.h>
+#include <s2s/NodeFactory.h>
+#include <s2s/AnimSym.h>
+#include <s2s/NodeSpr.h>
 
 #include <sprite2/ILerp.h>
 #include <sprite2/LerpType.h>
@@ -29,8 +29,8 @@ void LoadFromBin::Load(const std::string& filepath)
 {
 	mm::LinearAllocator alloc;
 
-	auto sym = sns::NodeFactory::CreateSymFromBin(alloc, filepath);
-	auto anim_sym = dynamic_cast<sns::AnimSym*>(sym);
+	auto sym = s2s::NodeFactory::CreateSymFromBin(alloc, filepath);
+	auto anim_sym = dynamic_cast<s2s::AnimSym*>(sym);
 
 	SetFpsSJ::Instance()->Set(anim_sym->m_fps);
 
@@ -63,7 +63,7 @@ void LoadFromBin::Load(const std::string& filepath)
 	SetSelectedSJ::Instance()->Set(0, 0);
 }
 
-void LoadFromBin::LoadFrame(const sns::AnimSym::Frame& src, KeyFrame* dst, const std::string& dir)
+void LoadFromBin::LoadFrame(const s2s::AnimSym::Frame& src, KeyFrame* dst, const std::string& dir)
 {
 	dst->SetClassicTween(src.tween);
 
@@ -84,18 +84,18 @@ void LoadFromBin::LoadFrame(const sns::AnimSym::Frame& src, KeyFrame* dst, const
 	}
 }
 
-void LoadFromBin::LoadLerp(const sns::AnimSym::Lerp& src, KeyFrame* dst_frame)
+void LoadFromBin::LoadLerp(const s2s::AnimSym::Lerp& src, KeyFrame* dst_frame)
 {
 	std::unique_ptr<s2::ILerp> dst = nullptr;
 	switch (src.type)
 	{
-	case sns::AnimSym::LERP_CIRCLE:
+	case s2s::AnimSym::LERP_CIRCLE:
 		{
 			float scale = src.data[0] * 0.01f;
 			dst = std::make_unique<s2::LerpCircle>(scale);
 		}
 		break;
-	case sns::AnimSym::LERP_SPIRAL:
+	case s2s::AnimSym::LERP_SPIRAL:
 		{
 			float begin = src.data[0] * SM_DEG_TO_RAD,
 				  end   = src.data[1] * SM_DEG_TO_RAD;
@@ -103,14 +103,14 @@ void LoadFromBin::LoadLerp(const sns::AnimSym::Lerp& src, KeyFrame* dst_frame)
 			dst = std::make_unique<s2::LerpSpiral>(begin, end, scale);
 		}
 		break;
-	case sns::AnimSym::LERP_WIGGLE:
+	case s2s::AnimSym::LERP_WIGGLE:
 		{
 			float freq = src.data[0],
 				  amp  = src.data[1];
 			dst = std::make_unique<s2::LerpWiggle>(freq, amp);
 		}
 		break;
-	case sns::AnimSym::LERP_EASE:
+	case s2s::AnimSym::LERP_EASE:
 		{
 			int type = src.data[0];
 			dst = std::make_unique<s2::LerpEase>(type);

@@ -21,7 +21,7 @@
 #include <gum/DTex.h>
 #include <gum/GTxt.h>
 #include <gum/StringHelper.h>
-#include <node3/PrimitiveDraw.h>
+#include <painting3/PrimitiveDraw.h>
 
 namespace ecomplex
 {

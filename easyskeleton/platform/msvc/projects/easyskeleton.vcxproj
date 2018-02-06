@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>6.easyskeleton</ProjectName>
+    <ProjectGuid>{263EF43F-42E5-4DAC-8221-108A8AF48C0B}</ProjectGuid>
+    <RootNamespace>easyskeleton</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\easyskeleton\x86\Debug\</OutDir>
+    <IntDir>..\easyskeleton\x86\Debug\obj\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\easyskeleton\x86\Release\</OutDir>
+    <IntDir>..\easyskeleton\x86\Release\obj\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\shaderlab\include\;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\easyskeleton\x86\Debug</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\easyskeleton\x86\Debug\easyskeleton.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_stc.lib;wxmsw31ud_core.lib;wxbase31ud_net.lib;wxbase31ud.lib;wxscintillad.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;jsond.lib;freetype281d.lib;luad.lib;libpng16d.lib;cjsond.lib;pthreadVC2.lib;lzmad.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\easyskeleton\x86\Debug\easyskeleton.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\easyskeleton\x86\Debug\easyskeleton.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\sm\src\sm;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\shaderlab\include\;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\rapidjson\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>..\easyskeleton\x86\Release</AssemblerListingLocation>
+      <ProgramDataBaseFileName>..\easyskeleton\x86\Release\easyskeleton.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw31u_gl.lib;wxmsw31u_propgrid.lib;wxmsw31u_adv.lib;wxmsw31u_stc.lib;wxmsw31u_core.lib;wxbase31u_net.lib;wxbase31u.lib;wxscintilla.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;json.lib;freetype281.lib;lua.lib;libpng16.lib;cjson.lib;pthreadVC2.lib;lzma.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\easyskeleton\x86\Release\easyskeleton.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib;..\..\..\..\editor-external\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\easyskeleton\x86\Release\easyskeleton.pdb</ProgramDatabaseFile>
+      <StripPrivateSymbols />
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\easyskeleton\Bone.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\ComposeSkeletonImpl.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\ComposeSkeletonOP.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\FileLoader.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\FileStorer.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\Joint.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\LibraryPanel.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\main.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\RotateSprState.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\ScaleSprState.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\StageCanvas.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\StagePanel.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\Task.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\ToolbarPanel.cpp" />
+    <ClCompile Include="..\..\..\src\easyskeleton\TranslateSprState.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\easyskeleton\Bone.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\ComposeSkeletonImpl.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\ComposeSkeletonOP.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\FileLoader.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\FileStorer.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\Joint.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\LibraryPanel.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\main.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\RotateSprState.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\ScaleSprState.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\StageCanvas.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\StagePanel.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\Task.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\ToolbarPanel.h" />
+    <ClInclude Include="..\..\..\src\easyskeleton\TranslateSprState.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\editor-external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libdata.vcxproj">
+      <Project>{77e15c91-f70b-4141-a0fc-4e82d1c43bd2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libedit.vcxproj">
+      <Project>{8d18eb4e-fddf-484a-9784-3ac9dcbcc2a1}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libgui.vcxproj">
+      <Project>{fa0a46ec-e1ab-4830-8898-c953eebdf7a5}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libmath.vcxproj">
+      <Project>{8cd2d282-45ee-46b4-a8d8-291e8e445be7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libmsg.vcxproj">
+      <Project>{d4baa61e-9918-4f72-b772-88afd4ee76bc}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\librender.vcxproj">
+      <Project>{6216b0f5-5b88-4ba8-88f3-02585c4158b4}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libtool.vcxproj">
+      <Project>{e1843ab3-962e-4f9c-b471-74ec36dc94b0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyeditor\platform\msvc\projects\libview.vcxproj">
+      <Project>{26a3bb4b-6ac6-4280-92e3-666056aec52a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\easyimage\platform\msvc\projects\libimage.vcxproj">
+      <Project>{d41c0b3e-f0a0-4a1f-a568-0100c839406c}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\fs\platform\msvc\projects\fs.vcxproj">
+      <Project>{09c39b9e-27f5-4b39-9829-2815fd1c5469}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\gum\platform\msvc\projects\gum.vcxproj">
+      <Project>{70c5478d-6d53-4f75-99d4-f06373175c83}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\logger\platform\msvc\projects\logger.vcxproj">
+      <Project>{4031b66e-39a3-401e-918a-e1424a4af944}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\particle\platform\msvc\projects\particle.vcxproj">
+      <Project>{ee2229a3-ad5f-46e7-afab-729f8aa18036}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="libskeleton.vcxproj">
+      <Project>{0a0f323f-d04e-44a6-9784-c1947ac38da8}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
