@@ -280,7 +280,7 @@ GetContainArea(const ee::SprConstPtr& spr) const
 	{
 		sm::vec2 center = (tris[i*3] + tris[i*3+1] + tris[i*3+2]) / 3;
 		if (sm::is_point_in_rect(center, m_rect)) {
-			area += ee::Math2D::GetTriangleArea(tris[i*3], tris[i*3+1], tris[i*3+2]);
+			area += sm::get_triangle_area(tris[i*3], tris[i*3+1], tris[i*3+2]);
 		}
 	}
 

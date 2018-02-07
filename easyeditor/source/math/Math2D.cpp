@@ -32,13 +32,6 @@ bool Math2D::IsPointInTriangle(const sm::vec2& p, const sm::vec2& a, const sm::v
 	return test0 == test1 && test1 == test2;
 }
 
-bool Math2D::IsTwoLineParallel(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1)
-{
-	float denominatorX = (e1.y - s1.y) * (e0.x - s0.x) - (e0.y - s0.y) * (e1.x - s1.x),
-		  denominatorY = (e1.x - s1.x) * (e0.y - s0.y) - (e0.x - s0.x) * (e1.y - s1.y);
-	return fabs(denominatorX) < FLT_EPSILON || fabs(denominatorY) < FLT_EPSILON;
-}
-
 int Math2D::CheckPosInTriangle(const sm::vec2& p, const sm::vec2& t0, const sm::vec2& t1, const sm::vec2& t2)
 {
 	if (p == t0 || p == t1 || p == t2)
@@ -128,44 +121,6 @@ float Math2D::GetDisPointToMultiPos(const sm::vec2& p, const CU_VEC<CU_VEC<sm::v
 		*index1 = iNearest1;
 	}
 	return nearest;
-}
-
-float Math2D::GetPolygonArea(const CU_VEC<sm::vec2>& polygon)
-{
-	if(polygon.size() < 3)
-		return 0;
-
-	float s = 0;
-	for(int i = 0, n = polygon.size(); i < n; i++) {
-		int next = (i+1)%n;
-		s += (polygon[i].y + polygon[next].y) * (polygon[i].x - polygon[next].x);		
-	}
-
-	return fabs(s/2.0f);
-}
-
-float Math2D::GetPolygonPerimeter(const CU_VEC<sm::vec2>& poly)
-{
-	if (poly.size() < 2) {
-		return 0;
-	}
-
-	float perimeter = 0.0f;
-	for (int i = 0, n = poly.size()-1; i < n; ++i) {
-		perimeter += sm::dis_pos_to_pos(poly[i], poly[i+1]);
-	}
-	perimeter += sm::dis_pos_to_pos(poly[0], poly[poly.size()-1]);
-
-	return perimeter;
-}
-
-float Math2D::GetTriangleArea(const sm::vec2& p0, const sm::vec2& p1, const sm::vec2& p2)
-{
-	float s = 0;
-	s += (p1.y + p0.y) * (p1.x - p0.x);
-	s += (p2.y + p1.y) * (p2.x - p1.x);
-	s += (p0.y + p2.y) * (p0.x - p2.x);
-	return fabs(s/2.0f);
 }
 
 int Math2D::TestPointOnSection(const sm::vec2& startPos, const sm::vec2& endPos, const sm::vec2& thdPos, float tolerance/* = FLT_EPSILON*/)

@@ -15,7 +15,7 @@
     <ProjectGuid>{8CD2D282-45EE-46B4-A8D8-291E8E445BE7}</ProjectGuid>
     <RootNamespace>libmath</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -84,7 +84,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\external\clipper\clipper.cpp" />
     <ClCompile Include="..\..\..\source\math\alg\DelaunayTriangulation.cpp" />
-    <ClCompile Include="..\..\..\source\math\alg\MinBoundingBox.cpp" />
     <ClCompile Include="..\..\..\source\math\alg\PolygonClipper.cpp" />
     <ClCompile Include="..\..\..\source\math\alg\SGI.cpp" />
     <ClCompile Include="..\..\..\source\math\alg\TrapezoidalDec.cpp" />
@@ -95,7 +94,6 @@
     <ClInclude Include="..\..\..\include\ee\DelaunayTriangulation.h" />
     <ClInclude Include="..\..\..\include\ee\Math2D.h" />
     <ClInclude Include="..\..\..\include\ee\math_common.h" />
-    <ClInclude Include="..\..\..\include\ee\MinBoundingBox.h" />
     <ClInclude Include="..\..\..\include\ee\PolygonClipper.h" />
     <ClInclude Include="..\..\..\include\ee\Random.h" />
     <ClInclude Include="..\..\..\include\ee\SGI.h" />

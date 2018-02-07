@@ -24,8 +24,6 @@ public:
 
 	static bool IsPointInTriangle(const sm::vec2& p, const sm::vec2& a, const sm::vec2& b, const sm::vec2& c);
 
-	static bool IsTwoLineParallel(const sm::vec2& s0, const sm::vec2& e0, const sm::vec2& s1, const sm::vec2& e1);
-
 	// To check if the point in the triangle.
 	// return: [0] p is on the edge t0-t1		[1] p is on the edge t1-t2
 	//		   [2] p is on the edge t2-t0
@@ -45,11 +43,6 @@ public:
 	static float GetDisPointToMultiLines(const sm::vec2& p, const CU_VEC<CU_VEC<sm::vec2> >& multiLines, size_t* iLine = NULL, size_t* iPos = NULL);
 
 	static float GetDisPointToMultiPos(const sm::vec2& p, const CU_VEC<CU_VEC<sm::vec2> >& pos, size_t* index0 = NULL, size_t* index1 = NULL);
-
-	static float GetPolygonArea(const CU_VEC<sm::vec2>& polygon);
-	static float GetTriangleArea(const sm::vec2& p0, const sm::vec2& p1, const sm::vec2& p2);
-
-	static float GetPolygonPerimeter(const CU_VEC<sm::vec2>& poly);
 
 	//////////////////////////////////////////////////////////////////////////
 	//

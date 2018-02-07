@@ -10,13 +10,14 @@
 #include <ee/SpriteFactory.h>
 #include <ee/Sprite.h>
 #include <ee/Math2D.h>
-#include <ee/MinBoundingBox.h>
 #include <ee/SymbolFile.h>
 #include <ee/ImageData.h>
 
 #include <easyimage.h>
 
 #include <SM_Calc.h>
+#include <SM_MinBoundingBox.h>
+#include <pimg/OutlineRaw.h>
 #include <sprite2/SymType.h>
 #include <sprite2/DrawRT.h>
 #include <gum/Config.h>
@@ -136,7 +137,7 @@ void RotateTrimImage::RotateTrim(const std::string& dir)
 bool RotateTrimImage::GetRotateTrimInfo(const uint8_t* pixels, int img_w, int img_h, 
 										int& width, int& height, sm::vec2& center, float& angle) const
 {
-	eimage::ExtractOutlineRaw raw(pixels, img_w, img_h);
+	pimg::OutlineRaw raw(pixels, img_w, img_h);
 	raw.CreateBorderLineAndMerge();
 	if (raw.GetBorderLine().empty()) {
 		return false;
@@ -144,7 +145,7 @@ bool RotateTrimImage::GetRotateTrimInfo(const uint8_t* pixels, int img_w, int im
 	raw.CreateBorderConvexHull();
 
 	sm::vec2 bound[4];
-	bool is_rotate = ee::MinBoundingBox::Do(raw.GetConvexHull(), bound);
+	bool is_rotate = sm::MinBoundingBox::Do(raw.GetConvexHull(), bound);
 
 	center = (bound[0] + bound[2]) * 0.5f;
 	center.x -= img_w * 0.5f;

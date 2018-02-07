@@ -112,9 +112,9 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 	ee::ClearShapeSJ::Instance()->Clear();
 
 	auto img_data = ee::ImageDataMgr::Instance()->GetItem(img_symbol->GetFilepath());
-	eimage::ExtractOutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
+	pimg::OutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
 	raw.CreateBorderLineAndMerge();
-	eimage::ExtractOutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
+	pimg::OutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
 	fine.Trigger(0.04f, 0.2f);
 
 	sm::vec2 offset(-img_data->GetWidth()*0.5f, -img_data->GetHeight()*0.5f);

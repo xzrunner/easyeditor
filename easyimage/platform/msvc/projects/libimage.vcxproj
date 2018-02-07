@@ -15,7 +15,7 @@
     <ProjectGuid>{D41C0B3E-F0A0-4A1F-A568-0100C839406C}</ProjectGuid>
     <RootNamespace>libimage</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -84,8 +84,6 @@
     <ClCompile Include="..\..\..\..\external\rg_etc1\rg_etc1.cpp" />
     <ClCompile Include="..\..\..\..\external\rg_etc1\rg_etc1_for_c.cpp" />
     <ClCompile Include="..\..\..\src\libimage\BlockCompress.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\ExtractOutlineFine.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\ExtractOutlineRaw.cpp" />
     <ClCompile Include="..\..\..\src\libimage\ImageCmp.cpp" />
     <ClCompile Include="..\..\..\src\libimage\LanczosResamplingShader.cpp" />
     <ClCompile Include="..\..\..\src\libimage\OutlineToTriStrip.cpp" />
@@ -111,8 +109,6 @@
     <ClInclude Include="..\..\..\src\easyimage.h" />
     <ClInclude Include="..\..\..\src\libimage\BlockCompress.h" />
     <ClInclude Include="..\..\..\src\libimage\config.h" />
-    <ClInclude Include="..\..\..\src\libimage\ExtractOutlineFine.h" />
-    <ClInclude Include="..\..\..\src\libimage\ExtractOutlineRaw.h" />
     <ClInclude Include="..\..\..\src\libimage\ImageCmp.h" />
     <ClInclude Include="..\..\..\src\libimage\LanczosResamplingShader.h" />
     <ClInclude Include="..\..\..\src\libimage\OutlineToTriStrip.h" />

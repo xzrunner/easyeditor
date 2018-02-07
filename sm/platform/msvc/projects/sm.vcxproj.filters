@@ -57,6 +57,9 @@
     <ClCompile Include="..\..\..\src\sm\SM_Triangulation.cpp">
       <Filter>algorithms</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\sm\SM_MinBoundingBox.cpp">
+      <Filter>algorithms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\sm\sm_c_vector.h">
@@ -117,6 +120,9 @@
       <Filter>algorithms</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sm\SM_Triangulation.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sm\SM_MinBoundingBox.h">
       <Filter>algorithms</Filter>
     </ClInclude>
   </ItemGroup>

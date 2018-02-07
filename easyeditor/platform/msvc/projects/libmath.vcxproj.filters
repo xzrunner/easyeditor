@@ -15,9 +15,6 @@
     <ClCompile Include="..\..\..\source\math\alg\DelaunayTriangulation.cpp">
       <Filter>alg</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\math\alg\MinBoundingBox.cpp">
-      <Filter>alg</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\math\alg\PolygonClipper.cpp">
       <Filter>alg</Filter>
     </ClCompile>
@@ -27,16 +24,11 @@
     <ClCompile Include="..\..\..\source\math\alg\TrapezoidalDec.cpp">
       <Filter>alg</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\editor-external\clipper\clipper.cpp">
-      <Filter>external\clipper</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\math\Math2D.cpp" />
+    <ClCompile Include="..\..\..\..\external\clipper\clipper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\ee\DelaunayTriangulation.h">
-      <Filter>alg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\ee\MinBoundingBox.h">
       <Filter>alg</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\ee\PolygonClipper.h">
@@ -48,13 +40,11 @@
     <ClInclude Include="..\..\..\include\ee\TrapezoidalDec.h">
       <Filter>alg</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\editor-external\clipper\clipper.hpp">
-      <Filter>external\clipper</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\ee\Math2D.h" />
     <ClInclude Include="..\..\..\include\ee\math_common.h" />
     <ClInclude Include="..\..\..\include\ee\Random.h" />
     <ClInclude Include="..\..\..\include\ee\std_functor.h" />
+    <ClInclude Include="..\..\..\..\external\clipper\clipper.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\include\ee\Math2D.inl" />

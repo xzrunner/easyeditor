@@ -9,8 +9,11 @@
 
 #include <easyimage.h>
 
+#include <SM_Calc.h>
 #include <sprite2/SymType.h>
 #include <gum/JsonSerializer.h>
+#include <pimg/OutlineRaw.h>
+#include <pimg/OutlineFine.h>
 
 #include <wx/arrstr.h>
 
@@ -63,9 +66,9 @@ void OutlineImage::Trigger(const std::string& dir) const
 		auto image = ee::ImageMgr::Instance()->GetItem(filepath);
 		auto img_data = ee::ImageDataMgr::Instance()->GetItem(filepath);
 
-		eimage::ExtractOutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
+		pimg::OutlineRaw raw(img_data->GetPixelData(), img_data->GetWidth(), img_data->GetHeight());
 		raw.CreateBorderLineAndMerge();
-		eimage::ExtractOutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
+		pimg::OutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
 		fine.Trigger(0.04f, 0.2f);
 
 		Json::Value value;
@@ -76,7 +79,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 		auto vertices(fine.GetResult());
 
 		float src_area = image->GetClippedRegion().Width() * image->GetClippedRegion().Height();
-		float dst_area = ee::Math2D::GetPolygonArea(vertices);
+		float dst_area = sm::get_polygon_area(vertices);
 		if (dst_area < src_area * 0.95f)
 		{
 			for (int i = 0, n = vertices.size(); i < n; ++i) {

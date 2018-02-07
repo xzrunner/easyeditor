@@ -15,7 +15,7 @@
     <ProjectGuid>{81630E0D-E1EF-4837-A0EE-30435ED4FE59}</ProjectGuid>
     <RootNamespace>sm</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-	<WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>    
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -77,6 +77,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\sm\SM_MinBoundingBox.cpp" />
     <ClCompile Include="..\..\..\src\sm\SM_ConvexHull.cpp" />
     <ClCompile Include="..\..\..\src\sm\SM_CosineSmooth.cpp" />
     <ClCompile Include="..\..\..\src\sm\sm_c_calc.cpp" />
@@ -89,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\sm\external\sm_config.h" />
+    <ClInclude Include="..\..\..\src\sm\SM_MinBoundingBox.h" />
     <ClInclude Include="..\..\..\src\sm\SM_Calc.h" />
     <ClInclude Include="..\..\..\src\sm\sm_const.h" />
     <ClInclude Include="..\..\..\src\sm\SM_ConvexHull.h" />

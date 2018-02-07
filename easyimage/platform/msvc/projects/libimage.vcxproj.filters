@@ -39,12 +39,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\libimage\ExtractOutlineFine.cpp">
-      <Filter>outline</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\libimage\ExtractOutlineRaw.cpp">
-      <Filter>outline</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\libimage\OutlineToTriStrip.cpp">
       <Filter>outline</Filter>
     </ClCompile>
@@ -84,24 +78,6 @@
     <ClCompile Include="..\..\..\src\libimage\TransToPVR.cpp">
       <Filter>format</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\editor-external\etcpack\c_wrap_etcpack.cpp">
-      <Filter>external\etcpack</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcdec.cxx">
-      <Filter>external\etcpack</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcimage.cxx">
-      <Filter>external\etcpack</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\editor-external\etcpack\source\etcpack.cxx">
-      <Filter>external\etcpack</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\editor-external\rg_etc1\rg_etc1.cpp">
-      <Filter>external\rg_etc1</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\editor-external\rg_etc1\rg_etc1_for_c.cpp">
-      <Filter>external\rg_etc1</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\libimage\BlockCompress.cpp">
       <Filter>compress</Filter>
     </ClCompile>
@@ -109,14 +85,14 @@
       <Filter>compare</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\libimage\PixelsTools.cpp" />
+    <ClCompile Include="..\..\..\..\external\etcpack\c_wrap_etcpack.cpp" />
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcdec.cxx" />
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcimage.cxx" />
+    <ClCompile Include="..\..\..\..\external\etcpack\source\etcpack.cxx" />
+    <ClCompile Include="..\..\..\..\external\rg_etc1\rg_etc1.cpp" />
+    <ClCompile Include="..\..\..\..\external\rg_etc1\rg_etc1_for_c.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\libimage\ExtractOutlineFine.h">
-      <Filter>outline</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libimage\ExtractOutlineRaw.h">
-      <Filter>outline</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\libimage\OutlineToTriStrip.h">
       <Filter>outline</Filter>
     </ClInclude>
@@ -159,21 +135,6 @@
     <ClInclude Include="..\..\..\src\libimage\TransToPVR.h">
       <Filter>format</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\editor-external\etcpack\c_wrap_etcpack.h">
-      <Filter>external\etcpack</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\editor-external\etcpack\source\etcimage.h">
-      <Filter>external\etcpack</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\editor-external\etcpack\etcpack_lib.h">
-      <Filter>external\etcpack</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\editor-external\rg_etc1\rg_etc1.h">
-      <Filter>external\rg_etc1</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\editor-external\rg_etc1\rg_etc1_for_c.h">
-      <Filter>external\rg_etc1</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\libimage\BlockCompress.h">
       <Filter>compress</Filter>
     </ClInclude>
@@ -183,6 +144,11 @@
     <ClInclude Include="..\..\..\src\libimage\config.h" />
     <ClInclude Include="..\..\..\src\easyimage.h" />
     <ClInclude Include="..\..\..\src\libimage\PixelsTools.h" />
+    <ClInclude Include="..\..\..\..\external\etcpack\c_wrap_etcpack.h" />
+    <ClInclude Include="..\..\..\..\external\etcpack\etcpack_lib.h" />
+    <ClInclude Include="..\..\..\..\external\etcpack\source\etcimage.h" />
+    <ClInclude Include="..\..\..\..\external\rg_etc1\rg_etc1.h" />
+    <ClInclude Include="..\..\..\..\external\rg_etc1\rg_etc1_for_c.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\src\libimage\NormalSpriteShader.frag">
