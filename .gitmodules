@@ -1,9 +1,6 @@
 [submodule "editor-external"]
 	path = external
 	url = git@github.com:xzrunner/external.git
-[submodule "particle/src"]
-	path = particle/src
-	url = git@github.com:xzrunner/ps.git
 [submodule "dtex/src"]
 	path = dtex/src
 	url = git@github.com:xzrunner/dtex.git
@@ -142,3 +139,6 @@
 [submodule "easyeditor3"]
 	path = easyeditor3
 	url = git@github.com:xzrunner/easyeditor3.git
+[submodule "ps/src/ps"]
+	path = ps/src/ps
+	url = git@github.com:xzrunner/ps.git

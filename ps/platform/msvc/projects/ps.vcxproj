@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectName>2.ps</ProjectName>
     <ProjectGuid>{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}</ProjectGuid>
-    <RootNamespace>particle</RootNamespace>
+    <RootNamespace>ps</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -43,12 +43,12 @@
     <_ProjectFileVersion>15.0.26730.12</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\particle\x86\Debug\</OutDir>
-    <IntDir>..\particle\x86\Debug\obj\</IntDir>
+    <OutDir>..\ps\x86\Debug\</OutDir>
+    <IntDir>..\ps\x86\Debug\obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\particle\x86\Release\</OutDir>
-    <IntDir>..\particle\x86\Release\obj\</IntDir>
+    <OutDir>..\ps\x86\Release\</OutDir>
+    <IntDir>..\ps\x86\Release\obj\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -77,15 +77,15 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\ps_2d.c" />
-    <ClCompile Include="..\..\..\src\ps_3d.c" />
-    <ClCompile Include="..\..\..\src\ps_utility.c" />
+    <ClCompile Include="..\..\..\src\ps\ps_2d.c" />
+    <ClCompile Include="..\..\..\src\ps\ps_3d.c" />
+    <ClCompile Include="..\..\..\src\ps\ps_utility.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\ps_2d.h" />
-    <ClInclude Include="..\..\..\src\ps_3d.h" />
-    <ClInclude Include="..\..\..\src\ps_array.h" />
-    <ClInclude Include="..\..\..\src\ps_utility.h" />
+    <ClInclude Include="..\..\..\src\ps\ps_2d.h" />
+    <ClInclude Include="..\..\..\src\ps\ps_3d.h" />
+    <ClInclude Include="..\..\..\src\ps\ps_array.h" />
+    <ClInclude Include="..\..\..\src\ps\ps_utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

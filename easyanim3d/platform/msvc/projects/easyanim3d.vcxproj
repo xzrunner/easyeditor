@@ -226,7 +226,7 @@
     <ProjectReference Include="..\..\..\..\node3\platform\msvc\projects\node3.vcxproj">
       <Project>{6030cf6b-1a8b-421b-92ce-4eb965751636}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\particle\platform\msvc\projects\particle.vcxproj">
+    <ProjectReference Include="..\..\..\..\ps\platform\msvc\projects\ps.vcxproj">
       <Project>{ee2229a3-ad5f-46e7-afab-729f8aa18036}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>

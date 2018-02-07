@@ -158,7 +158,7 @@
       <Project>{d41c0b3e-f0a0-4a1f-a568-0100c839406c}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\particle\platform\msvc\projects\particle.vcxproj">
+    <ProjectReference Include="..\..\..\..\ps\platform\msvc\projects\ps.vcxproj">
       <Project>{ee2229a3-ad5f-46e7-afab-729f8aa18036}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
