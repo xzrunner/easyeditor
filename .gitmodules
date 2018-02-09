@@ -142,3 +142,6 @@
 [submodule "ps/src/ps"]
 	path = ps/src/ps
 	url = git@github.com:xzrunner/ps.git
+[submodule "external-editor"]
+	path = external-editor
+	url = git@github.com:xzrunner/external-editor.git

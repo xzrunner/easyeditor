@@ -55,7 +55,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easycomplex\src;..\..\..\..\coceditor\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\external\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\lua\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easycomplex\src;..\..\..\..\coceditor\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\external-editor\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\lua\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -69,7 +69,7 @@
     <Link>
       <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_stc.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxscintillad.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;comctl32.lib;rpcrt4.lib;Opengl32.lib;glew32s.lib;jsond.lib;freetype281d.lib;luad.lib;libpng16d.lib;lzmad.lib;cjsond.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\cocpackage\x86\Debug\cocpackage.exe</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\..\external\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\pthread\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\external-editor\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\pthread\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\cocpackage\x86\Debug\cocpackage.pdb</ProgramDatabaseFile>
@@ -81,7 +81,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easycomplex\src;..\..\..\..\coceditor\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\external\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\lua\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easycomplex\src;..\..\..\..\coceditor\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\external-editor\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\lua\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -94,7 +94,7 @@
     <Link>
       <AdditionalDependencies>wxmsw31u_gl.lib;wxmsw31u_propgrid.lib;wxmsw31u_adv.lib;wxmsw31u_stc.lib;wxmsw31u_core.lib;wxbase31u.lib;wxscintilla.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;comctl32.lib;rpcrt4.lib;Opengl32.lib;glew32s.lib;json.lib;freetype281.lib;lua.lib;libpng16.lib;lzma.lib;cjson.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\cocpackage\x86\Release\cocpackage.exe</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\..\external\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\pthread\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\external-editor\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\pthread\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\cocpackage\x86\Release\cocpackage.pdb</ProgramDatabaseFile>
@@ -108,9 +108,9 @@
     <ClCompile Include="..\..\..\src\cocpackage\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\..\..\external\wx\include\wx\msw\wx.rc">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    <ResourceCompile Include="..\..\..\..\external-editor\wx\include\wx\msw\wx.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\external-editor\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\external-editor\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>

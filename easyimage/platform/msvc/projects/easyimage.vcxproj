@@ -55,7 +55,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\src\easyimage;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\easyeditor\include;..\..\..\..\easycomplex\src;..\..\..\..\easyimage\src;..\..\..\..\easyshape\src;..\..\..\..\external\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src\easyimage;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\easyeditor\include;..\..\..\..\easycomplex\src;..\..\..\..\easyimage\src;..\..\..\..\easyshape\src;..\..\..\..\external-editor\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -69,7 +69,7 @@
     <Link>
       <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_stc.lib;wxmsw31ud_core.lib;wxbase31ud_net.lib;wxbase31ud.lib;wxscintillad.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;comctl32.lib;rpcrt4.lib;jsond.lib;freetype281d.lib;luad.lib;glew32s.lib;libpng16d.lib;cjsond.lib;lzmad.lib;pthreadVC2.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\easyimage\x86\Debug\easyimage.exe</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\..\external\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\pthread\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\external-editor\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\pthread\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\easyimage\x86\Debug\easyimage.pdb</ProgramDatabaseFile>
@@ -81,7 +81,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\src\easyimage;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\easyeditor\include;..\..\..\..\easycomplex\src;..\..\..\..\easyimage\src;..\..\..\..\easyshape\src;..\..\..\..\external\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src\easyimage;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\gimg\src\gimg;..\..\..\..\pimg\include;..\..\..\..\easyeditor\include;..\..\..\..\easycomplex\src;..\..\..\..\easyimage\src;..\..\..\..\easyshape\src;..\..\..\..\external-editor\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -94,7 +94,7 @@
     <Link>
       <AdditionalDependencies>wxmsw31u_gl.lib;wxmsw31u_propgrid.lib;wxmsw31u_adv.lib;wxmsw31u_stc.lib;wxmsw31u_core.lib;wxbase31u_net.lib;wxbase31u.lib;wxscintilla.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;comctl32.lib;rpcrt4.lib;json.lib;freetype281.lib;lua.lib;glew32s.lib;libpng16.lib;cjson.lib;lzma.lib;pthreadVC2.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\easyimage\x86\Release\easyimage.exe</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\..\external\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\pthread\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\external-editor\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\pthread\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\easyimage\x86\Release\easyimage.pdb</ProgramDatabaseFile>
@@ -144,9 +144,9 @@
     <ClInclude Include="..\..\..\src\easyimage\ToolBarPanel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\..\..\external\wx\include\wx\msw\wx.rc">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    <ResourceCompile Include="..\..\..\..\external-editor\wx\include\wx\msw\wx.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\external-editor\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\external-editor\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>

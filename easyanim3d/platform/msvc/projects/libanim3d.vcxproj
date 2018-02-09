@@ -53,7 +53,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor3\include;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\node3\include;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\cu\src;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\wx\include;..\..\..\..\external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor3\include;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\node3\include;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\cu\src;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external-editor\wx\include;..\..\..\..\external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -67,7 +67,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor3\include;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\node3\include;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\cu\src;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\wx\include;..\..\..\..\external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\easyeditor\include;..\..\..\..\easyeditor0\include;..\..\..\..\easyeditor3\include;..\..\..\..\guard\include;..\..\..\..\sprite2\include;..\..\..\..\painting2\include;..\..\..\..\gum\include;..\..\..\..\s2loader\include;..\..\..\..\node3\include;..\..\..\..\sm\src\sm;..\..\..\..\ds\src\ds;..\..\..\..\memmgr\include;..\..\..\..\cu\src;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external-editor\wx\include;..\..\..\..\external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

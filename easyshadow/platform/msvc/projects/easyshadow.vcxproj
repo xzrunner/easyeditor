@@ -55,7 +55,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\external\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\external-editor\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -69,7 +69,7 @@
     <Link>
       <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_stc.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxscintillad.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;jsond.lib;freetype281d.lib;luad.lib;libpng16d.lib;cjsond.lib;lzmad.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\easyshadow\x86\Debug\easyshadow.exe</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\..\external\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\pthread\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\external-editor\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\pthread\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\easyshadow\x86\Debug\easyshadow.pdb</ProgramDatabaseFile>
@@ -81,7 +81,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\external\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\external-editor\wx\include;..\..\..\..\external\json\include;..\..\..\..\external\rapidjson\include;..\..\..\..\external\freetype\include;..\..\..\..\external\c99;..\..\..\..\external\lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -94,7 +94,7 @@
     <Link>
       <AdditionalDependencies>wxmsw31u_gl.lib;wxmsw31u_propgrid.lib;wxmsw31u_adv.lib;wxmsw31u_stc.lib;wxmsw31u_core.lib;wxbase31u.lib;wxscintilla.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;comctl32.lib;rpcrt4.lib;glew32s.lib;json.lib;freetype281.lib;lua.lib;libpng16.lib;cjson.lib;lzma.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\easyshadow\x86\Release\easyshadow.exe</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\..\external\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\pthread\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\external-editor\wx\lib;..\..\..\..\external\gl\lib;..\..\..\..\external\json\lib;..\..\..\..\external\freetype\lib;..\..\..\..\external\libpng\lib;..\..\..\..\external\lua\lib;..\..\..\..\external\intel;..\..\..\..\external\lzma\lib;..\..\..\..\external\cjson\lib;..\..\..\..\external\pthread\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC.LIB;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\easyshadow\x86\Release\easyshadow.pdb</ProgramDatabaseFile>
@@ -114,9 +114,9 @@
     <ClInclude Include="..\..\..\src\easyshadow\Task.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\..\..\external\wx\include\wx\msw\wx.rc">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\external\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    <ResourceCompile Include="..\..\..\..\external-editor\wx\include\wx\msw\wx.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\external-editor\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\external-editor\wx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
