@@ -3,9 +3,9 @@
 
 #include <ee/StringHelper.h>
 #include <ee/std_functor.h>
-#include <ee/math_common.h>
 #include <ee/SymbolFile.h>
 
+#include <SM_Math.h>
 #include <sprite2/SymType.h>
 
 #include <json/json.h>
@@ -125,7 +125,7 @@ void RegularRectPack::PackPowerOfTwo()
 	{
 		CombineArray* ca = *itr;
 		// power of 2, w == h
-		if (ca->w == ca->h && ee::is_power_of_two(ca->w))
+		if (ca->w == ca->h && sm::is_power_of_two(ca->w))
 		{
 			int next_sz = ca->w << 1;
 			// compose 4 to a larger one
@@ -139,7 +139,7 @@ void RegularRectPack::PackPowerOfTwo()
 			}		
 		}
 		// power of 2, w == h * 2
-		else if (ca->w == ca->h * 2 && ee::is_power_of_two(ca->w))
+		else if (ca->w == ca->h * 2 && sm::is_power_of_two(ca->w))
 		{
 			int next_sz = ca->w;
 			// compose 2 to a larger one
@@ -151,7 +151,7 @@ void RegularRectPack::PackPowerOfTwo()
 			}
 		}
 		// power of 2, h == w * 2
-		else if (ca->h == ca->w * 2 && ee::is_power_of_two(ca->w))
+		else if (ca->h == ca->w * 2 && sm::is_power_of_two(ca->w))
 		{
 			int next_sz = ca->h;
 			// compose 2 to a larger one
@@ -189,10 +189,10 @@ void RegularRectPack::PackNotPowerOfTwo()
 				continue;
 			}
 
-			if (!ee::is_power_of_two(ca->h)) 
+			if (!sm::is_power_of_two(ca->h)) 
 			{
 				while (ca->Size() >= 1) {
-					int sub_h = ee::next_p2(ca->h) - ca->h;
+					int sub_h = sm::next_p2(ca->h) - ca->h;
 					if (ComposeTwo(ca, ca->w, sub_h, false) ||
 						ComposeTwo(ca, ca->w, 4, false)) {
 						success = true;
@@ -227,7 +227,7 @@ void RegularRectPack::PackNotPowerOfTwo()
 				continue;
 			}
 
-			if (ee::is_power_of_two(ca->h) && ca->w < ca->h)
+			if (sm::is_power_of_two(ca->h) && ca->w < ca->h)
 			{
 				while (ca->Size() >= 1) {
 					int sub_w = ca->h - ca->w;

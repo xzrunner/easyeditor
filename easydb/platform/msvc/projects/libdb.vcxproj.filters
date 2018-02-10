@@ -40,9 +40,6 @@
     <Filter Include="commands\image">
       <UniqueIdentifier>{a9346c4b-266d-4df7-953d-eac8a032519a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="commands\image\trim">
-      <UniqueIdentifier>{0f3df707-9557-4a3f-98ca-a6e9678fe5d9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="commands\image\outline">
       <UniqueIdentifier>{0fb6fecc-932f-4112-ad9a-c0dad37faeb4}</UniqueIdentifier>
     </Filter>
@@ -51,9 +48,6 @@
     </Filter>
     <Filter Include="commands\image\cut">
       <UniqueIdentifier>{e28607fe-72ff-42af-8b13-0e4c399927ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="commands\image\format">
-      <UniqueIdentifier>{c34b25a1-e35c-48e8-ac0b-41d1e28de532}</UniqueIdentifier>
     </Filter>
     <Filter Include="commands\image\compress">
       <UniqueIdentifier>{ebc0ae93-c5ae-4adc-aa9c-ebf29a9bd477}</UniqueIdentifier>
@@ -192,12 +186,6 @@
     <ClCompile Include="..\..\..\src\libdb\TransToGif.cpp">
       <Filter>commands\image</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\libdb\RotateTrimImage.cpp">
-      <Filter>commands\image\trim</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\libdb\TrimImage.cpp">
-      <Filter>commands\image\trim</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\libdb\OutlineImage.cpp">
       <Filter>commands\image\outline</Filter>
     </ClCompile>
@@ -216,23 +204,11 @@
     <ClCompile Include="..\..\..\src\libdb\AverageRectCut.cpp">
       <Filter>commands\image\cut</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\libdb\Cropping.cpp">
-      <Filter>commands\image\cut</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\libdb\RectCutWithJson.cpp">
       <Filter>commands\image\cut</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\libdb\RegularRectCut.cpp">
       <Filter>commands\image\cut</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\libdb\TransToETC1.cpp">
-      <Filter>commands\image\format</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\libdb\TransToETC2.cpp">
-      <Filter>commands\image\format</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\libdb\TransToPVR.cpp">
-      <Filter>commands\image\format</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\libdb\BlockCompress.cpp">
       <Filter>commands\image\compress</Filter>
@@ -506,12 +482,6 @@
     <ClInclude Include="..\..\..\src\libdb\TransToGif.h">
       <Filter>commands\image</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\libdb\RotateTrimImage.h">
-      <Filter>commands\image\trim</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libdb\TrimImage.h">
-      <Filter>commands\image\trim</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\OutlineImage.h">
       <Filter>commands\image\outline</Filter>
     </ClInclude>
@@ -530,23 +500,11 @@
     <ClInclude Include="..\..\..\src\libdb\AverageRectCut.h">
       <Filter>commands\image\cut</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\libdb\Cropping.h">
-      <Filter>commands\image\cut</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\RectCutWithJson.h">
       <Filter>commands\image\cut</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\RegularRectCut.h">
       <Filter>commands\image\cut</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libdb\TransToETC1.h">
-      <Filter>commands\image\format</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libdb\TransToETC2.h">
-      <Filter>commands\image\format</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libdb\TransToPVR.h">
-      <Filter>commands\image\format</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\BlockCompress.h">
       <Filter>commands\image\compress</Filter>

@@ -1,6 +1,6 @@
 #include "MaxRectsBinaryPack.h"
 
-#include <ee/math_common.h>
+#include <SM_Math.h>
 
 #include <algorithm>
 
@@ -57,7 +57,7 @@ void MaxRectsBinaryPack::Pack(const std::vector<RectSize>& rects, std::vector<Re
 	for (int i = 0; i < sz; ++i) {
 		area += rects[i].width * rects[i].height;
 	}
-	int edge = ee::next_p2((int)ceil(sqrt(area)));
+	int edge = sm::next_p2((int)ceil(sqrt(area)));
 
 	// insert
 	bool success = false;

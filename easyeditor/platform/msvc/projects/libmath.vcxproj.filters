@@ -41,7 +41,6 @@
       <Filter>alg</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\ee\Math2D.h" />
-    <ClInclude Include="..\..\..\include\ee\math_common.h" />
     <ClInclude Include="..\..\..\include\ee\Random.h" />
     <ClInclude Include="..\..\..\include\ee\std_functor.h" />
     <ClInclude Include="..\..\..\..\external\clipper\clipper.hpp" />

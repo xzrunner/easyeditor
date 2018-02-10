@@ -3,7 +3,6 @@
 
 #include "ChangeJsonFile.h"
 #include "ChangeTPJsonFile.h"
-#include "TrimImage.h"
 #include "FormatJsonFile.h"
 #include "PackParticle3D.h"
 #include "ReverseAnimation.h"
@@ -20,7 +19,6 @@
 #include "OutlineImage.h"
 #include "OutlineToPolygon.h"
 #include "FixSpriteColor.h"
-#include "RotateTrimImage.h"
 #include "RegularRectCut.h"
 #include "RotateImage.h"
 #include "PackRegularRect.h"
@@ -31,9 +29,6 @@
 #include "BinEP.h"
 #include "PackRes.h"
 #include "OutlineToTriStrip.h"
-#include "TransToPVR.h"
-#include "TransToETC1.h"
-#include "TransToETC2.h"
 #include "BinRRR.h"
 #include "BinB4R.h"
 #include "BlockCompress.h"
@@ -78,7 +73,6 @@
 #include "PrintGLExt.h"
 #include "GenNoCompressCfg.h"
 #include "FixPackCfg.h"
-#include "Cropping.h"
 #include "TranslateJson.h"
 #include "ExportBodymovin.h"
 #include "CalcImageArea.h"
@@ -100,7 +94,6 @@ void CommandLoader::Init()
 	CommandFactory* fc = CommandFactory::Instance();
 	fc->Register(ChangeJsonFile::Create());
 	fc->Register(ChangeTPJsonFile::Create());
-	fc->Register(TrimImage::Create());
 	fc->Register(FormatJsonFile::Create());
 	fc->Register(PackParticle3D::Create());
 	fc->Register(ReverseAnimation::Create());
@@ -117,7 +110,6 @@ void CommandLoader::Init()
 	fc->Register(OutlineImage::Create());
 	fc->Register(OutlineToPolygon::Create());
 	fc->Register(FixSpriteColor::Create());
-	fc->Register(RotateTrimImage::Create());
 	fc->Register(RegularRectCut::Create());
 	fc->Register(RotateImage::Create());
 	fc->Register(PackRegularRect::Create());
@@ -128,9 +120,6 @@ void CommandLoader::Init()
 	fc->Register(BinEP::Create());
 	fc->Register(PackRes::Create());
 	fc->Register(OutlineToTriStrip::Create());
-	fc->Register(TransToPVR::Create());
-	fc->Register(TransToETC1::Create());
-	fc->Register(TransToETC2::Create());
 	fc->Register(BinRRR::Create());
 	fc->Register(BinB4R::Create());
 	fc->Register(BlockCompress::Create());
@@ -174,7 +163,6 @@ void CommandLoader::Init()
 	fc->Register(PrintGLExt::Create());
 	fc->Register(GenNoCompressCfg::Create());
 	fc->Register(FixPackCfg::Create());
-	fc->Register(Cropping::Create());
 	fc->Register(TranslateJson::Create());
 	fc->Register(ExportBodymovin::Create());
 	fc->Register(CalcImageArea::Create());

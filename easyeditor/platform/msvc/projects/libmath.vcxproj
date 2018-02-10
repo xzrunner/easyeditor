@@ -93,7 +93,6 @@
     <ClInclude Include="..\..\..\..\external\clipper\clipper.hpp" />
     <ClInclude Include="..\..\..\include\ee\DelaunayTriangulation.h" />
     <ClInclude Include="..\..\..\include\ee\Math2D.h" />
-    <ClInclude Include="..\..\..\include\ee\math_common.h" />
     <ClInclude Include="..\..\..\include\ee\PolygonClipper.h" />
     <ClInclude Include="..\..\..\include\ee\Random.h" />
     <ClInclude Include="..\..\..\include\ee\SGI.h" />

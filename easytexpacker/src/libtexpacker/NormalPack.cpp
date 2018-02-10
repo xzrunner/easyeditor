@@ -5,11 +5,14 @@
 #include <ee/FileHelper.h>
 #include <ee/Exception.h>
 #include <ee/StringHelper.h>
-#include <ee/ImagePack.h>
 #include <ee/ImageData.h>
 
 #include <gimg_import.h>
 #include <gimg_typedef.h>
+#include <pimg/ImagePack.h>
+#include <pimg/ImageData.h>
+#include <gum/Config.h>
+#include <gum/ResPool.h>
 
 #include <json/json.h>
 
@@ -166,7 +169,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 
 	for (int i = 0, n = m_dst_img_idx.size(); i < n; ++i) 
 	{
-		ee::ImagePack pack(m_dst_img_sz[i].width, m_dst_img_sz[i].height);
+		pimg::ImagePack pack(m_dst_img_sz[i].width, m_dst_img_sz[i].height);
 
 		for (int j = 0, m = m_dst_img_idx[i].size(); j < m; ++j) 
 		{
@@ -183,7 +186,8 @@ void NormalPack::OutputImage(const std::string& filepath) const
 				rot = true;
 			}
 
-			auto img_data = ee::ImageDataMgr::Instance()->GetItem(m_filepaths[idx]);
+			auto img_data = gum::ResPool::Instance().Fetch<pimg::ImageData>(
+				m_filepaths[idx], gum::Config::Instance()->GetPreMulAlpha());
 
 			int e_left, e_right, e_bottom, e_up;
 			if (m_trim_info) {

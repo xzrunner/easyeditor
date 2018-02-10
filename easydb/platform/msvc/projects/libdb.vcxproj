@@ -103,7 +103,6 @@
     <ClCompile Include="..\..\..\src\libdb\CommandLoader.cpp" />
     <ClCompile Include="..\..\..\src\libdb\CopyFile.cpp" />
     <ClCompile Include="..\..\..\src\libdb\CreateColLUT.cpp" />
-    <ClCompile Include="..\..\..\src\libdb\Cropping.cpp" />
     <ClCompile Include="..\..\..\src\libdb\DecodeEjoy2dRes.cpp" />
     <ClCompile Include="..\..\..\src\libdb\DFFParser.cpp" />
     <ClCompile Include="..\..\..\src\libdb\DistanceFieldFont.cpp" />
@@ -162,7 +161,6 @@
     <ClCompile Include="..\..\..\src\libdb\RemoveDuplicateSprite.cpp" />
     <ClCompile Include="..\..\..\src\libdb\ReverseAnimation.cpp" />
     <ClCompile Include="..\..\..\src\libdb\RotateImage.cpp" />
-    <ClCompile Include="..\..\..\src\libdb\RotateTrimImage.cpp" />
     <ClCompile Include="..\..\..\src\libdb\ScaleImage.cpp" />
     <ClCompile Include="..\..\..\src\libdb\ScaleJson.cpp" />
     <ClCompile Include="..\..\..\src\libdb\ScaleOverall.cpp" />
@@ -175,11 +173,7 @@
     <ClCompile Include="..\..\..\src\libdb\TransOldP3DFile.cpp" />
     <ClCompile Include="..\..\..\src\libdb\TransOldShapeFile.cpp" />
     <ClCompile Include="..\..\..\src\libdb\TransOldTextFile.cpp" />
-    <ClCompile Include="..\..\..\src\libdb\TransToETC1.cpp" />
-    <ClCompile Include="..\..\..\src\libdb\TransToETC2.cpp" />
     <ClCompile Include="..\..\..\src\libdb\TransToGif.cpp" />
-    <ClCompile Include="..\..\..\src\libdb\TransToPVR.cpp" />
-    <ClCompile Include="..\..\..\src\libdb\TrimImage.cpp" />
     <ClCompile Include="..\..\..\src\libdb\UniqueImage.cpp" />
     <ClCompile Include="..\..\..\src\libdb\UnpackLuaDescFile.cpp" />
     <ClCompile Include="..\..\..\src\libdb\utility.cpp" />
@@ -208,7 +202,6 @@
     <ClInclude Include="..\..\..\src\libdb\CommandLoader.h" />
     <ClInclude Include="..\..\..\src\libdb\CopyFile.h" />
     <ClInclude Include="..\..\..\src\libdb\CreateColLUT.h" />
-    <ClInclude Include="..\..\..\src\libdb\Cropping.h" />
     <ClInclude Include="..\..\..\src\libdb\DecodeEjoy2dRes.h" />
     <ClInclude Include="..\..\..\src\libdb\DFFParser.h" />
     <ClInclude Include="..\..\..\src\libdb\DistanceFieldFont.h" />
@@ -269,7 +262,6 @@
     <ClInclude Include="..\..\..\src\libdb\RemoveDuplicateSprite.h" />
     <ClInclude Include="..\..\..\src\libdb\ReverseAnimation.h" />
     <ClInclude Include="..\..\..\src\libdb\RotateImage.h" />
-    <ClInclude Include="..\..\..\src\libdb\RotateTrimImage.h" />
     <ClInclude Include="..\..\..\src\libdb\ScaleImage.h" />
     <ClInclude Include="..\..\..\src\libdb\ScaleJson.h" />
     <ClInclude Include="..\..\..\src\libdb\ScaleOverall.h" />
@@ -282,11 +274,7 @@
     <ClInclude Include="..\..\..\src\libdb\TransOldP3DFile.h" />
     <ClInclude Include="..\..\..\src\libdb\TransOldShapeFile.h" />
     <ClInclude Include="..\..\..\src\libdb\TransOldTextFile.h" />
-    <ClInclude Include="..\..\..\src\libdb\TransToETC1.h" />
-    <ClInclude Include="..\..\..\src\libdb\TransToETC2.h" />
     <ClInclude Include="..\..\..\src\libdb\TransToGif.h" />
-    <ClInclude Include="..\..\..\src\libdb\TransToPVR.h" />
-    <ClInclude Include="..\..\..\src\libdb\TrimImage.h" />
     <ClInclude Include="..\..\..\src\libdb\UniqueImage.h" />
     <ClInclude Include="..\..\..\src\libdb\UnpackLuaDescFile.h" />
     <ClInclude Include="..\..\..\src\libdb\utility.h" />

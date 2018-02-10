@@ -2,10 +2,14 @@
 
 #include <ee/StringHelper.h>
 #include <ee/FileHelper.h>
-#include <ee/ImagePack.h>
 #include <ee/ImageData.h>
 
 #include <easyimage.h>
+
+#include <pimg/ImagePack.h>
+#include <pimg/ImageData.h>
+#include <gum/Config.h>
+#include <gum/ResPool.h>
 
 #include <json/json.h>
 
@@ -40,7 +44,7 @@ void GenRegularRectImage::CreateSingle(const std::string& filepath)
 
 	int width = value["width"].asInt(),
 		height = value["height"].asInt();
-	ee::ImagePack pack(width, height);
+	pimg::ImagePack pack(width, height);
 
 	int i = 0;
 	Json::Value spr_val = value["parts"][i++];
@@ -51,7 +55,8 @@ void GenRegularRectImage::CreateSingle(const std::string& filepath)
 			h = spr_val["dst"]["h"].asInt();
 		std::string filepath = spr_val["filepath"].asString();
 
-		auto img_data = ee::ImageDataMgr::Instance()->GetItem(filepath);
+		auto img_data = gum::ResPool::Instance().Fetch<pimg::ImageData>(
+			filepath, gum::Config::Instance()->GetPreMulAlpha());
 		assert(img_data->GetWidth() == w && img_data->GetHeight() == h 
 			|| img_data->GetWidth() == h && img_data->GetHeight() == w);
 		bool rot = img_data->GetWidth() != w && img_data->GetHeight() != h;

@@ -1,9 +1,9 @@
 #include "DistanceFieldFont.h"
 
-#include <ee/math_common.h>
 #include <ee/StringHelper.h>
 
 #include <SM_Calc.h>
+#include <SM_Math.h>
 
 #include <freetype/ftglyph.h>
 #include <gl/glew.h>
@@ -143,8 +143,8 @@ void DistanceFieldFont::genChar(int unicode)
 	//Use our helper function to get the widths of
 	//the bitmap data that we will need in order to create
 	//our texture.
-	int width = ee::next_p2( bitmap.width );
-	int height = ee::next_p2( bitmap.rows );
+	int width = sm::next_p2( bitmap.width );
+	int height = sm::next_p2( bitmap.rows );
 
 	//Allocate memory for the texture data.
 	GLubyte* expanded_data = new GLubyte[4 * width * height];

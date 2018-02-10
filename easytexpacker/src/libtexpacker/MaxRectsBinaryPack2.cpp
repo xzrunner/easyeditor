@@ -1,8 +1,9 @@
 #include "MaxRectsBinaryPack2.h"
 #include "math.h"
 
+#include <SM_Math.h>
+
 #include <ee/std_functor.h>
-#include <ee/math_common.h>
 
 #include <assert.h>
 
@@ -131,7 +132,7 @@ bool MaxRectsBinaryPack2::Insert(ee::TPNode* root, const Sprite* spr, int tex_id
 
 void MaxRectsBinaryPack2::PackAuto(const std::vector<Sprite>& sprs, int area)
 {
-	int edge = ee::next_p2((int)ceil(sqrt((float)area)));
+	int edge = sm::next_p2((int)ceil(sqrt((float)area)));
 	int w = edge, h = (edge >> 1);
 
 	bool success = false;
@@ -165,7 +166,7 @@ void MaxRectsBinaryPack2::PackAuto(const std::vector<Sprite>& sprs, int area)
 
 void MaxRectsBinaryPack2::PackSquare(const std::vector<Sprite>& sprs, int area)
 {
-	int edge = ee::next_p2((int)ceil(sqrt((float)area)));
+	int edge = sm::next_p2((int)ceil(sqrt((float)area)));
 	bool success = false;
 	while (!success)
 	{
@@ -240,12 +241,12 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprs, int are
 
 	float area_scale_limit = AREA_SCALE_LIMIT;
 
-	int edge = std::max(std::min(ee::next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
+	int edge = std::max(std::min(sm::next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
 	for (auto& spr : sprs) {
-		edge = std::max(edge, ee::next_p2(spr.size->width));
-		edge = std::max(edge, ee::next_p2(spr.size->height));
+		edge = std::max(edge, sm::next_p2(spr.size->width));
+		edge = std::max(edge, sm::next_p2(spr.size->height));
 	}
-	int need_edge = ee::next_p2(std::max(sprs[0].size->width, sprs[0].size->height));
+	int need_edge = sm::next_p2(std::max(sprs[0].size->width, sprs[0].size->height));
 	if (edge == need_edge) {
 		area_scale_limit = 0;
 	}
@@ -290,7 +291,7 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprs, int are
 			area_scale_limit = std::min(area_scale_limit * (1 + AREA_SCALE_LIMIT_STEP), AREA_SCALE_LIMIT);
 			curr_list = fail_list;
 			area = area - used_area;
-			edge = std::max(std::min(ee::next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
+			edge = std::max(std::min(sm::next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
 			m_roots.push_back(root);
 			++curr_tex;
 		} 
