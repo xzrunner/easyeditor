@@ -157,11 +157,8 @@
     <ClCompile Include="..\..\..\src\libdb\PackTexture.cpp" />
     <ClCompile Include="..\..\..\src\libdb\PrintGLExt.cpp" />
     <ClCompile Include="..\..\..\src\libdb\RectCutWithJson.cpp" />
-    <ClCompile Include="..\..\..\src\libdb\RegularRectCut.cpp" />
     <ClCompile Include="..\..\..\src\libdb\RemoveDuplicateSprite.cpp" />
     <ClCompile Include="..\..\..\src\libdb\ReverseAnimation.cpp" />
-    <ClCompile Include="..\..\..\src\libdb\RotateImage.cpp" />
-    <ClCompile Include="..\..\..\src\libdb\ScaleImage.cpp" />
     <ClCompile Include="..\..\..\src\libdb\ScaleJson.cpp" />
     <ClCompile Include="..\..\..\src\libdb\ScaleOverall.cpp" />
     <ClCompile Include="..\..\..\src\libdb\SetNameFromFile.cpp" />
@@ -258,11 +255,8 @@
     <ClInclude Include="..\..\..\src\libdb\PackTexture.h" />
     <ClInclude Include="..\..\..\src\libdb\PrintGLExt.h" />
     <ClInclude Include="..\..\..\src\libdb\RectCutWithJson.h" />
-    <ClInclude Include="..\..\..\src\libdb\RegularRectCut.h" />
     <ClInclude Include="..\..\..\src\libdb\RemoveDuplicateSprite.h" />
     <ClInclude Include="..\..\..\src\libdb\ReverseAnimation.h" />
-    <ClInclude Include="..\..\..\src\libdb\RotateImage.h" />
-    <ClInclude Include="..\..\..\src\libdb\ScaleImage.h" />
     <ClInclude Include="..\..\..\src\libdb\ScaleJson.h" />
     <ClInclude Include="..\..\..\src\libdb\ScaleOverall.h" />
     <ClInclude Include="..\..\..\src\libdb\SetNameFromFile.h" />

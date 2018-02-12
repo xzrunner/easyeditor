@@ -87,18 +87,7 @@
     <ClCompile Include="..\..\..\src\libimage\ImageCmp.cpp" />
     <ClCompile Include="..\..\..\src\libimage\LanczosResamplingShader.cpp" />
     <ClCompile Include="..\..\..\src\libimage\OutlineToTriStrip.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\PixelAreaLUT.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\PixelCoveredLUT.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\PixelEdgeTable.cpp" />
     <ClCompile Include="..\..\..\src\libimage\PixelsTools.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\PixelUncoveredLUT.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\RectPostProcessor.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\RegularRectCondense.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\RegularRectCut.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\RegularRectMerge.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\TransToETC1.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\TransToETC2.cpp" />
-    <ClCompile Include="..\..\..\src\libimage\TransToPVR.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\external\etcpack\c_wrap_etcpack.h" />
@@ -112,19 +101,7 @@
     <ClInclude Include="..\..\..\src\libimage\ImageCmp.h" />
     <ClInclude Include="..\..\..\src\libimage\LanczosResamplingShader.h" />
     <ClInclude Include="..\..\..\src\libimage\OutlineToTriStrip.h" />
-    <ClInclude Include="..\..\..\src\libimage\PixelAreaLUT.h" />
-    <ClInclude Include="..\..\..\src\libimage\PixelCoveredLUT.h" />
-    <ClInclude Include="..\..\..\src\libimage\PixelEdgeTable.h" />
     <ClInclude Include="..\..\..\src\libimage\PixelsTools.h" />
-    <ClInclude Include="..\..\..\src\libimage\PixelUncoveredLUT.h" />
-    <ClInclude Include="..\..\..\src\libimage\Rect.h" />
-    <ClInclude Include="..\..\..\src\libimage\RectPostProcessor.h" />
-    <ClInclude Include="..\..\..\src\libimage\RegularRectCondense.h" />
-    <ClInclude Include="..\..\..\src\libimage\RegularRectCut.h" />
-    <ClInclude Include="..\..\..\src\libimage\RegularRectMerge.h" />
-    <ClInclude Include="..\..\..\src\libimage\TransToETC1.h" />
-    <ClInclude Include="..\..\..\src\libimage\TransToETC2.h" />
-    <ClInclude Include="..\..\..\src\libimage\TransToPVR.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\src\libimage\AverageDownSamplingShader.frag" />

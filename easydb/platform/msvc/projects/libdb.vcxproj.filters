@@ -43,9 +43,6 @@
     <Filter Include="commands\image\outline">
       <UniqueIdentifier>{0fb6fecc-932f-4112-ad9a-c0dad37faeb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="commands\image\transform">
-      <UniqueIdentifier>{f93bbfd0-724c-446b-b350-33268bb6ea28}</UniqueIdentifier>
-    </Filter>
     <Filter Include="commands\image\cut">
       <UniqueIdentifier>{e28607fe-72ff-42af-8b13-0e4c399927ea}</UniqueIdentifier>
     </Filter>
@@ -195,19 +192,10 @@
     <ClCompile Include="..\..\..\src\libdb\OutlineToTriStrip.cpp">
       <Filter>commands\image\outline</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\libdb\RotateImage.cpp">
-      <Filter>commands\image\transform</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\libdb\ScaleImage.cpp">
-      <Filter>commands\image\transform</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\libdb\AverageRectCut.cpp">
       <Filter>commands\image\cut</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\libdb\RectCutWithJson.cpp">
-      <Filter>commands\image\cut</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\libdb\RegularRectCut.cpp">
       <Filter>commands\image\cut</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\libdb\BlockCompress.cpp">
@@ -491,19 +479,10 @@
     <ClInclude Include="..\..\..\src\libdb\OutlineToTriStrip.h">
       <Filter>commands\image\outline</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\libdb\RotateImage.h">
-      <Filter>commands\image\transform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libdb\ScaleImage.h">
-      <Filter>commands\image\transform</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\AverageRectCut.h">
       <Filter>commands\image\cut</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\RectCutWithJson.h">
-      <Filter>commands\image\cut</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\libdb\RegularRectCut.h">
       <Filter>commands\image\cut</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\libdb\BlockCompress.h">
